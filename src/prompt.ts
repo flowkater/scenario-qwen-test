@@ -63,7 +63,13 @@ Rules (apply in order — later rules OVERRIDE earlier ones when they conflict):
        review_total = sum of ALL review plan minutes. MUST be ≤ I_budget.
    - Step 5: totalDailyMinutes = practice_total + read_total + review_total. MUST be ≤ weekdayBudget.
    - Step 5: timeBudgetFit = "fits" if totalDailyMinutes ≤ weekdayBudget, else "over"
-   - Example: weekdayBudget=60, ratio C20/P50/I30 → C_budget=12min, P_budget=30min, I_budget=18min → sum=60. ✅
+   - ⚠️ HARD ADJUSTMENT: If totalDailyMinutes > weekdayBudget, you MUST reduce plan minutes before finalizing.
+       Reduce the largest plan's estimatedMinutes first. Repeat until totalDailyMinutes ≤ weekdayBudget.
+       ❌ NEVER output totalDailyMinutes > weekdayBudget when timeBudgetFit = "fits".
+   - Example: weekdayBudget=60, ratio C30/P40/I30 → C_budget=18min, P_budget=24min, I_budget=18min → sum=60. ✅
+       Plans: read=18, practice=24, review=18 → totalDailyMinutes=60 ✅
+       ❌ WRONG: read=20, practice=26, review=22 → totalDailyMinutes=68 → OVER BUDGET → must reduce
+       ✅ RIGHT: reduce each plan to exactly its budget slice → read=18, practice=24, review=18 → total=60
    - Example: weekdayBudget=45, ratio C15/P60/I25 → C_budget=7min, P_budget=27min, I_budget=11min → sum=45. Create EXACTLY 3 plans with these minute allocations.
    - ⚠️ If weekdayBudget ≤ 60: do NOT create more than 3 daily plans. Keep each plan's estimatedMinutes to the budget slice only.
    - Full exam simulations (>60min) MUST be schedule="event" and placed on weekends. Their dailyTarget MUST contain the word "Weekend" (e.g., "Day 7 (Weekend): full mock under timed conditions").
@@ -86,10 +92,18 @@ Rules (apply in order — later rules OVERRIDE earlier ones when they conflict):
    - If Rule 4 Step 3B applied (no practice resources in input) → ALWAYS add: "No practice resources available"
    - Budget too tight for the given scope: add "Plan exceeds daily budget — reduce scope" when EITHER:
        (a) timeBudgetFit = "over" (plan still doesn't fit), OR
-       (b) weekdayBudget ≤ 60 AND 2 or more resources each with quantity ≥ 100 pages or ≥ 100 items.
-           This catches scenarios like "400p textbook + 300 problems with only 45min/day" → clearly over-budget → add warning.
-           Example that triggers: weekday=45, resources=[400p textbook, 300 problems] → 2 large resources + tight budget → add warning.
-           Example that does NOT trigger: weekday=60, resources=[200p textbook, 50p study guide] → only 1 resource ≥ 100p → no warning.
+       (b) SCOPE CHECK — run these steps:
+           STEP 1: Is weekdayBudget ≤ 60? If NO → skip this check entirely.
+           STEP 2: Count resources that have a large quantity. A resource is "large" if its quantity is ≥ 100.
+                   Count ALL of: pages (e.g. "400p" → 400), problems (e.g. "300 problems" → 300),
+                   questions, items, exercises — any numerical quantity ≥ 100.
+                   - "400p textbook" → 400 ≥ 100 → LARGE ✓
+                   - "300 problems" → 300 ≥ 100 → LARGE ✓
+                   - "50p study guide" → 50 < 100 → not large
+                   - "~10 hours videos" → no page/item count → not large
+           STEP 3: If large_count ≥ 2 → MUST add warning: "Plan exceeds daily budget — reduce scope"
+           Example that triggers: weekday=45, [400p textbook → LARGE, 300 problems → LARGE] → count=2 → ✅ ADD WARNING
+           Example that does NOT trigger: weekday=60, [200p textbook → LARGE, 50p guide → not large] → count=1 → ❌ NO warning
    - totalDailyMinutes > 240 → "Heavy load — monitor burnout risk"
    - daysLeft ≤ 3 → "Extremely tight — focus on highest-impact activity only"
 

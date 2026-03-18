@@ -139,6 +139,7 @@ export function validateFull(
       Object.values(smart).every(Boolean) &&
       cpi.ratioMatchesPlan &&
       time.fits &&
-      time.eventsOnWeekend,
+      time.eventsOnWeekend &&
+      missingWarnings.length === 0,
   };
 }

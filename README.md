@@ -20,4 +20,4 @@ npx tsx src/index.ts run-all          # Run all 8 test cases + report
 
 ## Model
 
-DashScope `qwen3.5-72b-instruct` via OpenAI-compatible API.
+DashScope `qwen3.5-flash` via OpenAI-compatible API.

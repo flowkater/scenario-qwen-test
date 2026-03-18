@@ -23,7 +23,7 @@ export async function callQwen(input: TestCaseInput): Promise<{
 
   try {
     const response = await client.chat.completions.create({
-      model: "qwen3.5-72b-instruct",
+      model: "qwen3.5-flash",
       messages: [
         { role: "system", content: SYSTEM_PROMPT },
         { role: "user", content: userPrompt },

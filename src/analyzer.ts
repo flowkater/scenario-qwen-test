@@ -14,7 +14,7 @@ export function generateReport(
 
   return {
     runDate: new Date().toISOString(),
-    model: "qwen3.5-72b-instruct",
+    model: "qwen3.5-flash",
     totalCases: results.length,
     passed,
     failed: results.length - passed,

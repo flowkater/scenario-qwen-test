@@ -1,0 +1,7 @@
+{
+  "tcId": "tc-8",
+  "notes": "Designed to trigger over-budget warning. 45min weekday with 400p textbook + 300 problems in 10 days. Normal PS: C15 P60 I25. Expect timeBudgetFit=over or tight.",
+  "warnings": ["exceeds daily budget", "reduce scope"],
+  "expectedCpiApprox": { "c": 15, "p": 60, "i": 25 },
+  "expectedTimeBudgetFit": "over"
+}

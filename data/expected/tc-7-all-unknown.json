@@ -1,0 +1,7 @@
+{
+  "tcId": "tc-7",
+  "notes": "Unknown exam type → uses Mixed ratios. Marathon (D-30): C30 P40 I30. All details estimated. Neutral tone. Model should handle uncertainty gracefully.",
+  "warnings": [],
+  "expectedCpiApprox": { "c": 30, "p": 40, "i": 30 },
+  "expectedTimeBudgetFit": "fits"
+}

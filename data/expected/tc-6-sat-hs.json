@@ -1,0 +1,8 @@
+{
+  "tcId": "tc-6",
+  "notes": "Normal mixed: C25 P45 I30. Full SAT practice tests (~3h each) MUST be scheduled as weekend events. eventsOnWeekend validator check. First-time student, encouraging tone.",
+  "warnings": [],
+  "expectedCpiApprox": { "c": 25, "p": 45, "i": 30 },
+  "expectedTimeBudgetFit": "fits",
+  "expectedWeekendEvent": true
+}

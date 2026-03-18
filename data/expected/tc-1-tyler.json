@@ -1,0 +1,7 @@
+{
+  "tcId": "tc-1",
+  "notes": "No practice resources → P=0. Urgent MC: C10→30, P60→0, I30→70 after redistribution. First-time student → encouraging tone expected.",
+  "warnings": ["No practice"],
+  "expectedCpiApprox": { "c": 30, "p": 0, "i": 70 },
+  "expectedTimeBudgetFit": "fits"
+}

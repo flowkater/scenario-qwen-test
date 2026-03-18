@@ -1,0 +1,7 @@
+{
+  "tcId": "tc-4",
+  "notes": "Normal mixed, study guide only (no textbook) → C time reduced. Has practice. C25 P45 I30 baseline. Weekday 45min — should fit or be tight. Neutral tone.",
+  "warnings": [],
+  "expectedCpiApprox": { "c": 25, "p": 45, "i": 30 },
+  "expectedTimeBudgetFit": "fits"
+}

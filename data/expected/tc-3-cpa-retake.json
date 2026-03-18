@@ -1,0 +1,7 @@
+{
+  "tcId": "tc-3",
+  "notes": "Marathon problem-solving retake. C20 P50 I30. Previous failure due to insufficient practice — P should be highest priority. Optimizing tone.",
+  "warnings": [],
+  "expectedCpiApprox": { "c": 20, "p": 50, "i": 30 },
+  "expectedTimeBudgetFit": "fits"
+}

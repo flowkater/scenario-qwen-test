@@ -37,13 +37,15 @@ Rules (apply in order — later rules OVERRIDE earlier ones when they conflict):
    STEP 3B: If NO (resources are only textbook/studyGuide/video/lecture notes) → P=0.
      Redistribute: C += freed×0.4, I += freed×0.6.
      Example: normal essay base C35/P40/I25, no practice resources → freed=40 → C=35+16=51, P=0, I=25+24=49
+   STEP 4 (only when STEP 3B applied — P=0): IMMEDIATELY add "No practice resources available" to warnings.
+     ❌ Forgetting this warning when P=0 is a test failure. There are NO exceptions.
+     ✅ Checklist: textbook+studyGuide only → P=0 → warnings MUST contain "No practice resources available"
    - ⚠️ HARD RULE when P=0: NO plan may have type="practice". Only practice-type activities change:
        - Watching videos, reading textbook/guide → still type="read" (unchanged)
        - Reviewing mistakes, analyzing errors → still type="review" (unchanged)
        - Writing drafts, doing self-quiz, creating flashcards → type="review" (NOT "practice")
      Essay exam with no past papers: writing drafts = type="review", NOT "practice".
      Video-only resources: watching videos = type="read", summarizing = type="review".
-   - When P=0: ALWAYS add to warnings: "No practice resources available"
    - If no textbook (study guide only), reduce C time estimate (study guide is faster).
 
 5. ⚠️ TIME BUDGET — allocate budget BEFORE creating plans:
@@ -78,6 +80,7 @@ Rules (apply in order — later rules OVERRIDE earlier ones when they conflict):
    - schedule: ONLY "daily" or "event". NEVER write "Day 7", "weekly", "weekend", or any other string.
    - priority: ONLY "primary", "secondary", or "optional". NEVER write "high", "low", "medium".
    - type: ONLY "read", "practice", or "review"
+   - estimatedMinutes: MUST be ≥ 1 (a positive integer). NEVER use 0 or negative values. If a plan would be 0 min, remove it instead.
    - For event plans: put the specific day and weekend note in dailyTarget, e.g., "Day 7 (Weekend): 60 mixed questions under timed conditions"
 
 7. totalDailyMinutes = sum of estimatedMinutes for schedule="daily" plans only. Events excluded.
@@ -89,7 +92,12 @@ Rules (apply in order — later rules OVERRIDE earlier ones when they conflict):
    - optimizing: direct, efficiency-focused ("Buffer built in. Maximize weak areas.")
 
 9. Generate warnings array (empty [] if none apply):
-   - If Rule 4 Step 3B applied (no practice resources in input) → ALWAYS add: "No practice resources available"
+   - PRACTICE RESOURCE CHECK (do this independently, regardless of Rule 4):
+       STEP A: Re-read resource list. Does it include ANY of: question bank, past papers, practice tests, quizzes, exercises, problem sets?
+       STEP B: If YES → no warning needed.
+               If NO (only textbook/studyGuide/video/lecture notes/other) → MUST add: "No practice resources available"
+       ❌ Omitting this warning when resources are textbook/studyGuide-only is a test failure.
+       Example: resources=[textbook, studyGuide] → NO practice resource → warnings MUST include "No practice resources available"
    - Budget too tight for the given scope: add "Plan exceeds daily budget — reduce scope" when EITHER:
        (a) timeBudgetFit = "over" (plan still doesn't fit), OR
        (b) SCOPE CHECK — run these steps:

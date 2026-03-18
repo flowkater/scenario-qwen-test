@@ -31,6 +31,8 @@ export async function callQwen(input: TestCaseInput): Promise<{
       temperature: 0.3,
       max_tokens: 2000,
       response_format: { type: "json_object" },
+      // @ts-ignore DashScope-specific: disable chain-of-thought thinking tokens
+      enable_thinking: false,
     });
 
     const latencyMs = Date.now() - start;

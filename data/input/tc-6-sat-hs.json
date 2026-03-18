@@ -1,0 +1,35 @@
+{
+  "id": "tc-6",
+  "name": "SAT HS (student, hs, beginner, normal, mixed)",
+  "description": "High school junior taking SAT for first time. 21 days left. Has full practice tests that must be scheduled on weekends.",
+  "profile": {
+    "role": "student",
+    "studentLevel": "highschool",
+    "readSpeed": "medium",
+    "level": "beginner",
+    "tone": "encouraging",
+    "focusSpan": 35,
+    "timeBudget": { "weekday": 90, "weekend": 240 },
+    "firstTime": true
+  },
+  "exam": {
+    "subject": "SAT (Math + Reading/Writing)",
+    "examDate": "D-21",
+    "daysLeft": 21,
+    "examType": "mixed",
+    "ddayBucket": "normal"
+  },
+  "resources": [
+    { "type": "studyGuide", "description": "College Board Official SAT Study Guide", "quantity": "400p" },
+    { "type": "practice", "description": "College Board full practice tests", "quantity": "5 tests" }
+  ],
+  "examScope": {
+    "description": "Reading/Writing modules 1-2 and Math modules 1-2, full digital SAT format",
+    "isEstimated": false
+  },
+  "currentState": {
+    "description": "Completed one diagnostic test, reviewed basic math and reading concepts",
+    "progressPercent": 20,
+    "isEstimated": false
+  }
+}

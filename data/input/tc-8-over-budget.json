@@ -1,0 +1,35 @@
+{
+  "id": "tc-8",
+  "name": "Over Budget (student, beginner, tight, normal)",
+  "description": "College student with very limited time (45min/day) trying to cover massive Calculus II scope in 10 days. Designed to trigger over-budget warning.",
+  "profile": {
+    "role": "student",
+    "studentLevel": "college",
+    "collegeType": "undergrad",
+    "readSpeed": "slow",
+    "level": "beginner",
+    "tone": "encouraging",
+    "focusSpan": 25,
+    "timeBudget": { "weekday": 45, "weekend": 90 }
+  },
+  "exam": {
+    "subject": "Calculus II Final Exam",
+    "examDate": "D-10",
+    "daysLeft": 10,
+    "examType": "problemSolving",
+    "ddayBucket": "normal"
+  },
+  "resources": [
+    { "type": "textbook", "description": "Stewart Calculus Ch.7-12", "quantity": "400p" },
+    { "type": "practice", "description": "Problem sets and past final exams", "quantity": "300 problems" }
+  ],
+  "examScope": {
+    "description": "Integration techniques, infinite series and sequences, polar coordinates",
+    "isEstimated": false
+  },
+  "currentState": {
+    "description": "Barely started — only covered basic integration review",
+    "progressPercent": 10,
+    "isEstimated": false
+  }
+}

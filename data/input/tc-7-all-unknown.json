@@ -1,0 +1,38 @@
+{
+  "id": "tc-7",
+  "name": "All Unknown (self, beginner, exploring)",
+  "description": "Self-learner with minimal info. Exam type unknown, all details estimated. CompTIA A+ exploration.",
+  "profile": {
+    "role": "self",
+    "readSpeed": "medium",
+    "level": "beginner",
+    "tone": "neutral",
+    "focusSpan": 30,
+    "timeBudget": { "weekday": 60, "weekend": 120 },
+    "selfLearnerGoal": "exploring"
+  },
+  "exam": {
+    "subject": "CompTIA A+ Certification",
+    "examDate": "D-30",
+    "daysLeft": 30,
+    "examType": "unknown",
+    "ddayBucket": "marathon"
+  },
+  "resources": [
+    {
+      "type": "other",
+      "description": "Various online tutorials and YouTube videos",
+      "quantity": "~10 hours",
+      "isEstimated": true
+    }
+  ],
+  "examScope": {
+    "description": "Core 1 and Core 2 objectives: hardware, networking, OS, security, troubleshooting",
+    "isEstimated": true
+  },
+  "currentState": {
+    "description": "Watched some intro videos, unclear on current progress",
+    "progressPercent": 15,
+    "isEstimated": true
+  }
+}

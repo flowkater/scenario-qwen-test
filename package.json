@@ -1,0 +1,20 @@
+{
+  "name": "add-plan-scenario-ai-test",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "tsx src/index.ts",
+    "run-all": "tsx src/index.ts run-all",
+    "prompt": "tsx src/index.ts prompt"
+  },
+  "dependencies": {
+    "openai": "^4.77.0",
+    "zod": "^3.24.0",
+    "dotenv": "^16.4.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "tsx": "^4.19.0",
+    "@types/node": "^22.10.0"
+  }
+}

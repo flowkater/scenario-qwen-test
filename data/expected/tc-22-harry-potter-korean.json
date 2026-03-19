@@ -1,0 +1,31 @@
+{
+  "tcId": "tc-22",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1",
+  "expectedQuestions": {
+    "required": [],
+    "optional": [],
+    "maxCount": 0
+  },
+  "effortModel": {
+    "type": "range",
+    "expected": 2.0,
+    "min": 1.5,
+    "max": 2.5,
+    "unit": "page",
+    "citation": "Korean Ophthalmology Society 2016: average 202 WPM = 2.0 min/page; r/books: 30-40p/hr"
+  },
+  "expectedTimeFit": "fits",
+  "expectedStrategy": [
+    "offer 3 pace options: slow (15-20p/day ~4-5wks), normal (30-40p/day ~2.5wks), fast (50+p/day ~2wks)",
+    "no forced schedule — user picks own pace"
+  ],
+  "warnings": [],
+  "alternatives": [],
+  "hardFailChecks": [
+    "must NOT ask any questions — all information provided",
+    "must NOT push a specific pace — present options only",
+    "must NOT add note-taking or comprehension coaching (casual reading)"
+  ],
+  "toneExpectation": "warm and fun; Harry Potter excitement energy 😊; no unsolicited strategy coaching"
+}

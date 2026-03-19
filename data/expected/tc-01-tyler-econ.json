@@ -1,0 +1,29 @@
+{
+  "tcId": "tc-01",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1",
+  "expectedQuestions": {
+    "required": ["chaptersScope", "examFormat"],
+    "optional": ["classAttendance"],
+    "maxCount": 3,
+    "decisionValue": "chaptersScope → totalQuantity/deadline; examFormat → min/page changes (MC:3.0 vs essay:4.0); classAttendance → strategy switch (lecture supplement or not)"
+  },
+  "effortModel": {
+    "type": "range",
+    "expected": 3.0,
+    "min": 2.3,
+    "max": 3.8,
+    "unit": "page",
+    "citation": "Wake Forest CAT: Understand; No New Concepts = 3.0 min/page; UT Austin 3.2",
+    "layers": {
+      "baseProcessing": 45,
+      "reviewPractice": 15,
+      "sessionOverhead": 0
+    }
+  },
+  "expectedTimeFit": "fits",
+  "expectedStrategy": ["15p/day reading", "self-test 15min", "250p ÷ 15p/day = 17 days"],
+  "warnings": [],
+  "hardFailChecks": ["HFG-1", "HFG-2", "HFG-4"],
+  "toneExpectation": "beginner encouraging — '첫 시험 준비 잘하려는 거 좋아. 2주면 충분히 할 수 있어.'"
+}

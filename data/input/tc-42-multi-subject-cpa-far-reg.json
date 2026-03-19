@@ -1,0 +1,45 @@
+{
+  "id": "tc-42",
+  "category": "multi-subject",
+  "name": "멀티 과목 — CPA FAR+REG (neutral)",
+  "userMessage": "CPA FAR and REG at the same time. Both exams are in 10 weeks. FAR is my weak area (failed once). REG I'm starting fresh. About 4 hours a day after work.",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1.5",
+  "profile": {
+    "timeBudget": {
+      "weekday": 240,
+      "weekend": 240
+    }
+  },
+  "subjects": [
+    {
+      "name": "FAR (Financial Accounting & Reporting)",
+      "examDate": "10 weeks",
+      "attempt": 2,
+      "previousResult": "failed",
+      "estimatedHours": {
+        "firstAttempt": 165,
+        "retake": 90,
+        "note": "재시험자 40-60% 시간 절감 가능"
+      },
+      "priority": 1
+    },
+    {
+      "name": "REG (Regulation)",
+      "examDate": "10 weeks",
+      "attempt": 1,
+      "previousResult": null,
+      "estimatedHours": {
+        "firstAttempt": 120,
+        "note": "신규, 기초부터 시작"
+      },
+      "priority": 2
+    }
+  ],
+  "globalBudget": {
+    "totalDailyMin": 240,
+    "totalDays": 70,
+    "totalAvailableMin": 16800,
+    "totalAvailableHours": 280
+  }
+}

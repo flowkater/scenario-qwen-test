@@ -1,0 +1,40 @@
+{
+  "tcId": "tc-27",
+  "emotionProtocol": "frustration",
+  "versionTag": "v1.5",
+  "expectedQuestions": {
+    "required": ["Are there practice problems? (you need 3-5 per lecture for real learning)"],
+    "optional": [],
+    "maxCount": 1
+  },
+  "effortModel": {
+    "type": "range",
+    "expected": 100,
+    "min": 75,
+    "max": 150,
+    "unit": "lecture",
+    "citation": "r/PhysicsStudents DP-14: 2.0× multiplier confirmed; derivation-heavy → up to 3.0× (DP-15)"
+  },
+  "expectedTimeFit": "tight",
+  "expectedStrategy": [
+    "1 lecture per day (NOT 2) — 100min lecture + 20min immediate problem practice",
+    "interleaved: each day = current lecture + review of previous lecture problems",
+    "milestone check every 2 lectures",
+    "Day 9-14: full review + past exam practice"
+  ],
+  "warnings": [
+    "2 lectures/day is mathematically impossible: 2×100min = 200min > 120min budget",
+    "watching alone ≠ studying — must pause every 10min and work out derivations",
+    "derivation-heavy lectures may take up to 150min (3.0×) — plan accordingly"
+  ],
+  "alternatives": [
+    "if lecture content is mostly review: 1.5× multiplier allows slight speedup",
+    "interleaved structure more effective than massed lecture binging"
+  ],
+  "hardFailChecks": [
+    "must NOT plan 2 lectures/day — physically impossible given budget",
+    "must include immediate problem-solving track alongside each lecture",
+    "ICAP principle: constructive (writing derivations) > passive watching"
+  ],
+  "toneExpectation": "constructive and structured; validate 'behind' feeling briefly then pivot to 'here's the achievable plan'; milestone-based progress"
+}

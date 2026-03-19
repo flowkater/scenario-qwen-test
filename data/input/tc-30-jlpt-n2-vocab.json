@@ -1,0 +1,20 @@
+{
+  "id": "tc-30",
+  "category": "practice",
+  "name": "JLPT N2 단어 2000개 SRS (15분/일, 지속가능성)",
+  "userMessage": "I want to memorize Japanese vocabulary. I have a list of 2000 words for JLPT N2. I want to do some every day. Maybe 15 minutes.",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1.5",
+  "profile": {
+    "role": "self",
+    "timeBudget": { "weekday": 15, "weekend": 15 }
+  },
+  "resources": [
+    { "type": "app", "description": "JLPT N2 vocabulary list (2000 words)" }
+  ],
+  "practiceDetails": {
+    "activity": "vocabulary",
+    "method": "srs",
+    "totalItems": 2000
+  }
+}

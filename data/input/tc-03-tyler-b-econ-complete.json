@@ -1,0 +1,31 @@
+{
+  "id": "tc-03",
+  "category": "exam-university",
+  "name": "Tyler-B — Econ 101 (완전한 정보)",
+  "userMessage": "Econ 101 midterm, March 28. Mankiw Principles of Economics, chapters 1-12. About 300 pages. Haven't started. I can study about an hour a day.",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1",
+  "profile": {
+    "role": "student",
+    "studentLevel": "college",
+    "level": "beginner",
+    "focusSpan": 30,
+    "timeBudget": { "weekday": 60, "weekend": 60 }
+  },
+  "resources": [
+    { "type": "textbook", "description": "Mankiw Principles of Economics Ch.1-12", "quantity": "300p" }
+  ],
+  "exam": {
+    "subject": "Economics 101",
+    "examDate": "March 28",
+    "daysLeft": 14,
+    "examType": "unknown"
+  },
+  "examScope": {
+    "description": "Ch.1-12",
+    "isEstimated": false
+  },
+  "currentState": {
+    "description": "Haven't started"
+  }
+}

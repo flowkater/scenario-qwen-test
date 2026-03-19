@@ -1,7 +1,0 @@
-{
-  "tcId": "tc-5",
-  "notes": "Marathon MC: C30 P40 I30. App resource treated as practice. Self-learner with specific goal. Encouraging tone.",
-  "warnings": [],
-  "expectedCpiApprox": { "c": 30, "p": 40, "i": 30 },
-  "expectedTimeBudgetFit": "fits"
-}

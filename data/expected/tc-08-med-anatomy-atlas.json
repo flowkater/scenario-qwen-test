@@ -1,0 +1,33 @@
+{
+  "tcId": "tc-08",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1.5",
+  "expectedQuestions": {
+    "required": [],
+    "optional": ["flashcardsAnki"],
+    "maxCount": 1,
+    "decisionValue": "Anki usage → Anki integration strategy vs standalone active recall. Not essential but enhances v1.5 plan."
+  },
+  "effortModel": {
+    "type": "range",
+    "expected": 11.0,
+    "min": 9.0,
+    "max": 15.0,
+    "unit": "page",
+    "citation": "r/medicalschool: 3hr/20p = 9min/page (lab concurrent); AUC M1: 7.5-10hr/week on anatomy/35p = 13-17min/page; PMC ATSU-KCOM: pure atlas 9-15min. v3 was 8-12, v4 uplifted.",
+    "layers": {
+      "baseProcessing": 3000,
+      "reviewPractice": 2500,
+      "sessionOverhead": 0
+    }
+  },
+  "expectedTimeFit": "tight",
+  "expectedStrategy": [
+    "Unit = 'region' not 'page' (upper limb, lower limb, thorax, etc.)",
+    "Active recall cycle: look → close → draw → compare → label → blank test",
+    "Total ~5500min needed vs 5040min available (180min × 28days) — tight, weekend review cycles needed"
+  ],
+  "warnings": ["5500min needed vs 5040min available — tight", "Viewing ≠ knowing: can't draw = don't know"],
+  "hardFailChecks": ["HFG-1", "HFG-2", "HFG-4"],
+  "toneExpectation": "med student context acknowledgment — '해부학은 볼륨보다 recall 퀄리티가 성적 만들어.'"
+}

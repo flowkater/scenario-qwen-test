@@ -1,8 +1,28 @@
+// ===== 공통 기초 타입 =====
+
+export type EmotionProtocol = "neutral" | "panic" | "shame" | "frustration" | "burnout";
+
+export type VersionTag = "v1" | "v1.5" | "v2";
+
+export type TimeFit = "fits" | "tight" | "deficit" | "impossible";
+
+export type TCCategory =
+  | "exam-university"
+  | "exam-highschool"
+  | "exam-cert"
+  | "read"
+  | "assignment"
+  | "watch"
+  | "practice"
+  | "cross-profile"
+  | "replan"
+  | "multi-subject";
+
 // ===== 입력 (인터뷰 결과) =====
 
 export interface TimeBudget {
-  weekday: number;  // minutes
-  weekend: number;  // minutes
+  weekday: number;   // minutes
+  weekend: number;   // minutes
 }
 
 export interface StudentProfile {
@@ -12,8 +32,8 @@ export interface StudentProfile {
   year?: string;
   readSpeed?: "fast" | "medium" | "slow";
   level: "beginner" | "capable" | "confident";
-  tone: "encouraging" | "guiding" | "neutral" | "optimizing";
-  focusSpan: number;  // minutes
+  tone?: "encouraging" | "guiding" | "neutral" | "optimizing";
+  focusSpan: number;   // minutes
   timeBudget: TimeBudget;
   firstTime?: boolean;
   isRetake?: boolean;
@@ -23,14 +43,14 @@ export interface StudentProfile {
 
 export interface ExamDetails {
   subject: string;
-  examDate: string;       // "D-5", "D-18" etc
+  examDate?: string;       // "D-5", "D-18" etc
   daysLeft: number;
   examType: "multipleChoice" | "essay" | "problemSolving" | "mixed" | "unknown";
-  ddayBucket: "urgent" | "normal" | "marathon";
+  ddayBucket?: "urgent" | "normal" | "marathon";
 }
 
 export interface Resource {
-  type: "textbook" | "practice" | "lectures" | "studyGuide" | "app" | "other";
+  type: "textbook" | "practice" | "lectures" | "studyGuide" | "app" | "other" | "video" | "problems" | "pastExam" | "outlines";
   description: string;
   quantity?: string;       // "300p", "200 problems", "9 lectures"
   watched?: string;        // for lectures: "all watched", "5/9"
@@ -49,40 +69,126 @@ export interface CurrentState {
   retakeIssue?: string;    // isRetake 시: "Not enough practice"
 }
 
-export interface TestCaseInput {
-  id: string;              // "tc-1"
-  name: string;            // "Tyler (FR, beginner, urgent, MC)"
-  description: string;     // TC 설명
-  profile: StudentProfile;
-  exam: ExamDetails;
+// Multi-subject TC용
+export interface SubjectDetail {
+  subject: string;
+  daysLeft: number;
   resources: Resource[];
-  examScope: ExamScope;
-  currentState: CurrentState;
+  timeBudgetShare?: number;  // percentage of global budget
+  priority?: number;
 }
 
-// ===== 출력 (Qwen 응답) =====
+// Replan TC용
+export interface OriginalPlan {
+  description: string;
+  totalQuantity: number;
+  unit: string;
+  dailyTarget: number;
+  startDate?: string;
+}
+
+export interface CurrentProgress {
+  completedQuantity: number;
+  remainingQuantity: number;
+  daysElapsed: number;
+  daysRemaining: number;
+  description?: string;
+}
+
+export interface TestCaseInput {
+  id: string;              // "tc-01"
+  category: TCCategory;    // NEW v4
+  name: string;            // "Tyler — Econ 101 Freshman 🤷"
+  description?: string;    // TC 설명 (optional for backward compat)
+  userMessage?: string;    // NEW v4: raw user message
+  emotionProtocol: EmotionProtocol;  // NEW v4
+  versionTag: VersionTag;            // NEW v4: minimum version needed
+  profile: StudentProfile;
+  exam?: ExamDetails;               // optional for non-exam TCs
+  resources: Resource[];
+  examScope?: ExamScope;            // optional for non-exam TCs
+  currentState?: CurrentState;      // optional
+  // Multi-subject support
+  subjects?: SubjectDetail[];       // for multi-subject TCs
+  // Replan support
+  originalPlan?: OriginalPlan;
+  currentProgress?: CurrentProgress;
+}
+
+// ===== 출력 (AI Coach 응답) =====
+
+export interface EffortModel {
+  type: "fixed" | "range" | "variable" | "unpredictable";
+  expected: number;   // P50
+  min: number;        // P25
+  max: number;        // P75
+  unit?: string;      // "page", "problem", "lecture", etc.
+  citation?: string;  // data source
+  layers?: {
+    baseProcessing: number;
+    reviewPractice: number;
+    sessionOverhead: number;
+  };
+}
 
 export interface StudyPlan {
-  type: "read" | "practice" | "review";
-  schedule: "daily" | "event";
+  type: "read" | "practice" | "review" | "watch" | "simulate" | "check";
+  schedule?: "daily" | "event";
   label: string;
-  scope: string;
-  dailyTarget: string;
-  estimatedMinutes: number;
+  scope?: string;
+  dailyTarget?: string;
+  weekdayTarget?: number;  // NEW v4
+  weekendTarget?: number;  // NEW v4
+  estimatedMinutes?: number;
+  effortModel?: EffortModel;  // NEW v4: replaces estimatedMinPerUnit
   priority: "primary" | "secondary" | "optional";
-  rationale: string;
+  phase?: "learn" | "practice" | "review" | "simulate" | "triage";
+  rationale?: string;
+  assumptions?: string[];   // NEW v4
+  missingInfo?: string[];   // NEW v4
 }
 
+// Legacy support
 export interface QwenOutput {
   strategy: string;
   strategyRationale: string;
-  cpiRatio: { c: number; p: number; i: number };
+  cpiRatio?: { c: number; p: number; i: number };  // deprecated in v4
   plans: StudyPlan[];
   totalDailyMinutes: number;
-  totalEventMinutes: number;
-  timeBudgetFit: "fits" | "tight" | "over";
+  totalEventMinutes?: number;
+  timeBudgetFit: TimeFit;
   coachComment: string;
   warnings: string[];
+  emotionProtocol?: EmotionProtocol;  // NEW v4
+  versionTag?: VersionTag;            // NEW v4
+  alternatives?: StudyPlan[];         // NEW v4: for deficit cases
+}
+
+// ===== 기대 출력 (TestCase Expected) =====
+
+export interface ExpectedQuestions {
+  required: string[];
+  optional: string[];
+  maxCount: number;
+  decisionValue?: string;
+}
+
+export interface TestCaseExpected {
+  tcId: string;
+  emotionProtocol: EmotionProtocol;   // NEW v4
+  versionTag: VersionTag;             // NEW v4
+  expectedQuestions?: ExpectedQuestions;
+  effortModel?: EffortModel;          // NEW v4: per primary plan
+  effortModels?: { [planLabel: string]: EffortModel };  // for multi-plan TCs
+  expectedTimeFit: TimeFit;
+  expectedStrategy?: string[];
+  warnings?: string[];
+  hardFailChecks: string[];           // NEW v4: HFG rules
+  toneExpectation?: string;
+  notes?: string;
+  // Legacy (v3 backward compat)
+  expectedCpiApprox?: { c: number; p: number; i: number };  // deprecated
+  expectedTimeBudgetFit?: string;  // use expectedTimeFit instead
 }
 
 // ===== 분석 결과 =====
@@ -99,7 +205,13 @@ export interface ValidationResult {
     relevant: boolean;
     timeBound: boolean;
   };
-  cpiCheck: {
+  effortModelCheck?: {         // NEW v4: replaces cpiCheck
+    expected: number;
+    actual: number;
+    withinRange: boolean;
+    deviation: number;
+  };
+  cpiCheck?: {                  // legacy v3
     ratioMatchesPlan: boolean;
     expectedRatio: { c: number; p: number; i: number };
     actualRatio: { c: number; p: number; i: number };
@@ -109,7 +221,22 @@ export interface ValidationResult {
     totalDailyMinutes: number;
     weekdayBudget: number;
     fits: boolean;
-    eventsOnWeekend: boolean;
+    eventsOnWeekend?: boolean;
+  };
+  timeFitCheck?: {             // NEW v4
+    expected: TimeFit;
+    actual: TimeFit;
+    matches: boolean;
+  };
+  emotionProtocolCheck?: {     // NEW v4
+    expected: EmotionProtocol;
+    actual: EmotionProtocol;
+    matches: boolean;
+  };
+  hardFailCheck?: {            // NEW v4
+    rules: string[];
+    passed: boolean;
+    failedRules?: string[];
   };
   toneCheck: {
     expectedTone: string;
@@ -134,7 +261,10 @@ export interface TestReport {
     parseRate: string;
     schemaRate: string;
     smartRate: string;
-    cpiRate: string;
+    effortModelRate?: string;  // NEW v4
+    cpiRate?: string;          // legacy
     timeBudgetRate: string;
+    timeFitRate?: string;      // NEW v4
+    emotionProtocolRate?: string;  // NEW v4
   };
 }

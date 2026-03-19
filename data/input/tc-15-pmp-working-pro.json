@@ -1,0 +1,24 @@
+{
+  "id": "tc-15",
+  "category": "exam-cert",
+  "name": "PMP — Working Professional (5년 경력)",
+  "userMessage": "PMP certification exam in 5 weeks. I have the PMBOK Guide (756 pages) and Rita Mulcahy's prep book (550 pages). I'm a project manager with 5 years experience. I can do 1 hour on weekdays.",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1.5",
+  "profile": {
+    "role": "working",
+    "level": "confident",
+    "focusSpan": 50,
+    "timeBudget": { "weekday": 60, "weekend": 180 }
+  },
+  "resources": [
+    { "type": "textbook", "description": "PMBOK Guide 7th edition", "quantity": "756p" },
+    { "type": "studyGuide", "description": "Rita Mulcahy PMP Prep book", "quantity": "550p" }
+  ],
+  "exam": {
+    "subject": "PMP Certification",
+    "daysLeft": 35,
+    "examType": "multipleChoice",
+    "ddayBucket": "normal"
+  }
+}

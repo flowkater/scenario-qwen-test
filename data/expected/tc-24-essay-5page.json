@@ -1,0 +1,37 @@
+{
+  "tcId": "tc-24",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1",
+  "expectedQuestions": {
+    "required": ["Have you already read both novels?"],
+    "optional": ["What time Friday is it due — 11:59pm or morning?"],
+    "maxCount": 2
+  },
+  "effortModel": {
+    "type": "unpredictable",
+    "expected": null,
+    "min": null,
+    "max": null,
+    "unit": "milestone",
+    "citation": "Essay outline+mini-draft: 65 [50-90]min; body draft: 90 [70-120]min; revision: 55 [40-75]min"
+  },
+  "expectedTimeFit": "fits",
+  "expectedStrategy": [
+    "Day 1 (Tue): outline + thesis + intro + body paragraph 1 — 60min",
+    "Day 2 (Wed): remaining body paragraphs + conclusion — 60-75min",
+    "Day 3 (Thu): revision + read-aloud + rubric check + submit prep — 45-60min"
+  ],
+  "warnings": [
+    "Day 1 must include real writing (mini-draft), not just outline — outline-only causes procrastination",
+    "find citations on Day 1 to avoid breaking flow on Day 2"
+  ],
+  "alternatives": [
+    "if novels not read: add Day 0 for key scene review before outline"
+  ],
+  "hardFailChecks": [
+    "must NOT create page-based plan (e.g., '2 pages/day') — essays use milestones",
+    "Day 1 must involve real writing start, not outline alone",
+    "must NOT generate 1-day full completion plan without asking about novels"
+  ],
+  "toneExpectation": "structured, reassuring, actionable milestone-by-milestone; thesis checkpoint at Day 1 end"
+}

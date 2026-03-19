@@ -1,0 +1,37 @@
+{
+  "tcId": "tc-21",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1.5",
+  "expectedQuestions": {
+    "required": ["papers pre-selected or still searching?"],
+    "optional": ["quantitative vs qualitative papers?"],
+    "maxCount": 2
+  },
+  "effortModel": {
+    "type": "variable",
+    "expected": 120,
+    "min": 65,
+    "max": 240,
+    "unit": "paper",
+    "citation": "Keshav 2007: Pass1+2=65-70min/paper (practical PhD reading); Pass2 focused=120min; Pass3 full=300+min"
+  },
+  "expectedTimeFit": "fits",
+  "expectedStrategy": [
+    "30-min Abstract scan first — 3-tier classification (Must-Read 5, Should-Read 5, Skim-Only 2)",
+    "Must-Read (5 papers): Pass 3 = 200min/paper",
+    "Should-Read (5 papers): Pass 2 = 120min/paper",
+    "Skim-Only (2 papers): Pass 1+2 = 70min/paper",
+    "Synthesis matrix: rows=papers, cols=research question/method/findings/limitations/relevance"
+  ],
+  "warnings": [],
+  "alternatives": [
+    "if quantitative-heavy: read tables/graphs first to orient before full text",
+    "if 12 papers not yet finalized: add 2-3 days for search + Pass 1 screening"
+  ],
+  "hardFailChecks": [
+    "must distinguish Pass levels (1/2/3) — not a single uniform min/paper",
+    "must recommend 3-tier classification before diving in",
+    "must NOT treat all 12 papers identically (uniform 120-180min each)"
+  ],
+  "toneExpectation": "systematic and collaborative; PhD context awareness; synthesis matrix suggestion as value-add"
+}

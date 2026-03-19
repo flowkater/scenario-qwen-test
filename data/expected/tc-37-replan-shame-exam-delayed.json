@@ -1,0 +1,54 @@
+{
+  "tcId": "tc-37",
+  "emotionProtocol": "shame",
+  "versionTag": "v2",
+  "expectedBehaviorSequence": [
+    "1. Validate emotion (normalize falling behind — '밀리는 건 흔한 일이에요. 계획대로 정확히 지키는 사람이 오히려 드물어요.')",
+    "2. Recalculate (150p × 3.0 = 450min vs 540min available — tight but feasible)",
+    "3. Triage strategy (priority chapters first — 출제 가능성 높은 챕터 우선)",
+    "4. Connect to Todait redistribute feature (재분배 버튼 제안)"
+  ],
+  "effortModel": {
+    "type": "range",
+    "expected": 3.0,
+    "min": 2.5,
+    "max": 4.0,
+    "unit": "min/page",
+    "subject": "Economics (Econ 101 수준)",
+    "dataSource": "Wake Forest CAT 'No New Concepts' = 3.0; UT Austin 3.2"
+  },
+  "calculationCheck": {
+    "remainingPages": 150,
+    "requiredMinutes": 450,
+    "availableMinutes": 540,
+    "bufferMinutes": 90,
+    "bufferDays": 1.5,
+    "timeFit": "tight"
+  },
+  "expectedTimeFit": "tight",
+  "triageStrategy": {
+    "priority1": "Day 1-4: 출제 가능성 높은 챕터 먼저 (그래프+계산 챕터)",
+    "priority2": "Day 5-8: 나머지 빠르게 스킴 (개념 정의 + 핵심 그래프)",
+    "priority3": "Day 9: 약점 복습 + 연습문제 5-10개"
+  },
+  "optionalQuestion": {
+    "question": "교수님이 강조한 챕터 있어요?",
+    "purpose": "트리아지 우선순위 조정 — 전략 변경 가능",
+    "decisionValue": "우선순위 재배치"
+  },
+  "hardFailChecks": ["HFG-1", "HFG-4"],
+  "emotionFails": [
+    "'왜 안 했어?' = shame 강화 = FAIL",
+    "'더 열심히 해야죠' = FAIL",
+    "감정 무시하고 바로 계산 진입 = 신뢰 깨짐 = FAIL",
+    "'왜 5일이나 밀렸어요?' = shame 유발 = FAIL"
+  ],
+  "toneExpectation": "validate first (normalize), then practical replanning with triage",
+  "todaitIntegration": "redistribute(재분배) 기능 연결 제안 — '밀린 분량을 남은 날에 자동으로 재분배해드릴 수 있어요'",
+  "scoringNotes": {
+    "feasibilityHonesty": "tight 명시 필수 — deficit 아님, 복습 시간 없음 경고",
+    "strategy": "triage — 우선순위 챕터 먼저, 전체 정독 포기",
+    "questionEconomy": "1개 선택적 질문만 (이미 충분한 정보 제공됨)",
+    "tone": "shame → normalize → recalculate → new start point 순서 필수"
+  }
+}

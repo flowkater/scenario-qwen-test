@@ -1,0 +1,84 @@
+{
+  "tcId": "tc-42",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1.5",
+  "expectedBehaviorSequence": [
+    "1. FAR retake efficiency recognition (재시험자 40-60% 시간 절감 — 90-100hr vs 165hr)",
+    "2. Sequential vs parallel analysis — recommend sequential (FAR first, REG after)",
+    "3. Phase-based allocation (Phase 1: FAR 집중 + REG 예열, Phase 2: REG 집중 + FAR 유지)",
+    "4. 50/50 equal split warning ('REG 총 80hr = 신규 과목에 부족')"
+  ],
+  "retakeEfficiency": {
+    "FAR_firstAttempt": 165,
+    "FAR_retake": 90,
+    "savingsPercentage": "40-60%",
+    "dataSource": "02-certification.md DP#7: FAR 재시험자 11주→5주로 합격 (하루 2hr 미만)",
+    "strategy": "targeted review — 약점 섹션만 집중, 전체 재수강 불필요"
+  },
+  "sequentialVsParallel": {
+    "optionA_parallel": {
+      "description": "Week 1-10: FAR 2hr + REG 2hr 매일",
+      "risk": "두 과목 동시 집중 = 간섭 효과, 번아웃 위험",
+      "recommendation": "비권장"
+    },
+    "optionB_sequential": {
+      "description": "Week 1-4 FAR 집중 → Week 5-10 REG 집중",
+      "rationale": "FAR 재시험 효율이 높아 단기 완료 후 REG 집중이 더 안전",
+      "recommendation": "데이터 기반 권장"
+    }
+  },
+  "phasePlan": {
+    "phase1": {
+      "period": "Week 1-4 (FAR 집중)",
+      "FAR": "3hr/day — 약점 섹션 집중 (요구 질문: '어디서 떨어졌어?')",
+      "REG": "1hr/day — Tax overview, 기초 개념만 (예열)",
+      "totalFAR": "~84hr"
+    },
+    "phase2": {
+      "period": "Week 5-10 (REG 집중)",
+      "REG": "4hr/day 주 5일",
+      "FAR": "주말 1-2hr (유지 + 약점 드릴)",
+      "totalREG": "~120hr"
+    },
+    "totalHours": {
+      "FAR": "Phase1 84hr + Phase2 12hr = ~96hr (재시험 기준 충분)",
+      "REG": "Phase1 28hr + Phase2 120hr = ~148hr (신규 기준 충분)",
+      "total": "~244hr / 280hr 예산 → 36hr 버퍼"
+    }
+  },
+  "equalSplitWarning": {
+    "scenario": "50/50 균등 배분 = 각 2시간씩",
+    "FAR_hours": 80,
+    "REG_hours": 80,
+    "verdict": "REG 80hr = 신규 과목 120hr 기준 부족 → REG 실패 위험",
+    "mustWarn": true
+  },
+  "sectionSpecificWarning": {
+    "FAR": "어느 섹션에서 떨어졌어요? (Leases? Governmental? NFP?) → 해당 섹션에 Phase 1 시간 집중",
+    "REG": "Tax는 '휘발성 높음' — 시험 직전 집중 필수. 공부 후 시험까지 시간 벌어지면 휘발"
+  },
+  "diagnosticQuestions": [
+    {
+      "question": "FAR에서 어느 섹션이 약했어요? (Leases, Governmental, NFP, etc.)",
+      "decisionValue": "Phase 1 내 FAR 집중 포인트 결정 — targeted review 핵심"
+    },
+    {
+      "question": "REG: 회계 과목 배경 있어요? 아니면 완전 처음?",
+      "decisionValue": "REG 진도 속도 결정 — 배경 있으면 120hr 미만 가능"
+    }
+  ],
+  "hardFailChecks": ["HFG-1", "HFG-4"],
+  "emotionFails": [
+    "50/50 균등 배분 = REG 시간 부족 = 준최적 = FAIL",
+    "두 과목 병렬로 동일 강도 = 간섭 효과 + 번아웃 = FAIL",
+    "FAR 재시험 효율 무시 = 재시험 이점 활용 안 함 = FAIL",
+    "'어느 섹션 약했어요?' 안 물음 = FAR targeted review 불가 = FAIL"
+  ],
+  "toneExpectation": "neutral + data-driven analysis — sequential recommendation with clear rationale",
+  "scoringNotes": {
+    "feasibilityHonesty": "280hr 예산 vs ~244hr 필요 → 36hr 버퍼 — 충분하지만 배분이 핵심",
+    "strategy": "FAR 재시험 효율 활용 순차 배분 — 균등 배분 vs 순차 배분 비교 제시",
+    "questionEconomy": "2개 질문 (FAR 약점 섹션 + REG 배경) — 각각 전략 완전 변경",
+    "failurePrevention": "50/50 경고 + REG 시험 직전 집중 필수 (휘발성) 명시"
+  }
+}

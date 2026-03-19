@@ -1,0 +1,18 @@
+{
+  "id": "tc-24",
+  "category": "assignment",
+  "name": "영문 에세이 5p 비교 (화요일 시작, 금요일 마감)",
+  "userMessage": "I have a 5-page essay due Friday for my English class. Topic is comparing two novels we read. I haven't started. It's Tuesday now.",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1",
+  "profile": {
+    "role": "student",
+    "timeBudget": { "weekday": 60, "weekend": 60 }
+  },
+  "resources": [],
+  "assignmentDetails": {
+    "type": "essay",
+    "description": "5-page comparative essay on two novels from English class",
+    "deadline": "Friday"
+  }
+}

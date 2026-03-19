@@ -1,0 +1,26 @@
+{
+  "id": "tc-16",
+  "category": "exam-cert",
+  "name": "JLPT N2 — Self-learner (N3 합격자)",
+  "userMessage": "JLPT N2 올해 7월이에요. 단어장(3000단어)이랑 문법책(200페이지) 있어요. 매일 30분 정도. N3은 작년에 합격했어요.",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1.5",
+  "profile": {
+    "role": "self",
+    "selfLearnerGoal": "specific",
+    "level": "capable",
+    "focusSpan": 30,
+    "timeBudget": { "weekday": 30, "weekend": 30 }
+  },
+  "resources": [
+    { "type": "other", "description": "JLPT N2 단어장 (빈도순)", "quantity": "3000 words" },
+    { "type": "studyGuide", "description": "JLPT N2 문법책", "quantity": "200p" }
+  ],
+  "exam": {
+    "subject": "JLPT N2",
+    "examDate": "July",
+    "daysLeft": 120,
+    "examType": "multipleChoice",
+    "ddayBucket": "marathon"
+  }
+}

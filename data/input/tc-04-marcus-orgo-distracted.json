@@ -1,0 +1,27 @@
+{
+  "id": "tc-04",
+  "category": "exam-university",
+  "name": "Marcus — Orgo II Sophomore (산만, 15min focus)",
+  "userMessage": "Organic chemistry 2 exam in 10 days. I have the McMurry textbook, about 200 pages for this unit. I also have practice problems but I get distracted really easily. I can only focus for like 15 minutes at a time. I have about 2 hours a day.",
+  "emotionProtocol": "frustration",
+  "versionTag": "v1",
+  "profile": {
+    "role": "student",
+    "studentLevel": "college",
+    "collegeType": "undergrad",
+    "year": "sophomore",
+    "level": "capable",
+    "focusSpan": 15,
+    "timeBudget": { "weekday": 120, "weekend": 120 }
+  },
+  "resources": [
+    { "type": "textbook", "description": "McMurry Organic Chemistry textbook", "quantity": "~200p" },
+    { "type": "problems", "description": "Practice problems (quantity unknown)", "isEstimated": true }
+  ],
+  "exam": {
+    "subject": "Organic Chemistry II",
+    "daysLeft": 10,
+    "examType": "mixed",
+    "ddayBucket": "urgent"
+  }
+}

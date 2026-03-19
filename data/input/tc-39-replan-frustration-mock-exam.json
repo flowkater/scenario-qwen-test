@@ -1,0 +1,29 @@
+{
+  "id": "tc-39",
+  "category": "replan",
+  "name": "플랜 실패 후 재계획 — 모의고사 충격 (frustration)",
+  "userMessage": "6월 모평 봤는데 국어 4등급 나왔어요. 비문학이 시간이 너무 부족했어요. 수능까지 5개월인데 계획을 완전히 바꿔야 할 것 같아요.",
+  "emotionProtocol": "frustration",
+  "versionTag": "v2",
+  "profile": {
+    "timeBudget": {
+      "weekday": 60,
+      "weekend": 60
+    }
+  },
+  "originalPlan": {
+    "dailyTarget": "국어 1시간",
+    "subject": "Korean (수능 국어)",
+    "focus": "비문학"
+  },
+  "currentProgress": {
+    "mockExamResult": {
+      "subject": "Korean",
+      "grade": 4,
+      "issue": "비문학 시간 부족"
+    },
+    "remainingDays": 150,
+    "emotionalState": "frustration",
+    "triggerEvent": "6월 모평 4등급"
+  }
+}

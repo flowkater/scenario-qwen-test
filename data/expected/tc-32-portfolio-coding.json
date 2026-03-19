@@ -1,0 +1,46 @@
+{
+  "tcId": "tc-32",
+  "emotionProtocol": "frustration",
+  "versionTag": "v1.5",
+  "expectedQuestions": {
+    "required": [],
+    "optional": [],
+    "maxCount": 0
+  },
+  "effortModel": {
+    "type": "unpredictable",
+    "expected": null,
+    "min": null,
+    "max": null,
+    "unit": "milestone",
+    "citation": "r/webdev, r/learnprogramming: beginner portfolio 10-15 weeks typical; Hofstadter's Law: always 2-3× longer than estimated"
+  },
+  "expectedTimeFit": "deficit",
+  "expectedStrategy": [
+    "10-week plan (8 weeks work + 2 weeks buffer)",
+    "Week 1-2: React basics (Hooks, components, props, state) + To-do app",
+    "Week 3: project setup + landing page → DEPLOY #1 (even a blank site with URL)",
+    "Week 4-5: About + Projects pages + basic navigation",
+    "Week 6-7: interactions + responsive + styling → DEPLOY #2",
+    "Week 8: polish + testing + content review",
+    "Week 9-10: buffer + FINAL DEPLOY",
+    "weekend 3hr blocks = primary build sessions (most critical time)",
+    "stuck protocol: 2+ days blocked → simplify scope, try ChatGPT/SO, take a day off"
+  ],
+  "warnings": [
+    "6 weeks is too optimistic for React beginners — React alone takes 2+ weeks to feel comfortable",
+    "buffer weeks always get used — plan without buffer = plan that fails",
+    "weekend 3hr blocks are the highest-leverage time — protect them"
+  ],
+  "alternatives": [
+    "10-week plan: quality portfolio with React comfort (recommended)",
+    "8-week minimum: possible with full dedication and no major blockers"
+  ],
+  "hardFailChecks": [
+    "must NOT say '6 weeks is achievable' — this is the primary failure mode",
+    "must include 2+ weeks of buffer explicitly",
+    "must include at least 2 DEPLOY milestones (Week 3 and Week 7)",
+    "must recommend effective deep work blocks over fragmented micro-sessions"
+  ],
+  "toneExpectation": "honest but encouraging; timeline reality check without discouraging; build milestones as motivation engine"
+}

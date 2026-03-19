@@ -1,0 +1,48 @@
+{
+  "tcId": "tc-12",
+  "emotionProtocol": "frustration",
+  "versionTag": "v1.5",
+  "expectedQuestions": {
+    "required": ["testTypeSelection"],
+    "optional": ["weakBimuNhakCategory"],
+    "maxCount": 2,
+    "decisionValue": "testTypeSelection ('화법과 작문' or '언어와 매체') → exam structure differs, time allocation changes [v1 required]. weakBimuNhakCategory (science/tech vs humanities/social) → determines which past exam sets to prioritize."
+  },
+  "effortModels": {
+    "bimuNhak_average": {
+      "type": "range",
+      "expected": 5.5,
+      "min": 5.0,
+      "max": 6.0,
+      "unit": "set",
+      "citation": "오르비 data: average difficulty bimuNhak passage = 5-6min. Unit = passage+question set."
+    },
+    "bimuNhak_junkiller": {
+      "type": "range",
+      "expected": 8.5,
+      "min": 8.0,
+      "max": 9.0,
+      "unit": "set",
+      "citation": "오르비 data: 준킬러 8-9min. v3 used 7-10min flat, v4 splits by difficulty."
+    },
+    "suneungteugang": {
+      "type": "range",
+      "expected": 2.0,
+      "min": 1.5,
+      "max": 2.5,
+      "unit": "page",
+      "citation": "수능특강 text-only reading pace. Same as Korean novel pace."
+    }
+  },
+  "expectedTimeFit": "fits",
+  "expectedStrategy": [
+    "3 plans in PlanGroup: 수능특강(.range) + 기출 5개년(.amount, set unit) + 비문학 1지문/day routine(.check, daily)",
+    "6-phase: 3-6월 수능특강+daily routine → June mock exam milestone → 7-9월 기출 실전 풀이(80min timed) → Sep mock exam → 10월-수능 weak point+mock",
+    "Daily session: 5.5-8.5min bimuNhak passage (daily required) + 45-50min special/past exam + 5-10min 오답 analysis",
+    "EBS 연계: 수능특강 thorough — indirect connection ~50%",
+    "Past exam: 80min timed → score → 오답노트 cycle"
+  ],
+  "warnings": [],
+  "hardFailChecks": ["HFG-1", "HFG-2", "HFG-4"],
+  "toneExpectation": "frustration-aware — acknowledge bimuNhak weakness as legitimate difficulty, not personal failing"
+}

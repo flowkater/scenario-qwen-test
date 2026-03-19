@@ -1,0 +1,28 @@
+{
+  "id": "tc-06",
+  "category": "exam-university",
+  "name": "Priya — Political Science Essay Exam",
+  "userMessage": "I have a political science midterm that's all essay questions. It covers chapters 1-8 of our textbook, about 400 pages. The exam is in 3 weeks. I need to understand arguments well enough to write about them, not just recognize terms.",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1.5",
+  "profile": {
+    "role": "student",
+    "studentLevel": "college",
+    "level": "capable",
+    "focusSpan": 45,
+    "timeBudget": { "weekday": 90, "weekend": 90 }
+  },
+  "resources": [
+    { "type": "textbook", "description": "Political Science textbook Ch.1-8", "quantity": "400p" }
+  ],
+  "exam": {
+    "subject": "Political Science",
+    "daysLeft": 21,
+    "examType": "essay",
+    "ddayBucket": "normal"
+  },
+  "examScope": {
+    "description": "Ch.1-8",
+    "isEstimated": false
+  }
+}

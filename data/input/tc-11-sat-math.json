@@ -1,0 +1,26 @@
+{
+  "id": "tc-11",
+  "category": "exam-highschool",
+  "name": "SAT Math — 3개월",
+  "userMessage": "SAT is in 3 months. Math section is hard for me. I have a Kaplan prep book (about 400 pages for math) and access to Khan Academy videos. I'm a junior.",
+  "emotionProtocol": "frustration",
+  "versionTag": "v1.5",
+  "profile": {
+    "role": "student",
+    "studentLevel": "highschool",
+    "year": "junior",
+    "level": "beginner",
+    "focusSpan": 30,
+    "timeBudget": { "weekday": 60, "weekend": 120 }
+  },
+  "resources": [
+    { "type": "studyGuide", "description": "Kaplan SAT Math prep book", "quantity": "~400p" },
+    { "type": "video", "description": "Khan Academy videos", "quantity": "ongoing" }
+  ],
+  "exam": {
+    "subject": "SAT Math",
+    "daysLeft": 90,
+    "examType": "multipleChoice",
+    "ddayBucket": "marathon"
+  }
+}

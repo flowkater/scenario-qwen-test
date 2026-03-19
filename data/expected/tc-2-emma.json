@@ -1,7 +1,0 @@
-{
-  "tcId": "tc-2",
-  "notes": "No practice resources → P=0. Normal essay: C35→51, P40→0, I25→49 after redistribution. Working professional with 60min weekday limit.",
-  "warnings": ["No practice"],
-  "expectedCpiApprox": { "c": 51, "p": 0, "i": 49 },
-  "expectedTimeBudgetFit": "fits"
-}

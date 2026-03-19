@@ -1,0 +1,28 @@
+{
+  "id": "tc-05",
+  "category": "exam-university",
+  "name": "Emma-B — Genetics D-3 PANIC 🔴",
+  "userMessage": "Genetics midterm is in 3 days. Same situation — textbook Ch.8-14 (210p), 90 practice problems, 12 lectures I haven't watched. I'm panicking.",
+  "emotionProtocol": "panic",
+  "versionTag": "v1.5",
+  "profile": {
+    "role": "student",
+    "studentLevel": "college",
+    "collegeType": "undergrad",
+    "year": "junior",
+    "level": "capable",
+    "focusSpan": 50,
+    "timeBudget": { "weekday": 120, "weekend": 300 }
+  },
+  "resources": [
+    { "type": "textbook", "description": "Concepts of Genetics Ch.8-14", "quantity": "210p" },
+    { "type": "problems", "description": "Practice problems from past exams", "quantity": "90 problems" },
+    { "type": "lectures", "description": "Lecture recordings", "quantity": "12 lectures", "watched": "0/12" }
+  ],
+  "exam": {
+    "subject": "Genetics",
+    "daysLeft": 3,
+    "examType": "mixed",
+    "ddayBucket": "urgent"
+  }
+}

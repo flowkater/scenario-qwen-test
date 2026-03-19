@@ -1,0 +1,18 @@
+{
+  "id": "tc-32",
+  "category": "practice",
+  "name": "포트폴리오 웹사이트 (React 입문, 6주 목표 → 현실 10주)",
+  "userMessage": "I'm building a portfolio website. I know basic HTML/CSS but need to learn React. I want to finish in 6 weeks. I can put in about 1 hour on weekdays, 3 hours on weekends.",
+  "emotionProtocol": "frustration",
+  "versionTag": "v1.5",
+  "profile": {
+    "role": "self",
+    "timeBudget": { "weekday": 60, "weekend": 180 }
+  },
+  "resources": [],
+  "practiceDetails": {
+    "activity": "coding",
+    "method": "project-based",
+    "totalItems": null
+  }
+}

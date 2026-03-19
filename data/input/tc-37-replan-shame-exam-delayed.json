@@ -1,0 +1,26 @@
+{
+  "id": "tc-37",
+  "category": "replan",
+  "name": "플랜 실패 후 재계획 — 시험 밀림 (shame)",
+  "userMessage": "원래 계획대로 매일 20페이지씩 읽으려고 했는데 5일이나 밀렸어요. 시험 9일 남았고 아직 150페이지 남았어요. 경제학이에요. 너무 자책돼요.",
+  "emotionProtocol": "shame",
+  "versionTag": "v2",
+  "profile": {
+    "timeBudget": {
+      "weekday": 60,
+      "weekend": 60
+    }
+  },
+  "originalPlan": {
+    "dailyTarget": "20p/day",
+    "subject": "Economics",
+    "totalPages": 250
+  },
+  "currentProgress": {
+    "daysElapsed": 5,
+    "daysMissed": 5,
+    "remainingPages": 150,
+    "remainingDays": 9,
+    "emotionalState": "shame"
+  }
+}

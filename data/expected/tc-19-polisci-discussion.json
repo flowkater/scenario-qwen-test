@@ -1,0 +1,37 @@
+{
+  "tcId": "tc-19",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1.5",
+  "expectedQuestions": {
+    "required": ["discussionDay"],
+    "optional": [],
+    "maxCount": 1
+  },
+  "effortModel": {
+    "type": "range",
+    "expected": 6.5,
+    "min": 5.0,
+    "max": 8.0,
+    "unit": "page",
+    "citation": "CAT monograph Engage; Some New Concepts = 6.7 min/page; r/askphilosophy: political theory 5-10 min/page"
+  },
+  "expectedTimeFit": "deficit",
+  "expectedStrategy": [
+    "reverse reading: read discussion questions first, then relevant sections",
+    "2-pass skim: 1.5min/p full structure pass, then deep-read top 30-40p"
+  ],
+  "warnings": [
+    "3.1x budget deficit — 150p × 6.5min = 975min vs 315min available",
+    "full coverage impossible — selective deep reading is the only viable strategy"
+  ],
+  "alternatives": [
+    "focus on 30-40p directly relevant to discussion questions with full argument mapping",
+    "use professor's discussion questions to reverse-engineer which 30% of text matters most"
+  ],
+  "hardFailChecks": [
+    "must NOT lower min/page to make budget appear achievable",
+    "must acknowledge deficit explicitly and explain triage strategy",
+    "must NOT recommend full cover-to-cover reading as primary plan"
+  ],
+  "toneExpectation": "neutral to mildly supportive; not alarming; practical triage framing"
+}

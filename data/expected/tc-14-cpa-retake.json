@@ -1,0 +1,48 @@
+{
+  "tcId": "tc-14",
+  "emotionProtocol": "shame",
+  "versionTag": "v1.5",
+  "expectedQuestions": {
+    "required": ["specificWeakCostAccounting"],
+    "optional": ["scoreReportAvailable"],
+    "maxCount": 2,
+    "decisionValue": "specificWeakCostAccounting (종합원가 vs 표준원가 vs 활동기준원가) → changes past exam allocation order and study sequence. Score report → confirms weak areas precisely."
+  },
+  "effortModels": {
+    "review_part": {
+      "type": "range",
+      "expected": 3.5,
+      "min": 2.5,
+      "max": 5.0,
+      "unit": "page",
+      "citation": "Retaker effect: 40-60% time reduction for familiar content. r/CPA: FAR retaker 11weeks → 5weeks same schedule."
+    },
+    "cost_accounting_weak": {
+      "type": "range",
+      "expected": 9.0,
+      "min": 7.0,
+      "max": 12.0,
+      "unit": "page",
+      "citation": "Calculation-heavy; first-attempt level concentration required for weak area."
+    },
+    "past_exam_set": {
+      "type": "fixed",
+      "expected": 120,
+      "min": 80,
+      "max": 135,
+      "unit": "set",
+      "citation": "10 past exam sets × 2hr each = 20hr total."
+    }
+  },
+  "expectedTimeFit": "deficit",
+  "expectedStrategy": [
+    "3 plans: Review part(600p, priority 2) + Cost accounting weak(200p, priority 1) + Past exams(10sets, priority 1 from Day1)",
+    "DEFICIT: 600p×3.5 + 200p×9.0 + 10sets×120min + overhead = 90hr needed vs 80hr available = 10hr deficit",
+    "Strategy: past exams from Day 1 (not after finishing textbook) → identify high-frequency chapters → targeted textbook review",
+    "Cost accounting: 40-50% time allocation",
+    "Weekend: no formal schedule but suggest '30min 원가계산 공식 복습 on weekend'"
+  ],
+  "warnings": ["10hr deficit — tight", "Reading known content = wasted time; formulas+errors only"],
+  "hardFailChecks": ["HFG-1", "HFG-2", "HFG-3"],
+  "toneExpectation": "shame-reframe — '재시험 준비하신다는 게 오히려 유리해요. 이미 한 번 본 분은 선택과 집중이 가능하거든요.'"
+}

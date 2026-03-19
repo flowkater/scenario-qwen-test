@@ -1,0 +1,40 @@
+{
+  "tcId": "tc-30",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1.5",
+  "expectedQuestions": {
+    "required": [],
+    "optional": [],
+    "maxCount": 0
+  },
+  "effortModel": {
+    "type": "range",
+    "expected": 1.0,
+    "min": 0.5,
+    "max": 2.0,
+    "unit": "word",
+    "citation": "SRS steady-state: 10 new/day = ~100 review cards/day (Anki 10× rule); r/Anki DP-25,26"
+  },
+  "expectedTimeFit": "fits",
+  "expectedStrategy": [
+    "10 new words/day (NOT 15+)",
+    "5-5-5 session: 5min yesterday's review, 5min 10 new words, 5min random quiz from last 30",
+    "Anki recommended; frequency-sorted word list",
+    "2000 ÷ 10 = 200 days — if JLPT deadline <200 days: prioritize top 1200-1500 high-frequency"
+  ],
+  "warnings": [
+    "Day 14-21 pile-up risk (NOT Day 30): 10 new/day → ~100 reviews/day steady state",
+    "15+ new/day → Day 14 review count exceeds 15min budget → burnout",
+    "Early warning rule: if reviews hit 50+ by Day 14, reduce new cards to 5/day"
+  ],
+  "alternatives": [
+    "Option A: top 1200-1500 high-frequency words first if JLPT date is approaching",
+    "Option B: increase to 20min/day to safely do 15 new words/day"
+  ],
+  "hardFailChecks": [
+    "SRS pile-up warning MUST reference Day 14-21 (not Day 30 — too late)",
+    "must NOT allow 15+ new/day without strong warning",
+    "must explain Anki 10× rule (10 new → 100 reviews in steady state)"
+  ],
+  "toneExpectation": "steady, sustainable, SRS-mechanics-aware; streak resilience (missing days is okay, just restart)"
+}

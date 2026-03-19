@@ -1,0 +1,42 @@
+{
+  "tcId": "tc-31",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1.5",
+  "expectedQuestions": {
+    "required": [],
+    "optional": [],
+    "maxCount": 0
+  },
+  "effortModel": {
+    "type": "variable",
+    "expected": 15,
+    "min": 5,
+    "max": 60,
+    "unit": "problem",
+    "citation": "r/learnmath DP-32: routine 2-5min; DP-33: hard 30-48min; 수능 수학 전문가 전원 시간기반 동의"
+  },
+  "expectedTimeFit": "tight",
+  "expectedStrategy": [
+    "time-based goal: 60min/day (not X problems/day)",
+    "difficulty tagging: ⭐(easy) / ⭐⭐(medium) / ⭐⭐⭐(hard) after each problem",
+    "Phase 1 (Month 1-2): first pass — tagging as you go",
+    "Phase 2 (Month 3): wrong answer 2nd pass + weak area focus",
+    "Phase 3 (Month 4): mock exam simulation + final weak point cleanup",
+    "every 5 days: dedicated 60min wrong answer analysis session",
+    "interleaving: mix domains (not same domain all day)"
+  ],
+  "warnings": [
+    "killer problems can take 60min each — this is NORMAL for 수능 수학",
+    "Phase 3 may need extra time for mock exam simulation beyond the base 60min/day"
+  ],
+  "alternatives": [
+    "if behind schedule by Phase 2: focus exclusively on ⭐⭐⭐ problems",
+    "triage: ⭐ problems in bulk, ⭐⭐⭐ with full analysis"
+  ],
+  "hardFailChecks": [
+    "must NOT calculate '500÷120days = 4.2 problems/day' as primary goal",
+    "upper bound MUST be 60min (not 30min) — 수능 killers take 30-60min each",
+    "must recommend time-based approach — expert consensus is unanimous"
+  ],
+  "toneExpectation": "systematic, Korean exam context-aware; time-based over quantity-based; phase structure with clear milestones"
+}

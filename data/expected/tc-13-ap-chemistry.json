@@ -1,0 +1,40 @@
+{
+  "tcId": "tc-13",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1.5",
+  "expectedQuestions": {
+    "required": [],
+    "optional": ["bookPageSplit", "labExperience"],
+    "maxCount": 2,
+    "decisionValue": "bookPageSplit → different min/page for Zumdahl vs review book, changes time calc. If unknown, use Zumdahl ~400p + Review ~200p estimate. labExperience → FRQ lab-based question prep decision [v2]."
+  },
+  "effortModels": {
+    "zumdahl": {
+      "type": "range",
+      "expected": 5.0,
+      "min": 4.0,
+      "max": 6.5,
+      "unit": "page",
+      "citation": "CAT Understand; Many New Concepts = 6.0; AP Chem equations+reactions+experiments density; v4 range 4.0-6.5"
+    },
+    "review_book": {
+      "type": "range",
+      "expected": 2.5,
+      "min": 2.0,
+      "max": 3.5,
+      "unit": "page",
+      "citation": "Review book = summary. ~45% of original textbook speed."
+    }
+  },
+  "expectedTimeFit": "fits",
+  "expectedStrategy": [
+    "2 separate plans: Zumdahl + Review Book (different min/page — must NOT merge)",
+    "3-phase: Phase1(4wks) Zumdahl main + Review parallel → Phase2(2wks) AP Review intensive + FRQ start → Phase3(1wk) mock MCQ 60q/90min + FRQ drill 7q/105min",
+    "Total needed ~2800min vs available 4410min (90min × 49days) → 1610min surplus ✅ — FRQ + MCQ sets add-in possible",
+    "AP format essential: MCQ 60q/90min + FRQ 7q/105min — FRQ = separate track from Month 2",
+    "Unit 1-4 = ~40% exam weight — front-heavy strategy [v2]"
+  ],
+  "warnings": [],
+  "hardFailChecks": ["HFG-1", "HFG-2", "HFG-4"],
+  "toneExpectation": "confidence-building for first AP — 'Science 강점이라 좋아. 근데 AP는 형식 연습이 내용만큼 중요해.'"
+}

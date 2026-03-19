@@ -1,0 +1,28 @@
+{
+  "id": "tc-10",
+  "category": "exam-university",
+  "name": "Over-budget Crisis — 내일 시험 300p 🔴",
+  "userMessage": "시험이 내일인데 300페이지 남았어요. 하루에 45분밖에 없어요. 경영학 원론이에요.",
+  "emotionProtocol": "panic",
+  "versionTag": "v1",
+  "profile": {
+    "role": "student",
+    "studentLevel": "college",
+    "level": "beginner",
+    "focusSpan": 25,
+    "timeBudget": { "weekday": 45, "weekend": 45 }
+  },
+  "resources": [
+    { "type": "textbook", "description": "경영학 원론 교재", "quantity": "300p remaining" }
+  ],
+  "exam": {
+    "subject": "경영학 원론",
+    "daysLeft": 1,
+    "examType": "unknown",
+    "ddayBucket": "urgent"
+  },
+  "currentState": {
+    "description": "300 pages remaining",
+    "isEstimated": false
+  }
+}

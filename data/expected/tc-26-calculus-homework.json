@@ -1,0 +1,42 @@
+{
+  "tcId": "tc-26",
+  "emotionProtocol": "frustration",
+  "versionTag": "v1.5",
+  "expectedQuestions": {
+    "required": [],
+    "optional": [],
+    "maxCount": 0
+  },
+  "effortModel": {
+    "type": "variable",
+    "expected": 12.0,
+    "min": 3.0,
+    "max": 60.0,
+    "unit": "problem",
+    "citation": "r/learnmath: routine 2-5min; trig substitution/improper 30-60min; r/calculus DP-33 Calc2 hard 30-48min"
+  },
+  "expectedTimeFit": "deficit",
+  "expectedStrategy": [
+    "time-based approach: set 60min timer and solve as many as possible",
+    "easy problems first (u-sub, basic parts) — fast pass",
+    "30-minute cap per problem — flag and move on if stuck",
+    "office hours for problems stuck 30+ minutes"
+  ],
+  "warnings": [
+    "200min+ deficit: 30 problems × 12min (P50) = 360min vs ~180min available",
+    "trig substitution and improper integrals can take 20-60min each — this is NORMAL",
+    "uniform '10 problems/day' plan ignores difficulty variance — do NOT use"
+  ],
+  "alternatives": [
+    "time-based: maximize problems solved in 60min sessions",
+    "triage: easy → medium → hard order",
+    "flag genuinely stuck problems (30+ min) for office hours"
+  ],
+  "hardFailChecks": [
+    "must NOT create '10 problems/day' uniform plan — ignores difficulty",
+    "must NOT use fixed min/problem (e.g., 13min flat)",
+    "must validate 'really hard' — Calc 2 hard problems are objectively 30-60min each",
+    "must mention office hours for stuck problems"
+  ],
+  "toneExpectation": "frustration-validating; normalize hard problems with real data; practical time-based triage"
+}

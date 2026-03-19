@@ -1,0 +1,18 @@
+{
+  "id": "tc-25",
+  "category": "assignment",
+  "name": "그룹 발표 마케팅 시장 분석 파트 (10일, 15분 발표)",
+  "userMessage": "Group presentation for marketing class due in 10 days. My part is market analysis — need to research, make slides, and practice. About 15 minutes of presenting.",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1",
+  "profile": {
+    "role": "student",
+    "timeBudget": { "weekday": 60, "weekend": 60 }
+  },
+  "resources": [],
+  "assignmentDetails": {
+    "type": "presentation",
+    "description": "15-minute market analysis presentation (own part only)",
+    "deadline": "10 days from now"
+  }
+}

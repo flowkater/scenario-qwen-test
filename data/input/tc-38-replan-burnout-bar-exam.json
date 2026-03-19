@@ -1,0 +1,28 @@
+{
+  "id": "tc-38",
+  "category": "replan",
+  "name": "플랜 실패 후 재계획 — 완전 포기 직전 (burnout)",
+  "userMessage": "Bar exam prep. I've been studying for 4 weeks but I'm only 30% through the material. Exam is in 6 weeks. I feel like giving up. This is impossible.",
+  "emotionProtocol": "burnout",
+  "versionTag": "v2",
+  "profile": {
+    "timeBudget": {
+      "weekday": 480,
+      "weekend": 480
+    }
+  },
+  "originalPlan": {
+    "dailyTarget": "8hr/day",
+    "subject": "Bar Exam",
+    "totalMaterial": "100% Bar material"
+  },
+  "currentProgress": {
+    "daysElapsed": 28,
+    "completedPercentage": 30,
+    "remainingPercentage": 70,
+    "remainingDays": 42,
+    "actualDailyHours": 4.5,
+    "plannedDailyHours": 8,
+    "emotionalState": "burnout"
+  }
+}

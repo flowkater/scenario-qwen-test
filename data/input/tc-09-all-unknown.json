@@ -1,0 +1,15 @@
+{
+  "id": "tc-09",
+  "category": "exam-university",
+  "name": "All Unknown — 뭐부터 해야 하지?",
+  "userMessage": "시험이 있는데 뭐부터 해야 할지 모르겠어요",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1",
+  "profile": {
+    "role": "student",
+    "level": "beginner",
+    "focusSpan": 30,
+    "timeBudget": { "weekday": 60, "weekend": 60 }
+  },
+  "resources": []
+}

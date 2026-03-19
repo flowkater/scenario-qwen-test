@@ -1,0 +1,83 @@
+{
+  "tcId": "tc-38",
+  "emotionProtocol": "burnout",
+  "versionTag": "v2",
+  "expectedBehaviorSequence": [
+    "1. Validate burnout ('포기하고 싶은 감정 이해해요. 4주 동안 버텨온 것 자체가 대단한 거예요.')",
+    "2. Actual vs Planned gap analysis (planned 8hr/day → actual 4-5hr/day; 140hr done, 70% remaining)",
+    "3. Deficit calculation (70% Bar material ≈ 280hr needed vs 210hr available → 70hr deficit)",
+    "4. Burnout recovery plan: scale down to 6hr/day + 회복 일정 포함",
+    "5. Triage (MBE 우선 — 점수 비중 최대)"
+  ],
+  "gapAnalysis": {
+    "planned": {
+      "dailyHours": 8,
+      "totalDays": 28,
+      "totalHours": 224
+    },
+    "actual": {
+      "dailyHours": 4.5,
+      "totalDays": 28,
+      "totalHours": 126
+    },
+    "completed": "30% material"
+  },
+  "deficitCalculation": {
+    "remainingMaterial": "70%",
+    "estimatedRemainingHours": 280,
+    "availableHours": 210,
+    "deficitHours": 70,
+    "basis": "Bar Exam 총 ~400hr 합격 기준; 02-certification.md 데이터"
+  },
+  "recoveryPlan": {
+    "newDailyTarget": "6hr/day",
+    "rationale": "Cal Newport Deep Work — 지속 가능한 상한 4-6시간. 8시간 목표 = 인간 한계 초과",
+    "phases": [
+      {
+        "phase": 1,
+        "weeks": "Week 1-2",
+        "dailyHours": 6,
+        "restDay": "주 1회 half-day (계획된 회복으로 재정의)"
+      },
+      {
+        "phase": 2,
+        "weeks": "Week 3-4",
+        "dailyHours": 6,
+        "focus": "MBE 집중 (기출 위주)"
+      },
+      {
+        "phase": 3,
+        "weeks": "Week 5-6",
+        "dailyHours": 5,
+        "focus": "모의시험 주 2회"
+      }
+    ],
+    "totalHours": "6hr × 42일 = 252hr — 기존 30% 포함 시 총 ~392hr (합격 기준 근접)"
+  },
+  "triageStrategy": {
+    "priority1": "MBE (7과목, 점수 비중 최대)",
+    "priority2": "MEE",
+    "priority3": "MPT",
+    "rationale": "MBE만 확실히 하면 합격선 넘는 경우 많음"
+  },
+  "diagnosticQuestion": {
+    "question": "지금 가장 어려운 게 뭐야? 내용이 어려운 거? 아니면 앉아 있는 게 힘든 거?",
+    "purpose": "burnout 원인 진단 — 내용 문제 vs 물리적 번아웃",
+    "decisionValue": "전략 분기 (자료 재구성 vs 시간 구조 조정)"
+  },
+  "hardFailChecks": ["HFG-1", "HFG-4"],
+  "emotionFails": [
+    "'더 열심히 해' = burnout에 독소 = FAIL",
+    "8hr/day 계획 다시 제시 = 현실 무시 = FAIL",
+    "deficit 계산 없이 '할 수 있어요!' = 거짓 위로 = FAIL",
+    "감정 validate 없이 바로 숫자 = 신뢰 깨짐 = FAIL",
+    "'포기하면 안 돼' = 감정 무시 = FAIL"
+  ],
+  "toneExpectation": "recovery first (scale down), not encouragement; restructure around realistic 6hr ceiling",
+  "scoringNotes": {
+    "feasibilityHonesty": "deficit 70hr 솔직하게 고지 + 6hr 현실 계획으로 근접 가능 설명",
+    "strategy": "burnout recovery rhythm + MBE triage — 전략적 우선순위",
+    "tone": "burnout → recovery first → scale down → small wins 순서 필수",
+    "failurePrevention": "일요일 = '계획된 회복'으로 재정의 — 실패가 아닌 설계"
+  }
+}

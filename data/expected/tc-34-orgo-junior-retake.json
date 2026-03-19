@@ -1,0 +1,39 @@
+{
+  "tcId": "tc-34",
+  "emotionProtocol": "frustration",
+  "versionTag": "v1.5",
+  "expectedQuestions": {
+    "required": ["Which mechanisms specifically weak? (SN1/SN2? Elimination? Addition?)"],
+    "optional": [],
+    "maxCount": 1
+  },
+  "effortModel": {
+    "type": "range",
+    "expected": 4.5,
+    "min": 3.5,
+    "max": 5.5,
+    "unit": "page",
+    "citation": "Retake = ~70-75% of first-time speed; CPA retake 40-60% shorter confirmed; orgo retake Reddit patterns"
+  },
+  "expectedTimeFit": "fits",
+  "expectedStrategy": [
+    "Day 1-9: 50% scan reading (known content fast), 40% mechanism drill (stop and draw), 10% blind recall self-test",
+    "Day 10-13: mechanism drill by type — SN1/SN2/E1/E2/addition/oxidation",
+    "Day 14: timed mock test under exam conditions"
+  ],
+  "warnings": [
+    "'Familiarity illusion' risk: reading feels easy but drawing mechanisms on exam is different skill",
+    "Mechanism drill must be ≥40% of time — failure reason from last attempt"
+  ],
+  "alternatives": [
+    "if specific weak mechanisms identified: prioritize those chapters first (not Ch.10→15 linear order)",
+    "if very strong in some chapters: scan-only for those, full drill only for weak chapters"
+  ],
+  "hardFailChecks": [
+    "must NOT give same plan as TC-33 (freshman) — different speed, different focus",
+    "must ask specifically which mechanism type is weak",
+    "mechanism drill proportion MUST be ≥40% (not 30%)",
+    "must NOT start with Ch.10 linear reading — weak mechanism chapters should come first"
+  ],
+  "toneExpectation": "frustration-validating; past failure reframed as strategic guide; action-focused; 'last time failed → this time drill' narrative"
+}

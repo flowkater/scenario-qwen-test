@@ -140,6 +140,7 @@ export interface StudyPlan {
   weekdayTarget?: number;  // NEW v4
   weekendTarget?: number;  // NEW v4
   estimatedMinutes?: number;
+  estimatedDailyMinutes?: number;  // NEW engine: daily need in minutes
   effortModel?: EffortModel;  // NEW v4: replaces estimatedMinPerUnit
   priority: "primary" | "secondary" | "optional";
   phase?: "learn" | "practice" | "review" | "simulate" | "triage";
@@ -248,6 +249,53 @@ export interface ValidationResult {
     missingWarnings: string[];
   };
   overallPass: boolean;
+}
+
+// ===== Plan Engine 출력 =====
+
+export interface RateEntry {
+  key: string;
+  p50: number;
+  p25: number;
+  p75: number;
+  unit: string;
+  gating?: string;
+  citation?: string;
+}
+
+export interface PlanSkeleton {
+  plans: StudyPlan[];
+  timeFit: TimeFit;
+  totalDailyMinutes: number;
+  warnings: string[];
+  assumptions: string[];
+  missingInfo: string[];
+  globalBudget?: {
+    totalDailyMin: number;
+    allocation: { subject: string; percentage: number }[];
+    conflictWarning?: string;
+  };
+  alternatives?: {
+    label: string;
+    description: string;
+    timeFit: TimeFit;
+  }[];
+  emotionProtocol?: EmotionProtocol;
+  coachComment?: string;
+  strategy?: string;
+  strategyRationale?: string;
+  questionsToAsk?: any[];
+}
+
+export interface CoachOutput {
+  emotionProtocol: EmotionProtocol;
+  coachComment: string;
+  strategy: string;
+  strategyRationale: string;
+  questionsToAsk: {
+    question: string;
+    decisionImpact: string;
+  }[];
 }
 
 export interface TestReport {

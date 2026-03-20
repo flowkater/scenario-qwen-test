@@ -1,12 +1,58 @@
 import "dotenv/config";
 import fs from "fs/promises";
 import path from "path";
-import { initClient } from "./api.js";
-import { loadTestCase, loadAllTestCases, loadAllExpected, runAndValidate } from "./runner.js";
+import OpenAI from "openai";
+import { initPipeline } from "./pipeline.js";
+import { loadTestCase, loadAllTestCases, loadAllExpected, runAndValidate, runEngineAndValidate } from "./runner.js";
 import { generateReport, printSummary, printFailureAnalysis, suggestPromptPatches } from "./analyzer.js";
 
-// RunResult 타입 (runner.ts의 runAndValidate 반환값)
 type RunResult = Awaited<ReturnType<typeof runAndValidate>>;
+
+// ── engine-test 모드 ───────────────────────────────────────
+async function engineTestMode(tcId?: string) {
+  const allInputs = tcId ? [await loadTestCase(tcId)] : await loadAllTestCases();
+  const allExpected = await loadAllExpected();
+
+  let passed = 0;
+  let failed = 0;
+  const failures: string[] = [];
+
+  console.log(`\n${"═".repeat(60)}`);
+  console.log(`  Engine-Only Validation (${allInputs.length} Test Cases)`);
+  console.log(`${"═".repeat(60)}\n`);
+
+  for (const input of allInputs) {
+    const expected = allExpected.find(e => e.tcId === input.id);
+    if (!expected) {
+      console.warn(`  ⚠ No expected for ${input.id}`);
+      continue;
+    }
+    const result = await runEngineAndValidate(input, expected);
+    if (result.enginePass) {
+      passed++;
+      const d = result.details;
+      console.log(`✅ ${input.id}: timeFit=${d.timeFit} | effort=${d.effort}`);
+    } else {
+      failed++;
+      const issues = Object.entries(result.details)
+        .filter(([, v]) => v === "false" || v === false)
+        .map(([k]) => k)
+        .join(", ");
+      const msg = `❌ ${input.id}: FAIL [${issues}] | ${JSON.stringify(result.details)}`;
+      failures.push(msg);
+      console.log(msg);
+    }
+  }
+
+  console.log(`\n${"═".repeat(60)}`);
+  console.log(`  RESULT: ${passed}/${passed + failed} ENGINE PASS`);
+  if (failures.length > 0) {
+    console.log(`  (Coach validation skipped — Phase A)`);
+    console.log(`\nFailed TCs:`);
+    failures.forEach(f => console.log(`  ${f}`));
+  }
+  console.log(`${"═".repeat(60)}\n`);
+}
 
 // ── iterate 모드 ──────────────────────────────────────────────
 async function iterateMode(maxRounds: number, targetPass: number) {
@@ -19,10 +65,7 @@ async function iterateMode(maxRounds: number, targetPass: number) {
   const allInputs = await loadAllTestCases();
   const allExpected = await loadAllExpected();
 
-  // target=0 means "all TCs" (set dynamically after loading)
   const effectiveTarget = targetPass === 0 ? allInputs.length : targetPass;
-
-  // 전체 통과한 TC ID 추적 (누적)
   const passedTcIds = new Set<string>();
 
   while (round < maxRounds) {
@@ -31,30 +74,27 @@ async function iterateMode(maxRounds: number, targetPass: number) {
     console.log(`ROUND ${round} / ${maxRounds}`);
     console.log(`${"═".repeat(60)}\n`);
 
-    // 실행 대상: 1라운드는 전체, 이후는 실패분만
     const targetInputs =
       round === 1
         ? allInputs
-        : allInputs.filter((i) => failedTcIds.includes(i.id));
+        : allInputs.filter(i => failedTcIds.includes(i.id));
 
     console.log(`Running ${targetInputs.length} TCs...`);
 
     const results: RunResult[] = [];
     for (const input of targetInputs) {
-      const expected = allExpected.find((e) => e.tcId === input.id)!;
+      const expected = allExpected.find(e => e.tcId === input.id)!;
       const result = await runAndValidate(input, expected);
       results.push(result);
       if (result.validation.overallPass) passedTcIds.add(input.id);
       else passedTcIds.delete(input.id);
-      await sleep(500); // rate limit
+      await sleep(500);
     }
 
     const totalPassed = passedTcIds.size;
     roundHistory.push({ round, passed: totalPassed });
-
     console.log(`\nRound ${round}: ${totalPassed}/${allInputs.length} PASS`);
 
-    // 성공 조건
     if (totalPassed >= effectiveTarget) {
       const report = generateReport(results, round, "SUCCESS", roundHistory);
       await saveReport(round, report);
@@ -63,14 +103,13 @@ async function iterateMode(maxRounds: number, targetPass: number) {
       return;
     }
 
-    // 개선 여부
     if (totalPassed <= bestScore) {
       noImprovementCount++;
       if (noImprovementCount >= 3) {
         const report = generateReport(results, round, "STALLED", roundHistory);
         await saveReport(round, report);
         console.log(`\n3라운드 연속 개선 없음. 중단.`);
-        printFailureAnalysis(results.filter((r) => !r.validation.overallPass));
+        printFailureAnalysis(results.filter(r => !r.validation.overallPass));
         return;
       }
     } else {
@@ -78,9 +117,8 @@ async function iterateMode(maxRounds: number, targetPass: number) {
       bestScore = totalPassed;
     }
 
-    // 실패 분석 + 패치 제안
-    const failedResults = results.filter((r) => !r.validation.overallPass);
-    failedTcIds = failedResults.map((r) => r.input.id);
+    const failedResults = results.filter(r => !r.validation.overallPass);
+    failedTcIds = failedResults.map(r => r.input.id);
     console.log(`\nFailed: ${failedTcIds.join(", ")}`);
     printFailureAnalysis(failedResults);
 
@@ -92,7 +130,6 @@ async function iterateMode(maxRounds: number, targetPass: number) {
       }
     }
 
-    // 리포트 저장
     const report = generateReport(results, round, "IN_PROGRESS", roundHistory);
     await saveReport(round, report);
   }
@@ -110,19 +147,16 @@ async function saveReport(round: number, report: any) {
 }
 
 function sleep(ms: number) {
-  return new Promise((r) => setTimeout(r, ms));
+  return new Promise(r => setTimeout(r, ms));
 }
 
 // ── main ──────────────────────────────────────────────────────
 async function main() {
   const args = process.argv.slice(2);
 
-  if (args[0] === "prompt" && args[1]) {
-    // prompt 커맨드는 API 키 불필요 — 먼저 처리
-    const { buildUserPrompt, SYSTEM_PROMPT } = await import("./prompt.js");
-    const input = await loadTestCase(args[1]);
-    console.log("=== SYSTEM PROMPT ===\n" + SYSTEM_PROMPT);
-    console.log("\n=== USER PROMPT ===\n" + buildUserPrompt(input));
+  // engine-test: AI 호출 없음, 순수 engine 검증
+  if (args[0] === "engine-test") {
+    await engineTestMode(args[1]);
     return;
   }
 
@@ -131,10 +165,10 @@ async function main() {
 AI Coach 42 TC v4
 
 Commands:
+  engine-test [tc-id]                      Engine-only 검증 (AI 없음)
   run <tc-id>                              단일 TC 실행 (예: tc-01)
   run-all                                  전체 42개 TC 1회 실행
   iterate [--max-rounds=10] [--target=42]  반복 실행 모드
-  prompt <tc-id>                           프롬프트 미리보기 (API 호출 없음)
   analyze                                  마지막 리포트 분석
     `);
     return;
@@ -145,28 +179,40 @@ Commands:
     process.exit(1);
   }
 
-  initClient();
+  // Pipeline 초기화 (engine + coach)
+  const client = new OpenAI({
+    apiKey: process.env.DASHSCOPE_API_KEY,
+    baseURL: "https://dashscope-intl.aliyuncs.com/compatible-mode/v1",
+  });
+  initPipeline(client);
 
   switch (args[0]) {
     case "run": {
-      // npx tsx src/index.ts run tc-01
       const input = await loadTestCase(args[1]);
       const allExpected = await loadAllExpected();
-      const expected = allExpected.find((e) => e.tcId === input.id);
+      const expected = allExpected.find(e => e.tcId === input.id);
       if (!expected) throw new Error(`Expected not found: ${input.id}`);
       const result = await runAndValidate(input, expected);
       printSummary(generateReport([result]));
+
+      // 2-Track 리포트 출력
+      if (result.twoTrack) {
+        const tt = result.twoTrack;
+        console.log(`\n2-Track: ENGINE ${tt.engine.enginePass ? "✅" : "❌"} | COACH ${tt.coach.coachPass ? "✅" : "❌"}`);
+        console.log(`  Engine: timeFit=${tt.engine.details.timeFit} | effort=${tt.engine.details.effort}`);
+        console.log(`  Coach: emotion=${tt.coach.emotionMatched} | strategy=${tt.coach.strategyKeywordsOk}`);
+      }
       break;
     }
 
     case "run-all": {
-      // npx tsx src/index.ts run-all
       const inputs = await loadAllTestCases();
       const allExpected = await loadAllExpected();
       console.log(`\nRunning ${inputs.length} TCs...\n`);
       const results: RunResult[] = [];
+
       for (const input of inputs) {
-        const expected = allExpected.find((e) => e.tcId === input.id);
+        const expected = allExpected.find(e => e.tcId === input.id);
         if (!expected) {
           console.warn(`No expected for ${input.id}`);
           continue;
@@ -175,8 +221,19 @@ Commands:
         results.push(result);
         await sleep(1000);
       }
+
       const report = generateReport(results);
       printSummary(report);
+
+      // 2-Track 요약
+      const enginePassed = results.filter(r => r.twoTrack?.engine.enginePass).length;
+      const coachPassed = results.filter(r => r.twoTrack?.coach.coachPass).length;
+      const overall = results.filter(r => r.validation.overallPass).length;
+      console.log(`\n2-Track Summary:`);
+      console.log(`  Engine: ${enginePassed}/${results.length} PASS`);
+      console.log(`  Coach:  ${coachPassed}/${results.length} PASS`);
+      console.log(`  Overall: ${overall}/${results.length} PASS`);
+
       const reportsDir = path.resolve(import.meta.dirname, "../reports");
       await fs.mkdir(reportsDir, { recursive: true });
       const ts = new Date().toISOString().slice(0, 16).replace(/[T:]/g, "-");
@@ -188,24 +245,21 @@ Commands:
     }
 
     case "iterate": {
-      // npx tsx src/index.ts iterate [--max-rounds=10] [--target=44]
       const maxRounds = parseInt(
-        args.find((a) => a.startsWith("--max-rounds="))?.split("=")[1] ?? "10"
+        args.find(a => a.startsWith("--max-rounds="))?.split("=")[1] ?? "10"
       );
-      // target=0 means "all TCs" (resolved dynamically in iterateMode)
       const target = parseInt(
-        args.find((a) => a.startsWith("--target="))?.split("=")[1] ?? "0"
+        args.find(a => a.startsWith("--target="))?.split("=")[1] ?? "0"
       );
       await iterateMode(maxRounds, target);
       break;
     }
 
     case "analyze": {
-      // npx tsx src/index.ts analyze (마지막 리포트 분석)
       const reportsDir = path.resolve(import.meta.dirname, "../reports");
       try {
         const files = (await fs.readdir(reportsDir))
-          .filter((f) => f.endsWith(".json"))
+          .filter(f => f.endsWith(".json"))
           .sort();
         if (files.length === 0) {
           console.log("No reports found.");
@@ -224,16 +278,7 @@ Commands:
     }
 
     default:
-      console.log(`
-AI Coach 42 TC v4
-
-Commands:
-  run <tc-id>                              단일 TC 실행 (예: tc-01)
-  run-all                                  전체 42개 TC 1회 실행
-  iterate [--max-rounds=10] [--target=42]  반복 실행 모드
-  prompt <tc-id>                           프롬프트 미리보기 (API 호출 없음)
-  analyze                                  마지막 리포트 분석
-      `);
+      console.log(`Unknown command: ${args[0]}. Run without args for help.`);
   }
 }
 

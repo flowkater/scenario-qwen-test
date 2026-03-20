@@ -496,6 +496,84 @@ export function validateV4(
   };
 }
 
+// ===== 2-Track Validation =====
+
+export interface EngineValidationResult {
+  plansNotEmpty: boolean;
+  hfgPassed: boolean;
+  timeFitMatched: boolean;
+  effortModelInRange: boolean;
+  assumptionsPresent: boolean;
+  enginePass: boolean;
+  details: {
+    timeFit: string;
+    effort: string;
+    hfg: string;
+  };
+}
+
+export interface CoachValidationResult {
+  emotionMatched: boolean;
+  strategyKeywordsOk: boolean;
+  coachCommentPresent: boolean;
+  coachPass: boolean;
+}
+
+export interface TwoTrackValidation {
+  tcId: string;
+  engine: EngineValidationResult;
+  coach: CoachValidationResult;
+  overallPass: boolean;
+}
+
+export function validateTwoTrack(
+  output: any,
+  input: TestCaseInput,
+  expected: TestCaseExpected
+): TwoTrackValidation {
+  // Engine track
+  const timeFitResult = checkTimeFit(output, expected);
+  const effortResult = checkEffortModel(output, expected);
+  const hfgResult = checkHardFailGates(output, input, expected);
+  const plansNotEmpty = (output?.plans ?? []).length > 0;
+  const assumptionsPresent = (output?.plans ?? []).some(
+    (p: any) => Array.isArray(p.assumptions) && p.assumptions.length > 0
+  );
+
+  const engine: EngineValidationResult = {
+    plansNotEmpty,
+    hfgPassed: hfgResult.passed,
+    timeFitMatched: timeFitResult.passed,
+    effortModelInRange: effortResult.passed,
+    assumptionsPresent,
+    enginePass: plansNotEmpty && hfgResult.passed && timeFitResult.passed && effortResult.passed && assumptionsPresent,
+    details: {
+      timeFit: timeFitResult.detail,
+      effort: effortResult.detail,
+      hfg: hfgResult.failedGates.length > 0 ? hfgResult.failedGates.join(",") : "ok",
+    },
+  };
+
+  // Coach track
+  const strategyResult = checkStrategy(output, expected);
+  const emotionResult = checkEmotionProtocol(output, expected);
+  const coachCommentPresent = typeof output?.coachComment === "string" && output.coachComment.length > 0;
+
+  const coach: CoachValidationResult = {
+    emotionMatched: emotionResult.passed,
+    strategyKeywordsOk: strategyResult.passed,
+    coachCommentPresent,
+    coachPass: emotionResult.passed && strategyResult.passed && coachCommentPresent,
+  };
+
+  return {
+    tcId: input.id,
+    engine,
+    coach,
+    overallPass: engine.enginePass && coach.coachPass,
+  };
+}
+
 // ===== 레거시 호환 exports (기존 코드가 import할 수 있도록) =====
 
 export function validateSchema(output: unknown): { valid: boolean; errors: string[] } {

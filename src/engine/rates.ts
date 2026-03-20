@@ -56,6 +56,7 @@ export const RATE_TABLE: {
     "calc-hard":           { key: "calc-hard",           p50: 15,  p25: 5,   p75: 60,  unit: "problem" },
     "calc-mixed":          { key: "calc-mixed",          p50: 12,  p25: 8,   p75: 18,  unit: "problem" },
     "general-math":        { key: "general-math",        p50: 12,  p25: 8,   p75: 18,  unit: "problem" },
+    "suneung-math":        { key: "suneung-math",        p50: 13,  p25: 10,  p75: 18,  unit: "problem" },
     "srs-word":            { key: "srs-word",            p50: 1,   p25: 0.8, p75: 1.5, unit: "word" },
     "essay-outline":       { key: "essay-outline",       p50: 65,  p25: 50,  p75: 90,  unit: "milestone" },
     "essay-draft":         { key: "essay-draft",         p50: 90,  p25: 70,  p75: 120, unit: "milestone" },

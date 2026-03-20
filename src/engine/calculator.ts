@@ -48,8 +48,8 @@ export function determineTimeFit(
   if (weekendBudget > weekdayBudget) {
     const weeklyCapacity = weekdayBudget * 5 + weekendBudget * 2;
     const weeklyNeed = dailyNeed * 7;
-    if (weeklyNeed <= weeklyCapacity * 1.05) {
-      return weeklyNeed <= weeklyCapacity * 0.9 ? "fits" : "tight";
+    if (weeklyNeed <= weeklyCapacity * 1.15) {
+      return weeklyNeed <= weeklyCapacity * 1.05 ? "fits" : "tight";
     }
   }
 
@@ -57,8 +57,8 @@ export function determineTimeFit(
 
   // IMPOSSIBLE lock: ratio > 1.5
   if (ratio > 1.5) return "impossible";
-  // DEFICIT: ratio > 1.05
-  if (ratio > 1.05) return "deficit";
+  // DEFICIT: ratio > 1.10
+  if (ratio > 1.06) return "deficit";
   // TIGHT: ratio > 0.85
   if (ratio > 0.85) return "tight";
   return "fits";

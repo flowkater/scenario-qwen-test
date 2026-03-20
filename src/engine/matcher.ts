@@ -21,6 +21,9 @@ export function matchReadingRate(
 ): RateEntry {
   const d = desc(resource, exam);
   const isRetake = profile.isRetake === true;
+  const msgLower = (input?.userMessage ?? "").toLowerCase();
+  const isRetakeFromMsg = msgLower.includes("retaking") || msgLower.includes("retake") ||
+    msgLower.includes("재수강") || msgLower.includes("재시험");
 
   // Emergency skim - panic + D-1
   if (input?.emotionProtocol === "panic" && (exam?.daysLeft ?? 99) <= 1) {
@@ -30,7 +33,7 @@ export function matchReadingRate(
   // Organic chemistry
   if (d.includes("mcmurry") || d.includes("organic") || d.includes("orgo") || d.includes("유기화학")) {
     if (isThirdAttempt(input)) return RATE_TABLE.reading["orgo-3rd"];
-    if (isRetake || d.includes("retake") || d.includes("재수강")) return RATE_TABLE.reading["orgo-retake"];
+    if (isRetake || isRetakeFromMsg || d.includes("retake") || d.includes("재수강")) return RATE_TABLE.reading["orgo-retake"];
     if (d.includes("ch.10") || d.includes("ch. 10") || d.includes("mechanism")) return RATE_TABLE.reading["orgo-mechanisms-first"];
     return RATE_TABLE.reading["orgo-first"];
   }
@@ -176,7 +179,7 @@ export function matchPracticeRate(
 
   // Suneung math problems
   if ((d.includes("수학") || d.includes("math")) && (d.includes("기출") || d.includes("past") || d.includes("문제"))) {
-    return RATE_TABLE.practice["general-math"];
+    return RATE_TABLE.practice["suneung-math"];
   }
 
   // General past exams / cert exam sets — AFTER specific exam type checks

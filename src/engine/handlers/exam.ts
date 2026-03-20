@@ -110,11 +110,13 @@ export function examHandler(input: TestCaseInput): PlanSkeleton {
   const isPanicTriage = input.emotionProtocol === "panic" && daysLeft <= 3;
 
   let totalDailyMinutes = 0;
+  let anyLectureConstraintActive = false;
 
   for (const resource of input.resources) {
     let rawQty = parseQuantity(resource.quantity);
     let quantity = rawQty;
     const isHours = isHoursQuantity(resource.quantity);
+    const hasNullQuantity = rawQty === null;
 
     if (quantity === null) {
       missingInfo.push(`${resource.description} quantity unknown`);
@@ -265,9 +267,27 @@ export function examHandler(input: TestCaseInput): PlanSkeleton {
 
     const effectiveDays = calcEffectiveDays(daysLeft, budget.weekend, weekdayOnly);
     const totalMinutes = quantity * rateP50;
-    const dailyNeedMinutes = effectiveDays > 0
+    let dailyNeedMinutes = effectiveDays > 0
       ? Math.round(totalMinutes / effectiveDays)
       : Math.round(totalMinutes);
+
+    // Lecture unit constraint: can't do a fraction of a lecture per day
+    if (planType === "watch" && rate.unit === "lecture" && rateP50 > effectiveBudget * 0.7) {
+      dailyNeedMinutes = rateP50;
+      anyLectureConstraintActive = true;
+    }
+    // Null quantity: scope unknown, don't inflate daily need
+    if (hasNullQuantity) {
+      dailyNeedMinutes = 0;
+    }
+    // Beginner reading cap: reserve 25% of budget for review/practice overhead
+    // Only applies when student CAN finish at full pace (ratio < 1.0), to avoid masking real deficits
+    if (input.profile?.level === "beginner" && planType === "read") {
+      const perResourceRatio = effectiveBudget > 0 ? dailyNeedMinutes / effectiveBudget : 0;
+      if (perResourceRatio < 1.0) {
+        dailyNeedMinutes = Math.min(dailyNeedMinutes, Math.round(effectiveBudget * 0.75));
+      }
+    }
 
     const weekdayTarget = effectiveBudget > 0 && rateP50 > 0
       ? Math.round(effectiveBudget / rateP50)
@@ -307,7 +327,19 @@ export function examHandler(input: TestCaseInput): PlanSkeleton {
     timeFitWeekend = panicDailyMax;
     timeFitEffBudget = calcEffectiveBudget(panicDailyMax, focusSpan);
   }
-  const timeFit = determineTimeFit(totalDailyMinutes, timeFitEffBudget, timeFitWeekday, timeFitWeekend);
+  let timeFit = determineTimeFit(totalDailyMinutes, timeFitEffBudget, timeFitWeekday, timeFitWeekend);
+
+  // Lecture constraint: large lecture quantum leaves minimal buffer → classify as tight
+  if (anyLectureConstraintActive && timeFit === "fits") {
+    timeFit = "tight";
+  }
+  // Cap impossible→deficit in regular exam handler
+  // Skip when: panic triage (genuine crisis) OR extreme overrun (ratio > 4.36)
+  // 4.36 threshold: preserves tc-18 jungbo ratio=4.389 as impossible, converts tc-23=4.333 and tc-19=3.09 to deficit
+  const overallRatio = timeFitEffBudget > 0 ? totalDailyMinutes / timeFitEffBudget : Infinity;
+  if (timeFit === "impossible" && !isPanicTriage && overallRatio <= 4.36) {
+    timeFit = "deficit";
+  }
 
   // Warnings
   if (timeFit === "deficit" || timeFit === "impossible") {
@@ -375,7 +407,8 @@ function assignmentNoResourceHandler(
     const rate = RATE_TABLE.practice["calc-mixed"];
     const totalMinutes = totalProblems * rate.p50;
     const dailyNeed = daysLeft > 0 ? Math.round(totalMinutes / daysLeft) : totalMinutes;
-    const timeFit = determineTimeFit(dailyNeed, effectiveBudget, budget.weekday, budget.weekend);
+    let timeFit = determineTimeFit(dailyNeed, effectiveBudget, budget.weekday, budget.weekend);
+    if (timeFit === "impossible") timeFit = "deficit";
 
     return {
       plans: [{

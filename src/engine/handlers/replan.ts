@@ -42,7 +42,14 @@ export function replanHandler(input: TestCaseInput): PlanSkeleton {
 
   const totalMinutes = remaining * rate.p50;
   const dailyNeed = effectiveDays > 0 ? Math.round(totalMinutes / effectiveDays) : Math.round(totalMinutes);
-  const timeFit = determineTimeFit(dailyNeed, effectiveBudget, budget.weekday, budget.weekend);
+  let timeFit = determineTimeFit(dailyNeed, effectiveBudget, budget.weekday, budget.weekend);
+
+  // Conservative bias: students who fell behind should plan realistically
+  const hasFallenBehind = ((progress as any)?.daysMissed ?? 0) > 0;
+  const replanRatio = effectiveBudget > 0 ? dailyNeed / effectiveBudget : 0;
+  if (timeFit === "fits" && hasFallenBehind && replanRatio >= 0.75) {
+    timeFit = "tight";
+  }
 
   const warnings: string[] = [];
   if (timeFit === "tight") {

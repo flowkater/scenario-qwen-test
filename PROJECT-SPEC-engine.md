@@ -878,19 +878,187 @@ STEP 20: git commit + push
 
 ---
 
-## 9. ⚠️ 중요 제약사항
+## 9. 검증 시스템 상세 — 2-Track Validation
+
+### 현재 validator의 overallPass 공식
+
+현재 `src/validator.ts`의 `validateV4()`는 다음 6가지가 **전부 통과**해야 overallPass:
+
+```
+overallPass = parseSuccess        // JSON 파싱 성공
+  && schemaValid                  // Zod 스키마 (plans, strategy, coachComment 등)
+  && hfgResult.passed             // Hard Fail Gates (HFG-1, HFG-2, HFG-4)
+  && timeFitResult.passed         // timeFit 일치 (허용 범위 포함)
+  && effortResult.passed          // effortModel.expected가 P25-P75±30% 내
+  && strategyResult.passed        // expectedStrategy 키워드 50%+ 매칭
+  && emotionResult.passed         // emotionProtocol 일치
+```
+
+### 검증 항목 → Layer 매핑
+
+| # | 검증 항목 | 현재 validator 함수 | Engine 책임 | Coach 책임 | 판정 |
+|---|----------|-------------------|-------------|-------------|------|
+| L1 | Zod 스키마 | `runSchemaValidation()` | plans, timeFit, totalDM, warnings | emotionProtocol, strategy, coachComment, questionsToAsk | 분리 |
+| L2 | HFG-1 거짓 계획 | `checkHardFailGates()` | ✅ timeFit + effortModel | — | **Engine 100%** |
+| L2 | HFG-2 예산 초과 | `checkHardFailGates()` | ✅ totalDM vs budget | — | **Engine 100%** |
+| L2 | HFG-4 가정 누락 | `checkHardFailGates()` | ✅ assumptions[] | — | **Engine 100%** |
+| L3 | timeFit | `checkTimeFit()` | ✅ 산술 판정 | — | **Engine 100%** |
+| L3 | effortModel | `checkEffortModel()` | ✅ rate lookup | — | **Engine 100%** |
+| L4 | 전략 키워드 | `checkStrategy()` | △ warnings 일부 | ✅ strategy 텍스트 | **Coach 주도** |
+| L5 | 감정 프로토콜 | `checkEmotionProtocol()` | — | ✅ 감지 | **Coach 100%** |
+
+### 2-Track Validation 구현
+
+**validator.ts를 리팩토링하여 2개 트랙을 분리 리포팅:**
+
+```typescript
+// Track 1: Engine Validation (결정론적, 100% 필수)
+interface EngineValidation {
+  plansNotEmpty: boolean;          // plans.length > 0
+  hfgPassed: boolean;              // HFG-1, HFG-2, HFG-4 전부 통과
+  timeFitMatched: boolean;         // expected timeFit과 일치 (허용 범위 포함)
+  effortModelInRange: boolean;     // P25-P75 ±30% 범위 내
+  totalDailyMinutesValid: boolean; // 합리적 범위
+  assumptionsPresent: boolean;     // assumptions[] 하나 이상 비어있지 않음
+  warningsPresent: boolean;        // expected warnings 포함
+  enginePass: boolean;             // 위 전부 AND
+}
+
+// Track 2: Coach Validation (확률적, 90%+ 목표)
+interface CoachValidation {
+  emotionMatched: boolean;         // emotionProtocol 일치
+  strategyKeywordsOk: boolean;     // expectedStrategy 50%+ 매칭
+  coachCommentPresent: boolean;    // coachComment 비어있지 않음
+  questionsValid: boolean;         // questionsToAsk.length ≤ 3 + decisionImpact 있음
+  coachPass: boolean;              // 위 전부 AND
+}
+
+// Overall
+interface FullValidation {
+  engine: EngineValidation;
+  coach: CoachValidation;
+  overallPass: boolean;            // engine.enginePass && coach.coachPass
+}
+```
+
+**리포트 출력 예시:**
+```
+✅ tc-01: ENGINE ✅ (timeFit=fits, effort=3.0) | COACH ✅ (emotion=neutral, strategy=3/3) → PASS
+✅ tc-05: ENGINE ✅ (timeFit=tight, effort=6.0) | COACH ✅ (emotion=panic, strategy=3/4) → PASS
+❌ tc-18: ENGINE ✅ (timeFit=impossible) | COACH ❌ (emotion: got neutral, expected frustration) → FAIL
+```
+
+### Track별 허용 범위 (기존 validator 로직 유지)
+
+**timeFit 허용:**
+- 정확 일치: 항상 PASS
+- `deficit` → `impossible`: OK (더 엄격한 방향)
+- `fits` → `tight`: OK (소폭 차이)
+- `tight` → `deficit`: OK (더 보수적)
+- `tight` → `fits`: OK (90% 경계 근처)
+- 그 외: FAIL
+
+**effortModel 허용:**
+- P25 ≤ actual ≤ P75: PASS
+- P25×0.7 ≤ actual ≤ P75×1.3: PASS (±30% 확장)
+- 그 외: FAIL
+- unpredictable type: SKIP
+
+**전략 키워드 매칭:**
+- expectedStrategy 리스트에서 각 항목의 단어(길이>2)가 output JSON 전체에 하나라도 있으면 매칭
+- 매칭률 ≥ 50%: PASS
+
+**감정 프로토콜:**
+- 정확 일치: PASS
+- neutral이고 output에 emotionProtocol 필드 없음: PASS
+- 그 외: FAIL
+
+### Phase별 검증 기준
+
+| Phase | 검증 범위 | 통과 조건 | 실행 명령 |
+|-------|----------|----------|----------|
+| **A** | Engine Track만 | 42/42 enginePass (**100% 필수**) | `npx tsx tests/engine.test.ts` |
+| **A** | 결정론적 보장 | 100회 실행 100회 동일 결과 | 코드이므로 자동 보장 |
+| **B** | Coach Track 추가 | 38+/42 coachPass (90%+) | `npx tsx src/index.ts run-all --track=coach` |
+| **B** | Full (Engine+Coach) | 38+/42 overallPass (90%+) | `npx tsx src/index.ts run-all` |
+| **C** | 데모 연결 | API 응답 + UI 렌더링 | 브라우저에서 확인 |
+
+### expected JSON 필드 → Track 매핑
+
+`data/expected/tc-*.json` 파일의 각 필드가 어느 Track에서 검증되는지:
+
+```
+Engine Track이 검증:
+  ├── expectedTimeFit       → checkTimeFit() — 산술 계산 결과
+  ├── effortModel           → checkEffortModel() — rate table lookup
+  │   ├── expected, min, max, unit
+  │   └── type (range/fixed/unpredictable)
+  ├── hardFailChecks[]      → checkHardFailGates()
+  │   ├── HFG-1: timeFit 불일치 or effort 과소평가
+  │   ├── HFG-2: totalDM > budget*1.5인데 fits
+  │   └── HFG-4: assumptions[] 모두 비어있음
+  └── warnings[]            → 기대 경고 포함 여부
+
+Coach Track이 검증:
+  ├── emotionProtocol       → checkEmotionProtocol() — 감정 감지
+  ├── expectedStrategy[]    → checkStrategy() — 키워드 매칭
+  ├── expectedQuestions      → (현재 검증 안 함, Phase B에서 추가 가능)
+  │   ├── required[]
+  │   ├── optional[]
+  │   └── maxCount
+  └── toneExpectation       → (현재 리포트만, pass/fail 판정 안 함)
+```
+
+### ⚠️ Phase A Engine 테스트에서 주의할 특수 케이스
+
+Engine이 직접 계산하기 어려운 TC들 (Coach 의존도 높음):
+
+| TC | 특수성 | Engine 대응 |
+|---|--------|------------|
+| tc-09 | resources=[] (자료 없음) | plans 생성 불가 → `missingInfo` 필수 + timeFit="fits" |
+| tc-05 | panic + triage | Emergency skim rate (1.0) 자동 적용 |
+| tc-10 | D-1 impossible | Emergency rate + `alternatives[]` 생성 |
+| tc-15 | PMP PMBOK 756→200p 보정 | PMBOK 감지 → 200p selective 강제 |
+| tc-32 | coding project (unpredictable) | effortModel.type="unpredictable", timeFit="deficit" 강제 |
+| tc-36a/b/c | TOEFL score-based (hr/10pts) | langExam 핸들러 — 별도 계산 로직 |
+| tc-37~39 | replan (잔여 재계산) | 완료량 빼기 → 남은 분량으로 재계산 |
+| tc-40~42 | multi-subject (글로벌 배분) | 과목별 독립 계산 → 합산 → 글로벌 timeFit |
+
+### Engine 테스트 출력 형식 (`tests/engine.test.ts`)
+
+```
+═══════════════════════════════════════════
+  Engine-Only Validation (42 Test Cases)
+═══════════════════════════════════════════
+
+✅ tc-01: timeFit=fits(✓) | effort=3.0 [2.3-3.8](✓) | plans=1(✓) | HFG=0(✓) | warnings=0/0(✓)
+✅ tc-02: timeFit=tight(✓) | effort=5.5 [4.5-6.5](✓) | plans=3(✓) | HFG=0(✓) | warnings=0/0(✓)
+...
+❌ tc-XX: timeFit=fits(✗ expected=deficit) | effort=2.0(✗ range=[4.5,6.5]) | ...
+
+═══════════════════════════════════════════
+  RESULT: 42/42 ENGINE PASS
+  (Coach validation skipped — Phase A)
+═══════════════════════════════════════════
+```
+
+---
+
+## 10. ⚠️ 중요 제약사항
 
 1. **마스터 테이블 값은 v4 문서가 진실의 원천** — `docs/AI-Coach-42-Test-Cases-v4.md` 참조
 2. **data/ 폴더의 input/expected JSON은 수정하지 말 것** — engine이 맞춰야 함
 3. **prompt.ts의 계산 로직을 engine으로 이동할 때 누락 없이** — 49개 LOCKED CALCULATION 전부
-4. **Phase A는 AI 호출 없이 42/42 달성이 목표** — 이게 핵심
-5. **기존 validator.ts는 유지** — engine 출력도 같은 validator로 검증
+4. **Phase A는 AI 호출 없이 42/42 enginePass 달성이 목표** — 이게 핵심
+5. **validator.ts를 2-Track으로 리팩토링** — enginePass와 coachPass 분리 리포팅
 6. **package.json에 fastify (또는 hono) + @fastify/cors 추가**
 7. **demo/는 기존 코드 유지하고 API 연결만 추가** — 기존 TC 브라우저 모드는 그대로
+8. **Engine 출력은 기존 Zod 스키마와 호환** — merge 후 AICoachOutputSchema 통과해야 함
+9. **Coach가 실패해도 Engine이 성공이면 Engine은 PASS** — 두 트랙 독립 리포팅
 
 ---
 
-## 10. 의존성 추가
+## 11. 의존성 추가
 
 ```json
 {
@@ -906,18 +1074,19 @@ STEP 20: git commit + push
 
 ---
 
-## 11. 성공 정의
+## 12. 성공 정의
 
-| Phase | 조건 | 검증 방법 |
-|-------|------|----------|
-| **A** | Engine-only 42/42 PASS | `npx tsx tests/engine.test.ts` |
-| **A** | 100회 실행 100회 통과 | 결정론적이므로 자동 보장 |
-| **B** | Full pipeline 42/42 | `npx tsx src/index.ts run-all` |
-| **B** | emotionProtocol 38+/42 | 90%+ 정확도 |
-| **C** | 데모에서 API 호출 성공 | 브라우저에서 확인 |
+| Phase | Track | 조건 | 검증 방법 |
+|-------|-------|------|----------|
+| **A** | Engine | 42/42 enginePass (**100%**) | `npx tsx tests/engine.test.ts` |
+| **A** | Engine | 결정론적 (N회=N회 동일) | 코드이므로 자동 보장 |
+| **B** | Coach | 38+/42 coachPass (90%+) | `npx tsx src/index.ts run-all --track=coach` |
+| **B** | Full | 38+/42 overallPass (90%+) | `npx tsx src/index.ts run-all` |
+| **B** | Full | 5회 연속 run-all 평균 40+/42 | 안정성 검증 |
+| **C** | Demo | API 응답 + UI 정상 렌더 | 브라우저에서 확인 |
 
 ---
 
 *작성: 2026-03-20 | MUSE*
 *원본: AI Coach — 42 Test Cases v4 (2026-03-19)*
-*기반: prompt.ts 1,375줄 분석 + final_report.md 실패 패턴*
+*기반: prompt.ts 1,375줄 분석 + final_report.md 실패 패턴 + validator.ts 553줄 분석*

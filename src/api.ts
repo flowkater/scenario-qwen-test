@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 import { SYSTEM_PROMPT, buildUserPrompt } from "./prompt.js";
-import type { TestCaseInput, QwenOutput } from "./types.js";
+import type { TestCaseInput } from "./types.js";
 
 let client: OpenAI;
 
@@ -11,9 +11,9 @@ export function initClient() {
   });
 }
 
-export async function callQwen(input: TestCaseInput): Promise<{
+export async function callAICoach(input: TestCaseInput): Promise<{
   raw: string;
-  parsed: QwenOutput | null;
+  parsed: any | null;
   error: string | null;
   usage: { promptTokens: number; completionTokens: number; totalTokens: number };
   latencyMs: number;
@@ -29,7 +29,7 @@ export async function callQwen(input: TestCaseInput): Promise<{
         { role: "user", content: userPrompt },
       ],
       temperature: 0.3,
-      max_tokens: 2000,
+      max_tokens: 4000,
       response_format: { type: "json_object" },
       // @ts-ignore DashScope-specific: disable chain-of-thought thinking tokens
       enable_thinking: false,
@@ -43,10 +43,9 @@ export async function callQwen(input: TestCaseInput): Promise<{
       totalTokens: response.usage?.total_tokens ?? 0,
     };
 
-    let parsed: QwenOutput | null = null;
+    let parsed: any = null;
     let error: string | null = null;
     try {
-      // Remove markdown fences if present (defensive)
       const cleaned = raw.replace(/^```json\s*\n?/i, "").replace(/\n?```\s*$/i, "").trim();
       parsed = JSON.parse(cleaned);
     } catch (e) {
@@ -54,7 +53,6 @@ export async function callQwen(input: TestCaseInput): Promise<{
     }
 
     return { raw, parsed, error, usage, latencyMs };
-
   } catch (e) {
     return {
       raw: "",

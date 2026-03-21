@@ -53,7 +53,7 @@
       "conversation": [
         {
           "turn": 1,
-          "user": "SAT is in 3 months. Math section is hard for me. I have a Kaplan prep book (about 400 pages for math) and access to Khan Academy videos. I'm a junior.",
+          "user": "SAT Math in 3 months. I have the College Board practice book. I'm actually okay with most content — my main issue is finishing on time.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",

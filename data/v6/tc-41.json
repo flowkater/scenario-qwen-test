@@ -8,7 +8,9 @@
     "timeBudget": {
       "weekday": 300,
       "weekend": 300
-    }
+    },
+    "focusSpan": 30,
+    "level": "capable"
   },
   "paths": {
     "A": {

@@ -9,7 +9,9 @@
     "timeBudget": {
       "weekday": 60,
       "weekend": 180
-    }
+    },
+    "focusSpan": 30,
+    "level": "capable"
   },
   "paths": {
     "A": {
@@ -49,7 +51,7 @@
       "conversation": [
         {
           "turn": 1,
-          "user": "I'm building a portfolio website. I know basic HTML/CSS but need to learn React. I want to finish in 6 weeks. I can put in about 1 hour on weekdays, 3 hours on weekends.",
+          "user": "JLPT N2 단어 1500개 외워야 해요. Anki 써본 적 없고 종이에 적으면서 외우려고요. 하루에 10개가 한계인 것 같아요.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",

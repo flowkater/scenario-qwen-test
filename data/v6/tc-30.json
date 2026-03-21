@@ -9,7 +9,9 @@
     "timeBudget": {
       "weekday": 15,
       "weekend": 15
-    }
+    },
+    "focusSpan": 30,
+    "level": "capable"
   },
   "paths": {
     "A": {
@@ -49,7 +51,7 @@
       "conversation": [
         {
           "turn": 1,
-          "user": "I want to memorize Japanese vocabulary. I have a list of 2000 words for JLPT N2. I want to do some every day. Maybe 15 minutes.",
+          "user": "Stewart Calculus problems, chapters 6-10, about 150 problems. I haven't started at all and I'm not sure which chapters to focus on.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",

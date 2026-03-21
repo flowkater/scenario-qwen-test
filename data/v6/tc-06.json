@@ -52,7 +52,7 @@
       "conversation": [
         {
           "turn": 1,
-          "user": "I have a political science midterm that's all essay questions. It covers chapters 1-8 of our textbook, about 400 pages. The exam is in 3 weeks. I need to understand arguments well enough to write about them, not just recognize terms.",
+          "user": "PoliSci essay exam next week. 400 pages of readings across 4 books. But it's actually open book, so I can bring the texts with me.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",

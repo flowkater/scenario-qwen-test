@@ -9,7 +9,9 @@
     "timeBudget": {
       "weekday": 60,
       "weekend": 60
-    }
+    },
+    "focusSpan": 30,
+    "level": "capable"
   },
   "paths": {
     "A": {
@@ -49,7 +51,7 @@
       "conversation": [
         {
           "turn": 1,
-          "user": "Math homework due Thursday. 30 problems from chapter 7. Calculus 2, integration techniques. Some problems are really hard.",
+          "user": "Calc 2 homework due in 2 days. 30 problems on integration techniques. Honestly ALL of it is hard — parts, trig sub, partial fractions, everything.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",

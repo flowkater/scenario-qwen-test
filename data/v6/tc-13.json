@@ -53,7 +53,7 @@
       "conversation": [
         {
           "turn": 1,
-          "user": "AP Chem exam is May 6. I have Zumdahl textbook and the AP review book. About 600 pages total between both. I'm a sophomore taking it early. Science is my thing but this is my first AP.",
+          "user": "AP Chemistry exam in 7 weeks. Zumdahl textbook, chapters 5-12. I want to focus on textbook reading first before trying any FRQ practice.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",

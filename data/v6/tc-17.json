@@ -54,7 +54,7 @@
       "conversation": [
         {
           "turn": 1,
-          "user": "Studying for the bar exam full-time. Using Barbri course materials. About 2000 pages of outlines plus their video lectures (150 hours). Exam in 10 weeks. I can study 8 hours a day.",
+          "user": "Bar exam in 8 weeks. Full-time study. I scored below average on both MBE and MEE sections in my last practice test — everything is weak.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",

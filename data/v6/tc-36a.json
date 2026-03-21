@@ -9,7 +9,9 @@
     "timeBudget": {
       "weekday": 60,
       "weekend": 60
-    }
+    },
+    "focusSpan": 30,
+    "level": "capable"
   },
   "paths": {
     "A": {
@@ -49,7 +51,7 @@
       "conversation": [
         {
           "turn": 1,
-          "user": "I'm a Korean high school student preparing for TOEFL. Test is in 2 months. Current score is about 80, target is 100. 1 hour a day.",
+          "user": "I need TOEFL 100+ but my Speaking and Writing are both really weak. I freeze during Speaking and my essays are always too short.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",

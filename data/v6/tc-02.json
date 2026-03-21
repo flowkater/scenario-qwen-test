@@ -54,7 +54,7 @@
       "conversation": [
         {
           "turn": 1,
-          "user": "Genetics midterm is April 14th. I have Concepts of Genetics textbook (chapters 8-14, about 210 pages), 90 practice problems from past exams, and 12 lectures I haven't watched. I'm a junior, I've done well in bio before.",
+          "user": "I have a genetics midterm coming up on April 14th. Same textbook, chapters 8-14, about 250 pages. But honestly the whole unit feels really hard, not just specific parts.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",

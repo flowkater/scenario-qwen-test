@@ -9,7 +9,9 @@
     "timeBudget": {
       "weekday": 60,
       "weekend": 60
-    }
+    },
+    "focusSpan": 30,
+    "level": "capable"
   },
   "paths": {
     "A": {
@@ -49,7 +51,7 @@
       "conversation": [
         {
           "turn": 1,
-          "user": "수학 기출문제집 풀려고요. 총 500문제. 수능까지 4개월 남았어요. 하루 1시간.",
+          "user": "100 LeetCode problems for interview prep. I'm a non-CS major so I only know basic arrays and loops. Need to build up from fundamentals.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",

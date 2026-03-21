@@ -54,7 +54,7 @@
       "conversation": [
         {
           "turn": 1,
-          "user": "Anatomy exam in 4 weeks. Netter's Atlas + lecture notes. The atlas is about 500 pages but I need to know structures, not just read. I'm a first-year med student. I can do 3 hours a day.",
+          "user": "Anatomy final in 4 weeks. Netter's Atlas, 500 pages. I don't use Anki or any flashcard apps — I prefer hand-drawing diagrams.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",

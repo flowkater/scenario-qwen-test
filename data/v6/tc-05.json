@@ -54,7 +54,7 @@
       "conversation": [
         {
           "turn": 1,
-          "user": "Genetics midterm is in 3 days. Same situation — textbook Ch.8-14 (210p), 90 practice problems, 12 lectures I haven't watched. I'm panicking.",
+          "user": "PLEASE HELP. Genetics final is in 3 DAYS. I have 200 pages to review and I'm only about 30% through. I think I have about 3 hours total, maybe less.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",

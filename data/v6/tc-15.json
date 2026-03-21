@@ -51,7 +51,7 @@
       "conversation": [
         {
           "turn": 1,
-          "user": "PMP certification exam in 5 weeks. I have the PMBOK Guide (756 pages) and Rita Mulcahy's prep book (550 pages). I'm a project manager with 5 years experience. I can do 1 hour on weekdays.",
+          "user": "PMP exam in 6 weeks. I'm going to use the PMBOK Guide as my primary resource, not Rita's. I have 5 years of PM experience.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",

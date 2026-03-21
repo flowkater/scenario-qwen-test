@@ -49,7 +49,7 @@
       "conversation": [
         {
           "turn": 1,
-          "user": "(Path A와 약간 다른 조건으로 같은 시나리오)",
+          "user": "수학 기출문제집 풀려고요. 총 500문제. 수능까지 4개월 남았어요. 하루 1시간.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",
@@ -102,7 +102,7 @@
         },
         {
           "turn": 3,
-          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "user": "🤷 I don't know which types of problems to focus on. I just know I need to do 100 LeetCode problems for interview prep.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",

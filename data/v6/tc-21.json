@@ -51,7 +51,7 @@
         },
         {
           "turn": 2,
-          "user": "(유저가 구체적 답변 제공 — 약점 특정, 분량 확인 등)",
+          "user": "I have a clear list of 12 papers. The methodology sections are the hardest to parse. I need to extract key findings and compare across papers.",
           "expectedAI": {
             "action": "generate_plan",
             "mustInclude": {
@@ -91,7 +91,7 @@
         },
         {
           "turn": 2,
-          "user": "(유저가 Path A와 다른 답변 — 전체 어려움, 다른 전략 선호 등)",
+          "user": "I only have 5 papers so far. I need to find more through citation chaining. Not sure how many total I'll need.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",
@@ -144,7 +144,7 @@
         },
         {
           "turn": 3,
-          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "user": "🤷 I'm not sure how many papers I need. My advisor just said 'do a thorough review.' Maybe 10-15?",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",

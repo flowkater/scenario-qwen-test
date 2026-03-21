@@ -51,7 +51,7 @@
         },
         {
           "turn": 2,
-          "user": "(유저가 구체적 답변 제공 — 약점 특정, 분량 확인 등)",
+          "user": "핵심 판례 위주로 먼저 하려고요. 헌법소원 부분이 제일 어렵고 한 60페이지 정도. 나머지는 한번 봤어요.",
           "expectedAI": {
             "action": "generate_plan",
             "mustInclude": {
@@ -91,7 +91,7 @@
         },
         {
           "turn": 2,
-          "user": "(유저가 Path A와 다른 답변 — 전체 어려움, 다른 전략 선호 등)",
+          "user": "전부 다 어려워요. 한번도 안 읽었어요. 이번 주 안에 다 해야 하는데 막막해요.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",
@@ -144,7 +144,7 @@
         },
         {
           "turn": 3,
-          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "user": "🤷 어디가 어려운지 모르겠어요. 아직 안 펴봤어요.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",

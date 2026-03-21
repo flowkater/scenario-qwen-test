@@ -51,7 +51,7 @@
       "conversation": [
         {
           "turn": 1,
-          "user": "(Path A와 약간 다른 조건으로 같은 시나리오)",
+          "user": "PMP certification exam in 5 weeks. I have the PMBOK Guide (756 pages) and Rita Mulcahy's prep book (550 pages). I'm a project manager with 5 years experience. I can do 1 hour on weekdays.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",
@@ -104,7 +104,7 @@
         },
         {
           "turn": 3,
-          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "user": "🤷 I haven't decided which book to focus on. And I'm not sure which knowledge areas are my weakest.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",

@@ -52,7 +52,7 @@
       "conversation": [
         {
           "turn": 1,
-          "user": "(Path A와 약간 다른 조건으로 같은 시나리오)",
+          "user": "Econ 101 final next week. Same textbook, 350 pages total but I've already studied about 150 pages. I need to focus on what I haven't covered.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",
@@ -105,7 +105,7 @@
         },
         {
           "turn": 3,
-          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "user": "I'm not sure what I got on the midterm actually. Maybe a C? I don't really know what specifically I need to work on.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",

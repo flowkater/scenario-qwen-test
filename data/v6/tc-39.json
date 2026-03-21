@@ -48,7 +48,7 @@
       "conversation": [
         {
           "turn": 1,
-          "user": "(Path A와 약간 다른 조건으로 같은 시나리오)",
+          "user": "모의고사 성적이 떨어졌어요. 국어 3등급에서 4등급으로. 비문학 독해 속도가 문제인 것 같은데 시간 관리가 안 되는 건지 잘 모르겠어요.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",
@@ -101,7 +101,7 @@
         },
         {
           "turn": 3,
-          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "user": "🤷 왜 성적이 떨어졌는지 모르겠어요. 공부는 하고 있는데.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",

@@ -51,7 +51,7 @@
         },
         {
           "turn": 2,
-          "user": "(유저가 구체적 답변 제공 — 약점 특정, 분량 확인 등)",
+          "user": "I need to prepare discussion questions too. The theoretical frameworks in chapters 5-7 are the hardest, about 40% of the reading.",
           "expectedAI": {
             "action": "generate_plan",
             "mustInclude": {
@@ -91,7 +91,7 @@
         },
         {
           "turn": 2,
-          "user": "(유저가 Path A와 다른 답변 — 전체 어려움, 다른 전략 선호 등)",
+          "user": "I just need to skim for the key arguments. I don't need to understand every detail, just enough for class discussion.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",
@@ -144,7 +144,7 @@
         },
         {
           "turn": 3,
-          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "user": "🤷 I'm not sure what the professor expects. I haven't looked at the reading list yet.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",

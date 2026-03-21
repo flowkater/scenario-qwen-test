@@ -49,7 +49,7 @@
       "conversation": [
         {
           "turn": 1,
-          "user": "(Path A와 약간 다른 조건으로 같은 시나리오)",
+          "user": "I'm building a portfolio website. I know basic HTML/CSS but need to learn React. I want to finish in 6 weeks. I can put in about 1 hour on weekdays, 3 hours on weekends.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",
@@ -102,7 +102,7 @@
         },
         {
           "turn": 3,
-          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "user": "🤷 어떤 방법으로 외워야 할지 모르겠어요. 그냥 교재 보고 있는데 안 외워져요.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",

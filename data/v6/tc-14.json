@@ -54,7 +54,7 @@
         },
         {
           "turn": 2,
-          "user": "(유저가 구체적 답변 제공 — 약점 특정, 분량 확인 등)",
+          "user": "종합원가계산이 제일 약해요. 표준원가는 그나마 괜찮고. 한 40% 정도가 원가계산 관련인 것 같아요.",
           "expectedAI": {
             "action": "generate_plan",
             "mustInclude": {
@@ -94,7 +94,7 @@
         },
         {
           "turn": 2,
-          "user": "(유저가 Path A와 다른 답변 — 전체 어려움, 다른 전략 선호 등)",
+          "user": "솔직히 원가계산 전체가 다 어려워요. 처음 시험 때도 그 부분에서 떨어진 거라서.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",
@@ -147,7 +147,7 @@
         },
         {
           "turn": 3,
-          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "user": "🤷 어디가 약한지 정확히 모르겠어요. 점수표를 봐야 하는데 안 봤어요.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",

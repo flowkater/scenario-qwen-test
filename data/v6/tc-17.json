@@ -54,7 +54,7 @@
       "conversation": [
         {
           "turn": 1,
-          "user": "(Path A와 약간 다른 조건으로 같은 시나리오)",
+          "user": "Studying for the bar exam full-time. Using Barbri course materials. About 2000 pages of outlines plus their video lectures (150 hours). Exam in 10 weeks. I can study 8 hours a day.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",
@@ -107,7 +107,7 @@
         },
         {
           "turn": 3,
-          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "user": "🤷 I'm not sure which section is weaker. I haven't taken a full practice exam yet.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",

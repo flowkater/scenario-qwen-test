@@ -54,7 +54,7 @@
       "conversation": [
         {
           "turn": 1,
-          "user": "(Path A와 약간 다른 조건으로 같은 시나리오)",
+          "user": "Anatomy exam in 4 weeks. Netter's Atlas + lecture notes. The atlas is about 500 pages but I need to know structures, not just read. I'm a first-year med student. I can do 3 hours a day.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",
@@ -107,7 +107,7 @@
         },
         {
           "turn": 3,
-          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "user": "I've heard of Anki but haven't tried it. Not sure which body regions are hardest yet.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",

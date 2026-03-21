@@ -54,7 +54,7 @@
         },
         {
           "turn": 2,
-          "user": "(유저가 구체적 답변 제공 — 약점 특정, 분량 확인 등)",
+          "user": "SRS 앱 써서 외우고 있어요. 한자 읽기는 괜찮은데 청해가 약해요.",
           "expectedAI": {
             "action": "generate_plan",
             "mustInclude": {
@@ -94,7 +94,7 @@
         },
         {
           "turn": 2,
-          "user": "(유저가 Path A와 다른 답변 — 전체 어려움, 다른 전략 선호 등)",
+          "user": "아직 단어 공부를 시작 안 했어요. 교재 순서대로 하려고 하는데 뭐부터 해야 할지.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",
@@ -147,7 +147,7 @@
         },
         {
           "turn": 3,
-          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "user": "🤷 어떻게 외우는 게 좋은지 모르겠어요. 그냥 교재 보고 있는데 안 외워져요.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",

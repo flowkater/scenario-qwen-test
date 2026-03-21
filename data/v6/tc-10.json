@@ -52,7 +52,7 @@
       "conversation": [
         {
           "turn": 1,
-          "user": "(Path A와 약간 다른 조건으로 같은 시나리오)",
+          "user": "I have a physics final TOMORROW. 300 pages, 45 minutes of study time tonight. No slides, no notes, just the textbook.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",
@@ -105,7 +105,7 @@
         },
         {
           "turn": 3,
-          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "user": "🤷 I don't have any other materials. Just the textbook. I don't even know where to start.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",

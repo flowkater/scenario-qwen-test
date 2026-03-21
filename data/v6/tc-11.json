@@ -53,7 +53,7 @@
       "conversation": [
         {
           "turn": 1,
-          "user": "(Path A와 약간 다른 조건으로 같은 시나리오)",
+          "user": "SAT is in 3 months. Math section is hard for me. I have a Kaplan prep book (about 400 pages for math) and access to Khan Academy videos. I'm a junior.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",
@@ -106,7 +106,7 @@
         },
         {
           "turn": 3,
-          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "user": "I haven't taken a full practice test yet so I don't really know what's hard.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",

@@ -48,7 +48,7 @@
       "conversation": [
         {
           "turn": 1,
-          "user": "(Path A와 약간 다른 조건으로 같은 시나리오)",
+          "user": "I'm studying for CPA FAR and REG simultaneously. 10 weeks total. I failed FAR last time by 3 points. REG is new. I'm thinking about doing them parallel but not sure.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",
@@ -101,7 +101,7 @@
         },
         {
           "turn": 3,
-          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "user": "🤷 I don't know if I should study both at the same time or one after the other.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",

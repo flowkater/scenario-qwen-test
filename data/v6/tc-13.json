@@ -53,7 +53,7 @@
       "conversation": [
         {
           "turn": 1,
-          "user": "(Path A와 약간 다른 조건으로 같은 시나리오)",
+          "user": "AP Chem exam is May 6. I have Zumdahl textbook and the AP review book. About 600 pages total between both. I'm a sophomore taking it early. Science is my thing but this is my first AP.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",
@@ -106,7 +106,7 @@
         },
         {
           "turn": 3,
-          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "user": "🤷 I don't know if I should do FRQs or textbook first. I haven't figured out my weak areas yet.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",

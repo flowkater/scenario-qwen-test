@@ -53,7 +53,7 @@
         },
         {
           "turn": 2,
-          "user": "(유저가 구체적 답변 제공 — 약점 특정, 분량 확인 등)",
+          "user": "It's business administration, the final is in 3 weeks. I have the textbook, about 400 pages. And a problem set with maybe 50 questions.",
           "expectedAI": {
             "action": "generate_plan",
             "mustInclude": {
@@ -93,7 +93,7 @@
         },
         {
           "turn": 2,
-          "user": "(유저가 Path A와 다른 답변 — 전체 어려움, 다른 전략 선호 등)",
+          "user": "It's sociology. The exam is next month. I have lecture notes but no textbook. Maybe 100 pages of notes?",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",
@@ -146,7 +146,7 @@
         },
         {
           "turn": 3,
-          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "user": "Uh I'm not even sure about the exact date. Sometime in April? I think we have a textbook but I haven't bought it yet.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",

@@ -51,7 +51,7 @@
         },
         {
           "turn": 2,
-          "user": "(유저가 구체적 답변 제공 — 약점 특정, 분량 확인 등)",
+          "user": "리스닝은 괜찮은데 리딩이 시간이 부족해요. 퇴근 후 하루 1시간 정도 할 수 있어요. 주말에는 3시간.",
           "expectedAI": {
             "action": "generate_plan",
             "mustInclude": {
@@ -91,7 +91,7 @@
         },
         {
           "turn": 2,
-          "user": "(유저가 Path A와 다른 답변 — 전체 어려움, 다른 전략 선호 등)",
+          "user": "전 영역이 다 부족해요. 직장이라 평일에는 30분이 최선이에요.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",
@@ -144,7 +144,7 @@
         },
         {
           "turn": 3,
-          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "user": "🤷 어떤 영역이 약한지 잘 모르겠어요. 오래전에 본 거라서.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",

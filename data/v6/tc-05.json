@@ -54,7 +54,7 @@
       "conversation": [
         {
           "turn": 1,
-          "user": "(Path A와 약간 다른 조건으로 같은 시나리오)",
+          "user": "Genetics midterm is in 3 days. Same situation — textbook Ch.8-14 (210p), 90 practice problems, 12 lectures I haven't watched. I'm panicking.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",
@@ -107,7 +107,7 @@
         },
         {
           "turn": 3,
-          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "user": "Honestly I don't know how much time I have. Maybe a few hours? I'm panicking right now.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",

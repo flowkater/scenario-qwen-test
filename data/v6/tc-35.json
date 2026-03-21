@@ -51,7 +51,7 @@
         },
         {
           "turn": 2,
-          "user": "(유저가 구체적 답변 제공 — 약점 특정, 분량 확인 등)",
+          "user": "이번이 마지막 기회예요. 메커니즘은 아는데 시험만 보면 머리가 하얘져요. 시험 불안인 것 같아요.",
           "expectedAI": {
             "action": "generate_plan",
             "mustInclude": {
@@ -91,7 +91,7 @@
         },
         {
           "turn": 2,
-          "user": "(유저가 Path A와 다른 답변 — 전체 어려움, 다른 전략 선호 등)",
+          "user": "사실 메커니즘도 아직 헷갈려요. 3번째인데 기초부터 다시 해야 할 것 같아요.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",
@@ -144,7 +144,7 @@
         },
         {
           "turn": 3,
-          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "user": "🤷 뭐가 문제인지 모르겠어요. 공부는 하는데 성적이 안 나와요.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",

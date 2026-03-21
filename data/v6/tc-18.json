@@ -53,7 +53,7 @@
         },
         {
           "turn": 2,
-          "user": "(유저가 구체적 답변 제공 — 약점 특정, 분량 확인 등)",
+          "user": "CBT 기출 위주로 하려고요. SQL이랑 알고리즘 부분이 제일 어려워요.",
           "expectedAI": {
             "action": "generate_plan",
             "mustInclude": {
@@ -93,7 +93,7 @@
         },
         {
           "turn": 2,
-          "user": "(유저가 Path A와 다른 답변 — 전체 어려움, 다른 전략 선호 등)",
+          "user": "이론부터 잡으려고요. 비전공이라 기초가 없어서 기출만 봐서는 모르겠어요.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",
@@ -146,7 +146,7 @@
         },
         {
           "turn": 3,
-          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "user": "🤷 뭐부터 해야 할지 모르겠어요. 비전공이라 다 어려워요.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",

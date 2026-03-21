@@ -51,7 +51,7 @@
         },
         {
           "turn": 2,
-          "user": "(유저가 구체적 답변 제공 — 약점 특정, 분량 확인 등)",
+          "user": "I want to focus on the mechanism lectures. I'll take notes and do textbook problems alongside. 1.5x speed should work since I've seen some content before.",
           "expectedAI": {
             "action": "generate_plan",
             "mustInclude": {
@@ -91,7 +91,7 @@
         },
         {
           "turn": 2,
-          "user": "(유저가 Path A와 다른 답변 — 전체 어려움, 다른 전략 선호 등)",
+          "user": "I need to watch everything from scratch. Can't do 1.5x since it's all new to me. And I don't have a textbook.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",
@@ -144,7 +144,7 @@
         },
         {
           "turn": 3,
-          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "user": "🤷 I don't know which lectures to prioritize. And I haven't decided on playback speed yet.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",

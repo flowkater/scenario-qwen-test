@@ -54,7 +54,7 @@
       "conversation": [
         {
           "turn": 1,
-          "user": "(Path A와 약간 다른 조건으로 같은 시나리오)",
+          "user": "Genetics midterm is April 14th. I have Concepts of Genetics textbook (chapters 8-14, about 210 pages), 90 practice problems from past exams, and 12 lectures I haven't watched. I'm a junior, I've done well in bio before.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",
@@ -107,7 +107,7 @@
         },
         {
           "turn": 3,
-          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "user": "Maybe? I'm not sure about the lab manual pages. And I haven't really figured out what's hard yet.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",

@@ -48,7 +48,7 @@
       "conversation": [
         {
           "turn": 1,
-          "user": "(Path A와 약간 다른 조건으로 같은 시나리오)",
+          "user": "I have 3 midterms in the same week: Organic Chemistry on Monday, Statistics on Wednesday, and Political Science on Friday. I'm most worried about Orgo. I have about 4 hours per day.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",
@@ -101,7 +101,7 @@
         },
         {
           "turn": 3,
-          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "user": "🤷 I have 3 exams but I don't know which one to prioritize. They all feel equally hard.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",

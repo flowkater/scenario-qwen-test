@@ -49,7 +49,7 @@
       "conversation": [
         {
           "turn": 1,
-          "user": "(Path A와 약간 다른 조건으로 같은 시나리오)",
+          "user": "Math homework due Thursday. 30 problems from chapter 7. Calculus 2, integration techniques. Some problems are really hard.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",
@@ -102,7 +102,7 @@
         },
         {
           "turn": 3,
-          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "user": "🤷 I haven't looked at the problem set yet. I just know it's 30 problems due in 2 days.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",

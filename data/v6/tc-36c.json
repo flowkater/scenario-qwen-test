@@ -49,7 +49,7 @@
       "conversation": [
         {
           "turn": 1,
-          "user": "(Path A와 약간 다른 조건으로 같은 시나리오)",
+          "user": "I need to improve my Writing score from 22 to 27+. I'm applying to grad school and they specifically look at the Writing section. 90→100+ overall.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",
@@ -102,7 +102,7 @@
         },
         {
           "turn": 3,
-          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "user": "🤷 I'm not sure which section to prioritize. My advisor just said I need 100+.",
           "expectedAI": {
             "action": "generate_plan",
             "mustDifferFrom": "path_A",

@@ -1,0 +1,31 @@
+{
+  "id": "tc-14",
+  "category": "exam-cert",
+  "name": "CPA 재시험 — 직장인",
+  "userMessage": "CPA 재무회계 재시험 준비 중이에요. 작년에 떨어졌는데 원가계산이 약해서요. 교재 800페이지, 기출 10세트 있어요. 시험이 2달 뒤에요. 퇴근 후 2시간 정도 공부해요.",
+  "emotionProtocol": "shame",
+  "versionTag": "v1.5",
+  "profile": {
+    "role": "working",
+    "level": "capable",
+    "isRetake": true,
+    "focusSpan": 50,
+    "timeBudget": { "weekday": 120, "weekend": 0 }
+  },
+  "resources": [
+    { "type": "textbook", "description": "CPA 재무회계 복습 파트", "quantity": "600p" },
+    { "type": "textbook", "description": "CPA 원가계산 (약점 파트)", "quantity": "200p" },
+    { "type": "pastExam", "description": "기출문제 세트", "quantity": "10 sets" }
+  ],
+  "exam": {
+    "subject": "CPA 재무회계",
+    "daysLeft": 60,
+    "examType": "mixed",
+    "ddayBucket": "marathon"
+  },
+  "currentState": {
+    "description": "한 번 전체를 공부했으나 원가계산 취약. 재시험.",
+    "isRetake": true,
+    "retakeIssue": "원가계산 약점 — 종합/표준/활동기준 미확정"
+  }
+}

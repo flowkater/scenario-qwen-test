@@ -1,0 +1,34 @@
+{
+  "tcId": "tc-03",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1",
+  "expectedQuestions": {
+    "required": [],
+    "optional": ["examFormat"],
+    "maxCount": 1,
+    "decisionValue": "0 questions mandatory — all key info already provided. Asking about chapters/time/textbook = FAIL (already given). Only allowed: examFormat if not yet stated (changes strategy)."
+  },
+  "effortModel": {
+    "type": "range",
+    "expected": 3.0,
+    "min": 2.3,
+    "max": 3.8,
+    "unit": "page",
+    "citation": "Wake Forest CAT: 3.0 min/page; identical to TC-01 conditions",
+    "layers": {
+      "baseProcessing": 900,
+      "reviewPractice": 0,
+      "sessionOverhead": 0
+    }
+  },
+  "expectedTimeFit": "deficit",
+  "expectedStrategy": [
+    "DEFICIT detected: 300p × 3.0min = 900min needed, 60min × 14days = 840min available",
+    "Option A: increase to 1.5hr/day → 1260min covers reading + self-test",
+    "Option B: prioritize high-yield chapters (200p thorough + 100p skim)",
+    "Option C: reading only without practice — warn about MC risk"
+  ],
+  "warnings": ["60min deficit on reading alone", "0 time for review/practice"],
+  "hardFailChecks": ["HFG-1", "HFG-2", "HFG-3", "HFG-4"],
+  "toneExpectation": "honest and direct — present options clearly. NEVER lower min/page to make math work."
+}

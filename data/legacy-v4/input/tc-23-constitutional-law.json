@@ -1,0 +1,21 @@
+{
+  "id": "tc-23",
+  "category": "read",
+  "name": "법대 헌법 판례집 (shame+frustration, SEVERE DEFICIT)",
+  "userMessage": "헌법 판례집 읽어야 해요. 이번 주까지 200페이지. 법대 2학년인데 판례 분석하면서 읽어야 해서 느려요.",
+  "emotionProtocol": "shame",
+  "versionTag": "v1.5",
+  "profile": {
+    "role": "student",
+    "timeBudget": { "weekday": 120, "weekend": 120 }
+  },
+  "resources": [
+    { "type": "textbook", "description": "헌법 판례집", "quantity": "200p" }
+  ],
+  "readDetails": {
+    "title": "헌법 판례집",
+    "purpose": "class",
+    "totalPages": 200,
+    "deadline": "this week"
+  }
+}

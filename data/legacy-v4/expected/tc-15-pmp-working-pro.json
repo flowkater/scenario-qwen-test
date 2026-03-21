@@ -1,0 +1,40 @@
+{
+  "tcId": "tc-15",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1.5",
+  "expectedQuestions": {
+    "required": [],
+    "optional": ["pmbokEditionAndStrategy"],
+    "maxCount": 1,
+    "decisionValue": "PMBOK edition strategy → 7th ed = principles-based, full read less useful than simulator + agile focus. Changes PMBOK reading strategy significantly."
+  },
+  "effortModels": {
+    "rita_mulcahy": {
+      "type": "range",
+      "expected": 3.0,
+      "min": 2.5,
+      "max": 4.0,
+      "unit": "page",
+      "citation": "Conversational style; experienced PM can do 1.5-2min. r/pmp: 30-day AT/AT/AT cases for 5yr+ PMs."
+    },
+    "pmbok_selective": {
+      "type": "range",
+      "expected": 6.0,
+      "min": 4.0,
+      "max": 8.0,
+      "unit": "page",
+      "citation": "Principle-based, dense, abstract. Full 756p NOT needed — selective ~200p."
+    }
+  },
+  "expectedTimeFit": "fits",
+  "expectedStrategy": [
+    "Rita main (550p, priority 1) + PMBOK selective reference (~200p, NOT full 756p, priority 2) + weekly mock exam (check, priority 1)",
+    "Total: Rita 27.5hr + PMBOK selective 20hr + simulator 7hr + overhead 2hr = 56.5hr vs 55hr available ✅",
+    "Weekday: Rita 45min + notes 15min; Weekend: Rita 2hr + PMBOK reference 30min + mock 30min",
+    "Experienced PM: skip known Rita sections → focus on agile/hybrid concepts (new after 2023 PMP)",
+    "Weekly mock exam mandatory (weekend)"
+  ],
+  "warnings": ["Almost exactly fits — no buffer for slow weeks"],
+  "hardFailChecks": ["HFG-1", "HFG-2", "HFG-4"],
+  "toneExpectation": "experience-respectful — '이미 실무에서 많이 하신 것들이에요. 시험은 용어와 PMI 사고방식 파악이 핵심입니다.'"
+}

@@ -1,0 +1,40 @@
+{
+  "tcId": "tc-33",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1.5",
+  "expectedQuestions": {
+    "required": ["Are there practice problems or past exams from the professor?"],
+    "optional": ["Did you attend most lectures? (affects background context)"],
+    "maxCount": 2
+  },
+  "effortModel": {
+    "type": "range",
+    "expected": 6.0,
+    "min": 5.0,
+    "max": 7.5,
+    "unit": "page",
+    "citation": "Wake Forest CAT: Understand; Many New Concepts = 6.0 min/page; Reddit orgo first-time: 5-8 min/page"
+  },
+  "expectedTimeFit": "tight",
+  "expectedStrategy": [
+    "Track A (Reading): 180p × 6.0min = 1080min over 12 days = 13p/day",
+    "Track B (Problems): immediate chapter-end problems (2-3) after each reading session — from Day 1",
+    "Day 13-14: mechanism review + timed mock problems using remaining 180min buffer",
+    "interleaved reading + mechanism drawing (stop and draw on paper when mechanisms appear)"
+  ],
+  "warnings": [
+    "7.0 min/page calculation exhausts entire budget with 0 time for problems — do NOT use",
+    "reading only without problem practice = likely exam failure despite full coverage",
+    "Ch.15 may not be fully covered if reading goes slow — Ch.15 mechanics-only skim as fallback"
+  ],
+  "alternatives": [
+    "if lectures attended: context already exists, reading speed may be closer to 5.0min/p",
+    "if Ch.15 behind: mechanisms-only skim for Ch.15 instead of full reading"
+  ],
+  "hardFailChecks": [
+    "must NOT lower min/page below 6.0 to make budget appear comfortable — v3 error was using 7.0 (budget exhaustion)",
+    "must include problem-solving Track B — reading alone is insufficient",
+    "must NOT give same plan as TC-34 (retake) or TC-35 (senior)"
+  ],
+  "toneExpectation": "matter-of-fact; normalize 6min/page as expected for first-time orgo; practical dual-track plan"
+}

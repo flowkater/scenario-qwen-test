@@ -1,0 +1,21 @@
+{
+  "id": "tc-28",
+  "category": "watch",
+  "name": "Udemy React 코스 180강 (캐주얼, 기한 없음)",
+  "userMessage": "Taking a React course on Udemy. 180 lectures, about 24 hours total. No deadline, just learning for fun. Maybe 1 hour a day.",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1.5",
+  "profile": {
+    "role": "self",
+    "timeBudget": { "weekday": 60, "weekend": 60 }
+  },
+  "resources": [
+    { "type": "lectures", "description": "Udemy React course", "quantity": "180 lectures (24hr total)", "watched": "0/180" }
+  ],
+  "watchDetails": {
+    "courseName": "Udemy React Course",
+    "lectureCount": 180,
+    "lectureMinutes": 8,
+    "playbackSpeed": null
+  }
+}

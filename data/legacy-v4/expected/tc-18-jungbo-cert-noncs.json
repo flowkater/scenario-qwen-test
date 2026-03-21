@@ -1,0 +1,37 @@
+{
+  "tcId": "tc-18",
+  "emotionProtocol": "frustration",
+  "versionTag": "v1",
+  "expectedQuestions": {
+    "required": ["pilgiStudyMethod"],
+    "optional": [],
+    "maxCount": 1,
+    "decisionValue": "pilgiStudyMethod ('CBT 문제풀이 위주로 통과했나요?') → CBT-only 필기 합격자는 실기에서 이론 완전 백지화 패턴 prevalent. Changes coaching message fundamentally."
+  },
+  "effortModel": {
+    "type": "range",
+    "expected": 9.0,
+    "min": 6.0,
+    "max": 12.0,
+    "unit": "page",
+    "citation": "Korean IT cert forums: 수제비 1회독 2 weeks at 3-4hr/day → reverse calc 600p ÷ (14days × 210min/day) = ~9.8min/page for non-CS. v3 was 6-8min/page — under-estimated. v4 uplifted to 9.0 [6-12]."
+  },
+  "expectedTimeFit": "impossible",
+  "expectedStrategy": [
+    "SEVERE DEFICIT: 600p × 9.0min = 90hr + 10sets × 2hr = 10hr + overhead 10hr = 110hr needed vs 31.5hr available (21 × 1.5hr) = 78.5hr deficit (2.5×+)",
+    "TRIAGE: past exams from Day 1 → identify high-frequency chapters → textbook reverse lookup",
+    "Focus areas (by exam weight): SQL(SELECT/JOIN/subquery) ★★★ + Algorithm/Python/Java ★★★ + UML/DB design ★★",
+    "Textbook: 300p focus (high-frequency only, not all 600p)",
+    "3 plans: 수제비(300p, triage) + 기출 5년치(Day1 start) + SQL/coding practice(.check milestones)",
+    "CBT environment practice mandatory: read ≠ can type. SQL must be typed directly.",
+    "2023 revision: pass rate 17.7% — significantly harder than before"
+  ],
+  "warnings": [
+    "78.5hr deficit — SEVERE (2.5× available budget)",
+    "필기→실기 백지화: CBT-only 필기 study → 실기 이론 almost useless",
+    "Practical writing exam: knowing ≠ can write. CBT practice environment mandatory",
+    "17.7% pass rate — even CS majors find it difficult"
+  ],
+  "hardFailChecks": ["HFG-1", "HFG-2", "HFG-3", "HFG-4"],
+  "toneExpectation": "frustration-validate non-CS difficulty — '비전공이라 어려운 거 당연해요. 합격률 17%는 전공자도 어렵다는 뜻이에요.'"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "tc-13",
+  "category": "exam-highschool",
+  "name": "AP Chemistry — 고2 (첫 AP)",
+  "userMessage": "AP Chem exam is May 6. I have Zumdahl textbook and the AP review book. About 600 pages total between both. I'm a sophomore taking it early. Science is my thing but this is my first AP.",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1.5",
+  "profile": {
+    "role": "student",
+    "studentLevel": "highschool",
+    "year": "sophomore",
+    "level": "confident",
+    "focusSpan": 45,
+    "timeBudget": { "weekday": 90, "weekend": 90 }
+  },
+  "resources": [
+    { "type": "textbook", "description": "Zumdahl Chemistry textbook", "quantity": "~400p", "isEstimated": true },
+    { "type": "studyGuide", "description": "AP Chemistry review book", "quantity": "~200p", "isEstimated": true }
+  ],
+  "exam": {
+    "subject": "AP Chemistry",
+    "examDate": "May 6",
+    "daysLeft": 49,
+    "examType": "mixed",
+    "ddayBucket": "marathon"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "tcId": "tc-16",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1.5",
+  "expectedQuestions": {
+    "required": ["srsAppUsage"],
+    "optional": ["listeningPractice"],
+    "maxCount": 2,
+    "decisionValue": "srsAppUsage (Anki etc.) → determines SRS pile-up warning specifics and review management approach. listeningPractice → N2 listening is pass/fail differentiator."
+  },
+  "effortModels": {
+    "vocabulary_srs": {
+      "type": "range",
+      "expected": 1.0,
+      "min": 0.8,
+      "max": 1.5,
+      "unit": "word",
+      "citation": "SRS new+review combined. r/Anki: Day 14-21 pile-up starts (not Day 30 as previously thought). 10 new/day → Day 14: 50+ reviews."
+    },
+    "grammar_book": {
+      "type": "range",
+      "expected": 4.5,
+      "min": 3.5,
+      "max": 6.0,
+      "unit": "page",
+      "citation": "Grammar book with example patterns + memorization."
+    }
+  },
+  "expectedTimeFit": "deficit",
+  "expectedStrategy": [
+    "DEFICIT: 3000 words ÷ 10/day = 300days; 120 days available → 1800 word deficit",
+    "Option A: frequency-sorted → top 1500 words only (exam coverage priority)",
+    "Option B: 15 words/day + extend to 40min/day",
+    "3 plans: vocabulary .amount(1500 priority) + grammar .range(200p) + listening .check(daily 10min)",
+    "Daily split: vocabulary 10min + grammar 10min + listening 10min = 30min",
+    "SRS pile-up warning: Day 14-21 review exceeds 50 → STOP new words → catch-up mode"
+  ],
+  "warnings": [
+    "SRS pile-up: Day 14-21 critical threshold (not Day 30)",
+    "1800 word deficit at 10 words/day pace",
+    "N2 listening is pass/fail differentiator — must be included",
+    "Missing 1 day = double load next day — SRS requires consistency"
+  ],
+  "hardFailChecks": ["HFG-1", "HFG-2", "HFG-3"],
+  "toneExpectation": "N3 achievement respected, honest about N2 challenge — '처음 한 달은 쌓이는 복습 카드에 압도될 수 있어요. 그게 SRS가 작동하는 증거예요.'"
+}

@@ -1,0 +1,38 @@
+{
+  "tcId": "tc-25",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1",
+  "expectedQuestions": {
+    "required": ["What industry or product is the market analysis for? Is the scope defined?"],
+    "optional": [],
+    "maxCount": 1
+  },
+  "effortModel": {
+    "type": "unpredictable",
+    "expected": null,
+    "min": null,
+    "max": null,
+    "unit": "milestone",
+    "citation": "15-min presentation = 8-10 slides (1.5 min/slide); 3+ solo practice runs + 1 team rehearsal"
+  },
+  "expectedTimeFit": "fits",
+  "expectedStrategy": [
+    "Day 1-3: research (market size, competitors, trends — 3hr)",
+    "Day 4-6: slide creation (8-10 slides target — 3hr)",
+    "Day 7-8: practice runs with timer (3+ solo runs — 2hr)",
+    "Day 9-10: polish + team rehearsal + final submission — 2hr"
+  ],
+  "warnings": [
+    "schedule team rehearsal date by Day 8 — team schedules are the biggest variable",
+    "if scope undefined → research phase needs to be extended (Days 1-4)"
+  ],
+  "alternatives": [
+    "if scope already clear: fast-track to Day 1 outline and Day 2 research start"
+  ],
+  "hardFailChecks": [
+    "must NOT plan for the entire group — own part only",
+    "must include a dedicated practice stage (not just research + slides)",
+    "must NOT skip team rehearsal recommendation"
+  ],
+  "toneExpectation": "organized, proactive, team-aware; emphasize solo practice before team rehearsal"
+}

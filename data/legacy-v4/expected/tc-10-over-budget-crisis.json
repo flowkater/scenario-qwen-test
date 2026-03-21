@@ -1,0 +1,32 @@
+{
+  "tcId": "tc-10",
+  "emotionProtocol": "panic",
+  "versionTag": "v1",
+  "expectedQuestions": {
+    "required": [],
+    "optional": ["oneHighValueDiagnostic"],
+    "maxCount": 1,
+    "decisionValue": "ONE high-value diagnostic question only — choose based on context: 'Professor slides/exam guide available?' → if yes, compress to key 30-40p; 'Did you attend classes?' → attendance reduces reading load; 'Did professor hint exam topics?' → can cut 300p to <100p. Do NOT fix to one specific question."
+  },
+  "effortModel": {
+    "type": "fixed",
+    "expected": 1.0,
+    "min": 0.8,
+    "max": 1.2,
+    "unit": "page",
+    "citation": "TRIAGE mode: ultra-fast skim. Index scan + chapter summaries only. NOT normal reading speed."
+  },
+  "expectedTimeFit": "impossible",
+  "expectedStrategy": [
+    "TRIAGE: 300p full reading is IMPOSSIBLE in 45min",
+    "Focus on 30-40p: index/glossary scan 5min + chapter summaries+key terms 20min + weakest chapter 15min + quick review 5min = 45min total",
+    "Overnight all-nighter NOT recommended — sleep benefits exam performance"
+  ],
+  "warnings": [
+    "300p × 3.0min = 900min needed; 45min available = impossible",
+    "Do NOT promise '20% content = 60-70% score' — use '기본 개념이라도 잡으면 찍기보다 나은 결과'",
+    "Do NOT recommend all-nighter"
+  ],
+  "hardFailChecks": ["HFG-1", "HFG-2", "HFG-4"],
+  "toneExpectation": "calm and practical in panic — '할 수 있는 최선을 하자. 완벽 안 돼도 괜찮아.'"
+}

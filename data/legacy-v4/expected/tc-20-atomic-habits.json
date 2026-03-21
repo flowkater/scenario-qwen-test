@@ -1,0 +1,33 @@
+{
+  "tcId": "tc-20",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1",
+  "expectedQuestions": {
+    "required": [],
+    "optional": [],
+    "maxCount": 0
+  },
+  "effortModel": {
+    "type": "range",
+    "expected": 2.5,
+    "min": 1.5,
+    "max": 3.0,
+    "unit": "page",
+    "citation": "ReadingLength + r/productivity: casual self-help 1.0-1.2 + bedtime slowdown + reflection margin = 2.5"
+  },
+  "expectedTimeFit": "fits",
+  "expectedStrategy": [
+    "8 pages/day at 20 min → 35-day completion at P50",
+    "offer 3 pace options: slow (5-8p/day ~6-8wks), normal (8-12p/day ~4-5wks), fast (20+p/day ~2wks)",
+    "chapter endings as natural stopping points"
+  ],
+  "warnings": [],
+  "alternatives": [],
+  "hardFailChecks": [
+    "must NOT ask unnecessary questions (0 questions required)",
+    "must NOT give more than 1 coaching tip",
+    "must NOT recommend note-taking methods or habit-stacking coaching unprompted",
+    "no over-coaching: casual reading mode must be respected"
+  ],
+  "toneExpectation": "warm and light; bedtime reading vibe; encouraging without being prescriptive"
+}

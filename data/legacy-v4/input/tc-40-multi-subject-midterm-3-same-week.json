@@ -1,0 +1,39 @@
+{
+  "id": "tc-40",
+  "category": "multi-subject",
+  "name": "멀티 과목 — 중간고사 3과목 같은 주",
+  "userMessage": "Next week I have 3 midterms: Organic Chemistry (Mon), Statistics (Wed), and Political Science (Fri). I have about 3 hours a day total for studying.",
+  "emotionProtocol": "panic",
+  "versionTag": "v1.5",
+  "profile": {
+    "timeBudget": {
+      "weekday": 180,
+      "weekend": 180
+    }
+  },
+  "subjects": [
+    {
+      "name": "Organic Chemistry",
+      "examDate": "Monday",
+      "examOrder": 1,
+      "difficulty": "high"
+    },
+    {
+      "name": "Statistics",
+      "examDate": "Wednesday",
+      "examOrder": 2,
+      "difficulty": "medium"
+    },
+    {
+      "name": "Political Science",
+      "examDate": "Friday",
+      "examOrder": 3,
+      "difficulty": "medium"
+    }
+  ],
+  "globalBudget": {
+    "totalDailyMin": 180,
+    "totalDays": 7,
+    "totalAvailableMin": 1260
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": "tc-36",
+  "category": "cross-profile",
+  "name": "TOEFL — 3가지 프로필 비교",
+  "versionTag": "v1.5",
+  "profiles": [
+    {
+      "id": "tc-36a",
+      "crossProfileGroup": "toefl-comparison",
+      "crossProfileRole": "hs-student-panic",
+      "name": "TOEFL 준비 — 한국 고등학생 (80→100, 2달, panic)",
+      "userMessage": "I'm a Korean high school student preparing for TOEFL. Test is in 2 months. Current score is about 80, target is 100. 1 hour a day.",
+      "emotionProtocol": "panic",
+      "profile": {
+        "role": "student",
+        "timeBudget": { "weekday": 60, "weekend": 60 }
+      },
+      "resources": []
+    },
+    {
+      "id": "tc-36b",
+      "crossProfileGroup": "toefl-comparison",
+      "crossProfileRole": "korean-worker-frustration",
+      "name": "TOEFL 준비 — 한국 직장인 (85→100, 퇴근 후 1시간, frustration)",
+      "userMessage": "직장인인데 TOEFL 준비해야 해요. 시험 2달 뒤. 현재 85점, 목표 100. 퇴근 후 1시간.",
+      "emotionProtocol": "frustration",
+      "profile": {
+        "role": "working",
+        "timeBudget": { "weekday": 60, "weekend": 0 }
+      },
+      "resources": []
+    },
+    {
+      "id": "tc-36c",
+      "crossProfileGroup": "toefl-comparison",
+      "crossProfileRole": "gradapp-writing-weak-neutral",
+      "name": "TOEFL 준비 — 대학원 지원 (90→100+, Writing 약점, neutral)",
+      "userMessage": "Applying to grad school, need TOEFL 100+. Test in 2 months. Currently around 90. Writing section is weak. I can study 2 hours a day.",
+      "emotionProtocol": "neutral",
+      "profile": {
+        "role": "self",
+        "timeBudget": { "weekday": 120, "weekend": 120 }
+      },
+      "resources": []
+    }
+  ]
+}

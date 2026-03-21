@@ -1,0 +1,28 @@
+{
+  "id": "tc-29",
+  "category": "watch",
+  "name": "공인중개사 민법 인강 60강 + 교재 800p (2달, 하루 2시간)",
+  "userMessage": "공인중개사 인강 봐야 해요. 민법 60강, 각 40분. 시험 2달 뒤. 교재도 있는데 800페이지. 하루 2시간 정도 할 수 있어요.",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1.5",
+  "profile": {
+    "role": "examPrep",
+    "timeBudget": { "weekday": 120, "weekend": 120 }
+  },
+  "resources": [
+    { "type": "lectures", "description": "민법 인강", "quantity": "60 lectures (40min each)", "watched": "0/60" },
+    { "type": "textbook", "description": "민법 교재", "quantity": "800p" }
+  ],
+  "watchDetails": {
+    "courseName": "공인중개사 민법 인강",
+    "lectureCount": 60,
+    "lectureMinutes": 40,
+    "playbackSpeed": null
+  },
+  "readDetails": {
+    "title": "공인중개사 민법 교재",
+    "purpose": "class",
+    "totalPages": 800,
+    "deadline": "2 months"
+  }
+}

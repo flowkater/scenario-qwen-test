@@ -1,0 +1,32 @@
+{
+  "id": "tc-07",
+  "category": "exam-university",
+  "name": "Orgo Senior Retaker — 메커니즘 약점",
+  "userMessage": "Retaking organic chemistry 2. Failed last semester. McMurry textbook, 200 pages. Exam in 10 days. I know the material somewhat but mechanisms trip me up. 2 hours a day.",
+  "emotionProtocol": "shame",
+  "versionTag": "v1.5",
+  "profile": {
+    "role": "student",
+    "studentLevel": "college",
+    "collegeType": "undergrad",
+    "year": "senior",
+    "level": "capable",
+    "focusSpan": 50,
+    "isRetake": true,
+    "timeBudget": { "weekday": 120, "weekend": 120 }
+  },
+  "resources": [
+    { "type": "textbook", "description": "McMurry Organic Chemistry textbook", "quantity": "200p" }
+  ],
+  "exam": {
+    "subject": "Organic Chemistry II",
+    "daysLeft": 10,
+    "examType": "mixed",
+    "ddayBucket": "urgent"
+  },
+  "currentState": {
+    "description": "Some familiarity from last semester, but mechanisms are weak",
+    "isEstimated": false,
+    "retakeIssue": "mechanisms trip up"
+  }
+}

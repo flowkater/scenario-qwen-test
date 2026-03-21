@@ -1,0 +1,26 @@
+{
+  "id": "tc-12",
+  "category": "exam-highschool",
+  "name": "수능 국어 — 고3, 6개월",
+  "userMessage": "수능 국어 준비하는 고3이에요. 기출 5개년 있고 EBS 수능특강 교재 있어요. 수능까지 6개월 남았어요. 비문학이 약해요.",
+  "emotionProtocol": "frustration",
+  "versionTag": "v1.5",
+  "profile": {
+    "role": "student",
+    "studentLevel": "highschool",
+    "year": "3",
+    "level": "capable",
+    "focusSpan": 50,
+    "timeBudget": { "weekday": 60, "weekend": 60 }
+  },
+  "resources": [
+    { "type": "studyGuide", "description": "EBS 수능특강 국어", "quantity": "~200p" },
+    { "type": "pastExam", "description": "수능 기출 5개년", "quantity": "5 years" }
+  ],
+  "exam": {
+    "subject": "수능 국어",
+    "daysLeft": 180,
+    "examType": "multipleChoice",
+    "ddayBucket": "marathon"
+  }
+}

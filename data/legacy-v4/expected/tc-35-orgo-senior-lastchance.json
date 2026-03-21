@@ -1,0 +1,42 @@
+{
+  "tcId": "tc-35",
+  "emotionProtocol": "panic",
+  "versionTag": "v2",
+  "expectedQuestions": {
+    "required": ["Where exactly do you freeze on exams — at the first mechanism, or partway through?"],
+    "optional": [],
+    "maxCount": 1
+  },
+  "effortModel": {
+    "type": "range",
+    "expected": 2.5,
+    "min": 2.0,
+    "max": 3.5,
+    "unit": "page",
+    "citation": "Conditional: valid only with 2+ prior attempts AND user-confirmed concept understanding. Without these: use 4.0-4.5 min/page"
+  },
+  "expectedTimeFit": "fits",
+  "expectedStrategy": [
+    "Day 1-9: 55% skim+flag (known content fast), 45% timed practice problems (real exam conditions)",
+    "Day 10-12: full exam simulation — timer, book closed, one problem at a time",
+    "Day 13: debrief + relaxation ONLY — NO new content (anxiety increases with new material pre-exam)",
+    "Day 14: 30-min half-mock → rest, energy conservation for exam day"
+  ],
+  "warnings": [
+    "2.5 min/page is CONDITIONAL: 2+ attempts + concept understanding confirmed — if 'don't understand this' signals appear, switch to 4.0 immediately",
+    "Day 13: absolutely no new content — this increases anxiety and disrupts retention",
+    "studying MORE does not fix performance anxiety — simulation practice does"
+  ],
+  "alternatives": [
+    "if concept gaps found: switch to TC-34 plan (4.5 min/page + mechanism drill)",
+    "performance anxiety track: breathing technique 2min before exam + 'I've done this before' anchor"
+  ],
+  "hardFailChecks": [
+    "must validate BOTH emotions separately: frustration (2× failed) AND panic (graduation risk)",
+    "must NOT prescribe 'study harder' for performance anxiety — knowledge is NOT the problem",
+    "Day 13 must explicitly be free of new content",
+    "2.5 min/page gating conditions must be verified before applying",
+    "must NOT give same plan as TC-33 or TC-34"
+  ],
+  "toneExpectation": "dual emotional validation first (frustration + panic separately); then pivot to knowledge vs performance anxiety distinction; calm strategic framing; GPT Pro rated this #1 hardest TC"
+}

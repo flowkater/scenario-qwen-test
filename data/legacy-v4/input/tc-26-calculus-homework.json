@@ -1,0 +1,18 @@
+{
+  "id": "tc-26",
+  "category": "assignment",
+  "name": "Calculus 2 숙제 30문제 (목요일 마감, frustration)",
+  "userMessage": "Math homework due Thursday. 30 problems from chapter 7. Calculus 2, integration techniques. Some problems are really hard.",
+  "emotionProtocol": "frustration",
+  "versionTag": "v1.5",
+  "profile": {
+    "role": "student",
+    "timeBudget": { "weekday": 60, "weekend": 60 }
+  },
+  "resources": [],
+  "assignmentDetails": {
+    "type": "problem-set",
+    "description": "30 Calculus 2 problems, Chapter 7 integration techniques (u-sub, parts, trig substitution, improper integrals, partial fractions)",
+    "deadline": "Thursday"
+  }
+}

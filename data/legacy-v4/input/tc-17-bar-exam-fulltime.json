@@ -1,0 +1,27 @@
+{
+  "id": "tc-17",
+  "category": "exam-cert",
+  "name": "Bar Exam — Full-time Prep",
+  "userMessage": "Studying for the bar exam full-time. Using Barbri course materials. About 2000 pages of outlines plus their video lectures (150 hours). Exam in 10 weeks. I can study 8 hours a day.",
+  "emotionProtocol": "frustration",
+  "versionTag": "v1.5",
+  "profile": {
+    "role": "examPrep",
+    "studentLevel": "college",
+    "collegeType": "grad",
+    "level": "capable",
+    "focusSpan": 90,
+    "timeBudget": { "weekday": 480, "weekend": 480 },
+    "examPrepDuration": "justStarting"
+  },
+  "resources": [
+    { "type": "outlines", "description": "Barbri Law Outlines", "quantity": "2000p" },
+    { "type": "lectures", "description": "Barbri video lectures", "quantity": "150hr" }
+  ],
+  "exam": {
+    "subject": "Bar Exam (MBE/MEE/MPT)",
+    "daysLeft": 70,
+    "examType": "mixed",
+    "ddayBucket": "marathon"
+  }
+}

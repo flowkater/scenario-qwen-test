@@ -1,0 +1,27 @@
+{
+  "id": "tc-08",
+  "category": "exam-university",
+  "name": "Med Student — Anatomy Atlas",
+  "userMessage": "Anatomy exam in 4 weeks. Netter's Atlas + lecture notes. The atlas is about 500 pages but I need to know structures, not just read. I'm a first-year med student. I can do 3 hours a day.",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1.5",
+  "profile": {
+    "role": "student",
+    "studentLevel": "college",
+    "collegeType": "grad",
+    "year": "med-1",
+    "level": "confident",
+    "focusSpan": 60,
+    "timeBudget": { "weekday": 180, "weekend": 180 }
+  },
+  "resources": [
+    { "type": "textbook", "description": "Netter's Atlas of Human Anatomy", "quantity": "~500p" },
+    { "type": "studyGuide", "description": "Lecture notes" }
+  ],
+  "exam": {
+    "subject": "Anatomy",
+    "daysLeft": 28,
+    "examType": "mixed",
+    "ddayBucket": "marathon"
+  }
+}

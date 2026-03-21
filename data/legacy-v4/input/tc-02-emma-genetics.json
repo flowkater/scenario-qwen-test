@@ -1,0 +1,28 @@
+{
+  "id": "tc-02",
+  "category": "exam-university",
+  "name": "Emma — Genetics Junior (멀티 자료)",
+  "userMessage": "Genetics midterm is April 14th. I have Concepts of Genetics textbook (chapters 8-14, about 210 pages), 90 practice problems from past exams, and 12 lectures I haven't watched. I'm a junior, I've done well in bio before.",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1",
+  "profile": {
+    "role": "student",
+    "studentLevel": "college",
+    "collegeType": "undergrad",
+    "year": "junior",
+    "level": "capable",
+    "focusSpan": 50,
+    "timeBudget": { "weekday": 120, "weekend": 120 }
+  },
+  "resources": [
+    { "type": "textbook", "description": "Concepts of Genetics Ch.8-14", "quantity": "210p" },
+    { "type": "problems", "description": "Practice problems from past exams", "quantity": "90 problems" },
+    { "type": "lectures", "description": "Lecture recordings", "quantity": "12 lectures", "watched": "0/12" }
+  ],
+  "exam": {
+    "subject": "Genetics",
+    "examDate": "April 14",
+    "daysLeft": 25,
+    "examType": "mixed"
+  }
+}

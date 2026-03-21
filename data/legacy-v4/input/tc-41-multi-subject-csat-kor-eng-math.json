@@ -1,0 +1,46 @@
+{
+  "id": "tc-41",
+  "category": "multi-subject",
+  "name": "멀티 과목 — 수능 국영수 (frustration)",
+  "userMessage": "수능 준비하는데 국어, 영어, 수학 같이 해야 해요. 하루에 5시간 정도 할 수 있어요. 수능 4개월 남았어요. 국어 3등급, 영어 2등급, 수학 4등급이에요.",
+  "emotionProtocol": "frustration",
+  "versionTag": "v2",
+  "profile": {
+    "timeBudget": {
+      "weekday": 300,
+      "weekend": 300
+    }
+  },
+  "subjects": [
+    {
+      "name": "Korean (국어)",
+      "currentGrade": 3,
+      "gradeType": "relative",
+      "priority": 2
+    },
+    {
+      "name": "English (영어)",
+      "currentGrade": 2,
+      "gradeType": "absolute",
+      "priority": 3,
+      "note": "절대평가 — 1등급 컷 90점"
+    },
+    {
+      "name": "Math (수학)",
+      "currentGrade": 4,
+      "gradeType": "relative",
+      "priority": 1,
+      "note": "가장 약한 과목, 최대 성장 가능"
+    }
+  ],
+  "globalBudget": {
+    "totalDailyMin": 300,
+    "totalDays": 120,
+    "totalAvailableMin": 36000
+  },
+  "examInfo": {
+    "exam": "수능",
+    "remainingDays": 120,
+    "checkpoints": ["6월 모평", "9월 모평"]
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "tcId": "tc-11",
+  "emotionProtocol": "frustration",
+  "versionTag": "v1.5",
+  "expectedQuestions": {
+    "required": [],
+    "optional": ["currentScore"],
+    "maxCount": 1,
+    "decisionValue": "currentScore → determines weak area diagnosis priority and phase structure. Without it, basic plan still generatable [v1]."
+  },
+  "effortModels": {
+    "kaplan": {
+      "type": "range",
+      "expected": 3.0,
+      "min": 2.5,
+      "max": 4.0,
+      "unit": "page",
+      "citation": "Kaplan = mixed problems+explanations. 1.5min/page is under-estimate. CAT Some New Concepts = 4.3, but prep book nature lowers it to ~3.0"
+    },
+    "khan_academy": {
+      "type": "fixed",
+      "expected": 30,
+      "min": 20,
+      "max": 40,
+      "unit": "session",
+      "citation": "Time-based not page-based. 30min/session."
+    }
+  },
+  "expectedTimeFit": "fits",
+  "expectedStrategy": [
+    "2 plans: Kaplan .range + Khan Academy .check",
+    "3-phase structure: Phase1(1mo) diagnosis+foundation → Phase2(2mo) weak areas+past tests → Phase3(3mo) mock exams weekly+drilling",
+    "Weekday: Kaplan 30min + KA 30min; Weekend: mock test set or weak focus (Sat) + Kaplan continue (Sun)",
+    "SAT structure: Calculator/No-Calculator section separate strategy",
+    "Diagnostic test FIRST (KA or Kaplan diagnostic section)"
+  ],
+  "warnings": [],
+  "hardFailChecks": ["HFG-1", "HFG-2", "HFG-4"],
+  "toneExpectation": "frustration-acknowledging — math difficulty is real, validate then provide structured path"
+}

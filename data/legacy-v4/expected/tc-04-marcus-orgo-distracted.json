@@ -1,0 +1,37 @@
+{
+  "tcId": "tc-04",
+  "emotionProtocol": "frustration",
+  "versionTag": "v1",
+  "expectedQuestions": {
+    "required": ["practiceProblemsCount"],
+    "optional": [],
+    "maxCount": 1,
+    "decisionValue": "practiceProblemsCount → determines Plan 2 total quantity and strategy: ≤50 problems → increase reading weight; ≥100 problems → problem drill first"
+  },
+  "effortModel": {
+    "type": "range",
+    "expected": 5.5,
+    "min": 4.8,
+    "max": 7.0,
+    "unit": "page",
+    "citation": "CAT Many New Concepts = 6.0; r/premed 5-6min/page; distraction overhead +10% on top → effective ~6.0 P50",
+    "layers": {
+      "baseProcessing": 1100,
+      "reviewPractice": 300,
+      "sessionOverhead": 140
+    }
+  },
+  "expectedTimeFit": "deficit",
+  "expectedStrategy": [
+    "Pomodoro 15/5 structure: 15min read (same mechanism) → 15min problems (same mechanism) → 5min break",
+    "Effective focus: 8 blocks × 15min = 120min → with restart overhead ~100-108min effective",
+    "Distraction overhead: Gloria Mark UCI — 23-25min to refocus after interruption"
+  ],
+  "warnings": [
+    "300-540min deficit estimated (problem count unknown)",
+    "Distraction overhead ~10% on reading time",
+    "Effective daily time ~100-108min, not 120min"
+  ],
+  "hardFailChecks": ["HFG-1", "HFG-2", "HFG-3"],
+  "toneExpectation": "constraint-accepting — '15분이 네 리듬이라면 거기에 맞춰 짜자.' Do NOT say 'try to focus longer'."
+}

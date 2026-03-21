@@ -1,0 +1,41 @@
+{
+  "tcId": "tc-29",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1.5",
+  "expectedQuestions": {
+    "required": ["배속 얼마로 보세요?", "다른 과목도 같이 준비 중이에요?"],
+    "optional": [],
+    "maxCount": 2
+  },
+  "effortModel": {
+    "type": "range",
+    "expected": 42,
+    "min": 35,
+    "max": 50,
+    "unit": "lecture",
+    "citation": "1.5× speed: 40min / 1.5 = 26.7min playback + pause/notes overhead = 42min P50; UCLA: 1.5× same learning efficiency"
+  },
+  "expectedTimeFit": "tight",
+  "expectedStrategy": [
+    "Phase 1 (Day 1-40): lecture + textbook synchronized per chapter (이해 중심)",
+    "Phase 2 (Day 41-50): 기출 집중 (적용)",
+    "Phase 3 (Day 51-60): 오답 + 약점 보완",
+    "lecture → textbook chapter → next lecture synchronization order",
+    "1.5× speed recommendation (40% time savings, same learning efficiency)"
+  ],
+  "warnings": [
+    "배속 미확인 시 계획 오류 — 1배속(56min) vs 1.5배속(42min) vs 2배속(32min) = 전혀 다른 일정",
+    "다과목 병행 시 현재 민법 전략 전면 재검토 필요",
+    "총 115hr vs 120hr 예산 — 여유 거의 없음, Phase 1 기출 병행 필수"
+  ],
+  "alternatives": [
+    "if other subjects: global time reallocation needed across all subjects",
+    "if 1× speed: lecture completion alone = 56hr, leaving very little for textbook"
+  ],
+  "hardFailChecks": [
+    "must ask about playback speed FIRST — most critical variable",
+    "must ask about other subjects — 공인중개사 is almost always multi-subject",
+    "must NOT say '2달이면 충분해요' without confirming multi-subject status"
+  ],
+  "toneExpectation": "systematic and practical; cautionary about multi-subject risk; 1.5× speed rationale with data backing"
+}

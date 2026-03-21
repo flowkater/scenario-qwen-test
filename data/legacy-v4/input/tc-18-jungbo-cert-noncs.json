@@ -1,0 +1,24 @@
+{
+  "id": "tc-18",
+  "category": "exam-cert",
+  "name": "정보처리기사 실기 — 비전공 직장인",
+  "userMessage": "정보처리기사 실기 준비하는데 비전공이라 어려워요. 수제비 교재 한 권(600페이지)이랑 기출 5년치 있어요. 시험 3주 남았고 퇴근 후 1시간 반 정도요.",
+  "emotionProtocol": "frustration",
+  "versionTag": "v1",
+  "profile": {
+    "role": "working",
+    "level": "beginner",
+    "focusSpan": 40,
+    "timeBudget": { "weekday": 90, "weekend": 0 }
+  },
+  "resources": [
+    { "type": "textbook", "description": "수제비 정보처리기사 실기 교재", "quantity": "600p" },
+    { "type": "pastExam", "description": "정보처리기사 기출문제 5년치", "quantity": "5 sets" }
+  ],
+  "exam": {
+    "subject": "정보처리기사 실기",
+    "daysLeft": 21,
+    "examType": "problemSolving",
+    "ddayBucket": "urgent"
+  }
+}

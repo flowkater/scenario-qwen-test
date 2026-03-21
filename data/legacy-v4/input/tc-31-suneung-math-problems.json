@@ -1,0 +1,20 @@
+{
+  "id": "tc-31",
+  "category": "practice",
+  "name": "수능 수학 기출문제집 500문제 (4개월, 1시간/일)",
+  "userMessage": "수학 기출문제집 풀려고요. 총 500문제. 수능까지 4개월 남았어요. 하루 1시간.",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1.5",
+  "profile": {
+    "role": "student",
+    "timeBudget": { "weekday": 60, "weekend": 60 }
+  },
+  "resources": [
+    { "type": "practice", "description": "수학 기출문제집", "quantity": "500 problems" }
+  ],
+  "practiceDetails": {
+    "activity": "problem-solving",
+    "method": "timed",
+    "totalItems": 500
+  }
+}

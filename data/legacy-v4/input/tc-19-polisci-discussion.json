@@ -1,0 +1,21 @@
+{
+  "id": "tc-19",
+  "category": "read",
+  "name": "정치학 토론 준비 (논증 중심, DEFICIT)",
+  "userMessage": "I need to read chapters 5-9 of my political theory textbook for next week's discussion. About 150 pages. I need to be able to discuss the arguments, not just summarize. 45 min a day.",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1.5",
+  "profile": {
+    "role": "student",
+    "timeBudget": { "weekday": 45, "weekend": 45 }
+  },
+  "resources": [
+    { "type": "textbook", "description": "Political theory textbook Ch.5-9", "quantity": "150p" }
+  ],
+  "readDetails": {
+    "title": "Political Theory Textbook Ch.5-9",
+    "purpose": "class",
+    "totalPages": 150,
+    "deadline": "next week discussion"
+  }
+}

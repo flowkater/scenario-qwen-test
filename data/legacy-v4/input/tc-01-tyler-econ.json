@@ -1,0 +1,25 @@
+{
+  "id": "tc-01",
+  "category": "exam-university",
+  "name": "Tyler — Econ 101 Freshman 🤷",
+  "userMessage": "I have an econ midterm coming up. I think it's in about two weeks? I have the textbook but I haven't really started studying. I'm a freshman.",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1",
+  "profile": {
+    "role": "student",
+    "studentLevel": "college",
+    "collegeType": "undergrad",
+    "year": "freshman",
+    "level": "beginner",
+    "focusSpan": 25,
+    "timeBudget": { "weekday": 60, "weekend": 60 }
+  },
+  "resources": [
+    { "type": "textbook", "description": "Econ textbook (Mankiw Principles)", "quantity": "~250p", "isEstimated": true }
+  ],
+  "exam": {
+    "subject": "Economics 101",
+    "daysLeft": 14,
+    "examType": "unknown"
+  }
+}

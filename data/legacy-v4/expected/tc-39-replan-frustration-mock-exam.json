@@ -1,0 +1,63 @@
+{
+  "tcId": "tc-39",
+  "emotionProtocol": "frustration",
+  "versionTag": "v2",
+  "expectedBehaviorSequence": [
+    "1. Acknowledge frustration ('6월 모평이 충격인 거 이해해요. 근데 모평이 하는 일이 바로 이거예요 — 지금 뭐가 문제인지 보여주는 거.')",
+    "2. Diagnose root cause FIRST — bifurcate: 독해력 문제(원인 A) vs 시간 관리 문제(원인 B)",
+    "3. Ask the diagnostic question to determine pivot direction",
+    "4. Phase-based 5-month replan with 9월 모평 as checkpoint",
+    "5. Non-linear progress explanation (6월 4등급 → 9월 2등급 → 수능 1등급 패턴)"
+  ],
+  "diagnosisFirst": {
+    "causeA": {
+      "name": "독해력 문제",
+      "description": "지문 자체 이해가 느림",
+      "prescription": "비문학 지문 독해력 향상 — 매일 지문 1개 정독 + 구조 분석 (장기 루틴)"
+    },
+    "causeB": {
+      "name": "시간 관리 문제",
+      "description": "읽을 줄 알지만 배분 실패",
+      "prescription": "타이머 훈련 — 지문당 8-9분 제한 + 풀이 전략 재조정 (어려운 지문 패스 기준)"
+    },
+    "diagnosticQuestion": "비문학에서 틀렸을 때, '시간이 없어서 못 읽었어?' 아니면 '읽었는데 이해가 안 됐어'?",
+    "decisionValue": "전략 완전 분기 — 이 질문 없이는 올바른 처방 불가"
+  },
+  "effortModel": {
+    "subject": "수능 비문학 지문+문제 세트",
+    "expected": 8.5,
+    "min": 7.0,
+    "max": 11.0,
+    "unit": "min/세트",
+    "dataSource": "05-korean-exam.md DP#2: 비문학 1지문 보통 5~6분, 준킬러 8~9분"
+  },
+  "phasePlan": {
+    "phase1": {
+      "period": "6월~9월 모평 전",
+      "routineA_독해력": "매일 비문학 지문 1개 정독 + 구조도 작성 30분 + 오답 분석 30분",
+      "routineB_시간관리": "주 3회 80분 재기 모의 + 지문당 8분 타이머 훈련 20분 + 오답 분석 40분"
+    },
+    "phase2": {
+      "period": "9월 모평 후~수능",
+      "trigger": "9월 모평 결과 → 전략 재조정",
+      "focus": "기출 전수 반복 (5개년 × 2회독)"
+    }
+  },
+  "nonLinearExplanation": {
+    "pattern": "6월 4등급 → 9월 2등급 → 수능 1등급 패턴은 흔해요",
+    "message": "6월 모평은 수능 전략의 출발점. 지금 바꾼 게 맞아요"
+  },
+  "hardFailChecks": ["HFG-1", "HFG-4"],
+  "emotionFails": [
+    "진단 없이 '비문학 더 공부해야죠' = 원인 모르는 처방 = FAIL",
+    "기존 계획 그대로 유지 = '완전히 바꿔야 할 것 같아요' 무시 = FAIL",
+    "수능까지 5개월을 단선형 계획으로 = 모평 체크포인트 없음 = FAIL"
+  ],
+  "toneExpectation": "acknowledge frustration → diagnosis → pivot → non-linear progress framing",
+  "scoringNotes": {
+    "feasibilityHonesty": "5개월 = 충분하나 원인 진단 없으면 낭비 경고",
+    "strategy": "원인 A/B 완전 분기 전략 — 같은 '더 공부' 처방 = FAIL",
+    "questionEconomy": "진단 질문 1개가 전략을 완전히 결정 (의사결정 가치 최고)",
+    "sessionPhase": "Phase 1 (진단 루틴) → Phase 2 (9월 모평 후 재조정) 구조"
+  }
+}

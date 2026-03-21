@@ -1,0 +1,131 @@
+{
+  "tcId": "tc-36",
+  "versionTag": "v1.5",
+  "profiles": [
+    {
+      "profileId": "tc-36a",
+      "emotionProtocol": "panic",
+      "expectedQuestions": {
+        "required": [],
+        "optional": [],
+        "maxCount": 0
+      },
+      "effortModel": {
+        "type": "fixed",
+        "expected": null,
+        "min": null,
+        "max": null,
+        "unit": "session",
+        "citation": "TOEFL score gain: ~100hr per 10 points; 20-point gain = ~200hr; 60hr budget (1hr×60days) → realistic max 80→87"
+      },
+      "expectedTimeFit": "impossible",
+      "expectedStrategy": [
+        "non-linear score explanation: 80→90 = test-taking strategy; 90→100 = real English proficiency",
+        "Speaking templates first (fastest score gains)",
+        "all-section rotation + vocabulary daily",
+        "immediate target adjustment to 90+ as primary goal"
+      ],
+      "warnings": [
+        "60hr for 20 points = near-impossible: 10-point gain requires ~100hr, 20-point gain requires ~200hr",
+        "80→85/87 is realistic within 60hr; 90+ requires more time or higher daily budget"
+      ],
+      "alternatives": [
+        "Option A: adjust target to 90+ (achievable within 60hr)",
+        "Option B: extend timeline to 4 months (120hr → 88-92 possible)",
+        "Option C: increase to 2hr/day (120hr → 90+ achievable)",
+        "Option D: if already 80, test-taking strategy alone may reach 90 quickly"
+      ],
+      "hardFailChecks": [
+        "must NOT say '80→100 is achievable in 60hr' — false plan",
+        "must present at least 3 realistic options",
+        "must explain non-linear score gain curve for all profiles",
+        "panic must be validated before data is presented"
+      ],
+      "toneExpectation": "panic-validating first; honest about near-impossibility; hope-preserving with concrete realistic options; English language preferred for TOEFL context"
+    },
+    {
+      "profileId": "tc-36b",
+      "emotionProtocol": "frustration",
+      "expectedQuestions": {
+        "required": ["주말 공부 시간이 어떻게 돼요? (주말 가용시간이 전략을 결정함)"],
+        "optional": [],
+        "maxCount": 1
+      },
+      "effortModel": {
+        "type": "fixed",
+        "expected": null,
+        "min": null,
+        "max": null,
+        "unit": "session",
+        "citation": "Weekday 1hr only = 60hr/2months; weekend adds: +0→ 85-90 realistic; +3hr/day weekend = 88hr total → 85→92-95 possible"
+      },
+      "expectedTimeFit": "deficit",
+      "expectedStrategy": [
+        "20-25min single-section focus per session (not 60min marathon — post-work fatigue)",
+        "commute listening: 30min round-trip = +30min/day listening practice",
+        "Korean language for all instructions (post-work exhaustion makes English-only instructions harder)",
+        "target adjustment after weekend availability is known: 85→90 first, then 90→100"
+      ],
+      "warnings": [
+        "must ask '주말 가능해요?' BEFORE any time calculation — do NOT assume weekend 2-3× study (v3 error)",
+        "퇴근 후 피로 = 60min continuous study often counterproductive; 20-25min focused better",
+        "85→90 is one fight; 90→100 is a different fight requiring real proficiency"
+      ],
+      "alternatives": [
+        "if weekend 0 hours: 60hr budget → realistic target 85→88-90",
+        "if weekend 3hr: 88hr total → 85→92-93 possible",
+        "commute listening always recommended regardless of weekend answer"
+      ],
+      "hardFailChecks": [
+        "must ask about weekend availability BEFORE making any time calculation",
+        "must NOT assume weekend 2-3× study (v3 error — user did not state this)",
+        "must use Korean for response (직장인 context, 퇴근 후 지침)",
+        "frustration must be validated; realistic about after-work energy limits"
+      ],
+      "toneExpectation": "frustration-validating; Korean language; efficiency-focused; realistic about after-work fatigue; weekend question as first priority"
+    },
+    {
+      "profileId": "tc-36c",
+      "emotionProtocol": "neutral",
+      "expectedQuestions": {
+        "required": [],
+        "optional": [],
+        "maxCount": 0
+      },
+      "effortModel": {
+        "type": "fixed",
+        "expected": null,
+        "min": null,
+        "max": null,
+        "unit": "session",
+        "citation": "120hr over 2 months; 90→100+ with Writing focus is achievable; Integrated Writing faster gains than Independent"
+      },
+      "expectedTimeFit": "fits",
+      "expectedStrategy": [
+        "Writing 60% of study time: Integrated Writing 35% + Independent Writing 25%",
+        "Integrated Writing first — faster score gain than Independent (structure is learnable)",
+        "non-linear: 90→100+ = real proficiency required, not just test-taking tricks",
+        "daily: 1 essay + rubric self-scoring with sample comparison",
+        "weekend: 120-min full mock exam (all 4 sections)",
+        "remaining 40%: maintain existing Reading/Listening/Speaking strengths"
+      ],
+      "warnings": [
+        "mild risk note: Integrated Writing improves faster than Independent — prioritize Integrated first",
+        "non-linear: 90→100 requires real English proficiency improvement, not just strategy",
+        "Independent Writing requires argument depth development — daily practice non-negotiable"
+      ],
+      "alternatives": [
+        "if Integrated already decent: shift more time to Independent essay quality",
+        "add peer review or AI feedback loop for essay grading if self-scoring feels unreliable"
+      ],
+      "hardFailChecks": [
+        "must NOT ask any questions — full information provided",
+        "must specify Writing split: Integrated vs Independent (not just 'work on Writing')",
+        "must include weekend full mock exam as structured element",
+        "must note Integrated Writing improves faster than Independent",
+        "must mention non-linear score improvement for all profiles"
+      ],
+      "toneExpectation": "surgical and direct; neutral tone; goal-oriented; specific Writing strategy breakdown; no emotional scaffolding needed"
+    }
+  ]
+}

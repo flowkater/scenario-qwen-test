@@ -1,0 +1,21 @@
+{
+  "id": "tc-27",
+  "category": "watch",
+  "name": "밀린 물리 강의 8개 (시험 2주, frustration)",
+  "userMessage": "I'm behind on my physics lectures. 8 lectures behind, each about 50 minutes. Midterm is in 2 weeks and the lectures are the main study material. I can do 2 hours a day.",
+  "emotionProtocol": "frustration",
+  "versionTag": "v1.5",
+  "profile": {
+    "role": "student",
+    "timeBudget": { "weekday": 120, "weekend": 120 }
+  },
+  "resources": [
+    { "type": "lectures", "description": "Physics lectures", "quantity": "8 lectures", "watched": "0/8" }
+  ],
+  "watchDetails": {
+    "courseName": "Physics (Midterm prep)",
+    "lectureCount": 8,
+    "lectureMinutes": 50,
+    "playbackSpeed": null
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "tc-35",
+  "crossProfileGroup": "orgo-comparison",
+  "crossProfileRole": "senior-last-chance",
+  "category": "cross-profile",
+  "name": "Orgo 마지막 기회 — Senior (졸업 위기, frustration+panic)",
+  "userMessage": "This is my last chance to pass orgo or I can't graduate. McMurry Ch.10-15 (180 pages). Exam in 2 weeks. I've taken it twice. I understand concepts but freeze on exams. 1.5 hours.",
+  "emotionProtocol": "panic",
+  "versionTag": "v2",
+  "profile": {
+    "role": "student",
+    "timeBudget": { "weekday": 90, "weekend": 90 }
+  },
+  "resources": [
+    { "type": "textbook", "description": "McMurry Organic Chemistry Ch.10-15", "quantity": "180p" }
+  ],
+  "readDetails": {
+    "title": "McMurry Organic Chemistry Ch.10-15 (3rd attempt)",
+    "purpose": "class",
+    "totalPages": 180,
+    "deadline": "2 weeks"
+  }
+}

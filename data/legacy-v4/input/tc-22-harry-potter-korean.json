@@ -1,0 +1,21 @@
+{
+  "id": "tc-22",
+  "category": "read",
+  "name": "해리포터 불의 잔 (한국어, 재미로)",
+  "userMessage": "해리포터 불의 잔 읽으려고요. 한국어판 550페이지. 그냥 재미로. 하루에 얼마나 읽을지 알려주세요.",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1",
+  "profile": {
+    "role": "self",
+    "timeBudget": { "weekday": 0, "weekend": 0 }
+  },
+  "resources": [
+    { "type": "other", "description": "해리포터와 불의 잔 한국어판", "quantity": "550p" }
+  ],
+  "readDetails": {
+    "title": "해리포터와 불의 잔 (한국어판)",
+    "purpose": "casual",
+    "totalPages": 550,
+    "deadline": null
+  }
+}

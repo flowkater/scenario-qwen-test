@@ -1,0 +1,41 @@
+{
+  "tcId": "tc-23",
+  "emotionProtocol": "shame",
+  "versionTag": "v1.5",
+  "expectedQuestions": {
+    "required": ["deadline day — is it Friday?"],
+    "optional": [],
+    "maxCount": 1
+  },
+  "effortModel": {
+    "type": "range",
+    "expected": 13.0,
+    "min": 10.0,
+    "max": 20.0,
+    "unit": "page",
+    "citation": "r/LawSchool: 1L first semester 12-20 min/page; 5 pages/hr = 12 min/page; 7.5hr/55p = 8.5 min/page"
+  },
+  "expectedTimeFit": "deficit",
+  "expectedStrategy": [
+    "triage: identify 3-4 core cases for full IRAC briefing",
+    "remaining cases: headnote + holding + ratio decidendi only",
+    "cold-call prep: prioritize cases professor emphasizes",
+    "use supplemental handouts and case summaries where available"
+  ],
+  "warnings": [
+    "4.6× budget deficit — SEVERE: 200p × 13min = 2600min vs 5days × 120min = 600min",
+    "full cover-to-cover reading is physically impossible in the time available"
+  ],
+  "alternatives": [
+    "Option A: focus on 3-4 key cases with complete IRAC brief",
+    "Option B: use professor handouts for case summaries, supplement with brief cold-call prep",
+    "Option C: reading group / shared brief exchange with classmates"
+  ],
+  "hardFailChecks": [
+    "MUST validate '느려요' — normalize 1L reading speed before anything else",
+    "must NOT say 'try reading faster'",
+    "must acknowledge SEVERE deficit honestly",
+    "shame validation must come BEFORE any calculation or triage strategy"
+  ],
+  "toneExpectation": "shame-validating first; data-backed normalization of slow speed; practical triage without judgment; 1L learning curve acknowledgment"
+}

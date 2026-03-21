@@ -1,0 +1,79 @@
+{
+  "tcId": "tc-41",
+  "emotionProtocol": "frustration",
+  "versionTag": "v2",
+  "expectedBehaviorSequence": [
+    "1. Grade-based allocation — 약점 집중 원칙: 수학(4등급) > 국어(3등급) > 영어(2등급)",
+    "2. Absolute vs relative grading distinction — 영어 절대평가 특성 반영 (1등급 컷 90점)",
+    "3. Phase-based 4-month plan with 9월 모평 as pivot trigger",
+    "4. Diagnostic questions to refine math allocation (킬러 vs 앞부분)"
+  ],
+  "gradeBasedAllocation": {
+    "math": {
+      "currentGrade": 4,
+      "dailyMinutes": 150,
+      "percentage": 50,
+      "rationale": "4등급이 가장 많은 점수 올릴 수 있음 — 투자 효율 최대"
+    },
+    "korean": {
+      "currentGrade": 3,
+      "dailyMinutes": 90,
+      "percentage": 30,
+      "rationale": "3등급, 꾸준히 유지+향상"
+    },
+    "english": {
+      "currentGrade": 2,
+      "dailyMinutes": 60,
+      "percentage": 20,
+      "rationale": "절대평가 — 1등급 컷(90점) 유지 위주. 상대평가 과목에 더 투자",
+      "note": "영어 2등급 = 89점. 1등급 컷 90점. 1점 차이 → 시간 효율 계산 필요"
+    }
+  },
+  "phasePlan": {
+    "phase1": {
+      "period": "6월~8월 (3개월)",
+      "math": "기출 문제집 + 개념 보완 (4등급 → 3등급 목표)",
+      "korean": "비문학 매일 1지문 루틴 + 수능특강",
+      "english": "EBS 연계 지문 위주 (유지 모드)"
+    },
+    "checkpoint": {
+      "event": "9월 모평",
+      "trigger": "수학 3등급 달성 여부 체크 → Phase 3 배분 재조정"
+    },
+    "phase3": {
+      "period": "10월~수능 (2개월)",
+      "math": "모의시험 실전 + 킬러 집중",
+      "korean": "기출 전수 복습 + 약점 보완",
+      "english": "EBS 지문 암기 + 듣기 점검"
+    }
+  },
+  "csatSpecificKnowledge": {
+    "englishAbsoluteGrading": "수능 영어 절대평가 — 2등급(89점) → 1등급(90점). 1점 = 상대적으로 큰 시간 효율 차이",
+    "mathKillerProblems": "킬러(21/29/30번): 1등급 목표 → Day 1부터, 2등급 목표 → Phase 2 이후",
+    "checkpoints": "6월/9월 모평 = Phase 전환 트리거 (데이터 체크포인트)"
+  },
+  "diagnosticQuestions": [
+    {
+      "question": "수학 4등급이 어디서 막혀? 앞부분 쉬운 거? 아니면 킬러에서?",
+      "decisionValue": "배분 세부화 — 킬러 집중 여부 결정"
+    },
+    {
+      "question": "영어는 1등급 목표야, 2등급 유지야?",
+      "decisionValue": "영어 시간 배분 결정 — 전략 완전히 달라짐"
+    }
+  ],
+  "hardFailChecks": ["HFG-1", "HFG-3"],
+  "emotionFails": [
+    "3과목 동등 배분 (5/3 ≈ 1.7시간씩) = 약점 무시 = FAIL",
+    "영어 2등급에 과도한 시간 = 수학 4등급 방치 = FAIL",
+    "Phase 없이 4개월 단선형 계획 = 모평 체크포인트 없음 = FAIL",
+    "절대평가/상대평가 구분 무시 = 수능 구조 모름 = FAIL"
+  ],
+  "toneExpectation": "frustration acknowledge → data-driven allocation → phase structure → modifiable checkpoints",
+  "scoringNotes": {
+    "feasibilityHonesty": "5시간 × 120일 = 600시간 — 충분. 배분이 핵심",
+    "strategy": "약점 집중 50% 수학 + 절대평가 영어 유지 전략 — 균등 배분 = FAIL",
+    "questionEconomy": "2개 질문 — 수학 약점 위치 + 영어 목표 (각각 전략 완전 변경)",
+    "sessionPhase": "3 Phase + 9월 모평 체크포인트 — 단선형 = FAIL"
+  }
+}

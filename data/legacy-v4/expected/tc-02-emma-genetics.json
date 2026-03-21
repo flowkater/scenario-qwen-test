@@ -1,0 +1,55 @@
+{
+  "tcId": "tc-02",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1",
+  "expectedQuestions": {
+    "required": [],
+    "optional": ["lectureDuration"],
+    "maxCount": 1,
+    "decisionValue": "lectureDuration → min/lecture adjustment (50min lecture = 75min study). Already provided info (chapters, days, resources) must NOT be re-asked."
+  },
+  "effortModels": {
+    "textbook": {
+      "type": "range",
+      "expected": 5.5,
+      "min": 5.0,
+      "max": 6.0,
+      "unit": "page",
+      "citation": "WordsRated: genetics/bio textbook 5.5 min/page; CAT Many New Concepts = 6.0; v3 was 4.0-5.0, uplifted in v4"
+    },
+    "problems_first": {
+      "type": "range",
+      "expected": 11,
+      "min": 10,
+      "max": 12,
+      "unit": "problem",
+      "citation": "r/Mcat genetics thread: complex crosses/pedigree 10-15min/problem"
+    },
+    "problems_review": {
+      "type": "range",
+      "expected": 7,
+      "min": 6,
+      "max": 8,
+      "unit": "problem",
+      "citation": "Pattern matching mode"
+    },
+    "lectures": {
+      "type": "range",
+      "expected": 75,
+      "min": 60,
+      "max": 90,
+      "unit": "lecture",
+      "citation": "50min video × 1.5× multiplier"
+    }
+  },
+  "expectedTimeFit": "tight",
+  "expectedStrategy": [
+    "PlanGroup with 3 plans: textbook + problems + lectures",
+    "Priority inversion: problems > textbook > lectures",
+    "Interleaving: chapter reading → immediate problem set",
+    "Optional: reduce lectures to 7-8 to reclaim budget"
+  ],
+  "warnings": ["7.7hr deficit if all 3 plans at full — tight"],
+  "hardFailChecks": ["HFG-1", "HFG-2", "HFG-3"],
+  "toneExpectation": "confident student tone — '유전학은 문제풀이 과목. 문제가 실력 키워줘.'"
+}

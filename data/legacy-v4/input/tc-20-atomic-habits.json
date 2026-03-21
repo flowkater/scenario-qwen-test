@@ -1,0 +1,21 @@
+{
+  "id": "tc-20",
+  "category": "read",
+  "name": "Atomic Habits (취침 전 캐주얼 독서)",
+  "userMessage": "I want to read Atomic Habits. It's about 280 pages. No deadline, just want to finish it. Maybe 20 minutes before bed.",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1",
+  "profile": {
+    "role": "self",
+    "timeBudget": { "weekday": 20, "weekend": 20 }
+  },
+  "resources": [
+    { "type": "other", "description": "Atomic Habits (James Clear)", "quantity": "280p" }
+  ],
+  "readDetails": {
+    "title": "Atomic Habits",
+    "purpose": "casual",
+    "totalPages": 280,
+    "deadline": null
+  }
+}

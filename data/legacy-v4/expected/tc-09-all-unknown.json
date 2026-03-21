@@ -1,0 +1,28 @@
+{
+  "tcId": "tc-09",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1",
+  "expectedQuestions": {
+    "required": ["examSubject", "materialQuantity"],
+    "optional": ["weakArea"],
+    "maxCount": 3,
+    "decisionValue": "examSubject → determines exam type branch (score/pass/grade) and entire strategy; materialQuantity → totalQuantity for plan; weakArea → phase/priority adjustment. 5+ questions = survey failure."
+  },
+  "effortModel": {
+    "type": "fixed",
+    "expected": 3.0,
+    "min": 2.0,
+    "max": 5.0,
+    "unit": "page",
+    "citation": "Default assumption until exam type confirmed. Actual value depends on Q1 answer."
+  },
+  "expectedTimeFit": "fits",
+  "expectedStrategy": [
+    "Branch on exam type after Q1: score-based (TOEIC/SAT) → current level + target; pass/fail (CPA/cert) → first/retake; level (JLPT) → current level gap",
+    "Default timeBudget: 1hr/day if not provided",
+    "Max 3 questions before generating minimum viable plan"
+  ],
+  "warnings": [],
+  "hardFailChecks": ["HFG-1", "HFG-2"],
+  "toneExpectation": "welcoming and calm. Do NOT generate a plan without exam subject. Do NOT ask 5+ questions."
+}

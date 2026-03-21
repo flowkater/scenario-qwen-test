@@ -1,0 +1,41 @@
+{
+  "tcId": "tc-28",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1.5",
+  "expectedQuestions": {
+    "required": ["How far along are you in HTML/CSS/JS? (determines which sections to skip)"],
+    "optional": [],
+    "maxCount": 1
+  },
+  "effortModel": {
+    "type": "range",
+    "expected": 18,
+    "min": 14,
+    "max": 24,
+    "unit": "lecture",
+    "citation": "r/learnprogramming DP-05,06: coding tutorial 2.0× rule confirmed; 8min × 2.0-2.5× = 16-20min"
+  },
+  "expectedTimeFit": "fits",
+  "expectedStrategy": [
+    "section-based milestones (not 180 individual lectures — too overwhelming)",
+    "3-4 lectures/day ≈ 50-60 min at 18min/lecture",
+    "1 Build Day per week: build something with that week's concepts (no lecture)",
+    "if JS background exists: skip Sections 1-2 for faster perceived progress"
+  ],
+  "warnings": [
+    "Tutorial Hell: watching 90%+ without building = ineffective (r/learnprogramming consensus)",
+    "MOOC completion rate <10% without milestones and Build Days",
+    "portfolio site after course completion: minimum 10 more weeks of work"
+  ],
+  "alternatives": [
+    "skip known fundamentals sections (JS/HTML/CSS) if already familiar",
+    "Build Day focus: build 1 component from scratch each week without lecture"
+  ],
+  "hardFailChecks": [
+    "must NOT plan 180 lectures one-by-one — use section milestones",
+    "must include Tutorial Hell warning",
+    "must include Build Day concept",
+    "multiplier must be 2.0-2.5× (NOT 3.0× unless stated complete beginner)"
+  ],
+  "toneExpectation": "encouraging and fun; realistic about portfolio timeline; MOOC motivation awareness; build-focused"
+}

@@ -1,0 +1,50 @@
+{
+  "tcId": "tc-05",
+  "emotionProtocol": "panic",
+  "versionTag": "v1.5",
+  "expectedQuestions": {
+    "required": [],
+    "optional": ["extendedHours"],
+    "maxCount": 1,
+    "decisionValue": "No questions in panic state — adding questions = stress amplification. Only allowed: '3일간 하루 4-5시간 가능해?' → fundamental strategy change"
+  },
+  "effortModel": {
+    "type": "range",
+    "expected": 6.0,
+    "min": 5.0,
+    "max": 8.0,
+    "unit": "problem+page-combined",
+    "citation": "TRIAGE mode: problems at pattern-matching speed 6min [5-8], skim reading 3.5min [3.0-4.5] — completely different from TC-02 full study mode"
+  },
+  "effortModels": {
+    "problems_triage": {
+      "type": "range",
+      "expected": 6,
+      "min": 5,
+      "max": 8,
+      "unit": "problem",
+      "citation": "Pattern matching mode, not first-attempt (11min)"
+    },
+    "textbook_skim": {
+      "type": "range",
+      "expected": 3.5,
+      "min": 3.0,
+      "max": 4.5,
+      "unit": "page",
+      "citation": "Reverse-skim from problem errors, not cover-to-cover"
+    }
+  },
+  "expectedTimeFit": "tight",
+  "expectedStrategy": [
+    "TRIAGE MODE — completely different from TC-02",
+    "Priority: 30 problems/day × 3 days → 80p key chapters skim → 2-3 lectures only",
+    "Daily schedule: Morning 2hr problems → Afternoon 1.5hr skim → Evening 1hr weak-point review + 1 lecture",
+    "Sleep guardrail: minimum 7hr sleep — non-negotiable"
+  ],
+  "warnings": [
+    "TC-02 full plan compressed to 3 days = worst-case failure",
+    "Sleep deprivation harms exam performance"
+  ],
+  "hardFailChecks": ["HFG-1", "HFG-2", "HFG-4"],
+  "toneExpectation": "panic-first validation — 'Take a breath. 넌 bio 잘했잖아. 90개 기출이 있으면 시험 패턴이 보여.'"
+}

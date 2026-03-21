@@ -1,0 +1,46 @@
+{
+  "tcId": "tc-17",
+  "emotionProtocol": "frustration",
+  "versionTag": "v1.5",
+  "expectedQuestions": {
+    "required": [],
+    "optional": ["weakSection"],
+    "maxCount": 1,
+    "decisionValue": "weakSection (MBE vs MEE vs MPT) → resource allocation within phases changes. Without it, balanced plan is still valid [v1]."
+  },
+  "effortModels": {
+    "barbri_outlines": {
+      "type": "range",
+      "expected": 3.5,
+      "min": 2.8,
+      "max": 5.0,
+      "unit": "page",
+      "citation": "r/Bar_Prep: contracts 130p = ~8hr → 3.7min/page. Barbri own 2hr estimate is under. CMR outlines slower than expected by users."
+    },
+    "video_lectures": {
+      "type": "range",
+      "expected": 84,
+      "min": 72,
+      "max": 105,
+      "unit": "lecture",
+      "citation": "150hr × 1.4× multiplier = 210hr total. 1.25× playback saves ~30hr."
+    }
+  },
+  "expectedTimeFit": "deficit",
+  "expectedStrategy": [
+    "3 plans: Barbri Outlines 2000p + Video Lectures 150hr + MBE/MEE/MPT mock exams (weekly)",
+    "DEFICIT: outlines 117hr + video 210hr + mock 80hr + overhead 20hr = 427hr needed vs 400hr available (10wks × 40hr effective) = 27hr deficit",
+    "Mitigation: 1.25× playback speed saves ~30hr → nearly balanced",
+    "Session structure: 90min blocks × 5 sets + 30min breaks (NOT continuous 8hrs)",
+    "Phase: wk1-6 learning (outlines + video synchronized) → wk7-9 MBE/MEE/MPT mock → wk10 weak review + final mock",
+    "Burnout prevention: weekly half-day light session (Saturday afternoon: review only, no new content)"
+  ],
+  "warnings": [
+    "~27hr deficit without speed adjustment",
+    "8hr/day effective study ≠ 8hr sitting — actual capacity 5-6hr/day (Cal Newport deep work limit)",
+    "Burnout risk at ~Day 20 with full 8hr daily load",
+    "Morning: MBE sessions (high focus); Never: consecutive 90min+ reading blocks"
+  ],
+  "hardFailChecks": ["HFG-1", "HFG-2", "HFG-3", "HFG-4"],
+  "toneExpectation": "burnout-prevention framing — 'Bar prep은 마라톤이에요. 처음 2주에 전력질주하면 Week 6이 위험합니다.'"
+}

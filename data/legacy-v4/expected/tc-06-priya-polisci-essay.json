@@ -1,0 +1,34 @@
+{
+  "tcId": "tc-06",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1.5",
+  "expectedQuestions": {
+    "required": [],
+    "optional": ["openBook", "studyGuideAvailable"],
+    "maxCount": 2,
+    "decisionValue": "openBook → strategy switch (open book = outline-focused, closed = argument memorization); studyGuideAvailable → enables reverse reading"
+  },
+  "effortModel": {
+    "type": "range",
+    "expected": 6.5,
+    "min": 5.0,
+    "max": 8.0,
+    "unit": "page",
+    "citation": "CAT Engage; Some New Concepts (monograph) = 6.7 min/page; Gonzaga Poli Sci: argument-level reading 6-8min/page; Rice CTE: 9 pages/hr = 6.7min/page",
+    "layers": {
+      "baseProcessing": 800,
+      "reviewPractice": 400,
+      "sessionOverhead": 0
+    }
+  },
+  "expectedTimeFit": "deficit",
+  "expectedStrategy": [
+    "DEFICIT: 400p × 6.5min = 2600min + essay prep ~400min = 3000min needed; 90min × 21 = 1890min available; 1110min deficit",
+    "Reverse reading: essay prompts first → relevant chapters → skim the rest",
+    "2-pass: Pass 1 at 2min/p (structure only) → Pass 2 at 7min/p on 200p essay-critical sections",
+    "Essay outline practice: 2×/week 30min separate plan"
+  ],
+  "warnings": ["1110min deficit — severe", "Full cover-to-cover reading impossible"],
+  "hardFailChecks": ["HFG-1", "HFG-2", "HFG-3"],
+  "toneExpectation": "reframe deficit as strategic opportunity — '400p는 많아. 하지만 에세이 시험이라 전략이 달라. 역방향으로 가자.'"
+}

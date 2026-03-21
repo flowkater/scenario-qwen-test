@@ -1,0 +1,21 @@
+{
+  "id": "tc-21",
+  "category": "read",
+  "name": "PhD 문헌 리뷰 — 논문 12편 (3주 목표)",
+  "userMessage": "I have 12 journal papers to read for my literature review. Each is about 15-25 pages. I need to deeply understand methodology and findings. No hard deadline but I want to finish in 3 weeks. PhD student in psychology.",
+  "emotionProtocol": "neutral",
+  "versionTag": "v1.5",
+  "profile": {
+    "role": "student",
+    "timeBudget": { "weekday": 120, "weekend": 120 }
+  },
+  "resources": [
+    { "type": "other", "description": "12 journal papers (15-25 pages each)", "quantity": "12 papers" }
+  ],
+  "readDetails": {
+    "title": "Literature Review — 12 Psychology Papers",
+    "purpose": "self-study",
+    "totalPages": null,
+    "deadline": "3 weeks"
+  }
+}

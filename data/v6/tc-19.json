@@ -1,0 +1,89 @@
+{
+  "id": "tc-19",
+  "category": "read",
+  "name": "정치학 토론 준비 (논증 중심, DEFICIT)",
+  "path": "R",
+  "emotionProtocol": "neutral",
+
+  "profile": {
+    "role": "student",
+    "timeBudget": { "weekday": 45, "weekend": 45 }
+  },
+
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "I need to read chapters 5-9 of my political theory textbook for next week's discussion. About 150 pages. I need to be able to discuss the arguments, not just summarize. 45 min a day.",
+      "expectedAI": {
+        "action": "ask",
+        "mustAsk": "discussionDay",
+        "reason": "토론 날짜를 알아야 총 가용일 계산 → dailyTarget 결정 가능",
+        "mustDiagnose": ["discussion-focused reading → argument-mapping needed, not cover-to-cover"],
+        "mustNotDo": ["plan 바로 생성 (토론 날짜 모름 → 일수 불확정)"]
+      }
+    },
+    {
+      "turn": 2,
+      "user": "The discussion is next Wednesday. So I have 7 days including today.",
+      "expectedAI": {
+        "action": "generate_plan",
+        "plans": [
+          {
+            "label": "Political Theory Textbook Ch.5-9",
+            "type": "read",
+            "dailyTarget": { "value": 22, "unit": "page" },
+            "totalQuantity": 150,
+            "effortModel": { "expected": 6.5, "min": 5.0, "max": 8.0, "unit": "page" },
+            "priority": "primary"
+          }
+        ],
+        "timeFit": "deficit",
+        "diagnosis": "150p × 6.5min/p = 975min needed vs 7days × 45min = 315min available → 3.1× deficit",
+        "strategy": "reverse reading: read discussion questions first, then relevant sections; 2-pass skim: 1.5min/p full structure pass, then deep-read top 30-40p",
+        "honestAssessment": "3.1× budget deficit — full cover-to-cover reading is impossible. Selective deep reading is the only viable strategy.",
+        "alternatives": [
+          {
+            "label": "핵심 논증 30-40p 집중",
+            "change": "150p → 30-40p (토론 질문 직접 관련 페이지만 argument mapping)",
+            "newTimeFit": "fits"
+          },
+          {
+            "label": "교수 토론 질문 역추적",
+            "change": "150p → 교수 질문 기반 30% 구간만 deep read, 나머지 skim",
+            "newTimeFit": "tight"
+          }
+        ],
+        "emotion": {
+          "detected": "neutral",
+          "tone": "practical triage framing",
+          "mustNotSay": ["just read faster", "you should have started earlier"]
+        }
+      }
+    }
+  ],
+
+  "validation": {
+    "diagnosis": {
+      "mustIdentify": ["discussion-focused reading needs argument analysis not summarization", "3.1× budget deficit"],
+      "mustReflectInPlan": "triage strategy — selective deep reading over full coverage"
+    },
+    "strategy": {
+      "expectedType": "deficit-options",
+      "mustProvideAlternatives": true,
+      "alternativesMinCount": 2
+    },
+    "questions": {
+      "turn1MustAsk": ["discussionDay"],
+      "maxQuestionsPerTurn": 1
+    },
+    "honesty": {
+      "expectedTimeFit": "deficit",
+      "mustNotFalsePlan": true
+    },
+    "emotion": {
+      "expected": "neutral",
+      "mustNotSay": ["just read faster"],
+      "toneExpected": "neutral to mildly supportive; practical triage framing"
+    }
+  }
+}

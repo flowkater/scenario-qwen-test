@@ -1,0 +1,90 @@
+{
+  "id": "tc-21",
+  "category": "read",
+  "name": "PhD 문헌 리뷰 — 논문 12편 (3주 목표)",
+  "path": "R",
+  "emotionProtocol": "neutral",
+
+  "profile": {
+    "role": "student",
+    "year": "phd",
+    "timeBudget": { "weekday": 120, "weekend": 120 }
+  },
+
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "I have 12 journal papers to read for my literature review. Each is about 15-25 pages. I need to deeply understand methodology and findings. No hard deadline but I want to finish in 3 weeks. PhD student in psychology.",
+      "expectedAI": {
+        "action": "ask",
+        "mustAsk": "papers pre-selected or still searching?",
+        "reason": "논문이 확정인지 탐색 중인지에 따라 일정에 탐색 기간 추가 여부 결정",
+        "mustDiagnose": ["PhD literature review needs multi-pass reading (Keshav 3-pass)", "12 papers need classification before uniform reading"],
+        "mustNotDo": ["plan 바로 생성 (논문 확정 여부 모름 → 일정 달라짐)"]
+      }
+    },
+    {
+      "turn": 2,
+      "user": "Yes, all 12 are selected. Mix of quantitative and qualitative, mostly empirical studies.",
+      "expectedAI": {
+        "action": "generate_plan",
+        "plans": [
+          {
+            "label": "Literature Review — 12 Psychology Papers",
+            "type": "read",
+            "dailyTarget": { "value": 1, "unit": "paper" },
+            "totalQuantity": 12,
+            "effortModel": { "expected": 120, "min": 65, "max": 240, "unit": "paper" },
+            "priority": "primary"
+          }
+        ],
+        "timeFit": "fits",
+        "diagnosis": "12 papers × 120min avg = 1440min; 21days × 120min = 2520min available → fits with buffer for synthesis",
+        "strategy": "30-min Abstract scan first → 3-tier classification (Must-Read 5, Should-Read 5, Skim-Only 2); Must-Read: Pass 3 (200min/paper); Should-Read: Pass 2 (120min/paper); Skim-Only: Pass 1+2 (70min/paper); Synthesis matrix: rows=papers, cols=research question/method/findings/limitations/relevance",
+        "honestAssessment": "Fits within 3 weeks with room for synthesis work. Classification step is critical to avoid spending equal time on all 12.",
+        "alternatives": [
+          {
+            "label": "정량 논문 우선",
+            "change": "quantitative-heavy → read tables/graphs first to orient before full text",
+            "newTimeFit": "fits"
+          },
+          {
+            "label": "탐색 기간 추가",
+            "change": "if papers not fully finalized → add 2-3 days for screening Pass 1",
+            "newTimeFit": "fits"
+          }
+        ],
+        "emotion": {
+          "detected": "neutral",
+          "tone": "systematic and collaborative; PhD context awareness",
+          "mustNotSay": ["just read them all the same way"]
+        }
+      }
+    }
+  ],
+
+  "validation": {
+    "diagnosis": {
+      "mustIdentify": ["multi-pass reading approach needed (Keshav 3-pass)", "3-tier classification before diving in"],
+      "mustReflectInPlan": "differentiated reading depth per paper tier, not uniform min/paper"
+    },
+    "strategy": {
+      "expectedType": "fits",
+      "mustProvideAlternatives": false,
+      "alternativesMinCount": 0
+    },
+    "questions": {
+      "turn1MustAsk": ["papers pre-selected or still searching?"],
+      "maxQuestionsPerTurn": 2
+    },
+    "honesty": {
+      "expectedTimeFit": "fits",
+      "mustNotFalsePlan": true
+    },
+    "emotion": {
+      "expected": "neutral",
+      "mustNotSay": ["treat all 12 papers identically"],
+      "toneExpected": "systematic and collaborative; PhD context awareness; synthesis matrix suggestion as value-add"
+    }
+  }
+}

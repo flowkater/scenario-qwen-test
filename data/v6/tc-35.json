@@ -1,0 +1,86 @@
+{
+  "id": "tc-35",
+  "category": "cross-profile",
+  "name": "Orgo 마지막 기회 — Senior (졸업 위기, frustration+panic)",
+  "path": "E",
+  "emotionProtocol": "panic",
+  "profile": {
+    "role": "student",
+    "timeBudget": {
+      "weekday": 90,
+      "weekend": 90
+    }
+  },
+  "resources": [
+    {
+      "type": "textbook",
+      "description": "McMurry Organic Chemistry Ch.10-15",
+      "quantity": "180p"
+    }
+  ],
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "This is my last chance to pass orgo or I can't graduate. McMurry Ch.10-15 (180 pages). Exam in 2 weeks. I've taken it twice. I understand concepts but freeze on exams. 1.5 hours.",
+      "expectedAI": {
+        "action": "ask",
+        "mustAsk": [
+          "Where exactly do you freeze on exams — at the first mechanism, or partway through?"
+        ],
+        "reason": ""
+      }
+    },
+    {
+      "turn": 2,
+      "user": "(answer provided)",
+      "expectedAI": {
+        "action": "generate_plan",
+        "timeFit": "fits",
+        "emotion": {
+          "detected": "panic"
+        },
+        "strategy": [
+          "Day 1-9: 55% skim+flag (known content fast), 45% timed practice problems (real exam conditions)",
+          "Day 10-12: full exam simulation — timer, book closed, one problem at a time",
+          "Day 13: debrief + relaxation ONLY — NO new content (anxiety increases with new material pre-exam)",
+          "Day 14: 30-min half-mock → rest, energy conservation for exam day"
+        ],
+        "warnings": [
+          "2.5 min/page is CONDITIONAL: 2+ attempts + concept understanding confirmed — if 'don't understand this' signals appear, switch to 4.0 immediately",
+          "Day 13: absolutely no new content — this increases anxiety and disrupts retention",
+          "studying MORE does not fix performance anxiety — simulation practice does"
+        ]
+      }
+    }
+  ],
+  "validation": {
+    "diagnosis": {
+      "mustIdentify": [
+        "Day 1-9: 55% skim+flag (known content fast), 45% timed practice problems (real exam conditions)",
+        "Day 10-12: full exam simulation — timer, book closed, one problem at a time"
+      ]
+    },
+    "strategy": {
+      "expectedType": "standard"
+    },
+    "honesty": {
+      "expectedTimeFit": "fits",
+      "mustNotFalsePlan": true
+    },
+    "emotion": {
+      "expected": "panic",
+      "toneExpected": "dual emotional validation first (frustration + panic separately); then pivot to knowledge vs performance anxiety distinction; calm strategic framing; GPT Pro rated this #1 hardest TC"
+    },
+    "hardFailChecks": [
+      "must validate BOTH emotions separately: frustration (2× failed) AND panic (graduation risk)",
+      "must NOT prescribe 'study harder' for performance anxiety — knowledge is NOT the problem",
+      "Day 13 must explicitly be free of new content",
+      "2.5 min/page gating conditions must be verified before applying",
+      "must NOT give same plan as TC-33 or TC-34"
+    ]
+  },
+  "_legacy": {
+    "inputFile": "data/legacy-v4/input/tc-35-orgo-senior-lastchance.json",
+    "expectedFile": "data/legacy-v4/expected/tc-35-orgo-senior-lastchance.json"
+  }
+}

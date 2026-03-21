@@ -1,0 +1,99 @@
+{
+  "id": "tc-05",
+  "category": "exam-university",
+  "name": "Emma-B — Genetics D-3 PANIC 🔴",
+  "path": "E",
+  "emotionProtocol": "panic",
+
+  "profile": {
+    "role": "student",
+    "studentLevel": "college",
+    "collegeType": "undergrad",
+    "year": "junior",
+    "level": "capable",
+    "focusSpan": 50,
+    "timeBudget": { "weekday": 120, "weekend": 300 }
+  },
+
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "Genetics midterm is in 3 days. Same situation — textbook Ch.8-14 (210p), 90 practice problems, 12 lectures I haven't watched. I'm panicking.",
+      "expectedAI": {
+        "action": "generate_plan",
+        "plans": [
+          {
+            "label": "기출 Practice Problems (TRIAGE)",
+            "type": "practice",
+            "dailyTarget": { "value": 30, "unit": "problem" },
+            "totalQuantity": 90,
+            "effortModel": { "expected": 6, "min": 5, "max": 8, "unit": "problem" },
+            "priority": "primary"
+          },
+          {
+            "label": "Genetics 교재 핵심 챕터 Skim",
+            "type": "read",
+            "dailyTarget": { "value": 27, "unit": "page" },
+            "totalQuantity": 80,
+            "effortModel": { "expected": 3.5, "min": 3.0, "max": 4.5, "unit": "page" },
+            "priority": "secondary"
+          },
+          {
+            "label": "핵심 Lectures (2-3개만)",
+            "type": "watch",
+            "dailyTarget": { "value": 1, "unit": "lecture" },
+            "totalQuantity": 3,
+            "effortModel": { "expected": 75, "min": 60, "max": 90, "unit": "lecture" },
+            "priority": "tertiary"
+          }
+        ],
+        "timeFit": "tight",
+        "diagnosis": "D-3 panic → TRIAGE MODE. TC-02와 완전히 다른 전략. 문제 pattern-matching 모드 (11min→6min), 교재는 reverse-skim only",
+        "strategy": "TRIAGE: 기출 90문제 전부 → 틀린 개념 80p만 skim → 강의 2-3개 핵심만. 수면 7시간 최소 보장",
+        "honestAssessment": "3일로 전체 커버 불가. 기출 패턴 파악이 최선. TC-02 full plan을 3일로 압축하면 실패.",
+        "alternatives": [
+          {
+            "label": "문제 집중 올인",
+            "change": "90문제 + 틀린 개념만 교재 참조, lectures 전부 컷",
+            "newTimeFit": "fits"
+          },
+          {
+            "label": "확장 시간 (하루 4-5시간)",
+            "change": "120min → 270min/day, 210p + 90문제 커버 가능",
+            "newTimeFit": "tight"
+          }
+        ],
+        "emotion": {
+          "detected": "panic",
+          "tone": "panic-first-validation",
+          "mustNotSay": ["sleep less", "study all night", "you should have started earlier"]
+        }
+      }
+    }
+  ],
+
+  "validation": {
+    "diagnosis": {
+      "mustIdentify": ["D-3 panic → triage mode", "different strategy from TC-02 full plan"],
+      "mustReflectInPlan": "triage plan: problems first, skim reading, cut lectures to 2-3"
+    },
+    "strategy": {
+      "expectedType": "triage-panic",
+      "mustProvideAlternatives": true,
+      "alternativesMinCount": 2
+    },
+    "questions": {
+      "turn1MustAsk": [],
+      "maxQuestionsPerTurn": 1
+    },
+    "honesty": {
+      "expectedTimeFit": "tight",
+      "mustNotFalsePlan": true
+    },
+    "emotion": {
+      "expected": "panic",
+      "mustNotSay": ["you should have started earlier", "sleep less", "all-nighter"],
+      "toneExpected": "panic-first-validation — 'Take a breath. 넌 bio 잘했잖아. 90개 기출이 있으면 시험 패턴이 보여.'"
+    }
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "id": "tc-13",
+  "category": "exam-highschool",
+  "name": "AP Chemistry — 고2 (첫 AP)",
+  "path": "E",
+  "emotionProtocol": "neutral",
+
+  "profile": {
+    "role": "student",
+    "studentLevel": "highschool",
+    "year": "sophomore",
+    "level": "confident",
+    "focusSpan": 45,
+    "timeBudget": { "weekday": 90, "weekend": 90 }
+  },
+
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "AP Chem exam is May 6. I have Zumdahl textbook and the AP review book. About 600 pages total between both. I'm a sophomore taking it early. Science is my thing but this is my first AP.",
+      "expectedAI": {
+        "action": "generate_plan",
+        "plans": [
+          {
+            "label": "Zumdahl Chemistry textbook",
+            "type": "read",
+            "dailyTarget": { "value": 9, "unit": "page" },
+            "totalQuantity": 400,
+            "effortModel": { "expected": 5.0, "min": 4.0, "max": 6.5, "unit": "page" },
+            "priority": "primary"
+          },
+          {
+            "label": "AP Chemistry review book",
+            "type": "read",
+            "dailyTarget": { "value": 5, "unit": "page" },
+            "totalQuantity": 200,
+            "effortModel": { "expected": 2.5, "min": 2.0, "max": 3.5, "unit": "page" },
+            "priority": "secondary"
+          }
+        ],
+        "timeFit": "fits",
+        "diagnosis": "confident level + science strength → solid foundation. First AP → format practice (MCQ 60q/90min + FRQ 7q/105min) is critical alongside content",
+        "strategy": "3-phase: Phase1(4wks) Zumdahl main + Review parallel → Phase2(2wks) AP Review intensive + FRQ start → Phase3(1wk) mock MCQ+FRQ drill. Total ~2800min needed vs ~4410min available → surplus for FRQ practice",
+        "honestAssessment": "600p total over 49 days with 90min/day = fits comfortably. Surplus time for AP format practice (FRQ + MCQ mocks).",
+        "alternatives": [
+          {
+            "label": "Review book 우선",
+            "change": "Review book 200p first → Zumdahl 약점 챕터만 200p",
+            "newTimeFit": "fits"
+          },
+          {
+            "label": "FRQ 강화",
+            "change": "Zumdahl 300p 핵심만 + FRQ weekly practice from Week 2",
+            "newTimeFit": "fits"
+          }
+        ],
+        "emotion": {
+          "detected": "neutral",
+          "tone": "confidence-building",
+          "mustNotSay": ["AP is really hard", "you might not be ready"]
+        }
+      }
+    }
+  ],
+
+  "validation": {
+    "diagnosis": {
+      "mustIdentify": ["first AP → format practice essential", "science confidence → content OK, format is key"],
+      "mustReflectInPlan": "AP exam format practice (MCQ + FRQ) mentioned in strategy"
+    },
+    "strategy": {
+      "expectedType": "fits-phased",
+      "mustProvideAlternatives": true,
+      "alternativesMinCount": 2
+    },
+    "questions": {
+      "turn1MustAsk": [],
+      "maxQuestionsPerTurn": 2
+    },
+    "honesty": {
+      "expectedTimeFit": "fits",
+      "mustNotFalsePlan": true
+    },
+    "emotion": {
+      "expected": "neutral",
+      "mustNotSay": ["AP is really hard", "you might not be ready"],
+      "toneExpected": "confidence-building"
+    }
+  }
+}

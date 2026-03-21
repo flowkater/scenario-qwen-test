@@ -1,0 +1,88 @@
+{
+  "id": "tc-15",
+  "category": "exam-cert",
+  "name": "PMP — Working Professional (5년 경력)",
+  "path": "E",
+  "emotionProtocol": "neutral",
+
+  "profile": {
+    "role": "working",
+    "level": "confident",
+    "focusSpan": 50,
+    "timeBudget": { "weekday": 60, "weekend": 180 }
+  },
+
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "PMP certification exam in 5 weeks. I have the PMBOK Guide (756 pages) and Rita Mulcahy's prep book (550 pages). I'm a project manager with 5 years experience. I can do 1 hour on weekdays.",
+      "expectedAI": {
+        "action": "generate_plan",
+        "plans": [
+          {
+            "label": "Rita Mulcahy PMP Prep book",
+            "type": "read",
+            "dailyTarget": { "value": 16, "unit": "page" },
+            "totalQuantity": 550,
+            "effortModel": { "expected": 3.0, "min": 2.5, "max": 4.0, "unit": "page" },
+            "priority": "primary"
+          },
+          {
+            "label": "PMBOK Guide selective reference",
+            "type": "read",
+            "dailyTarget": { "value": 6, "unit": "page" },
+            "totalQuantity": 200,
+            "effortModel": { "expected": 6.0, "min": 4.0, "max": 8.0, "unit": "page" },
+            "priority": "secondary"
+          }
+        ],
+        "timeFit": "fits",
+        "diagnosis": "5yr PM experience → skip known Rita sections, focus on agile/hybrid concepts (post-2023 PMP changes). PMBOK 7th ed principles-based → full 756p NOT needed, selective ~200p sufficient",
+        "strategy": "Rita main (550p) + PMBOK selective (~200p, NOT full 756p) + weekly mock exam. Weekday: Rita 45min + notes 15min; Weekend: Rita 2hr + PMBOK 30min + mock 30min. Total: ~56.5hr vs ~55hr available.",
+        "honestAssessment": "Rita 27.5hr + PMBOK selective 20hr + simulator 7hr = ~56.5hr vs 55hr available. Almost exactly fits — no buffer for slow weeks.",
+        "alternatives": [
+          {
+            "label": "PMBOK 스킵",
+            "change": "PMBOK 200p → 0p, Rita only + mock exams 2x/week",
+            "newTimeFit": "fits"
+          },
+          {
+            "label": "주말 강화",
+            "change": "주말 mock exam 60min + review 60min (총 240min/weekend)",
+            "newTimeFit": "fits"
+          }
+        ],
+        "emotion": {
+          "detected": "neutral",
+          "tone": "experience-respectful",
+          "mustNotSay": ["PMP is very hard", "you need to start from basics"]
+        }
+      }
+    }
+  ],
+
+  "validation": {
+    "diagnosis": {
+      "mustIdentify": ["5yr experience → skip known sections", "PMBOK 7th ed → selective read, not full 756p", "agile/hybrid focus for 2023+ PMP"],
+      "mustReflectInPlan": "PMBOK selective ~200p (not full 756p), Rita as primary"
+    },
+    "strategy": {
+      "expectedType": "fits-tight",
+      "mustProvideAlternatives": true,
+      "alternativesMinCount": 2
+    },
+    "questions": {
+      "turn1MustAsk": [],
+      "maxQuestionsPerTurn": 1
+    },
+    "honesty": {
+      "expectedTimeFit": "fits",
+      "mustNotFalsePlan": true
+    },
+    "emotion": {
+      "expected": "neutral",
+      "mustNotSay": ["PMP is very hard", "you need to start from basics"],
+      "toneExpected": "experience-respectful"
+    }
+  }
+}

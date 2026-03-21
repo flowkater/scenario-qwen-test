@@ -1,0 +1,54 @@
+{
+  "id": "tc-42",
+  "category": "multi-subject",
+  "name": "멀티 과목 — CPA FAR+REG (neutral)",
+  "path": "E",
+  "emotionProtocol": "neutral",
+  "profile": {
+    "timeBudget": {
+      "weekday": 240,
+      "weekend": 240
+    }
+  },
+  "resources": [],
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "CPA FAR and REG at the same time. Both exams are in 10 weeks. FAR is my weak area (failed once). REG I'm starting fresh. About 4 hours a day after work.",
+      "expectedAI": {
+        "action": "generate_plan",
+        "timeFit": "fits",
+        "emotion": {
+          "detected": "neutral"
+        },
+        "strategy": [],
+        "warnings": [],
+        "alternatives": []
+      }
+    }
+  ],
+  "validation": {
+    "diagnosis": {
+      "mustIdentify": []
+    },
+    "strategy": {
+      "expectedType": "standard"
+    },
+    "honesty": {
+      "expectedTimeFit": "fits",
+      "mustNotFalsePlan": true
+    },
+    "emotion": {
+      "expected": "neutral",
+      "toneExpected": "neutral + data-driven analysis — sequential recommendation with clear rationale"
+    },
+    "hardFailChecks": [
+      "HFG-1",
+      "HFG-4"
+    ]
+  },
+  "_legacy": {
+    "inputFile": "data/legacy-v4/input/tc-42-multi-subject-cpa-far-reg.json",
+    "expectedFile": "data/legacy-v4/expected/tc-42-multi-subject-cpa-far-reg.json"
+  }
+}

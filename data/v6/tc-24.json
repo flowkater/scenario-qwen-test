@@ -1,0 +1,84 @@
+{
+  "id": "tc-24",
+  "category": "assignment",
+  "name": "영문 에세이 5p 비교 (화요일 시작, 금요일 마감)",
+  "path": "A",
+  "emotionProtocol": "neutral",
+
+  "profile": {
+    "role": "student",
+    "timeBudget": { "weekday": 60, "weekend": 60 }
+  },
+
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "I have a 5-page essay due Friday for my English class. Topic is comparing two novels we read. I haven't started. It's Tuesday now.",
+      "expectedAI": {
+        "action": "ask",
+        "mustAsk": "Have you already read both novels?",
+        "reason": "소설 미독 시 Day 0 리뷰 단계 추가 필요 → 일정 구조 변경",
+        "mustDiagnose": ["3-day window (Tue-Thu) for writing", "essay uses milestone-based plan, not page-based"],
+        "mustNotDo": ["plan 바로 생성 (소설 읽음 여부 모름)", "2 pages/day 같은 page-based plan"]
+      }
+    },
+    {
+      "turn": 2,
+      "user": "Yeah I've read both. Just haven't started writing.",
+      "expectedAI": {
+        "action": "generate_plan",
+        "plans": [
+          {
+            "label": "Comparative Essay — Two Novels",
+            "type": "assignment",
+            "dailyTarget": { "value": 1, "unit": "milestone" },
+            "totalQuantity": 3,
+            "effortModel": { "expected": null, "min": null, "max": null, "unit": "milestone" },
+            "priority": "primary"
+          }
+        ],
+        "timeFit": "fits",
+        "diagnosis": "3 working days (Tue/Wed/Thu); novels already read → no extra reading day needed; milestone-based planning",
+        "strategy": "Day 1 (Tue): outline + thesis + intro + body paragraph 1 — 60min; Day 2 (Wed): remaining body paragraphs + conclusion — 60-75min; Day 3 (Thu): revision + read-aloud + rubric check + submit prep — 45-60min",
+        "honestAssessment": "3 days is enough for a 5-page essay if you start writing (not just outlining) on Day 1.",
+        "alternatives": [
+          {
+            "label": "소설 미독 시",
+            "change": "Day 0 추가: 핵심 장면 리뷰 후 outline 시작",
+            "newTimeFit": "tight"
+          }
+        ],
+        "emotion": {
+          "detected": "neutral",
+          "tone": "structured, reassuring, actionable",
+          "mustNotSay": ["you should have started earlier"]
+        }
+      }
+    }
+  ],
+
+  "validation": {
+    "diagnosis": {
+      "mustIdentify": ["milestone-based plan needed (not page-based)", "Day 1 must include real writing, not just outline"],
+      "mustReflectInPlan": "milestone progression (outline+draft → body → revision)"
+    },
+    "strategy": {
+      "expectedType": "fits",
+      "mustProvideAlternatives": false,
+      "alternativesMinCount": 0
+    },
+    "questions": {
+      "turn1MustAsk": ["Have you already read both novels?"],
+      "maxQuestionsPerTurn": 2
+    },
+    "honesty": {
+      "expectedTimeFit": "fits",
+      "mustNotFalsePlan": true
+    },
+    "emotion": {
+      "expected": "neutral",
+      "mustNotSay": ["2 pages/day page-based plan", "just outline on Day 1"],
+      "toneExpected": "structured, reassuring, actionable milestone-by-milestone; thesis checkpoint at Day 1 end"
+    }
+  }
+}

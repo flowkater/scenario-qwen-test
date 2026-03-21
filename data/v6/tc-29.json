@@ -1,0 +1,99 @@
+{
+  "id": "tc-29",
+  "category": "watch",
+  "name": "공인중개사 민법 인강 60강 + 교재 800p (2달, 하루 2시간)",
+  "path": "W",
+  "emotionProtocol": "neutral",
+
+  "profile": {
+    "role": "examPrep",
+    "timeBudget": { "weekday": 120, "weekend": 120 }
+  },
+
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "공인중개사 인강 봐야 해요. 민법 60강, 각 40분. 시험 2달 뒤. 교재도 있는데 800페이지. 하루 2시간 정도 할 수 있어요.",
+      "expectedAI": {
+        "action": "ask",
+        "mustAsk": "playbackSpeed",
+        "reason": "배속에 따라 강의 소요시간 40% 차이 (1배속 56min vs 1.5배속 42min vs 2배속 32min) → 전체 일정 결정",
+        "alsoAsk": "otherSubjects",
+        "alsoAskReason": "공인중개사는 거의 항상 다과목 병행 — 민법만이면 전략이 완전히 다름",
+        "mustDiagnose": ["60강 × 40min + 800p textbook → massive volume", "배속 미확인 시 계획 오류 큼"],
+        "mustNotDo": ["plan 바로 생성 (배속 미확인 → 시간 추정 불가)", "'2달이면 충분해요' 단정 (다과목 여부 미확인)"]
+      }
+    },
+    {
+      "turn": 2,
+      "user": "1.5배속으로 봐요. 민법만 준비 중이에요, 다른 과목은 이미 끝냈어요.",
+      "expectedAI": {
+        "action": "generate_plan",
+        "plans": [
+          {
+            "label": "민법 인강",
+            "type": "watch",
+            "dailyTarget": { "value": 1, "unit": "lecture" },
+            "totalQuantity": 60,
+            "effortModel": { "expected": 42, "min": 35, "max": 50, "unit": "lecture" },
+            "priority": "primary"
+          },
+          {
+            "label": "민법 교재",
+            "type": "read",
+            "dailyTarget": { "value": 14, "unit": "page" },
+            "totalQuantity": 800,
+            "effortModel": { "expected": 4.5, "min": 3.5, "max": 6.0, "unit": "page" },
+            "priority": "secondary"
+          }
+        ],
+        "timeFit": "tight",
+        "diagnosis": "1.5배속: 40min/1.5 = 26.7min playback + 일시정지/필기 오버헤드 = ~42min/강의. 민법만 → 전체 예산 민법 투입 가능. 60강 × 42min = 2520min + 800p × 4.5min = 3600min → total 6120min vs 60days × 120min = 7200min → tight but workable.",
+        "strategy": "Phase 1 (Day 1-40): 강의 + 교재 동기화 (챕터 단위 — 강의 → 해당 교재 구간). Phase 2 (Day 41-50): 기출 집중 (적용). Phase 3 (Day 51-60): 오답 + 약점 보완. 1.5배속 권장 유지 (UCLA 연구: 1.5배속 동일 학습 효율).",
+        "honestAssessment": "6120min needed vs 7200min available → 85% utilization. 여유 거의 없으므로 Phase 1에서 기출 병행 필수.",
+        "alternatives": [
+          {
+            "label": "교재 축소",
+            "change": "800p → 500p (시험 빈출 챕터 위주) + 남은 시간 기출 확대",
+            "newTimeFit": "fits"
+          },
+          {
+            "label": "강의 우선",
+            "change": "60강 전체 + 교재는 강의 범위 요약본만 (400p) → 기출 시간 확보",
+            "newTimeFit": "fits"
+          }
+        ],
+        "emotion": {
+          "detected": "neutral",
+          "tone": "systematic and practical",
+          "mustNotSay": ["2달이면 충분해요", "쉽게 할 수 있어요"]
+        }
+      }
+    }
+  ],
+
+  "validation": {
+    "diagnosis": {
+      "mustIdentify": ["playback speed impact on lecture time", "lecture + textbook synchronization needed", "tight budget utilization (~85%)"],
+      "mustReflectInPlan": "1.5배속 반영 effortModel, phase-based strategy with synchronized lecture-textbook"
+    },
+    "strategy": {
+      "expectedType": "tight-phased",
+      "mustProvideAlternatives": true,
+      "alternativesMinCount": 2
+    },
+    "questions": {
+      "turn1MustAsk": ["playbackSpeed", "otherSubjects"],
+      "maxQuestionsPerTurn": 2
+    },
+    "honesty": {
+      "expectedTimeFit": "tight",
+      "mustNotFalsePlan": true
+    },
+    "emotion": {
+      "expected": "neutral",
+      "mustNotSay": ["2달이면 충분해요", "쉽게 할 수 있어요"],
+      "toneExpected": "systematic and practical; cautionary about tight budget"
+    }
+  }
+}

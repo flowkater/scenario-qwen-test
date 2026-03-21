@@ -1,0 +1,108 @@
+{
+  "id": "tc-16",
+  "category": "exam-cert",
+  "name": "JLPT N2 — Self-learner (N3 합격자)",
+  "path": "E",
+  "emotionProtocol": "neutral",
+
+  "profile": {
+    "role": "self",
+    "selfLearnerGoal": "specific",
+    "level": "capable",
+    "focusSpan": 30,
+    "timeBudget": { "weekday": 30, "weekend": 30 }
+  },
+
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "JLPT N2 올해 7월이에요. 단어장(3000단어)이랑 문법책(200페이지) 있어요. 매일 30분 정도. N3은 작년에 합격했어요.",
+      "expectedAI": {
+        "action": "ask",
+        "mustAsk": "srsAppUsage",
+        "reason": "SRS(Anki 등) 사용 여부에 따라 pile-up 경고 구체성과 복습 관리 방식이 달라짐",
+        "mustDiagnose": ["N3 합격 → 기본기 있음", "3000단어 ÷ 10/day = 300일 → 120일 내 불가능 → deficit", "30min/day 매우 제한적"],
+        "mustNotDo": ["plan 바로 생성 (SRS 전략이 plan 구조를 바꿈)"]
+      }
+    },
+    {
+      "turn": 2,
+      "user": "Anki로 외우고 있어요. 하루 10개 새 단어 추가하고 있어요.",
+      "expectedAI": {
+        "action": "generate_plan",
+        "plans": [
+          {
+            "label": "JLPT N2 단어장 (빈도순 상위 1500)",
+            "type": "practice",
+            "dailyTarget": { "value": 10, "unit": "word" },
+            "totalQuantity": 1500,
+            "effortModel": { "expected": 1.0, "min": 0.8, "max": 1.5, "unit": "word" },
+            "priority": "primary"
+          },
+          {
+            "label": "JLPT N2 문법책",
+            "type": "read",
+            "dailyTarget": { "value": 2, "unit": "page" },
+            "totalQuantity": 200,
+            "effortModel": { "expected": 4.5, "min": 3.5, "max": 6.0, "unit": "page" },
+            "priority": "primary"
+          },
+          {
+            "label": "리스닝 데일리 루틴",
+            "type": "practice",
+            "dailyTarget": { "value": 1, "unit": "session" },
+            "totalQuantity": null,
+            "effortModel": { "expected": 10, "min": 10, "max": 10, "unit": "session" },
+            "priority": "secondary"
+          }
+        ],
+        "timeFit": "deficit",
+        "diagnosis": "3000단어 ÷ 10/day = 300일 → 120일 가용 → 1800단어 deficit. Anki 사용 중 → Day 14-21 pile-up 경고 필요. N2 리스닝이 합불 가름",
+        "strategy": "DEFICIT: 빈도순 상위 1500단어만 커버 (시험 출제 빈도 우선). Daily: 단어 10min + 문법 10min + 리스닝 10min = 30min. SRS pile-up: Day 14-21 리뷰 50+ → 새 단어 STOP → catch-up",
+        "honestAssessment": "3000단어 전부는 10/day pace로 불가능. 빈도순 1500으로 범위 축소 필수. 하루 빠지면 다음 날 2배 부담.",
+        "alternatives": [
+          {
+            "label": "단어 15개/day로 증가",
+            "change": "10 → 15 words/day + 시간 40min/day로 확대",
+            "newTimeFit": "tight"
+          },
+          {
+            "label": "빈도순 1500 + 문법 축소",
+            "change": "문법책 200p → 100p (N3 중복 제외) + 단어 집중",
+            "newTimeFit": "deficit"
+          }
+        ],
+        "emotion": {
+          "detected": "neutral",
+          "tone": "N3-achievement-respectful",
+          "mustNotSay": ["N2 is much harder", "30 minutes is not enough"]
+        }
+      }
+    }
+  ],
+
+  "validation": {
+    "diagnosis": {
+      "mustIdentify": ["3000단어 deficit at 10/day pace", "SRS pile-up Day 14-21", "N2 리스닝 = 합불 결정", "N3 합격 → 기본기 있음"],
+      "mustReflectInPlan": "단어 범위 축소 (3000 → 1500) 또는 pace 증가"
+    },
+    "strategy": {
+      "expectedType": "deficit-options",
+      "mustProvideAlternatives": true,
+      "alternativesMinCount": 2
+    },
+    "questions": {
+      "turn1MustAsk": ["srsAppUsage"],
+      "maxQuestionsPerTurn": 2
+    },
+    "honesty": {
+      "expectedTimeFit": "deficit",
+      "mustNotFalsePlan": true
+    },
+    "emotion": {
+      "expected": "neutral",
+      "mustNotSay": ["N2 is much harder", "30 minutes is not enough"],
+      "toneExpected": "N3-achievement-respectful"
+    }
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "id": "tc-17",
+  "category": "exam-cert",
+  "name": "Bar Exam — Full-time Prep",
+  "path": "E",
+  "emotionProtocol": "frustration",
+
+  "profile": {
+    "role": "examPrep",
+    "studentLevel": "college",
+    "collegeType": "grad",
+    "level": "capable",
+    "focusSpan": 90,
+    "timeBudget": { "weekday": 480, "weekend": 480 },
+    "examPrepDuration": "justStarting"
+  },
+
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "Studying for the bar exam full-time. Using Barbri course materials. About 2000 pages of outlines plus their video lectures (150 hours). Exam in 10 weeks. I can study 8 hours a day.",
+      "expectedAI": {
+        "action": "generate_plan",
+        "plans": [
+          {
+            "label": "Barbri Law Outlines",
+            "type": "read",
+            "dailyTarget": { "value": 29, "unit": "page" },
+            "totalQuantity": 2000,
+            "effortModel": { "expected": 3.5, "min": 2.8, "max": 5.0, "unit": "page" },
+            "priority": "primary"
+          },
+          {
+            "label": "Barbri video lectures",
+            "type": "watch",
+            "dailyTarget": { "value": 3, "unit": "lecture" },
+            "totalQuantity": 150,
+            "effortModel": { "expected": 84, "min": 72, "max": 105, "unit": "lecture" },
+            "priority": "primary"
+          }
+        ],
+        "timeFit": "deficit",
+        "diagnosis": "8hr/day claimed → effective 5-6hr/day (Cal Newport deep work limit). 90min blocks × 5 sets + breaks. Burnout risk at ~Day 20",
+        "strategy": "DEFICIT: outlines 117hr + video 210hr + mock 80hr + overhead 20hr = 427hr needed vs ~400hr available (10wks × 40hr effective) = 27hr deficit. Mitigation: 1.25× playback → saves ~30hr → nearly balanced. Phase: wk1-6 learning (outlines+video sync) → wk7-9 MBE/MEE/MPT mock → wk10 weak review + final mock",
+        "honestAssessment": "~27hr deficit without speed adjustment. 8hr/day sitting ≠ 8hr effective study. Burnout prevention: weekly half-day light session (Saturday afternoon: review only).",
+        "alternatives": [
+          {
+            "label": "1.25× 재생속도",
+            "change": "비디오 150hr → 120hr (1.25× playback) → deficit 해소",
+            "newTimeFit": "tight"
+          },
+          {
+            "label": "Outlines 선별",
+            "change": "Outlines 2000p → 1400p (빈출 과목 집중) + video 전체",
+            "newTimeFit": "tight"
+          }
+        ],
+        "emotion": {
+          "detected": "frustration",
+          "tone": "burnout-prevention",
+          "mustNotSay": ["just study harder", "8 hours is enough", "you can do it if you push"]
+        }
+      }
+    }
+  ],
+
+  "validation": {
+    "diagnosis": {
+      "mustIdentify": ["8hr/day ≠ 8hr effective (deep work limit)", "burnout risk at ~Day 20", "90min block structure needed"],
+      "mustReflectInPlan": "effective budget based on realistic deep work hours, not claimed 8hr"
+    },
+    "strategy": {
+      "expectedType": "deficit-options",
+      "mustProvideAlternatives": true,
+      "alternativesMinCount": 2
+    },
+    "questions": {
+      "turn1MustAsk": [],
+      "maxQuestionsPerTurn": 1
+    },
+    "honesty": {
+      "expectedTimeFit": "deficit",
+      "mustNotFalsePlan": true
+    },
+    "emotion": {
+      "expected": "frustration",
+      "mustNotSay": ["just study harder", "8 hours is enough"],
+      "toneExpected": "burnout-prevention"
+    }
+  }
+}

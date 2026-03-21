@@ -1,0 +1,90 @@
+{
+  "id": "tc-11",
+  "category": "exam-highschool",
+  "name": "SAT Math — 3개월",
+  "path": "E",
+  "emotionProtocol": "frustration",
+
+  "profile": {
+    "role": "student",
+    "studentLevel": "highschool",
+    "year": "junior",
+    "level": "beginner",
+    "focusSpan": 30,
+    "timeBudget": { "weekday": 60, "weekend": 120 }
+  },
+
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "SAT is in 3 months. Math section is hard for me. I have a Kaplan prep book (about 400 pages for math) and access to Khan Academy videos. I'm a junior.",
+      "expectedAI": {
+        "action": "generate_plan",
+        "plans": [
+          {
+            "label": "Kaplan SAT Math prep book",
+            "type": "read",
+            "dailyTarget": { "value": 5, "unit": "page" },
+            "totalQuantity": 400,
+            "effortModel": { "expected": 3.0, "min": 2.5, "max": 4.0, "unit": "page" },
+            "priority": "primary"
+          },
+          {
+            "label": "Khan Academy practice sessions",
+            "type": "practice",
+            "dailyTarget": { "value": 1, "unit": "session" },
+            "totalQuantity": null,
+            "effortModel": { "expected": 30, "min": 20, "max": 40, "unit": "session" },
+            "priority": "secondary"
+          }
+        ],
+        "timeFit": "fits",
+        "diagnosis": "focusSpan=30 adequate for daily sessions; beginner level → foundation-first approach needed",
+        "strategy": "3-phase: Phase1(1mo) diagnostic+foundation → Phase2(2mo) weak areas+practice → Phase3(3mo) mock exams+drilling. Weekday: Kaplan 30min + KA 30min; Weekend: mock set or weak focus",
+        "honestAssessment": "400p × 3.0min + KA sessions over 90 days → fits within budget. SAT structure (Calculator/No-Calculator) needs separate strategy.",
+        "alternatives": [
+          {
+            "label": "진단 우선 전략",
+            "change": "Kaplan diagnostic section first → weak chapters only 250p",
+            "newTimeFit": "fits"
+          },
+          {
+            "label": "문제풀이 집중",
+            "change": "Kaplan 200p 핵심만 + KA practice 2 sessions/day",
+            "newTimeFit": "fits"
+          }
+        ],
+        "emotion": {
+          "detected": "frustration",
+          "tone": "frustration-acknowledging",
+          "mustNotSay": ["math is easy", "just practice more"]
+        }
+      }
+    }
+  ],
+
+  "validation": {
+    "diagnosis": {
+      "mustIdentify": ["beginner math level → foundation needed", "SAT Calculator/No-Calculator structure"],
+      "mustReflectInPlan": "phase-based approach with diagnostic first"
+    },
+    "strategy": {
+      "expectedType": "fits-phased",
+      "mustProvideAlternatives": true,
+      "alternativesMinCount": 2
+    },
+    "questions": {
+      "turn1MustAsk": [],
+      "maxQuestionsPerTurn": 1
+    },
+    "honesty": {
+      "expectedTimeFit": "fits",
+      "mustNotFalsePlan": true
+    },
+    "emotion": {
+      "expected": "frustration",
+      "mustNotSay": ["math is easy", "just practice more"],
+      "toneExpected": "frustration-acknowledging"
+    }
+  }
+}

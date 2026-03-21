@@ -1,0 +1,83 @@
+{
+  "id": "tc-26",
+  "category": "assignment",
+  "name": "Calculus 2 숙제 30문제 (목요일 마감, frustration)",
+  "path": "A",
+  "emotionProtocol": "frustration",
+
+  "profile": {
+    "role": "student",
+    "timeBudget": { "weekday": 60, "weekend": 60 }
+  },
+
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "Math homework due Thursday. 30 problems from chapter 7. Calculus 2, integration techniques. Some problems are really hard.",
+      "expectedAI": {
+        "action": "generate_plan",
+        "plans": [
+          {
+            "label": "Calculus 2 — Ch.7 Integration Techniques",
+            "type": "assignment",
+            "dailyTarget": { "value": 10, "unit": "problem" },
+            "totalQuantity": 30,
+            "effortModel": { "expected": 12.0, "min": 3.0, "max": 60.0, "unit": "problem" },
+            "priority": "primary"
+          }
+        ],
+        "timeFit": "deficit",
+        "diagnosis": "30 problems × 12min P50 = 360min vs ~180min available → 200min+ deficit; difficulty variance is extreme (u-sub 3min vs improper integrals 60min); 'really hard' is valid — Calc 2 hard problems are objectively 30-60min each",
+        "strategy": "easy problems first (u-sub, basic parts) — fast pass; 30-minute cap per problem — flag and move on if stuck; office hours for problems stuck 30+ min",
+        "honestAssessment": "200min+ deficit — uniform '10 problems/day' plan ignores difficulty variance. Time-based triage is the realistic approach.",
+        "alternatives": [
+          {
+            "label": "시간 기반 triage",
+            "change": "60min 세션 × 3일 — 풀 수 있는 만큼 풀고, 막힌 문제 flag",
+            "newTimeFit": "tight"
+          },
+          {
+            "label": "난이도 순서 정렬",
+            "change": "easy → medium → hard 순서; easy 15개 먼저 (약 60min), 나머지 시간에 medium/hard",
+            "newTimeFit": "tight"
+          },
+          {
+            "label": "office hours 활용",
+            "change": "30min+ 막힌 문제 → office hours에서 해결 (자력으로 전부 풀려고 하지 않기)",
+            "newTimeFit": "fits"
+          }
+        ],
+        "emotion": {
+          "detected": "frustration",
+          "tone": "frustration-validating; normalize hard problems with real data",
+          "mustNotSay": ["just practice more", "these should be easy", "you need to focus"]
+        }
+      }
+    }
+  ],
+
+  "validation": {
+    "diagnosis": {
+      "mustIdentify": ["extreme difficulty variance (3min-60min per problem)", "200min+ deficit", "'really hard' is valid for Calc 2 integration"],
+      "mustReflectInPlan": "difficulty-aware triage, not uniform problems/day"
+    },
+    "strategy": {
+      "expectedType": "deficit-options",
+      "mustProvideAlternatives": true,
+      "alternativesMinCount": 2
+    },
+    "questions": {
+      "turn1MustAsk": [],
+      "maxQuestionsPerTurn": 0
+    },
+    "honesty": {
+      "expectedTimeFit": "deficit",
+      "mustNotFalsePlan": true
+    },
+    "emotion": {
+      "expected": "frustration",
+      "mustNotSay": ["just practice more", "10 problems/day uniform plan", "fixed min/problem"],
+      "toneExpected": "frustration-validating; normalize hard problems with real data; practical time-based triage"
+    }
+  }
+}

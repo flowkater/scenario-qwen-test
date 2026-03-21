@@ -1,0 +1,55 @@
+{
+  "id": "tc-36a",
+  "category": "cross-profile",
+  "name": "TOEFL 준비 — 한국 고등학생 (80→100, 2달, panic)",
+  "path": "E",
+  "emotionProtocol": "panic",
+  "profile": {
+    "role": "student",
+    "timeBudget": {
+      "weekday": 60,
+      "weekend": 60
+    }
+  },
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "I'm a Korean high school student preparing for TOEFL. Test is in 2 months. Current score is about 80, target is 100. 1 hour a day.",
+      "expectedAI": {
+        "action": "generate_plan",
+        "timeFit": "impossible",
+        "emotion": {
+          "detected": "panic"
+        },
+        "strategy": [
+          "non-linear score explanation: 80→90 = test-taking strategy; 90→100 = real English proficiency",
+          "Speaking templates first (fastest score gains)",
+          "all-section rotation + vocabulary daily",
+          "immediate target adjustment to 90+ as primary goal"
+        ],
+        "warnings": [
+          "60hr for 20 points = near-impossible: 10-point gain requires ~100hr, 20-point gain requires ~200hr",
+          "80→85/87 is realistic within 60hr; 90+ requires more time or higher daily budget"
+        ]
+      }
+    }
+  ],
+  "validation": {
+    "honesty": {
+      "expectedTimeFit": "impossible"
+    },
+    "emotion": {
+      "expected": "panic"
+    },
+    "hardFailChecks": [
+      "must NOT say '80→100 is achievable in 60hr' — false plan",
+      "must present at least 3 realistic options",
+      "must explain non-linear score gain curve for all profiles",
+      "panic must be validated before data is presented"
+    ]
+  },
+  "_legacy": {
+    "inputFile": "data/legacy-v4/input/tc-36-toefl-3-profiles.json",
+    "expectedFile": "data/legacy-v4/expected/tc-36-toefl-3-profiles.json"
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "id": "tc-02",
+  "category": "exam-university",
+  "name": "Emma — Genetics Junior (멀티 자료)",
+  "path": "E",
+  "emotionProtocol": "neutral",
+
+  "profile": {
+    "role": "student",
+    "studentLevel": "college",
+    "collegeType": "undergrad",
+    "year": "junior",
+    "level": "capable",
+    "focusSpan": 50,
+    "timeBudget": { "weekday": 120, "weekend": 120 }
+  },
+
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "Genetics midterm is April 14th. I have Concepts of Genetics textbook (chapters 8-14, about 210 pages), 90 practice problems from past exams, and 12 lectures I haven't watched. I'm a junior, I've done well in bio before.",
+      "expectedAI": {
+        "action": "generate_plan",
+        "plans": [
+          {
+            "label": "Concepts of Genetics Ch.8-14",
+            "type": "read",
+            "dailyTarget": { "value": 9, "unit": "page" },
+            "totalQuantity": 210,
+            "effortModel": { "expected": 5.5, "min": 5.0, "max": 6.0, "unit": "page" },
+            "priority": "secondary"
+          },
+          {
+            "label": "Practice Problems (기출)",
+            "type": "practice",
+            "dailyTarget": { "value": 4, "unit": "problem" },
+            "totalQuantity": 90,
+            "effortModel": { "expected": 11, "min": 10, "max": 12, "unit": "problem" },
+            "priority": "primary"
+          },
+          {
+            "label": "Lecture Recordings",
+            "type": "watch",
+            "dailyTarget": { "value": 1, "unit": "lecture" },
+            "totalQuantity": 12,
+            "effortModel": { "expected": 75, "min": 60, "max": 90, "unit": "lecture" },
+            "priority": "tertiary"
+          }
+        ],
+        "timeFit": "tight",
+        "diagnosis": "capable junior, bio 기반 있음 → 문제풀이 중심 전략. 3자료 동시 → PlanGroup 번들",
+        "strategy": "PlanGroup 3 plans. Priority: problems > textbook > lectures. interleaving: chapter reading → immediate problem set. 총 ~3105min needed vs 3000min available → tight",
+        "honestAssessment": "3자료 전부 커버하면 tight. 강의 7-8개로 줄이면 여유 생김.",
+        "alternatives": [
+          {
+            "label": "강의 축소",
+            "change": "12 lectures → 8 lectures (핵심 토픽만)",
+            "newTimeFit": "fits"
+          },
+          {
+            "label": "문제 우선 집중",
+            "change": "reading 210p → 140p (문제 출제 챕터만) + 90문제 전부",
+            "newTimeFit": "fits"
+          }
+        ],
+        "emotion": {
+          "detected": "neutral",
+          "tone": "confident-student",
+          "mustNotSay": []
+        }
+      }
+    }
+  ],
+
+  "validation": {
+    "diagnosis": {
+      "mustIdentify": ["multi-resource bundle (3 materials)", "genetics = problem-solving subject"],
+      "mustReflectInPlan": "PlanGroup with 3 plans, problems prioritized over textbook"
+    },
+    "strategy": {
+      "expectedType": "tight-with-alternatives",
+      "mustProvideAlternatives": true,
+      "alternativesMinCount": 2
+    },
+    "questions": {
+      "turn1MustAsk": [],
+      "maxQuestionsPerTurn": 1
+    },
+    "honesty": {
+      "expectedTimeFit": "tight",
+      "mustNotFalsePlan": true
+    },
+    "emotion": {
+      "expected": "neutral",
+      "mustNotSay": [],
+      "toneExpected": "confident-student — '유전학은 문제풀이 과목. 문제가 실력 키워줘.'"
+    }
+  }
+}

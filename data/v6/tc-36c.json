@@ -1,0 +1,59 @@
+{
+  "id": "tc-36c",
+  "category": "cross-profile",
+  "name": "TOEFL 준비 — 대학원 지원 (90→100+, Writing 약점, neutral)",
+  "path": "E",
+  "emotionProtocol": "neutral",
+  "profile": {
+    "role": "self",
+    "timeBudget": {
+      "weekday": 120,
+      "weekend": 120
+    }
+  },
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "Applying to grad school, need TOEFL 100+. Test in 2 months. Currently around 90. Writing section is weak. I can study 2 hours a day.",
+      "expectedAI": {
+        "action": "generate_plan",
+        "timeFit": "fits",
+        "emotion": {
+          "detected": "neutral"
+        },
+        "strategy": [
+          "Writing 60% of study time: Integrated Writing 35% + Independent Writing 25%",
+          "Integrated Writing first — faster score gain than Independent (structure is learnable)",
+          "non-linear: 90→100+ = real proficiency required, not just test-taking tricks",
+          "daily: 1 essay + rubric self-scoring with sample comparison",
+          "weekend: 120-min full mock exam (all 4 sections)",
+          "remaining 40%: maintain existing Reading/Listening/Speaking strengths"
+        ],
+        "warnings": [
+          "mild risk note: Integrated Writing improves faster than Independent — prioritize Integrated first",
+          "non-linear: 90→100 requires real English proficiency improvement, not just strategy",
+          "Independent Writing requires argument depth development — daily practice non-negotiable"
+        ]
+      }
+    }
+  ],
+  "validation": {
+    "honesty": {
+      "expectedTimeFit": "fits"
+    },
+    "emotion": {
+      "expected": "neutral"
+    },
+    "hardFailChecks": [
+      "must NOT ask any questions — full information provided",
+      "must specify Writing split: Integrated vs Independent (not just 'work on Writing')",
+      "must include weekend full mock exam as structured element",
+      "must note Integrated Writing improves faster than Independent",
+      "must mention non-linear score improvement for all profiles"
+    ]
+  },
+  "_legacy": {
+    "inputFile": "data/legacy-v4/input/tc-36-toefl-3-profiles.json",
+    "expectedFile": "data/legacy-v4/expected/tc-36-toefl-3-profiles.json"
+  }
+}

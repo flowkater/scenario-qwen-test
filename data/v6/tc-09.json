@@ -1,0 +1,79 @@
+{
+  "id": "tc-09",
+  "category": "exam-university",
+  "name": "All Unknown — 뭐부터 해야 하지?",
+  "path": "E",
+  "emotionProtocol": "neutral",
+
+  "profile": {
+    "role": "student",
+    "level": "beginner",
+    "focusSpan": 30,
+    "timeBudget": { "weekday": 60, "weekend": 60 }
+  },
+
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "시험이 있는데 뭐부터 해야 할지 모르겠어요",
+      "expectedAI": {
+        "action": "ask",
+        "mustAsk": ["examSubject", "materialQuantity"],
+        "reason": "examSubject → 시험 유형 분기 (score/pass/grade) 및 전체 전략 결정; materialQuantity → totalQuantity로 plan 생성. 이 두 가지 없으면 plan 자체 불가",
+        "maxQuestions": 3,
+        "mustNotDo": ["plan 바로 생성 (과목, 자료 모두 모름)", "5개 이상 질문 (survey 실패)"]
+      }
+    },
+    {
+      "turn": 2,
+      "user": "수학 시험이에요. 교재가 있는데 150페이지 정도 남았어요. 시험은 2주 후예요.",
+      "expectedAI": {
+        "action": "generate_plan",
+        "plans": [
+          {
+            "label": "수학 교재",
+            "type": "read",
+            "dailyTarget": { "value": 11, "unit": "page" },
+            "totalQuantity": 150,
+            "effortModel": { "expected": 4.0, "min": 3.0, "max": 5.0, "unit": "page" },
+            "priority": "primary"
+          }
+        ],
+        "timeFit": "fits",
+        "diagnosis": "수학 시험, beginner, 150p / 14일. 수학은 개념+문제풀이 → 4.0min/page. 150 × 4.0 = 600min, 60 × 14 = 840min → fits",
+        "strategy": "하루 11p씩 꾸준히. 개념 이해 후 문제풀이 병행. 여유분으로 복습 가능",
+        "honestAssessment": "150p 2주면 충분히 가능. 매일 꾸준히 하면 복습 시간도 남아.",
+        "alternatives": [],
+        "emotion": {
+          "detected": "neutral",
+          "tone": "welcoming-calm",
+          "mustNotSay": []
+        }
+      }
+    }
+  ],
+
+  "validation": {
+    "diagnosis": {
+      "mustIdentify": ["정보 부족 → 질문 필요", "examSubject으로 전략 분기"],
+      "mustReflectInPlan": "user 답변 기반으로 적절한 min/page 적용"
+    },
+    "strategy": {
+      "expectedType": "depends-on-answers",
+      "mustProvideAlternatives": false
+    },
+    "questions": {
+      "turn1MustAsk": ["examSubject", "materialQuantity"],
+      "maxQuestionsPerTurn": 3
+    },
+    "honesty": {
+      "expectedTimeFit": "fits",
+      "mustNotFalsePlan": true
+    },
+    "emotion": {
+      "expected": "neutral",
+      "mustNotSay": [],
+      "toneExpected": "welcoming-calm — 과목 모르는 상태에서 plan 생성하지 않고 친절하게 질문"
+    }
+  }
+}

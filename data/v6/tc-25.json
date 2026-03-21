@@ -1,0 +1,84 @@
+{
+  "id": "tc-25",
+  "category": "assignment",
+  "name": "그룹 발표 마케팅 시장 분석 파트 (10일, 15분 발표)",
+  "path": "A",
+  "emotionProtocol": "neutral",
+
+  "profile": {
+    "role": "student",
+    "timeBudget": { "weekday": 60, "weekend": 60 }
+  },
+
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "Group presentation for marketing class due in 10 days. My part is market analysis — need to research, make slides, and practice. About 15 minutes of presenting.",
+      "expectedAI": {
+        "action": "ask",
+        "mustAsk": "What industry or product is the market analysis for? Is the scope defined?",
+        "reason": "분석 범위가 정해져 있으면 리서치 단계 단축 가능, 미정이면 리서치 연장 필요",
+        "mustDiagnose": ["15-min presentation = 8-10 slides", "milestone-based: research → slides → practice → rehearsal"],
+        "mustNotDo": ["plan 바로 생성 (분석 범위 모름)", "그룹 전체 계획 수립 (본인 파트만)"]
+      }
+    },
+    {
+      "turn": 2,
+      "user": "It's about the energy drink market. The professor gave us the scope — market size, major competitors, and consumer trends.",
+      "expectedAI": {
+        "action": "generate_plan",
+        "plans": [
+          {
+            "label": "Market Analysis Presentation — Energy Drink Market",
+            "type": "assignment",
+            "dailyTarget": { "value": 1, "unit": "milestone" },
+            "totalQuantity": 4,
+            "effortModel": { "expected": null, "min": null, "max": null, "unit": "milestone" },
+            "priority": "primary"
+          }
+        ],
+        "timeFit": "fits",
+        "diagnosis": "scope defined by professor → research phase can be focused; 10 days × 60min = 600min total budget; 15-min talk = 8-10 slides",
+        "strategy": "Day 1-3: research (market size, competitors, trends — ~3hr); Day 4-6: slide creation (8-10 slides — ~3hr); Day 7-8: practice runs with timer (3+ solo runs — ~2hr); Day 9-10: polish + team rehearsal + final submission — ~2hr",
+        "honestAssessment": "Scope defined, 10 days is plenty. Key risk is scheduling team rehearsal — lock that in early.",
+        "alternatives": [
+          {
+            "label": "범위 미정 시",
+            "change": "research 단계 Day 1-4로 연장, slide 단계 Day 5-7로 이동",
+            "newTimeFit": "fits"
+          }
+        ],
+        "emotion": {
+          "detected": "neutral",
+          "tone": "organized, proactive, team-aware",
+          "mustNotSay": ["plan for the entire group"]
+        }
+      }
+    }
+  ],
+
+  "validation": {
+    "diagnosis": {
+      "mustIdentify": ["milestone-based plan (research → slides → practice → rehearsal)", "15-min = 8-10 slides"],
+      "mustReflectInPlan": "dedicated practice stage included, not just research + slides"
+    },
+    "strategy": {
+      "expectedType": "fits",
+      "mustProvideAlternatives": false,
+      "alternativesMinCount": 0
+    },
+    "questions": {
+      "turn1MustAsk": ["What industry or product is the market analysis for? Is the scope defined?"],
+      "maxQuestionsPerTurn": 1
+    },
+    "honesty": {
+      "expectedTimeFit": "fits",
+      "mustNotFalsePlan": true
+    },
+    "emotion": {
+      "expected": "neutral",
+      "mustNotSay": ["plan for the entire group", "skip practice stage"],
+      "toneExpected": "organized, proactive, team-aware; emphasize solo practice before team rehearsal"
+    }
+  }
+}

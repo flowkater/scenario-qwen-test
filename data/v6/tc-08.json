@@ -1,0 +1,91 @@
+{
+  "id": "tc-08",
+  "category": "exam-university",
+  "name": "Med Student — Anatomy Atlas",
+  "path": "E",
+  "emotionProtocol": "neutral",
+
+  "profile": {
+    "role": "student",
+    "studentLevel": "college",
+    "collegeType": "grad",
+    "year": "med-1",
+    "level": "confident",
+    "focusSpan": 60,
+    "timeBudget": { "weekday": 180, "weekend": 180 }
+  },
+
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "Anatomy exam in 4 weeks. Netter's Atlas + lecture notes. The atlas is about 500 pages but I need to know structures, not just read. I'm a first-year med student. I can do 3 hours a day.",
+      "expectedAI": {
+        "action": "generate_plan",
+        "plans": [
+          {
+            "label": "Netter's Atlas of Human Anatomy",
+            "type": "read",
+            "dailyTarget": { "value": 18, "unit": "page" },
+            "totalQuantity": 500,
+            "effortModel": { "expected": 11.0, "min": 9.0, "max": 15.0, "unit": "page" },
+            "priority": "primary"
+          },
+          {
+            "label": "Lecture Notes Review",
+            "type": "read",
+            "dailyTarget": { "value": 10, "unit": "page" },
+            "totalQuantity": 0,
+            "effortModel": { "expected": 3.0, "min": 2.0, "max": 4.0, "unit": "page" },
+            "priority": "secondary"
+          }
+        ],
+        "timeFit": "tight",
+        "diagnosis": "anatomy atlas ≠ 일반 교재. 구조 암기 (active recall) 필요 → 11min/page. 500p × 11 = 5500min needed vs 180 × 28 = 5040min → tight",
+        "strategy": "active recall cycle: look → close → draw → compare → label → blank test. region 단위로 학습 (upper limb, lower limb, thorax 등). 주말 review cycle 활용",
+        "honestAssessment": "500p atlas를 active recall로 하면 tight. 보기만 하면 시험에서 못 그림. viewing ≠ knowing.",
+        "alternatives": [
+          {
+            "label": "high-yield region 집중",
+            "change": "500p → 350p (시험 빈출 region 우선, 나머지 atlas 참조만)",
+            "newTimeFit": "fits"
+          },
+          {
+            "label": "주말 확장",
+            "change": "주말 180min → 240min (4시간)",
+            "newTimeFit": "fits"
+          }
+        ],
+        "emotion": {
+          "detected": "neutral",
+          "tone": "med-student-context",
+          "mustNotSay": []
+        }
+      }
+    }
+  ],
+
+  "validation": {
+    "diagnosis": {
+      "mustIdentify": ["anatomy atlas → active recall required (not passive reading)", "11min/page for structure memorization", "viewing ≠ knowing"],
+      "mustReflectInPlan": "high min/page (11.0) reflecting active recall, not passive reading"
+    },
+    "strategy": {
+      "expectedType": "tight-with-alternatives",
+      "mustProvideAlternatives": true,
+      "alternativesMinCount": 2
+    },
+    "questions": {
+      "turn1MustAsk": [],
+      "maxQuestionsPerTurn": 1
+    },
+    "honesty": {
+      "expectedTimeFit": "tight",
+      "mustNotFalsePlan": true
+    },
+    "emotion": {
+      "expected": "neutral",
+      "mustNotSay": [],
+      "toneExpected": "med-student-context — '해부학은 볼륨보다 recall 퀄리티가 성적 만들어.'"
+    }
+  }
+}

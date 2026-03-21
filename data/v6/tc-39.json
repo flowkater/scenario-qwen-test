@@ -1,0 +1,55 @@
+{
+  "id": "tc-39",
+  "category": "replan",
+  "name": "플랜 실패 후 재계획 — 모의고사 충격 (frustration)",
+  "path": "E",
+  "replan": true,
+  "emotionProtocol": "frustration",
+  "profile": {
+    "timeBudget": {
+      "weekday": 60,
+      "weekend": 60
+    }
+  },
+  "resources": [],
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "6월 모평 봤는데 국어 4등급 나왔어요. 비문학이 시간이 너무 부족했어요. 수능까지 5개월인데 계획을 완전히 바꿔야 할 것 같아요.",
+      "expectedAI": {
+        "action": "generate_plan",
+        "timeFit": "fits",
+        "emotion": {
+          "detected": "frustration"
+        },
+        "strategy": [],
+        "warnings": [],
+        "alternatives": []
+      }
+    }
+  ],
+  "validation": {
+    "diagnosis": {
+      "mustIdentify": []
+    },
+    "strategy": {
+      "expectedType": "standard"
+    },
+    "honesty": {
+      "expectedTimeFit": "fits",
+      "mustNotFalsePlan": true
+    },
+    "emotion": {
+      "expected": "frustration",
+      "toneExpected": "acknowledge frustration → diagnosis → pivot → non-linear progress framing"
+    },
+    "hardFailChecks": [
+      "HFG-1",
+      "HFG-4"
+    ]
+  },
+  "_legacy": {
+    "inputFile": "data/legacy-v4/input/tc-39-replan-frustration-mock-exam.json",
+    "expectedFile": "data/legacy-v4/expected/tc-39-replan-frustration-mock-exam.json"
+  }
+}

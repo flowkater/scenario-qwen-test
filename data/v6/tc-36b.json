@@ -1,0 +1,56 @@
+{
+  "id": "tc-36b",
+  "category": "cross-profile",
+  "name": "TOEFL 준비 — 한국 직장인 (85→100, 퇴근 후 1시간, frustration)",
+  "path": "E",
+  "emotionProtocol": "frustration",
+  "profile": {
+    "role": "working",
+    "timeBudget": {
+      "weekday": 60,
+      "weekend": 0
+    }
+  },
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "직장인인데 TOEFL 준비해야 해요. 시험 2달 뒤. 현재 85점, 목표 100. 퇴근 후 1시간.",
+      "expectedAI": {
+        "action": "generate_plan",
+        "timeFit": "deficit",
+        "emotion": {
+          "detected": "frustration"
+        },
+        "strategy": [
+          "20-25min single-section focus per session (not 60min marathon — post-work fatigue)",
+          "commute listening: 30min round-trip = +30min/day listening practice",
+          "Korean language for all instructions (post-work exhaustion makes English-only instructions harder)",
+          "target adjustment after weekend availability is known: 85→90 first, then 90→100"
+        ],
+        "warnings": [
+          "must ask '주말 가능해요?' BEFORE any time calculation — do NOT assume weekend 2-3× study (v3 error)",
+          "퇴근 후 피로 = 60min continuous study often counterproductive; 20-25min focused better",
+          "85→90 is one fight; 90→100 is a different fight requiring real proficiency"
+        ]
+      }
+    }
+  ],
+  "validation": {
+    "honesty": {
+      "expectedTimeFit": "deficit"
+    },
+    "emotion": {
+      "expected": "frustration"
+    },
+    "hardFailChecks": [
+      "must ask about weekend availability BEFORE making any time calculation",
+      "must NOT assume weekend 2-3× study (v3 error — user did not state this)",
+      "must use Korean for response (직장인 context, 퇴근 후 지침)",
+      "frustration must be validated; realistic about after-work energy limits"
+    ]
+  },
+  "_legacy": {
+    "inputFile": "data/legacy-v4/input/tc-36-toefl-3-profiles.json",
+    "expectedFile": "data/legacy-v4/expected/tc-36-toefl-3-profiles.json"
+  }
+}

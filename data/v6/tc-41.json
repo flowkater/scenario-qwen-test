@@ -1,0 +1,54 @@
+{
+  "id": "tc-41",
+  "category": "multi-subject",
+  "name": "멀티 과목 — 수능 국영수 (frustration)",
+  "path": "E",
+  "emotionProtocol": "frustration",
+  "profile": {
+    "timeBudget": {
+      "weekday": 300,
+      "weekend": 300
+    }
+  },
+  "resources": [],
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "수능 준비하는데 국어, 영어, 수학 같이 해야 해요. 하루에 5시간 정도 할 수 있어요. 수능 4개월 남았어요. 국어 3등급, 영어 2등급, 수학 4등급이에요.",
+      "expectedAI": {
+        "action": "generate_plan",
+        "timeFit": "fits",
+        "emotion": {
+          "detected": "frustration"
+        },
+        "strategy": [],
+        "warnings": [],
+        "alternatives": []
+      }
+    }
+  ],
+  "validation": {
+    "diagnosis": {
+      "mustIdentify": []
+    },
+    "strategy": {
+      "expectedType": "standard"
+    },
+    "honesty": {
+      "expectedTimeFit": "fits",
+      "mustNotFalsePlan": true
+    },
+    "emotion": {
+      "expected": "frustration",
+      "toneExpected": "frustration acknowledge → data-driven allocation → phase structure → modifiable checkpoints"
+    },
+    "hardFailChecks": [
+      "HFG-1",
+      "HFG-3"
+    ]
+  },
+  "_legacy": {
+    "inputFile": "data/legacy-v4/input/tc-41-multi-subject-csat-kor-eng-math.json",
+    "expectedFile": "data/legacy-v4/expected/tc-41-multi-subject-csat-kor-eng-math.json"
+  }
+}

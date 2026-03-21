@@ -1,0 +1,95 @@
+{
+  "id": "tc-23",
+  "category": "read",
+  "name": "법대 헌법 판례집 (shame+frustration, SEVERE DEFICIT)",
+  "path": "R",
+  "emotionProtocol": "shame",
+
+  "profile": {
+    "role": "student",
+    "year": "sophomore",
+    "timeBudget": { "weekday": 120, "weekend": 120 }
+  },
+
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "헌법 판례집 읽어야 해요. 이번 주까지 200페이지. 법대 2학년인데 판례 분석하면서 읽어야 해서 느려요.",
+      "expectedAI": {
+        "action": "ask",
+        "mustAsk": "deadline day — is it Friday?",
+        "reason": "이번 주가 금요일인지 다른 날인지에 따라 가용일이 달라짐 → dailyTarget 결정에 필수",
+        "mustDiagnose": ["shame: '느려요' → 법대 reading speed 정상화 필요 (1L 12-20min/p는 정상)", "SEVERE deficit 예상"],
+        "mustNotDo": ["plan 바로 생성 (마감일 불확정)", "try reading faster 같은 말"]
+      }
+    },
+    {
+      "turn": 2,
+      "user": "금요일이요. 오늘 월요일이니까 5일 남았어요.",
+      "expectedAI": {
+        "action": "generate_plan",
+        "plans": [
+          {
+            "label": "헌법 판례집",
+            "type": "read",
+            "dailyTarget": { "value": 40, "unit": "page" },
+            "totalQuantity": 200,
+            "effortModel": { "expected": 13.0, "min": 10.0, "max": 20.0, "unit": "page" },
+            "priority": "primary"
+          }
+        ],
+        "timeFit": "deficit",
+        "diagnosis": "200p × 13min/p = 2600min needed vs 5days × 120min = 600min → 4.3× SEVERE deficit; '느려요'는 정상 — 법대 판례 분석 10-20min/p는 표준",
+        "strategy": "triage: 핵심 판례 3-4개 full IRAC briefing; 나머지: headnote + holding + ratio decidendi only; cold-call 대비: 교수 강조 판례 우선; 보조 자료(핸드아웃, 판례 요약) 적극 활용",
+        "honestAssessment": "4.3× SEVERE deficit — 200페이지 전부 분석하며 읽는 건 물리적으로 불가능합니다. 전략적 선별이 필수입니다.",
+        "alternatives": [
+          {
+            "label": "핵심 판례 3-4개 집중",
+            "change": "200p → 핵심 판례 3-4개 full IRAC brief (약 50-60p)",
+            "newTimeFit": "tight"
+          },
+          {
+            "label": "교수 핸드아웃 + cold-call 대비",
+            "change": "200p → 교수 핸드아웃 기반 요약 + 주요 판례 holding만 정리",
+            "newTimeFit": "fits"
+          },
+          {
+            "label": "스터디 그룹 판례 브리프 교환",
+            "change": "200p → 분담 (4-5명 × 40p씩 brief 교환)",
+            "newTimeFit": "fits"
+          }
+        ],
+        "emotion": {
+          "detected": "shame",
+          "tone": "shame-validating first; data-backed normalization; practical triage without judgment",
+          "mustNotSay": ["try reading faster", "you should have started earlier", "just focus more"]
+        }
+      }
+    }
+  ],
+
+  "validation": {
+    "diagnosis": {
+      "mustIdentify": ["SEVERE deficit (4.3×)", "1L/2L reading speed normalization — 10-20min/p is standard for case analysis"],
+      "mustReflectInPlan": "triage-based approach, not full coverage"
+    },
+    "strategy": {
+      "expectedType": "deficit-options",
+      "mustProvideAlternatives": true,
+      "alternativesMinCount": 2
+    },
+    "questions": {
+      "turn1MustAsk": ["deadline day — is it Friday?"],
+      "maxQuestionsPerTurn": 1
+    },
+    "honesty": {
+      "expectedTimeFit": "deficit",
+      "mustNotFalsePlan": true
+    },
+    "emotion": {
+      "expected": "shame",
+      "mustNotSay": ["try reading faster", "you should have started earlier"],
+      "toneExpected": "shame-validating first; data-backed normalization of slow speed; practical triage without judgment; 1L learning curve acknowledgment"
+    }
+  }
+}

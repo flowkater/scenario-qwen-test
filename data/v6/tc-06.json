@@ -1,0 +1,86 @@
+{
+  "id": "tc-06",
+  "category": "exam-university",
+  "name": "Priya — Political Science Essay Exam",
+  "path": "E",
+  "emotionProtocol": "neutral",
+
+  "profile": {
+    "role": "student",
+    "studentLevel": "college",
+    "level": "capable",
+    "focusSpan": 45,
+    "timeBudget": { "weekday": 90, "weekend": 90 }
+  },
+
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "I have a political science midterm that's all essay questions. It covers chapters 1-8 of our textbook, about 400 pages. The exam is in 3 weeks. I need to understand arguments well enough to write about them, not just recognize terms.",
+      "expectedAI": {
+        "action": "generate_plan",
+        "plans": [
+          {
+            "label": "Political Science Ch.1-8 (argument-level reading)",
+            "type": "read",
+            "dailyTarget": { "value": 19, "unit": "page" },
+            "totalQuantity": 400,
+            "effortModel": { "expected": 6.5, "min": 5.0, "max": 8.0, "unit": "page" },
+            "priority": "primary"
+          }
+        ],
+        "timeFit": "deficit",
+        "diagnosis": "essay exam → argument-level 이해 필요 (용어 인식 아님). 6.5min/page. 400p × 6.5 = 2600min + essay prep ~400min = 3000min needed, 90 × 21 = 1890min → 1110min deficit",
+        "strategy": "DEFICIT 심각 (1110min). 역방향 독서: essay 예상 주제 먼저 → 해당 챕터 deep read → 나머지 skim. 2-pass: Pass 1 structure only (2min/p) → Pass 2 essay-critical 200p (7min/p)",
+        "honestAssessment": "400p 전체를 argument-level로 읽기 불가. 역방향 전략으로 핵심 200p에 집중해야.",
+        "alternatives": [
+          {
+            "label": "역방향 독서 (essay 주제 기반)",
+            "change": "400p → 200p deep read + 200p skim (2min/p)",
+            "newTimeFit": "tight"
+          },
+          {
+            "label": "시간 증가",
+            "change": "90min/day → 150min/day",
+            "newTimeFit": "tight"
+          },
+          {
+            "label": "essay outline 연습 추가",
+            "change": "reading 300p + essay outline 2회/주 30min별도",
+            "newTimeFit": "deficit"
+          }
+        ],
+        "emotion": {
+          "detected": "neutral",
+          "tone": "strategic-reframe",
+          "mustNotSay": []
+        }
+      }
+    }
+  ],
+
+  "validation": {
+    "diagnosis": {
+      "mustIdentify": ["essay exam → argument-level reading (not term recognition)", "6.5min/page for monograph-style", "severe deficit 1110min"],
+      "mustReflectInPlan": "dailyTarget based on full 400p, deficit acknowledged"
+    },
+    "strategy": {
+      "expectedType": "deficit-options",
+      "mustProvideAlternatives": true,
+      "alternativesMinCount": 2
+    },
+    "questions": {
+      "turn1MustAsk": [],
+      "maxQuestionsPerTurn": 2
+    },
+    "honesty": {
+      "expectedTimeFit": "deficit",
+      "mustNotFalsePlan": true
+    },
+    "emotion": {
+      "expected": "neutral",
+      "mustNotSay": [],
+      "toneExpected": "strategic-reframe — '400p는 많아. 하지만 에세이 시험이라 전략이 달라. 역방향으로 가자.'"
+    }
+  }
+}

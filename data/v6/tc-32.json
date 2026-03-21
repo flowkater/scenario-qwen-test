@@ -1,0 +1,78 @@
+{
+  "id": "tc-32",
+  "category": "practice",
+  "name": "포트폴리오 웹사이트 (React 입문, 6주 목표 → 현실 10주)",
+  "path": "P",
+  "emotionProtocol": "frustration",
+
+  "profile": {
+    "role": "self",
+    "timeBudget": { "weekday": 60, "weekend": 180 }
+  },
+
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "I'm building a portfolio website. I know basic HTML/CSS but need to learn React. I want to finish in 6 weeks. I can put in about 1 hour on weekdays, 3 hours on weekends.",
+      "expectedAI": {
+        "action": "generate_plan",
+        "plans": [
+          {
+            "label": "Portfolio Website Project",
+            "type": "practice",
+            "dailyTarget": { "value": 1, "unit": "milestone" },
+            "totalQuantity": 8,
+            "effortModel": { "expected": null, "min": null, "max": null, "unit": "milestone" },
+            "priority": "primary"
+          }
+        ],
+        "timeFit": "deficit",
+        "diagnosis": "6 weeks is too optimistic for React beginner. React alone takes 2+ weeks to feel comfortable. Hofstadter's Law: always 2-3× longer than estimated. Weekly budget: 5×60 + 2×180 = 660min. Weekend 3hr blocks are highest-leverage time — primary build sessions.",
+        "strategy": "10-week plan (8 weeks work + 2 weeks buffer). Week 1-2: React basics (Hooks, components, props, state) + To-do app. Week 3: project setup + landing page → DEPLOY #1. Week 4-5: About + Projects pages + navigation. Week 6-7: interactions + responsive + styling → DEPLOY #2. Week 8: polish + testing + content. Week 9-10: buffer + FINAL DEPLOY. Stuck protocol: 2+ days blocked → simplify scope, try ChatGPT/SO, take a day off.",
+        "honestAssessment": "6 weeks is not achievable for a React beginner building a portfolio. 10 weeks (8 work + 2 buffer) is the realistic minimum. Buffer weeks always get used.",
+        "alternatives": [
+          {
+            "label": "10주 권장 플랜",
+            "change": "6주 → 10주 (8주 작업 + 2주 버퍼), 3개 DEPLOY 마일스톤",
+            "newTimeFit": "fits"
+          },
+          {
+            "label": "8주 최소 플랜",
+            "change": "6주 → 8주 (버퍼 없음), 전적인 헌신 + 주요 블로커 없을 때만 가능",
+            "newTimeFit": "tight"
+          }
+        ],
+        "emotion": {
+          "detected": "frustration",
+          "tone": "honest but encouraging",
+          "mustNotSay": ["6 weeks is achievable", "just work harder", "it's easy with React"]
+        }
+      }
+    }
+  ],
+
+  "validation": {
+    "diagnosis": {
+      "mustIdentify": ["6 weeks too optimistic for React beginner", "Hofstadter's Law applies", "weekend 3hr blocks are highest-leverage"],
+      "mustReflectInPlan": "10-week realistic timeline with deploy milestones and buffer weeks"
+    },
+    "strategy": {
+      "expectedType": "deficit-options",
+      "mustProvideAlternatives": true,
+      "alternativesMinCount": 2
+    },
+    "questions": {
+      "turn1MustAsk": [],
+      "maxQuestionsPerTurn": 0
+    },
+    "honesty": {
+      "expectedTimeFit": "deficit",
+      "mustNotFalsePlan": true
+    },
+    "emotion": {
+      "expected": "frustration",
+      "mustNotSay": ["6 weeks is achievable", "just work harder", "it's easy with React"],
+      "toneExpected": "honest but encouraging; timeline reality check without discouraging; deploy milestones as motivation"
+    }
+  }
+}

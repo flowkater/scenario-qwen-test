@@ -1,0 +1,84 @@
+{
+  "id": "tc-33",
+  "category": "cross-profile",
+  "name": "Orgo 첫수강 — Freshman (neutral, tight)",
+  "path": "E",
+  "emotionProtocol": "neutral",
+  "profile": {
+    "role": "student",
+    "timeBudget": {
+      "weekday": 90,
+      "weekend": 90
+    }
+  },
+  "resources": [
+    {
+      "type": "textbook",
+      "description": "McMurry Organic Chemistry Ch.10-15",
+      "quantity": "180p"
+    }
+  ],
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "Taking orgo for the first time. Exam in 2 weeks. McMurry Ch.10-15 (180 pages). I've been going to lectures but not really studying outside of class. I have about 1.5 hours a day.",
+      "expectedAI": {
+        "action": "ask",
+        "mustAsk": [
+          "Are there practice problems or past exams from the professor?"
+        ],
+        "reason": ""
+      }
+    },
+    {
+      "turn": 2,
+      "user": "(answer provided)",
+      "expectedAI": {
+        "action": "generate_plan",
+        "timeFit": "tight",
+        "emotion": {
+          "detected": "neutral"
+        },
+        "strategy": [
+          "Track A (Reading): 180p × 6.0min = 1080min over 12 days = 13p/day",
+          "Track B (Problems): immediate chapter-end problems (2-3) after each reading session — from Day 1",
+          "Day 13-14: mechanism review + timed mock problems using remaining 180min buffer",
+          "interleaved reading + mechanism drawing (stop and draw on paper when mechanisms appear)"
+        ],
+        "warnings": [
+          "7.0 min/page calculation exhausts entire budget with 0 time for problems — do NOT use",
+          "reading only without problem practice = likely exam failure despite full coverage",
+          "Ch.15 may not be fully covered if reading goes slow — Ch.15 mechanics-only skim as fallback"
+        ]
+      }
+    }
+  ],
+  "validation": {
+    "diagnosis": {
+      "mustIdentify": [
+        "Track A (Reading): 180p × 6.0min = 1080min over 12 days = 13p/day",
+        "Track B (Problems): immediate chapter-end problems (2-3) after each reading session — from Day 1"
+      ]
+    },
+    "strategy": {
+      "expectedType": "standard"
+    },
+    "honesty": {
+      "expectedTimeFit": "tight",
+      "mustNotFalsePlan": true
+    },
+    "emotion": {
+      "expected": "neutral",
+      "toneExpected": "matter-of-fact; normalize 6min/page as expected for first-time orgo; practical dual-track plan"
+    },
+    "hardFailChecks": [
+      "must NOT lower min/page below 6.0 to make budget appear comfortable — v3 error was using 7.0 (budget exhaustion)",
+      "must include problem-solving Track B — reading alone is insufficient",
+      "must NOT give same plan as TC-34 (retake) or TC-35 (senior)"
+    ]
+  },
+  "_legacy": {
+    "inputFile": "data/legacy-v4/input/tc-33-orgo-freshman.json",
+    "expectedFile": "data/legacy-v4/expected/tc-33-orgo-freshman.json"
+  }
+}

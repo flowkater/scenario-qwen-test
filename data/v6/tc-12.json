@@ -1,0 +1,109 @@
+{
+  "id": "tc-12",
+  "category": "exam-highschool",
+  "name": "수능 국어 — 고3, 6개월",
+  "path": "E",
+  "emotionProtocol": "frustration",
+
+  "profile": {
+    "role": "student",
+    "studentLevel": "highschool",
+    "year": "3",
+    "level": "capable",
+    "focusSpan": 50,
+    "timeBudget": { "weekday": 60, "weekend": 60 }
+  },
+
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "수능 국어 준비하는 고3이에요. 기출 5개년 있고 EBS 수능특강 교재 있어요. 수능까지 6개월 남았어요. 비문학이 약해요.",
+      "expectedAI": {
+        "action": "ask",
+        "mustAsk": "testTypeSelection",
+        "reason": "'화법과 작문' vs '언어와 매체' 선택에 따라 시험 구조와 시간 배분이 달라짐",
+        "mustDiagnose": ["비문학 약점 인식", "6개월 marathon → 페이즈별 전략 필요"],
+        "mustNotDo": ["plan 바로 생성 (선택과목 미확정)"]
+      }
+    },
+    {
+      "turn": 2,
+      "user": "화법과 작문 선택했어요.",
+      "expectedAI": {
+        "action": "generate_plan",
+        "plans": [
+          {
+            "label": "EBS 수능특강 국어",
+            "type": "read",
+            "dailyTarget": { "value": 2, "unit": "page" },
+            "totalQuantity": 200,
+            "effortModel": { "expected": 2.0, "min": 1.5, "max": 2.5, "unit": "page" },
+            "priority": "primary"
+          },
+          {
+            "label": "수능 기출 5개년",
+            "type": "practice",
+            "dailyTarget": { "value": 1, "unit": "set" },
+            "totalQuantity": 5,
+            "effortModel": { "expected": 80, "min": 70, "max": 90, "unit": "set" },
+            "priority": "secondary"
+          },
+          {
+            "label": "비문학 1지문/day 루틴",
+            "type": "practice",
+            "dailyTarget": { "value": 1, "unit": "passage" },
+            "totalQuantity": null,
+            "effortModel": { "expected": 5.5, "min": 5.0, "max": 8.5, "unit": "passage" },
+            "priority": "primary"
+          }
+        ],
+        "timeFit": "fits",
+        "diagnosis": "비문학 약점 → daily routine 필수. 화법과 작문 선택 → 해당 유형 연습 포함",
+        "strategy": "6-phase: 3-6월 수능특강+daily비문학 → 6월 모의 → 7-9월 기출 실전(80min timed) → 9월 모의 → 10월-수능 약점+모의. EBS 연계 간접 ~50%",
+        "honestAssessment": "200p 수능특강 + 기출 5세트 + daily 비문학을 6개월 × 60min으로 커버 가능. fits.",
+        "alternatives": [
+          {
+            "label": "비문학 집중 강화",
+            "change": "비문학 2지문/day + 수능특강 축소 150p",
+            "newTimeFit": "tight"
+          },
+          {
+            "label": "기출 먼저 전략",
+            "change": "기출 Day1부터 시작 → 수능특강은 약점 챕터만 100p",
+            "newTimeFit": "fits"
+          }
+        ],
+        "emotion": {
+          "detected": "frustration",
+          "tone": "frustration-aware",
+          "mustNotSay": ["비문학은 원래 쉬워요", "더 집중하면 돼요"]
+        }
+      }
+    }
+  ],
+
+  "validation": {
+    "diagnosis": {
+      "mustIdentify": ["비문학 약점 → daily routine 필요", "화법과작문/언어와매체 선택 필요"],
+      "mustReflectInPlan": "비문학 daily routine plan 포함"
+    },
+    "strategy": {
+      "expectedType": "fits-phased",
+      "mustProvideAlternatives": true,
+      "alternativesMinCount": 2
+    },
+    "questions": {
+      "turn1MustAsk": ["testTypeSelection"],
+      "maxQuestionsPerTurn": 2
+    },
+    "honesty": {
+      "expectedTimeFit": "fits",
+      "mustNotFalsePlan": true
+    },
+    "emotion": {
+      "expected": "frustration",
+      "mustNotSay": ["비문학은 쉬워요", "더 집중하면 돼요"],
+      "toneExpected": "frustration-aware"
+    }
+  }
+}

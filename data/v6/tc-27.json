@@ -1,0 +1,97 @@
+{
+  "id": "tc-27",
+  "category": "watch",
+  "name": "밀린 물리 강의 8개 (시험 2주, frustration)",
+  "path": "W",
+  "emotionProtocol": "frustration",
+
+  "profile": {
+    "role": "student",
+    "timeBudget": { "weekday": 120, "weekend": 120 }
+  },
+
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "I'm behind on my physics lectures. 8 lectures behind, each about 50 minutes. Midterm is in 2 weeks and the lectures are the main study material. I can do 2 hours a day.",
+      "expectedAI": {
+        "action": "ask",
+        "mustAsk": "practiceProblemsAvailable",
+        "reason": "연습문제 유무에 따라 Plan 2 생성 여부 및 시간 배분 전략이 달라짐",
+        "mustDiagnose": ["behind on lectures → frustration acknowledged", "50min lecture × 2.0× multiplier = ~100min effective per lecture → 1 lecture/day max within 120min budget"],
+        "mustNotDo": ["plan 바로 생성 (연습문제 유무 미확인)", "2 lectures/day 계획 (100min × 2 = 200min > 120min budget)"]
+      }
+    },
+    {
+      "turn": 2,
+      "user": "Yeah, there are practice problems at the end of each lecture. About 5-10 per lecture.",
+      "expectedAI": {
+        "action": "generate_plan",
+        "plans": [
+          {
+            "label": "Physics Lectures",
+            "type": "watch",
+            "dailyTarget": { "value": 1, "unit": "lecture" },
+            "totalQuantity": 8,
+            "effortModel": { "expected": 100, "min": 75, "max": 150, "unit": "lecture" },
+            "priority": "primary"
+          },
+          {
+            "label": "Lecture Practice Problems",
+            "type": "practice",
+            "dailyTarget": { "value": 5, "unit": "problem" },
+            "totalQuantity": 60,
+            "effortModel": { "expected": 4, "min": 2, "max": 8, "unit": "problem" },
+            "priority": "secondary"
+          }
+        ],
+        "timeFit": "tight",
+        "diagnosis": "8 lectures × 100min(2.0× multiplier) = 800min lecture + 60 problems × 4min = 240min practice → total ~1040min needed vs 14days × 120min = 1680min available → tight but workable with interleaving",
+        "strategy": "1 lecture/day + immediate 5 practice problems (Day 1-8). Day 9-14: full review + remaining problems + past exam practice. Interleaved: each day = current lecture + review of previous lecture problems.",
+        "honestAssessment": "1 lecture/day is the maximum pace. 2 lectures/day is physically impossible (200min > 120min budget). Day 9-14 review window is critical.",
+        "alternatives": [
+          {
+            "label": "리뷰 축소",
+            "change": "Day 9-14 리뷰 → Day 9-11만 (3일 집중 리뷰), Day 12-14 시험 시뮬레이션",
+            "newTimeFit": "tight"
+          },
+          {
+            "label": "문제 우선 전략",
+            "change": "강의 중 derivation 부분만 집중(강의당 70min) + 문제 풀이 시간 확대(50min/day)",
+            "newTimeFit": "tight"
+          }
+        ],
+        "emotion": {
+          "detected": "frustration",
+          "tone": "constraint-accepting",
+          "mustNotSay": ["try to focus longer", "just watch 2 lectures a day", "you should have kept up"]
+        }
+      }
+    }
+  ],
+
+  "validation": {
+    "diagnosis": {
+      "mustIdentify": ["2.0× lecture multiplier for derivation-heavy physics", "1 lecture/day max (NOT 2)", "behind on lectures → structured catch-up needed"],
+      "mustReflectInPlan": "dailyTarget = 1 lecture/day, interleaved with practice problems"
+    },
+    "strategy": {
+      "expectedType": "tight-structured",
+      "mustProvideAlternatives": true,
+      "alternativesMinCount": 2
+    },
+    "questions": {
+      "turn1MustAsk": ["practiceProblemsAvailable"],
+      "maxQuestionsPerTurn": 1
+    },
+    "honesty": {
+      "expectedTimeFit": "tight",
+      "mustNotFalsePlan": true
+    },
+    "emotion": {
+      "expected": "frustration",
+      "mustNotSay": ["watch 2 lectures a day", "try to focus longer", "you should have kept up"],
+      "toneExpected": "constraint-accepting; validate 'behind' feeling briefly then pivot to achievable plan"
+    }
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "id": "tc-04",
+  "category": "exam-university",
+  "name": "Marcus — Orgo II Sophomore (산만, 15min focus)",
+  "path": "E",
+  "emotionProtocol": "frustration",
+
+  "profile": {
+    "role": "student",
+    "studentLevel": "college",
+    "collegeType": "undergrad",
+    "year": "sophomore",
+    "level": "capable",
+    "focusSpan": 15,
+    "timeBudget": { "weekday": 120, "weekend": 120 }
+  },
+
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "Organic chemistry 2 exam in 10 days. I have the McMurry textbook, about 200 pages for this unit. I also have practice problems but I get distracted really easily. I can only focus for like 15 minutes at a time. I have about 2 hours a day.",
+      "expectedAI": {
+        "action": "ask",
+        "mustAsk": ["practiceProblemsCount"],
+        "reason": "문제 수량 모르면 Plan 2 생성 불가. ≤50 → reading 비중 증가; ≥100 → problem drill 우선",
+        "mustDiagnose": ["focusSpan=15 → 분량 chunk 필요"],
+        "mustNotDo": ["plan 바로 생성 (문제 수량 모름)", "try to focus longer 권유"]
+      }
+    },
+    {
+      "turn": 2,
+      "user": "I have practice problems but I'm not sure how many. Maybe around 80?",
+      "expectedAI": {
+        "action": "generate_plan",
+        "plans": [
+          {
+            "label": "McMurry Orgo II 교재",
+            "type": "read",
+            "dailyTarget": { "value": 20, "unit": "page" },
+            "chunkSize": 3,
+            "totalQuantity": 200,
+            "effortModel": { "expected": 5.5, "min": 4.8, "max": 7.0, "unit": "page" },
+            "priority": "primary"
+          },
+          {
+            "label": "Practice Problems",
+            "type": "practice",
+            "dailyTarget": { "value": 8, "unit": "problem" },
+            "totalQuantity": 80,
+            "effortModel": { "expected": 12, "min": 8, "max": 18, "unit": "problem" },
+            "priority": "secondary"
+          }
+        ],
+        "timeFit": "deficit",
+        "diagnosis": "focusSpan=15 → effective budget ~100-108min (restart overhead 10%), 분량 chunk 3p 단위로 끊어 읽기",
+        "strategy": "reading 70% + practice 30%. 200p × 5.5 + 80 × 12 = 2060min needed, ~1050min available → deficit",
+        "honestAssessment": "200p + 80문제를 10일 × ~105min으로 커버 불가. deficit.",
+        "alternatives": [
+          {
+            "label": "핵심 챕터만",
+            "change": "200p → 120p (시험 빈출 챕터)",
+            "newTimeFit": "tight"
+          },
+          {
+            "label": "문제 우선",
+            "change": "reading 50p skim + 80문제 전부",
+            "newTimeFit": "tight"
+          }
+        ],
+        "emotion": {
+          "detected": "frustration",
+          "tone": "constraint-accepting",
+          "mustNotSay": ["try to focus longer", "just study more"]
+        }
+      }
+    }
+  ],
+
+  "validation": {
+    "diagnosis": {
+      "mustIdentify": ["short focusSpan → chunk-based study", "distraction overhead ~10%", "orgo mechanism difficulty"],
+      "mustReflectInPlan": "chunkSize=3 for reading plan, effective budget adjusted"
+    },
+    "strategy": {
+      "expectedType": "deficit-options",
+      "mustProvideAlternatives": true,
+      "alternativesMinCount": 2
+    },
+    "questions": {
+      "turn1MustAsk": ["practiceProblemsCount"],
+      "maxQuestionsPerTurn": 1
+    },
+    "honesty": {
+      "expectedTimeFit": "deficit",
+      "mustNotFalsePlan": true
+    },
+    "emotion": {
+      "expected": "frustration",
+      "mustNotSay": ["try harder", "focus longer"],
+      "toneExpected": "constraint-accepting — '15분이 네 리듬이라면 거기에 맞춰 짜자.'"
+    }
+  }
+}

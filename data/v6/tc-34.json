@@ -1,0 +1,83 @@
+{
+  "id": "tc-34",
+  "category": "cross-profile",
+  "name": "Orgo 재수강 — Junior (메커니즘 약점, frustration)",
+  "path": "E",
+  "emotionProtocol": "frustration",
+  "profile": {
+    "role": "student",
+    "timeBudget": {
+      "weekday": 90,
+      "weekend": 90
+    }
+  },
+  "resources": [
+    {
+      "type": "textbook",
+      "description": "McMurry Organic Chemistry Ch.10-15",
+      "quantity": "180p"
+    }
+  ],
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "Retaking orgo. Failed because of mechanisms last time. Same McMurry Ch.10-15 (180 pages). Exam in 2 weeks. I know some of it already. 1.5 hours a day.",
+      "expectedAI": {
+        "action": "ask",
+        "mustAsk": [
+          "Which mechanisms specifically weak? (SN1/SN2? Elimination? Addition?)"
+        ],
+        "reason": ""
+      }
+    },
+    {
+      "turn": 2,
+      "user": "(answer provided)",
+      "expectedAI": {
+        "action": "generate_plan",
+        "timeFit": "fits",
+        "emotion": {
+          "detected": "frustration"
+        },
+        "strategy": [
+          "Day 1-9: 50% scan reading (known content fast), 40% mechanism drill (stop and draw), 10% blind recall self-test",
+          "Day 10-13: mechanism drill by type — SN1/SN2/E1/E2/addition/oxidation",
+          "Day 14: timed mock test under exam conditions"
+        ],
+        "warnings": [
+          "'Familiarity illusion' risk: reading feels easy but drawing mechanisms on exam is different skill",
+          "Mechanism drill must be ≥40% of time — failure reason from last attempt"
+        ]
+      }
+    }
+  ],
+  "validation": {
+    "diagnosis": {
+      "mustIdentify": [
+        "Day 1-9: 50% scan reading (known content fast), 40% mechanism drill (stop and draw), 10% blind recall self-test",
+        "Day 10-13: mechanism drill by type — SN1/SN2/E1/E2/addition/oxidation"
+      ]
+    },
+    "strategy": {
+      "expectedType": "standard"
+    },
+    "honesty": {
+      "expectedTimeFit": "fits",
+      "mustNotFalsePlan": true
+    },
+    "emotion": {
+      "expected": "frustration",
+      "toneExpected": "frustration-validating; past failure reframed as strategic guide; action-focused; 'last time failed → this time drill' narrative"
+    },
+    "hardFailChecks": [
+      "must NOT give same plan as TC-33 (freshman) — different speed, different focus",
+      "must ask specifically which mechanism type is weak",
+      "mechanism drill proportion MUST be ≥40% (not 30%)",
+      "must NOT start with Ch.10 linear reading — weak mechanism chapters should come first"
+    ]
+  },
+  "_legacy": {
+    "inputFile": "data/legacy-v4/input/tc-34-orgo-junior-retake.json",
+    "expectedFile": "data/legacy-v4/expected/tc-34-orgo-junior-retake.json"
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "id": "tc-03",
+  "category": "exam-university",
+  "name": "Tyler-B — Econ 101 (완전한 정보)",
+  "path": "E",
+  "emotionProtocol": "neutral",
+
+  "profile": {
+    "role": "student",
+    "studentLevel": "college",
+    "level": "beginner",
+    "focusSpan": 30,
+    "timeBudget": { "weekday": 60, "weekend": 60 }
+  },
+
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "Econ 101 midterm, March 28. Mankiw Principles of Economics, chapters 1-12. About 300 pages. Haven't started. I can study about an hour a day.",
+      "expectedAI": {
+        "action": "generate_plan",
+        "plans": [
+          {
+            "label": "Mankiw Principles of Economics Ch.1-12",
+            "type": "read",
+            "dailyTarget": { "value": 22, "unit": "page" },
+            "totalQuantity": 300,
+            "effortModel": { "expected": 3.0, "min": 2.3, "max": 3.8, "unit": "page" },
+            "priority": "primary"
+          }
+        ],
+        "timeFit": "deficit",
+        "diagnosis": "beginner, 300p × 3.0min = 900min needed, 60min × 14 = 840min available → 60min deficit. reading만으로도 부족",
+        "strategy": "DEFICIT: reading alone 900min > 840min budget. review/practice 시간 0. 범위 축소 or 시간 증가 필요",
+        "honestAssessment": "60분/일로 300p 전부 읽기도 빠듯. 복습/연습 시간 없음. deficit.",
+        "alternatives": [
+          {
+            "label": "시간 증가",
+            "change": "60min/day → 90min/day (1.5시간)",
+            "newTimeFit": "fits"
+          },
+          {
+            "label": "핵심 챕터 집중",
+            "change": "300p → 200p (high-yield 챕터 우선, 100p skim)",
+            "newTimeFit": "fits"
+          },
+          {
+            "label": "읽기만 (연습 없음)",
+            "change": "300p reading only, self-test/practice 제외 — MC 리스크 경고",
+            "newTimeFit": "tight"
+          }
+        ],
+        "emotion": {
+          "detected": "neutral",
+          "tone": "honest-direct",
+          "mustNotSay": ["min/page를 낮춰서 fits로 만들지 않음"]
+        }
+      }
+    }
+  ],
+
+  "validation": {
+    "diagnosis": {
+      "mustIdentify": ["300p × 3.0min = 900min > 840min budget", "no time for review/practice"],
+      "mustReflectInPlan": "dailyTarget ~22p/day, deficit acknowledged"
+    },
+    "strategy": {
+      "expectedType": "deficit-options",
+      "mustProvideAlternatives": true,
+      "alternativesMinCount": 2
+    },
+    "questions": {
+      "turn1MustAsk": [],
+      "maxQuestionsPerTurn": 1
+    },
+    "honesty": {
+      "expectedTimeFit": "deficit",
+      "mustNotFalsePlan": true
+    },
+    "emotion": {
+      "expected": "neutral",
+      "mustNotSay": ["NEVER lower min/page to make math work"],
+      "toneExpected": "honest-direct — present options clearly"
+    }
+  }
+}

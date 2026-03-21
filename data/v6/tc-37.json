@@ -1,0 +1,55 @@
+{
+  "id": "tc-37",
+  "category": "replan",
+  "name": "플랜 실패 후 재계획 — 시험 밀림 (shame)",
+  "path": "E",
+  "replan": true,
+  "emotionProtocol": "shame",
+  "profile": {
+    "timeBudget": {
+      "weekday": 60,
+      "weekend": 60
+    }
+  },
+  "resources": [],
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "원래 계획대로 매일 20페이지씩 읽으려고 했는데 5일이나 밀렸어요. 시험 9일 남았고 아직 150페이지 남았어요. 경제학이에요. 너무 자책돼요.",
+      "expectedAI": {
+        "action": "generate_plan",
+        "timeFit": "tight",
+        "emotion": {
+          "detected": "shame"
+        },
+        "strategy": [],
+        "warnings": [],
+        "alternatives": []
+      }
+    }
+  ],
+  "validation": {
+    "diagnosis": {
+      "mustIdentify": []
+    },
+    "strategy": {
+      "expectedType": "standard"
+    },
+    "honesty": {
+      "expectedTimeFit": "tight",
+      "mustNotFalsePlan": true
+    },
+    "emotion": {
+      "expected": "shame",
+      "toneExpected": "validate first (normalize), then practical replanning with triage"
+    },
+    "hardFailChecks": [
+      "HFG-1",
+      "HFG-4"
+    ]
+  },
+  "_legacy": {
+    "inputFile": "data/legacy-v4/input/tc-37-replan-shame-exam-delayed.json",
+    "expectedFile": "data/legacy-v4/expected/tc-37-replan-shame-exam-delayed.json"
+  }
+}

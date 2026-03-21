@@ -1,0 +1,55 @@
+{
+  "id": "tc-38",
+  "category": "replan",
+  "name": "플랜 실패 후 재계획 — 완전 포기 직전 (burnout)",
+  "path": "E",
+  "replan": true,
+  "emotionProtocol": "burnout",
+  "profile": {
+    "timeBudget": {
+      "weekday": 480,
+      "weekend": 480
+    }
+  },
+  "resources": [],
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "Bar exam prep. I've been studying for 4 weeks but I'm only 30% through the material. Exam is in 6 weeks. I feel like giving up. This is impossible.",
+      "expectedAI": {
+        "action": "generate_plan",
+        "timeFit": "fits",
+        "emotion": {
+          "detected": "burnout"
+        },
+        "strategy": [],
+        "warnings": [],
+        "alternatives": []
+      }
+    }
+  ],
+  "validation": {
+    "diagnosis": {
+      "mustIdentify": []
+    },
+    "strategy": {
+      "expectedType": "standard"
+    },
+    "honesty": {
+      "expectedTimeFit": "fits",
+      "mustNotFalsePlan": true
+    },
+    "emotion": {
+      "expected": "burnout",
+      "toneExpected": "recovery first (scale down), not encouragement; restructure around realistic 6hr ceiling"
+    },
+    "hardFailChecks": [
+      "HFG-1",
+      "HFG-4"
+    ]
+  },
+  "_legacy": {
+    "inputFile": "data/legacy-v4/input/tc-38-replan-burnout-bar-exam.json",
+    "expectedFile": "data/legacy-v4/expected/tc-38-replan-burnout-bar-exam.json"
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "id": "tc-14",
+  "category": "exam-cert",
+  "name": "CPA 재시험 — 직장인",
+  "path": "E",
+  "emotionProtocol": "shame",
+
+  "profile": {
+    "role": "working",
+    "level": "capable",
+    "isRetake": true,
+    "focusSpan": 50,
+    "timeBudget": { "weekday": 120, "weekend": 0 }
+  },
+
+  "conversation": [
+    {
+      "turn": 1,
+      "user": "CPA 재무회계 재시험 준비 중이에요. 작년에 떨어졌는데 원가계산이 약해서요. 교재 800페이지, 기출 10세트 있어요. 시험이 2달 뒤에요. 퇴근 후 2시간 정도 공부해요.",
+      "expectedAI": {
+        "action": "ask",
+        "mustAsk": "specificWeakCostAccounting",
+        "reason": "종합원가 vs 표준원가 vs 활동기준원가 중 어디가 약한지에 따라 기출 배분 순서와 학습 순서가 달라짐",
+        "mustDiagnose": ["isRetake → 선택과 집중 가능", "원가계산 약점 인식", "주말 0hr → 평일만으로 계획"],
+        "mustNotDo": ["plan 바로 생성 (약점 세부 미확정)", "과거 실패 언급"]
+      }
+    },
+    {
+      "turn": 2,
+      "user": "종합원가계산이랑 표준원가계산이 약해요. 활동기준은 그나마 괜찮아요.",
+      "expectedAI": {
+        "action": "generate_plan",
+        "plans": [
+          {
+            "label": "CPA 원가계산 약점 파트 (종합+표준)",
+            "type": "read",
+            "dailyTarget": { "value": 4, "unit": "page" },
+            "totalQuantity": 200,
+            "effortModel": { "expected": 9.0, "min": 7.0, "max": 12.0, "unit": "page" },
+            "priority": "primary"
+          },
+          {
+            "label": "CPA 재무회계 복습 파트",
+            "type": "read",
+            "dailyTarget": { "value": 15, "unit": "page" },
+            "totalQuantity": 600,
+            "effortModel": { "expected": 3.5, "min": 2.5, "max": 5.0, "unit": "page" },
+            "priority": "secondary"
+          },
+          {
+            "label": "기출문제 세트",
+            "type": "practice",
+            "dailyTarget": { "value": 1, "unit": "set" },
+            "totalQuantity": 10,
+            "effortModel": { "expected": 120, "min": 80, "max": 135, "unit": "set" },
+            "priority": "primary"
+          }
+        ],
+        "timeFit": "deficit",
+        "diagnosis": "isRetake → 복습 파트 40-60% 시간 절감 가능. 종합+표준원가 약점 → 1차 시도 수준 집중 필요. 주말 0hr 제약",
+        "strategy": "기출 Day1부터 시작 → 빈출 챕터 파악 → targeted 교재 복습. 원가계산 40-50% 시간 배분. DEFICIT: ~90hr needed vs ~80hr available = 10hr deficit",
+        "honestAssessment": "600p×3.5min + 200p×9.0min + 10sets×120min = ~90hr needed vs 80hr available. 10hr deficit. tight-deficit.",
+        "alternatives": [
+          {
+            "label": "복습 범위 축소",
+            "change": "재무회계 복습 600p → 300p (빈출 챕터만)",
+            "newTimeFit": "tight"
+          },
+          {
+            "label": "주말 30분 추가",
+            "change": "주말 원가계산 공식 복습 30min 추가 → deficit 해소",
+            "newTimeFit": "tight"
+          }
+        ],
+        "emotion": {
+          "detected": "shame",
+          "tone": "shame-reframe",
+          "mustNotSay": ["작년에 왜 떨어졌는지", "더 열심히 했어야", "try harder"]
+        }
+      }
+    }
+  ],
+
+  "validation": {
+    "diagnosis": {
+      "mustIdentify": ["isRetake → 선택과 집중", "종합+표준원가 약점", "주말 0hr 제약"],
+      "mustReflectInPlan": "원가계산 priority primary, 복습 파트 secondary"
+    },
+    "strategy": {
+      "expectedType": "deficit-options",
+      "mustProvideAlternatives": true,
+      "alternativesMinCount": 2
+    },
+    "questions": {
+      "turn1MustAsk": ["specificWeakCostAccounting"],
+      "maxQuestionsPerTurn": 2
+    },
+    "honesty": {
+      "expectedTimeFit": "deficit",
+      "mustNotFalsePlan": true
+    },
+    "emotion": {
+      "expected": "shame",
+      "mustNotSay": ["작년에 왜 떨어졌는지", "더 열심히 했어야"],
+      "toneExpected": "shame-reframe"
+    }
+  }
+}

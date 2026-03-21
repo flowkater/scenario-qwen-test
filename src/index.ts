@@ -4,9 +4,31 @@ import path from "path";
 import OpenAI from "openai";
 import { initPipeline } from "./pipeline.js";
 import { initPipelineV5, runPipelineV5 } from "./pipeline-v5.js";
+import { initPipelineV6, runPipelineV6 } from "./pipeline-v6.js";
+import type { TestCaseV6 } from "./pipeline-v6.js";
+import { judgeResponse } from "./judge.js";
+import { checkHardFails, validatePathDiff } from "./validator-v6.js";
 import { loadTestCase, loadAllTestCases, loadAllExpected, runAndValidate, runEngineAndValidate } from "./runner.js";
 import { generateReport, printSummary, printFailureAnalysis, suggestPromptPatches } from "./analyzer.js";
 import { validateV4, validateTwoTrack } from "./validator.js";
+
+// ─── V6 TC 로더 ──────────────────────────────────────────────────
+
+async function loadTestCaseV6(tcId: string): Promise<TestCaseV6> {
+  const dataDir = path.resolve(import.meta.dirname, "../data/v6");
+  const file = path.join(dataDir, `${tcId}.json`);
+  const raw = await fs.readFile(file, "utf-8");
+  return JSON.parse(raw) as TestCaseV6;
+}
+
+async function loadAllV6TcIds(): Promise<string[]> {
+  const dataDir = path.resolve(import.meta.dirname, "../data/v6");
+  const files = await fs.readdir(dataDir);
+  return files
+    .filter(f => f.endsWith(".json"))
+    .map(f => f.replace(".json", ""))
+    .sort();
+}
 
 type RunResult = Awaited<ReturnType<typeof runAndValidate>>;
 
@@ -164,7 +186,7 @@ async function main() {
 
   if (!args[0]) {
     console.log(`
-AI Coach 42 TC v4/v5
+AI Coach TC v4/v5/v6
 
 Commands:
   engine-test [tc-id]                      Engine-only 검증 (AI 없음)
@@ -172,6 +194,10 @@ Commands:
   run-all                                  전체 42개 TC 1회 실행 — v4 pipeline
   run-v5 <tc-id>                           단일 TC 실행 — v5 clean prompt
   run-all-v5                               전체 42개 TC 1회 실행 — v5 clean prompt
+  run-v6 <tc-id> [path]                    단일 TC 단일 path 실행 — v6 멀티턴 (path: A|B|C, default: A)
+  run-all-v6                               전체 44 TC × 3 paths = 132 실행 — v6
+  judge-v6 <tc-id> [path]                  단일 TC Claude Judge 평가 — v6
+  judge-all-v6                             전체 TC Claude Judge 평가 — v6
   iterate [--max-rounds=10] [--target=42]  반복 실행 모드
   analyze                                  마지막 리포트 분석
     `);
@@ -190,6 +216,7 @@ Commands:
   });
   initPipeline(client);
   initPipelineV5(client);
+  initPipelineV6(client);
 
   switch (args[0]) {
     case "run": {
@@ -344,6 +371,177 @@ Commands:
         path.join(reportsDir, `v5-report-${ts}.json`),
         JSON.stringify({ enginePassed, coachPassed, overallPassed, total: inputs.length, ts }, null, 2)
       );
+      break;
+    }
+
+    // ── run-v6: 단일 TC + 단일 path ──────────────────────────────
+    case "run-v6": {
+      const tcId = args[1];
+      if (!tcId) { console.error("Usage: run-v6 <tc-id> [path]"); process.exit(1); }
+      const pathKey = ((args[2] ?? "A").toUpperCase()) as "A" | "B" | "C";
+
+      const tc = await loadTestCaseV6(tcId);
+      console.log(`\n[V6] ${tc.id} Path-${pathKey}: ${tc.name}`);
+      const start = Date.now();
+      const result = await runPipelineV6(tc, pathKey);
+      const latencyMs = Date.now() - start;
+
+      for (const r of result.results) {
+        const status = r.actionMatch ? "✅" : "❌";
+        const parseErr = r.parseError ? ` PARSE_ERR: ${r.parseError}` : "";
+        console.log(`  Turn ${r.turn}: ${status} action=${r.aiResponse?.action ?? "?"} (expected: ${r.expectedAction})${parseErr} [${r.latencyMs}ms]`);
+      }
+
+      const hfg = result.finalPlan ? checkHardFails(result.finalPlan, tc) : [];
+      const allMatch = result.results.every(r => r.actionMatch);
+      console.log(`\n  HFG: ${hfg.length === 0 ? "✅ 없음" : "❌ " + hfg.join(", ")}`);
+      console.log(`  Overall: ${allMatch && hfg.length === 0 ? "✅ PASS" : "❌ FAIL"} [${latencyMs}ms]\n`);
+      console.log("Final Plan:", JSON.stringify(result.finalPlan, null, 2));
+
+      // 결과 저장 (judge-v6에서 사용)
+      const resultsDir = path.resolve(import.meta.dirname, "../data/v6/results");
+      await fs.mkdir(resultsDir, { recursive: true });
+      await fs.writeFile(
+        path.join(resultsDir, `${tcId}-${pathKey}.json`),
+        JSON.stringify({ tc, result, hfg, allMatch }, null, 2)
+      );
+      break;
+    }
+
+    // ── run-all-v6: 전체 44 TC × 3 paths = 132 ───────────────────
+    case "run-all-v6": {
+      const tcIds = await loadAllV6TcIds();
+      const paths = ["A", "B", "C"] as const;
+      let totalPass = 0;
+      let totalFail = 0;
+      const reports: any[] = [];
+
+      console.log(`\n[V6] 전체 ${tcIds.length} TCs × 3 paths = ${tcIds.length * 3} 실행\n`);
+
+      for (const tcId of tcIds) {
+        const tc = await loadTestCaseV6(tcId);
+        const pathResults: Record<string, any> = {};
+
+        for (const pk of paths) {
+          if (!tc.paths[pk]) { console.log(`  ⚠ ${tcId} Path-${pk} 없음, 건너뜀`); continue; }
+
+          process.stdout.write(`  ${tcId} Path-${pk}... `);
+          const result = await runPipelineV6(tc, pk);
+          pathResults[pk] = result;
+
+          const hfg = result.finalPlan ? checkHardFails(result.finalPlan, tc) : [];
+          const allMatch = result.results.every(r => r.actionMatch);
+          const pass = allMatch && hfg.length === 0;
+          if (pass) totalPass++; else totalFail++;
+          console.log(`${pass ? "✅" : "❌"} hfg=[${hfg.join(",")}]`);
+          await sleep(500);
+        }
+
+        // Path 분기 검증
+        if (pathResults.A && pathResults.B && pathResults.C) {
+          const diff = validatePathDiff(pathResults.A, pathResults.B, pathResults.C);
+          console.log(`  ${tcId} PathDiff: ${diff.pass ? "✅" : "❌"} (diffs=${diff.diffCount})`);
+        }
+
+        reports.push({ tcId, paths: pathResults });
+      }
+
+      const total = totalPass + totalFail;
+      console.log(`\n${"═".repeat(60)}`);
+      console.log(`[V6] RESULT: ${totalPass}/${total} PASS (${((totalPass/total)*100).toFixed(1)}%)`);
+      console.log(`${"═".repeat(60)}\n`);
+
+      const reportsDir = path.resolve(import.meta.dirname, "../reports");
+      await fs.mkdir(reportsDir, { recursive: true });
+      const ts = new Date().toISOString().slice(0, 16).replace(/[T:]/g, "-");
+      await fs.writeFile(
+        path.join(reportsDir, `v6-run-${ts}.json`),
+        JSON.stringify({ totalPass, totalFail, total, reports }, null, 2)
+      );
+      break;
+    }
+
+    // ── judge-v6: 단일 TC + path → 파이프라인 실행 후 결과 저장 ──
+    // (Claude Code가 직접 평가 — ANTHROPIC_API_KEY 불필요)
+    case "judge-v6": {
+      const tcId = args[1];
+      if (!tcId) { console.error("Usage: judge-v6 <tc-id> [path]"); process.exit(1); }
+      const pathKey = ((args[2] ?? "A").toUpperCase()) as "A" | "B" | "C";
+
+      const tc = await loadTestCaseV6(tcId);
+      console.log(`\n[V6 Judge] ${tc.id} Path-${pathKey}: ${tc.name}`);
+      console.log("  Qwen 파이프라인 실행...");
+
+      const pipelineResult = await runPipelineV6(tc, pathKey);
+      const hfg = pipelineResult.finalPlan ? checkHardFails(pipelineResult.finalPlan, tc) : [];
+
+      // 결과 저장
+      const resultsDir = path.resolve(import.meta.dirname, "../data/v6/results");
+      await fs.mkdir(resultsDir, { recursive: true });
+      const outFile = path.join(resultsDir, `${tcId}-${pathKey}.json`);
+      const judgeInput = { tc, pipelineResult, hfg };
+      await fs.writeFile(outFile, JSON.stringify(judgeInput, null, 2));
+
+      // 평가용 전체 컨텍스트 출력 (Claude Code가 읽고 평가)
+      console.log(`\n${"═".repeat(60)}`);
+      console.log(`[JUDGE INPUT] 저장: ${outFile}`);
+      console.log(`${"═".repeat(60)}`);
+      console.log(`\n## TC: ${tc.id} Path-${pathKey}`);
+      console.log(`Profile: ${JSON.stringify(tc.profile)}`);
+      console.log(`Emotion: ${tc.emotionProtocol ?? "neutral"} | Category: ${tc.category}`);
+      console.log(`\n## 대화 내역`);
+      for (const r of pipelineResult.results) {
+        console.log(`\nTurn ${r.turn} [학생]: ${r.userMessage}`);
+        console.log(`Turn ${r.turn} [코치]: ${JSON.stringify(r.aiResponse, null, 2)}`);
+      }
+      console.log(`\n## 기대사항`);
+      for (const t of tc.paths[pathKey].conversation) {
+        console.log(`Turn ${t.turn}: action=${t.expectedAI.action} | ${JSON.stringify(t.expectedAI.mustInclude ?? {})}`);
+      }
+      console.log(`\n## HFG 자동 체크: ${hfg.length === 0 ? "✅ 없음" : "❌ " + hfg.join(", ")}`);
+      console.log(`${"═".repeat(60)}\n`);
+      break;
+    }
+
+    // ── judge-all-v6: 전체 파이프라인 실행 + 결과 저장 ─────────
+    case "judge-all-v6": {
+      const tcIds = await loadAllV6TcIds();
+      const paths = ["A", "B", "C"] as const;
+      const allSaved: string[] = [];
+
+      console.log(`\n[V6 Judge-All] ${tcIds.length} TCs × 3 paths = ${tcIds.length * 3} 실행\n`);
+
+      for (const tcId of tcIds) {
+        const tc = await loadTestCaseV6(tcId);
+
+        for (const pk of paths) {
+          if (!tc.paths[pk]) continue;
+
+          process.stdout.write(`  ${tcId} Path-${pk}... `);
+          try {
+            const pipelineResult = await runPipelineV6(tc, pk);
+            const hfg = pipelineResult.finalPlan ? checkHardFails(pipelineResult.finalPlan, tc) : [];
+            const allMatch = pipelineResult.results.every(r => r.actionMatch);
+
+            const resultsDir = path.resolve(import.meta.dirname, "../data/v6/results");
+            await fs.mkdir(resultsDir, { recursive: true });
+            const outFile = path.join(resultsDir, `${tcId}-${pk}.json`);
+            await fs.writeFile(outFile, JSON.stringify({ tc, pipelineResult, hfg, allMatch }, null, 2));
+            allSaved.push(outFile);
+
+            const pass = allMatch && hfg.length === 0;
+            console.log(`${pass ? "✅" : "❌"} hfg=[${hfg.join(",")}] saved`);
+            await sleep(500);
+          } catch (e) {
+            console.log(`❌ ERROR: ${(e as Error).message}`);
+          }
+        }
+      }
+
+      console.log(`\n${"═".repeat(60)}`);
+      console.log(`[V6 Judge-All] ${allSaved.length}개 결과 저장 완료`);
+      console.log(`결과 위치: data/v6/results/`);
+      console.log(`${"═".repeat(60)}\n`);
       break;
     }
 

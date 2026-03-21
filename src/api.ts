@@ -31,8 +31,8 @@ export async function callAICoach(input: TestCaseInput): Promise<{
       temperature: 0.3,
       max_tokens: 4000,
       response_format: { type: "json_object" },
-      // @ts-ignore DashScope-specific: disable chain-of-thought thinking tokens
-      enable_thinking: false,
+      // @ts-ignore DashScope-specific: enable chain-of-thought thinking tokens
+      enable_thinking: true,
     });
 
     const latencyMs = Date.now() - start;

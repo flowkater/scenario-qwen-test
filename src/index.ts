@@ -3,8 +3,10 @@ import fs from "fs/promises";
 import path from "path";
 import OpenAI from "openai";
 import { initPipeline } from "./pipeline.js";
+import { initPipelineV5, runPipelineV5 } from "./pipeline-v5.js";
 import { loadTestCase, loadAllTestCases, loadAllExpected, runAndValidate, runEngineAndValidate } from "./runner.js";
 import { generateReport, printSummary, printFailureAnalysis, suggestPromptPatches } from "./analyzer.js";
+import { validateV4, validateTwoTrack } from "./validator.js";
 
 type RunResult = Awaited<ReturnType<typeof runAndValidate>>;
 
@@ -162,12 +164,14 @@ async function main() {
 
   if (!args[0]) {
     console.log(`
-AI Coach 42 TC v4
+AI Coach 42 TC v4/v5
 
 Commands:
   engine-test [tc-id]                      Engine-only 검증 (AI 없음)
-  run <tc-id>                              단일 TC 실행 (예: tc-01)
-  run-all                                  전체 42개 TC 1회 실행
+  run <tc-id>                              단일 TC 실행 — v4 pipeline
+  run-all                                  전체 42개 TC 1회 실행 — v4 pipeline
+  run-v5 <tc-id>                           단일 TC 실행 — v5 clean prompt
+  run-all-v5                               전체 42개 TC 1회 실행 — v5 clean prompt
   iterate [--max-rounds=10] [--target=42]  반복 실행 모드
   analyze                                  마지막 리포트 분석
     `);
@@ -185,6 +189,7 @@ Commands:
     baseURL: "https://dashscope-intl.aliyuncs.com/compatible-mode/v1",
   });
   initPipeline(client);
+  initPipelineV5(client);
 
   switch (args[0]) {
     case "run": {
@@ -240,6 +245,104 @@ Commands:
       await fs.writeFile(
         path.join(reportsDir, `report-${ts}.json`),
         JSON.stringify(report, null, 2)
+      );
+      break;
+    }
+
+    case "run-v5": {
+      const input = await loadTestCase(args[1]);
+      const allExpected = await loadAllExpected();
+      const expected = allExpected.find(e => e.tcId === input.id);
+      if (!expected) throw new Error(`Expected not found: ${input.id}`);
+
+      console.log(`\n🔄 [V5] Running ${input.id}: ${input.name}...`);
+      const start = Date.now();
+      const output = await runPipelineV5(input);
+      const latencyMs = Date.now() - start;
+
+      const validation = validateV4(output, input, expected);
+      const twoTrack = validateTwoTrack(output, input, expected);
+      const status = validation.overallPass ? "✅ PASS" : "❌ FAIL";
+      const eStatus = twoTrack.engine.enginePass ? "E✅" : "E❌";
+      const cStatus = twoTrack.coach.coachPass ? "C✅" : "C❌";
+      console.log(`   ${status} ${eStatus}${cStatus} (${latencyMs}ms)`);
+      console.log(`\n2-Track: ENGINE ${twoTrack.engine.enginePass ? "✅" : "❌"} | COACH ${twoTrack.coach.coachPass ? "✅" : "❌"}`);
+      console.log(`  Engine: timeFit=${twoTrack.engine.details.timeFit} | effort=${twoTrack.engine.details.effort}`);
+      console.log(`  Coach: emotion=${twoTrack.coach.emotionMatched} | strategy=${twoTrack.coach.strategyKeywordsOk}`);
+      console.log(`\nOutput:`);
+      console.log(JSON.stringify(output, null, 2));
+      break;
+    }
+
+    case "run-all-v5": {
+      const inputs = await loadAllTestCases();
+      const allExpected = await loadAllExpected();
+      console.log(`\n[V5 Clean Prompt] Running ${inputs.length} TCs...\n`);
+
+      let enginePassed = 0;
+      let coachPassed = 0;
+      let overallPassed = 0;
+
+      for (const input of inputs) {
+        const expected = allExpected.find(e => e.tcId === input.id);
+        if (!expected) {
+          console.warn(`No expected for ${input.id}`);
+          continue;
+        }
+
+        console.log(`\n🔄 [V5] ${input.id}: ${input.name}...`);
+        const start = Date.now();
+        let output: any = null;
+        try {
+          output = await runPipelineV5(input);
+        } catch (e) {
+          console.log(`   ❌ ERROR: ${(e as Error).message}`);
+          continue;
+        }
+        const latencyMs = Date.now() - start;
+
+        const validation = validateV4(output, input, expected);
+        const twoTrack = validateTwoTrack(output, input, expected);
+
+        if (twoTrack.engine.enginePass) enginePassed++;
+        if (twoTrack.coach.coachPass) coachPassed++;
+        if (validation.overallPass) overallPassed++;
+
+        const eStatus = twoTrack.engine.enginePass ? "E✅" : "E❌";
+        const cStatus = twoTrack.coach.coachPass ? "C✅" : "C❌";
+        const overall = validation.overallPass ? "✅" : "❌";
+
+        // Collect failure details
+        const issues: string[] = [];
+        if (!twoTrack.engine.enginePass) {
+          issues.push(`timeFit=${twoTrack.engine.details.timeFit}`);
+        }
+        if (!twoTrack.coach.coachPass) {
+          if (!twoTrack.coach.emotionMatched) {
+            issues.push(`emotion: exp=${expected.emotionProtocol ?? "neutral"} actual=${output.emotionProtocol ?? "neutral"}`);
+          }
+          if (!twoTrack.coach.strategyKeywordsOk) {
+            issues.push(`strategy keywords missing`);
+          }
+        }
+        const detail = issues.length > 0 ? ` — ${issues.join(", ")}` : "";
+        console.log(`   ${overall} ${eStatus}${cStatus} (${latencyMs}ms)${detail}`);
+
+        await sleep(1000);
+      }
+
+      console.log(`\n${"=".repeat(60)}`);
+      console.log(`\n[V5] 2-Track Summary:`);
+      console.log(`  Engine: ${enginePassed}/${inputs.length} PASS`);
+      console.log(`  Coach:  ${coachPassed}/${inputs.length} PASS`);
+      console.log(`  Overall: ${overallPassed}/${inputs.length} PASS`);
+
+      const reportsDir = path.resolve(import.meta.dirname, "../reports");
+      await fs.mkdir(reportsDir, { recursive: true });
+      const ts = new Date().toISOString().slice(0, 16).replace(/[T:]/g, "-");
+      await fs.writeFile(
+        path.join(reportsDir, `v5-report-${ts}.json`),
+        JSON.stringify({ enginePassed, coachPassed, overallPassed, total: inputs.length, ts }, null, 2)
       );
       break;
     }

@@ -11,74 +11,172 @@
       "weekend": 90
     }
   },
-  "resources": [
-    {
-      "type": "textbook",
-      "description": "McMurry Organic Chemistry Ch.10-15",
-      "quantity": "180p"
-    }
-  ],
-  "conversation": [
-    {
-      "turn": 1,
-      "user": "Taking orgo for the first time. Exam in 2 weeks. McMurry Ch.10-15 (180 pages). I've been going to lectures but not really studying outside of class. I have about 1.5 hours a day.",
-      "expectedAI": {
-        "action": "ask",
-        "mustAsk": [
-          "Are there practice problems or past exams from the professor?"
-        ],
-        "reason": ""
-      }
-    },
-    {
-      "turn": 2,
-      "user": "(answer provided)",
-      "expectedAI": {
-        "action": "generate_plan",
-        "timeFit": "tight",
-        "emotion": {
-          "detected": "neutral"
+  "paths": {
+    "A": {
+      "label": "Golden Path (핵심 정보 제공)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "Taking orgo for the first time. Exam in 2 weeks. McMurry Ch.10-15 (180 pages). I've been going to lectures but not really studying outside of class. I have about 1.5 hours a day.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "Are there practice problems or past exams from the professor?",
+            "choices": [
+              {
+                "id": "1",
+                "text": "50개 이하"
+              },
+              {
+                "id": "2",
+                "text": "50-100개"
+              },
+              {
+                "id": "3",
+                "text": "100개 이상"
+              },
+              {
+                "id": "free",
+                "text": "직접 입력"
+              },
+              {
+                "id": "idk",
+                "text": "🤷 잘 모르겠어"
+              }
+            ],
+            "mustNotDo": [
+              "분량 모른 채 plan 생성",
+              "focusSpan 다시 물어보기"
+            ]
+          }
         },
-        "strategy": [
-          "Track A (Reading): 180p × 6.0min = 1080min over 12 days = 13p/day",
-          "Track B (Problems): immediate chapter-end problems (2-3) after each reading session — from Day 1",
-          "Day 13-14: mechanism review + timed mock problems using remaining 180min buffer",
-          "interleaved reading + mechanism drawing (stop and draw on paper when mechanisms appear)"
-        ],
-        "warnings": [
-          "7.0 min/page calculation exhausts entire budget with 0 time for problems — do NOT use",
-          "reading only without problem practice = likely exam failure despite full coverage",
-          "Ch.15 may not be fully covered if reading goes slow — Ch.15 mechanics-only skim as fallback"
-        ]
-      }
-    }
-  ],
-  "validation": {
-    "diagnosis": {
-      "mustIdentify": [
-        "Track A (Reading): 180p × 6.0min = 1080min over 12 days = 13p/day",
-        "Track B (Problems): immediate chapter-end problems (2-3) after each reading session — from Day 1"
+        {
+          "turn": 2,
+          "user": "(유저가 구체적 답변 제공 — 약점 특정, 분량 확인 등)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=N/A, level=N/A), timeFit=tight",
+                "relevant": "약점/우선순위 반영",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시",
+                "practice": "인출 연습 제안 (문제풀기 or 셀프테스트)",
+                "insight": "이해도 확인 제안 (틀린 문제 복습 등)"
+              },
+              "coach": {
+                "diagnosis": "profile + 유저 답변 기반 상황 파악",
+                "strategy": "timeFit=tight 맞는 전략",
+                "honesty": "timeFit=tight 솔직 전달",
+                "emotion": "neutral 톤 적절, mustNotSay 위반 없음"
+              }
+            }
+          }
+        }
       ]
     },
-    "strategy": {
-      "expectedType": "standard"
+    "B": {
+      "label": "Variant (다른 핵심 선택 → 다른 plan)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "Taking orgo for the first time. Exam in 2 weeks. McMurry Ch.10-15 (180 pages). I've been going to lectures but not really studying outside of class. I have about 1.5 hours a day.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "Are there practice problems or past exams from the professor?"
+          }
+        },
+        {
+          "turn": 2,
+          "user": "(유저가 Path A와 다른 답변 — 전체 어려움, 다른 전략 선호 등)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustDifferFrom": "path_A",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=N/A, level=N/A), timeFit=tight",
+                "relevant": "약점/우선순위 반영",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시",
+                "practice": "인출 연습 제안 (문제풀기 or 셀프테스트)",
+                "insight": "이해도 확인 제안 (틀린 문제 복습 등)"
+              },
+              "coach": {
+                "diagnosis": "profile + 유저 답변 기반 상황 파악",
+                "strategy": "Path A와 다른 전략 (다른 선택지 반영)",
+                "honesty": "timeFit=tight 솔직 전달",
+                "emotion": "neutral 톤 적절, mustNotSay 위반 없음"
+              }
+            }
+          }
+        }
+      ]
     },
-    "honesty": {
-      "expectedTimeFit": "tight",
-      "mustNotFalsePlan": true
-    },
-    "emotion": {
-      "expected": "neutral",
-      "toneExpected": "matter-of-fact; normalize 6min/page as expected for first-time orgo; practical dual-track plan"
-    },
-    "hardFailChecks": [
-      "must NOT lower min/page below 6.0 to make budget appear comfortable — v3 error was using 7.0 (budget exhaustion)",
-      "must include problem-solving Track B — reading alone is insufficient",
-      "must NOT give same plan as TC-34 (retake) or TC-35 (senior)"
-    ]
+    "C": {
+      "label": "🤷 체인 (모르겠어 → 추정 질문 → Smart Default)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "Taking orgo for the first time. Exam in 2 weeks. McMurry Ch.10-15 (180 pages). I've been going to lectures but not really studying outside of class. I have about 1.5 hours a day.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "Are there practice problems or past exams from the professor?"
+          }
+        },
+        {
+          "turn": 2,
+          "user": "🤷 잘 모르겠어요.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "더 쉬운 질문으로 재시도 (추정)",
+            "mustNotDo": [
+              "분량 모른 채 plan 생성",
+              "넘어가기"
+            ]
+          }
+        },
+        {
+          "turn": 3,
+          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustDifferFrom": "path_A",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=N/A, level=N/A), timeFit=tight",
+                "relevant": "약점 모르니 Smart Default + 리밸런스 안내",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시",
+                "practice": "인출 연습 제안 (문제풀기 or 셀프테스트)",
+                "insight": "이해도 확인 제안 (틀린 문제 복습 등)"
+              },
+              "coach": {
+                "diagnosis": "정보 부족 → 추정 기반 or 기본값",
+                "strategy": "Smart Default + 나중에 조정 가능 안내",
+                "honesty": "timeFit=tight 솔직 전달",
+                "emotion": "neutral 톤 적절, mustNotSay 위반 없음"
+              }
+            }
+          }
+        }
+      ]
+    }
   },
-  "_legacy": {
-    "inputFile": "data/legacy-v4/input/tc-33-orgo-freshman.json",
-    "expectedFile": "data/legacy-v4/expected/tc-33-orgo-freshman.json"
-  }
+  "hardFailGates": [
+    "HFG-1",
+    "HFG-3",
+    "HFG-4",
+    "HFG-5"
+  ]
 }

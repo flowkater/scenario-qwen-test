@@ -4,86 +4,179 @@
   "name": "Udemy React 코스 180강 (캐주얼, 기한 없음)",
   "path": "W",
   "emotionProtocol": "neutral",
-
   "profile": {
     "role": "self",
-    "timeBudget": { "weekday": 60, "weekend": 60 }
+    "timeBudget": {
+      "weekday": 60,
+      "weekend": 60
+    }
   },
-
-  "conversation": [
-    {
-      "turn": 1,
-      "user": "Taking a React course on Udemy. 180 lectures, about 24 hours total. No deadline, just learning for fun. Maybe 1 hour a day.",
-      "expectedAI": {
-        "action": "ask",
-        "mustAsk": "priorHTMLCSSJSKnowledge",
-        "reason": "기존 HTML/CSS/JS 수준에 따라 초반 섹션 스킵 가능 여부 결정 → 실질 강의 수 변경",
-        "mustDiagnose": ["180 lectures × 8min avg × 2.0× coding multiplier = ~18min/lecture effective", "no deadline → sustainable pace + build days critical"],
-        "mustNotDo": ["plan 바로 생성 (사전 지식 수준 미확인)", "180개 개별 강의 단위 계획 (섹션 기반 마일스톤 필요)"]
-      }
-    },
-    {
-      "turn": 2,
-      "user": "I know basic HTML and CSS from school. JavaScript is still new to me though.",
-      "expectedAI": {
-        "action": "generate_plan",
-        "plans": [
-          {
-            "label": "Udemy React Course",
-            "type": "watch",
-            "dailyTarget": { "value": 3, "unit": "lecture" },
-            "totalQuantity": 180,
-            "effortModel": { "expected": 18, "min": 14, "max": 24, "unit": "lecture" },
-            "priority": "primary"
+  "paths": {
+    "A": {
+      "label": "Golden Path (핵심 정보 제공)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "Taking a React course on Udemy. 180 lectures, about 24 hours total. No deadline, just learning for fun. Maybe 1 hour a day.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "How far along are you in HTML/CSS/JS? (determines which sections to skip)",
+            "choices": [
+              {
+                "id": "1",
+                "text": "옵션 1"
+              },
+              {
+                "id": "2",
+                "text": "옵션 2"
+              },
+              {
+                "id": "3",
+                "text": "옵션 3"
+              },
+              {
+                "id": "free",
+                "text": "직접 입력"
+              },
+              {
+                "id": "idk",
+                "text": "🤷 잘 모르겠어"
+              }
+            ],
+            "mustNotDo": [
+              "분량 모른 채 plan 생성",
+              "focusSpan 다시 물어보기"
+            ]
           }
-        ],
-        "timeFit": "fits",
-        "diagnosis": "3 lectures/day × 18min = ~54min → fits within 60min. HTML/CSS known → skip HTML/CSS sections but JS sections needed. No deadline → sustainable pace with weekly Build Days.",
-        "strategy": "Section-based milestones: skip HTML/CSS basics, start from JS fundamentals. 3-4 lectures/day on weekdays. 1 Build Day per week (no lecture, build something with that week's concepts). Tutorial Hell prevention: build > watch ratio matters.",
-        "honestAssessment": "180 lectures at 3/day ≈ 60 days (2 months). With Build Days (1/week), realistic completion ~10 weeks. No rush — consistency beats speed for self-learning.",
-        "alternatives": [
-          {
-            "label": "빠른 진도",
-            "change": "4 lectures/day (skip HTML/CSS sections entirely) → ~45일 완료",
-            "newTimeFit": "fits"
-          },
-          {
-            "label": "Build 중심",
-            "change": "2 lectures/day + 매주 2일 Build Day → 실습 비중 40%",
-            "newTimeFit": "fits"
+        },
+        {
+          "turn": 2,
+          "user": "(유저가 구체적 답변 제공 — 약점 특정, 분량 확인 등)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=N/A, level=N/A), timeFit=fits",
+                "relevant": "약점/우선순위 반영",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시 (해당 시)",
+                "practice": "선택적",
+                "insight": "선택적"
+              },
+              "coach": {
+                "diagnosis": "profile + 유저 답변 기반 상황 파악",
+                "strategy": "timeFit=fits 맞는 전략",
+                "honesty": "timeFit=fits 솔직 전달",
+                "emotion": "neutral 톤 적절, mustNotSay 위반 없음"
+              }
+            }
           }
-        ],
-        "emotion": {
-          "detected": "neutral",
-          "tone": "encouraging and fun",
-          "mustNotSay": ["you need to hurry", "180 lectures is a lot"]
         }
-      }
+      ]
+    },
+    "B": {
+      "label": "Variant (다른 핵심 선택 → 다른 plan)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "Taking a React course on Udemy. 180 lectures, about 24 hours total. No deadline, just learning for fun. Maybe 1 hour a day.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "How far along are you in HTML/CSS/JS? (determines which sections to skip)"
+          }
+        },
+        {
+          "turn": 2,
+          "user": "(유저가 Path A와 다른 답변 — 전체 어려움, 다른 전략 선호 등)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustDifferFrom": "path_A",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=N/A, level=N/A), timeFit=fits",
+                "relevant": "약점/우선순위 반영",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시 (해당 시)",
+                "practice": "선택적",
+                "insight": "선택적"
+              },
+              "coach": {
+                "diagnosis": "profile + 유저 답변 기반 상황 파악",
+                "strategy": "Path A와 다른 전략 (다른 선택지 반영)",
+                "honesty": "timeFit=fits 솔직 전달",
+                "emotion": "neutral 톤 적절, mustNotSay 위반 없음"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "C": {
+      "label": "🤷 체인 (모르겠어 → 추정 질문 → Smart Default)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "Taking a React course on Udemy. 180 lectures, about 24 hours total. No deadline, just learning for fun. Maybe 1 hour a day.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "How far along are you in HTML/CSS/JS? (determines which sections to skip)"
+          }
+        },
+        {
+          "turn": 2,
+          "user": "🤷 잘 모르겠어요.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "더 쉬운 질문으로 재시도 (추정)",
+            "mustNotDo": [
+              "분량 모른 채 plan 생성",
+              "넘어가기"
+            ]
+          }
+        },
+        {
+          "turn": 3,
+          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustDifferFrom": "path_A",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=N/A, level=N/A), timeFit=fits",
+                "relevant": "약점 모르니 Smart Default + 리밸런스 안내",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시 (해당 시)",
+                "practice": "선택적",
+                "insight": "선택적"
+              },
+              "coach": {
+                "diagnosis": "정보 부족 → 추정 기반 or 기본값",
+                "strategy": "Smart Default + 나중에 조정 가능 안내",
+                "honesty": "timeFit=fits 솔직 전달",
+                "emotion": "neutral 톤 적절, mustNotSay 위반 없음"
+              }
+            }
+          }
+        }
+      ]
     }
-  ],
-
-  "validation": {
-    "diagnosis": {
-      "mustIdentify": ["coding tutorial 2.0× multiplier", "Tutorial Hell risk for MOOC", "Build Day necessity"],
-      "mustReflectInPlan": "section-based milestones with Build Days, not 180 individual lecture tracking"
-    },
-    "strategy": {
-      "expectedType": "fits-sustainable",
-      "mustProvideAlternatives": true,
-      "alternativesMinCount": 2
-    },
-    "questions": {
-      "turn1MustAsk": ["priorHTMLCSSJSKnowledge"],
-      "maxQuestionsPerTurn": 1
-    },
-    "honesty": {
-      "expectedTimeFit": "fits",
-      "mustNotFalsePlan": true
-    },
-    "emotion": {
-      "expected": "neutral",
-      "mustNotSay": ["you need to hurry", "180 lectures is too many"],
-      "toneExpected": "encouraging and fun; realistic about portfolio timeline; build-focused"
-    }
-  }
+  },
+  "hardFailGates": [
+    "HFG-1",
+    "HFG-3",
+    "HFG-4",
+    "HFG-5"
+  ]
 }

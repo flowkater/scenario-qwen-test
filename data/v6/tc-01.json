@@ -4,7 +4,6 @@
   "name": "Tyler — Econ 101 Freshman 🤷",
   "path": "E",
   "emotionProtocol": "neutral",
-
   "profile": {
     "role": "student",
     "studentLevel": "college",
@@ -12,71 +11,177 @@
     "year": "freshman",
     "level": "beginner",
     "focusSpan": 25,
-    "timeBudget": { "weekday": 60, "weekend": 60 }
+    "timeBudget": {
+      "weekday": 60,
+      "weekend": 60
+    }
   },
-
-  "conversation": [
-    {
-      "turn": 1,
-      "user": "I have an econ midterm coming up. I think it's in about two weeks? I have the textbook but I haven't really started studying. I'm a freshman.",
-      "expectedAI": {
-        "action": "ask",
-        "mustAsk": ["chaptersScope", "examFormat"],
-        "reason": "chaptersScope → totalQuantity/deadline 결정; examFormat → min/page 변경 (MC:3.0 vs essay:4.0)",
-        "maxQuestions": 3,
-        "mustNotDo": ["plan 바로 생성 (시험 범위, 형식 모름)"]
-      }
-    },
-    {
-      "turn": 2,
-      "user": "It covers chapters 1-10, about 250 pages. The exam is multiple choice and short answer.",
-      "expectedAI": {
-        "action": "generate_plan",
-        "plans": [
-          {
-            "label": "Mankiw Principles of Economics Ch.1-10",
-            "type": "read",
-            "dailyTarget": { "value": 18, "unit": "page" },
-            "totalQuantity": 250,
-            "effortModel": { "expected": 3.0, "min": 2.3, "max": 3.8, "unit": "page" },
-            "priority": "primary"
+  "paths": {
+    "A": {
+      "label": "Golden Path (핵심 정보 제공)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "I have an econ midterm coming up. I think it's in about two weeks? I have the textbook but I haven't really started studying. I'm a freshman.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "chaptersScope",
+            "choices": [
+              {
+                "id": "1",
+                "text": "옵션 1"
+              },
+              {
+                "id": "2",
+                "text": "옵션 2"
+              },
+              {
+                "id": "3",
+                "text": "옵션 3"
+              },
+              {
+                "id": "free",
+                "text": "직접 입력"
+              },
+              {
+                "id": "idk",
+                "text": "🤷 잘 모르겠어"
+              }
+            ],
+            "mustNotDo": [
+              "분량 모른 채 plan 생성",
+              "focusSpan 다시 물어보기"
+            ]
           }
-        ],
-        "timeFit": "fits",
-        "diagnosis": "beginner freshman, 첫 시험 → 기본 reading pace 3.0min/p, MC+short answer → 개념 이해 중심",
-        "strategy": "250p × 3.0min = 750min needed, 60min × 14 = 840min available → fits. reading + self-test 병행",
-        "honestAssessment": "2주면 250p 충분히 커버 가능. 매일 꾸준히 18p씩.",
-        "alternatives": [],
-        "emotion": {
-          "detected": "neutral",
-          "tone": "beginner-encouraging",
-          "mustNotSay": []
+        },
+        {
+          "turn": 2,
+          "user": "(유저가 구체적 답변 제공 — 약점 특정, 분량 확인 등)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=25, level=beginner), timeFit=fits",
+                "relevant": "약점/우선순위 반영",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시",
+                "practice": "인출 연습 제안 (문제풀기 or 셀프테스트)",
+                "insight": "이해도 확인 제안 (틀린 문제 복습 등)"
+              },
+              "coach": {
+                "diagnosis": "profile + 유저 답변 기반 상황 파악",
+                "strategy": "timeFit=fits 맞는 전략",
+                "honesty": "timeFit=fits 솔직 전달",
+                "emotion": "neutral 톤 적절, mustNotSay 위반 없음"
+              }
+            }
+          }
         }
-      }
+      ]
+    },
+    "B": {
+      "label": "Variant (다른 핵심 선택 → 다른 plan)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "I have an econ midterm coming up. I think it's in about two weeks? I have the textbook but I haven't really started studying. I'm a freshman.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "chaptersScope"
+          }
+        },
+        {
+          "turn": 2,
+          "user": "(유저가 Path A와 다른 답변 — 전체 어려움, 다른 전략 선호 등)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustDifferFrom": "path_A",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=25, level=beginner), timeFit=fits",
+                "relevant": "약점/우선순위 반영",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시",
+                "practice": "인출 연습 제안 (문제풀기 or 셀프테스트)",
+                "insight": "이해도 확인 제안 (틀린 문제 복습 등)"
+              },
+              "coach": {
+                "diagnosis": "profile + 유저 답변 기반 상황 파악",
+                "strategy": "Path A와 다른 전략 (다른 선택지 반영)",
+                "honesty": "timeFit=fits 솔직 전달",
+                "emotion": "neutral 톤 적절, mustNotSay 위반 없음"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "C": {
+      "label": "🤷 체인 (모르겠어 → 추정 질문 → Smart Default)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "I have an econ midterm coming up. I think it's in about two weeks? I have the textbook but I haven't really started studying. I'm a freshman.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "chaptersScope"
+          }
+        },
+        {
+          "turn": 2,
+          "user": "🤷 잘 모르겠어요.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "더 쉬운 질문으로 재시도 (추정)",
+            "mustNotDo": [
+              "분량 모른 채 plan 생성",
+              "넘어가기"
+            ]
+          }
+        },
+        {
+          "turn": 3,
+          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustDifferFrom": "path_A",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=25, level=beginner), timeFit=fits",
+                "relevant": "약점 모르니 Smart Default + 리밸런스 안내",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시",
+                "practice": "인출 연습 제안 (문제풀기 or 셀프테스트)",
+                "insight": "이해도 확인 제안 (틀린 문제 복습 등)"
+              },
+              "coach": {
+                "diagnosis": "정보 부족 → 추정 기반 or 기본값",
+                "strategy": "Smart Default + 나중에 조정 가능 안내",
+                "honesty": "timeFit=fits 솔직 전달",
+                "emotion": "neutral 톤 적절, mustNotSay 위반 없음"
+              }
+            }
+          }
+        }
+      ]
     }
-  ],
-
-  "validation": {
-    "diagnosis": {
-      "mustIdentify": ["freshman first exam", "beginner level → standard reading pace"],
-      "mustReflectInPlan": "dailyTarget ~18p/day based on 250p/14days"
-    },
-    "strategy": {
-      "expectedType": "fits-standard",
-      "mustProvideAlternatives": false
-    },
-    "questions": {
-      "turn1MustAsk": ["chaptersScope", "examFormat"],
-      "maxQuestionsPerTurn": 3
-    },
-    "honesty": {
-      "expectedTimeFit": "fits",
-      "mustNotFalsePlan": true
-    },
-    "emotion": {
-      "expected": "neutral",
-      "mustNotSay": [],
-      "toneExpected": "beginner-encouraging — '첫 시험 준비 잘하려는 거 좋아. 2주면 충분히 할 수 있어.'"
-    }
-  }
+  },
+  "hardFailGates": [
+    "HFG-1",
+    "HFG-3",
+    "HFG-4",
+    "HFG-5"
+  ]
 }

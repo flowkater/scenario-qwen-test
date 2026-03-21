@@ -4,64 +4,136 @@
   "name": "해리포터 불의 잔 (한국어, 재미로)",
   "path": "R",
   "emotionProtocol": "neutral",
-
   "profile": {
     "role": "self",
-    "timeBudget": { "weekday": 0, "weekend": 0 }
+    "timeBudget": {
+      "weekday": 0,
+      "weekend": 0
+    }
   },
-
-  "conversation": [
-    {
-      "turn": 1,
-      "user": "해리포터 불의 잔 읽으려고요. 한국어판 550페이지. 그냥 재미로. 하루에 얼마나 읽을지 알려주세요.",
-      "expectedAI": {
-        "action": "generate_plan",
-        "plans": [
-          {
-            "label": "해리포터와 불의 잔 (한국어판)",
-            "type": "read",
-            "dailyTarget": { "value": 30, "unit": "page" },
-            "totalQuantity": 550,
-            "effortModel": { "expected": 2.0, "min": 1.5, "max": 2.5, "unit": "page" },
-            "priority": "primary"
+  "paths": {
+    "A": {
+      "label": "Golden Path (정보 충분)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "해리포터 불의 잔 읽으려고요. 한국어판 550페이지. 그냥 재미로. 하루에 얼마나 읽을지 알려주세요.",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=N/A, level=N/A), timeFit=fits",
+                "relevant": "상황에 맞는 분배",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시 (해당 시)",
+                "practice": "선택적",
+                "insight": "선택적"
+              },
+              "coach": {
+                "diagnosis": "profile + 유저 답변 기반 상황 파악",
+                "strategy": "timeFit=fits 맞는 전략",
+                "honesty": "timeFit=fits 솔직 전달",
+                "emotion": "neutral 톤 적절, mustNotSay 위반 없음"
+              }
+            }
           }
-        ],
-        "timeFit": "fits",
-        "diagnosis": "casual Korean fiction; ~2.0min/p at average Korean reading speed; user picks own pace",
-        "strategy": "offer 3 pace options: slow (15-20p/day ~4-5wks), normal (30-40p/day ~2.5wks), fast (50+p/day ~2wks); no forced schedule — user picks own pace",
-        "honestAssessment": "No deadline, no pressure. Pick a pace that feels fun.",
-        "alternatives": [],
-        "emotion": {
-          "detected": "neutral",
-          "tone": "warm and fun; Harry Potter excitement energy 😊",
-          "mustNotSay": ["you should take notes", "try speed reading techniques"]
         }
-      }
+      ]
+    },
+    "B": {
+      "label": "Variant (다른 조건에서 plan)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "(Path A와 약간 다른 조건으로 같은 시나리오)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustDifferFrom": "path_A",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=N/A, level=N/A), timeFit=fits",
+                "relevant": "상황에 맞는 분배",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시 (해당 시)",
+                "practice": "선택적",
+                "insight": "선택적"
+              },
+              "coach": {
+                "diagnosis": "profile + 유저 답변 기반 상황 파악",
+                "strategy": "Path A와 다른 전략 (다른 선택지 반영)",
+                "honesty": "timeFit=fits 솔직 전달",
+                "emotion": "neutral 톤 적절, mustNotSay 위반 없음"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "C": {
+      "label": "🤷 체인 (모르겠어 → 추정 질문 → Smart Default)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "해리포터 불의 잔 읽으려고요. 한국어판 550페이지. 그냥 재미로. 하루에 얼마나 읽을지 알려주세요.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "기본 정보 확인"
+          }
+        },
+        {
+          "turn": 2,
+          "user": "🤷 잘 모르겠어요.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "더 쉬운 질문으로 재시도 (추정)",
+            "mustNotDo": [
+              "분량 모른 채 plan 생성",
+              "넘어가기"
+            ]
+          }
+        },
+        {
+          "turn": 3,
+          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustDifferFrom": "path_A",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=N/A, level=N/A), timeFit=fits",
+                "relevant": "약점 모르니 Smart Default + 리밸런스 안내",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시 (해당 시)",
+                "practice": "선택적",
+                "insight": "선택적"
+              },
+              "coach": {
+                "diagnosis": "정보 부족 → 추정 기반 or 기본값",
+                "strategy": "Smart Default + 나중에 조정 가능 안내",
+                "honesty": "timeFit=fits 솔직 전달",
+                "emotion": "neutral 톤 적절, mustNotSay 위반 없음"
+              }
+            }
+          }
+        }
+      ]
     }
-  ],
-
-  "validation": {
-    "diagnosis": {
-      "mustIdentify": ["casual reading — no academic goal", "Korean fiction at natural reading speed"],
-      "mustReflectInPlan": "flexible pace options, not a rigid schedule"
-    },
-    "strategy": {
-      "expectedType": "fits",
-      "mustProvideAlternatives": false,
-      "alternativesMinCount": 0
-    },
-    "questions": {
-      "turn1MustAsk": [],
-      "maxQuestionsPerTurn": 0
-    },
-    "honesty": {
-      "expectedTimeFit": "fits",
-      "mustNotFalsePlan": true
-    },
-    "emotion": {
-      "expected": "neutral",
-      "mustNotSay": ["push a specific pace", "add note-taking", "comprehension coaching"],
-      "toneExpected": "warm and fun; Harry Potter excitement energy 😊; no unsolicited strategy coaching"
-    }
-  }
+  },
+  "hardFailGates": [
+    "HFG-1",
+    "HFG-4",
+    "HFG-5"
+  ]
 }

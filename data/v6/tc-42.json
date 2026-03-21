@@ -10,45 +10,129 @@
       "weekend": 240
     }
   },
-  "resources": [],
-  "conversation": [
-    {
-      "turn": 1,
-      "user": "CPA FAR and REG at the same time. Both exams are in 10 weeks. FAR is my weak area (failed once). REG I'm starting fresh. About 4 hours a day after work.",
-      "expectedAI": {
-        "action": "generate_plan",
-        "timeFit": "fits",
-        "emotion": {
-          "detected": "neutral"
+  "paths": {
+    "A": {
+      "label": "Golden Path (정보 충분)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "CPA FAR and REG at the same time. Both exams are in 10 weeks. FAR is my weak area (failed once). REG I'm starting fresh. About 4 hours a day after work.",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=N/A, level=N/A), timeFit=fits",
+                "relevant": "상황에 맞는 분배",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시",
+                "practice": "인출 연습 제안 (문제풀기 or 셀프테스트)",
+                "insight": "이해도 확인 제안 (틀린 문제 복습 등)"
+              },
+              "coach": {
+                "diagnosis": "profile + 유저 답변 기반 상황 파악",
+                "strategy": "timeFit=fits 맞는 전략",
+                "honesty": "timeFit=fits 솔직 전달",
+                "emotion": "neutral 톤 적절, mustNotSay 위반 없음"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "B": {
+      "label": "Variant (다른 조건에서 plan)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "(Path A와 약간 다른 조건으로 같은 시나리오)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustDifferFrom": "path_A",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=N/A, level=N/A), timeFit=fits",
+                "relevant": "상황에 맞는 분배",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시",
+                "practice": "인출 연습 제안 (문제풀기 or 셀프테스트)",
+                "insight": "이해도 확인 제안 (틀린 문제 복습 등)"
+              },
+              "coach": {
+                "diagnosis": "profile + 유저 답변 기반 상황 파악",
+                "strategy": "Path A와 다른 전략 (다른 선택지 반영)",
+                "honesty": "timeFit=fits 솔직 전달",
+                "emotion": "neutral 톤 적절, mustNotSay 위반 없음"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "C": {
+      "label": "🤷 체인 (모르겠어 → 추정 질문 → Smart Default)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "CPA FAR and REG at the same time. Both exams are in 10 weeks. FAR is my weak area (failed once). REG I'm starting fresh. About 4 hours a day after work.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "기본 정보 확인"
+          }
         },
-        "strategy": [],
-        "warnings": [],
-        "alternatives": []
-      }
+        {
+          "turn": 2,
+          "user": "🤷 잘 모르겠어요.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "더 쉬운 질문으로 재시도 (추정)",
+            "mustNotDo": [
+              "분량 모른 채 plan 생성",
+              "넘어가기"
+            ]
+          }
+        },
+        {
+          "turn": 3,
+          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustDifferFrom": "path_A",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=N/A, level=N/A), timeFit=fits",
+                "relevant": "약점 모르니 Smart Default + 리밸런스 안내",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시",
+                "practice": "인출 연습 제안 (문제풀기 or 셀프테스트)",
+                "insight": "이해도 확인 제안 (틀린 문제 복습 등)"
+              },
+              "coach": {
+                "diagnosis": "정보 부족 → 추정 기반 or 기본값",
+                "strategy": "Smart Default + 나중에 조정 가능 안내",
+                "honesty": "timeFit=fits 솔직 전달",
+                "emotion": "neutral 톤 적절, mustNotSay 위반 없음"
+              }
+            }
+          }
+        }
+      ]
     }
-  ],
-  "validation": {
-    "diagnosis": {
-      "mustIdentify": []
-    },
-    "strategy": {
-      "expectedType": "standard"
-    },
-    "honesty": {
-      "expectedTimeFit": "fits",
-      "mustNotFalsePlan": true
-    },
-    "emotion": {
-      "expected": "neutral",
-      "toneExpected": "neutral + data-driven analysis — sequential recommendation with clear rationale"
-    },
-    "hardFailChecks": [
-      "HFG-1",
-      "HFG-4"
-    ]
   },
-  "_legacy": {
-    "inputFile": "data/legacy-v4/input/tc-42-multi-subject-cpa-far-reg.json",
-    "expectedFile": "data/legacy-v4/expected/tc-42-multi-subject-cpa-far-reg.json"
-  }
+  "hardFailGates": [
+    "HFG-1",
+    "HFG-4",
+    "HFG-5"
+  ]
 }

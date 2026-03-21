@@ -4,75 +4,136 @@
   "name": "수능 수학 기출문제집 500문제 (4개월, 1시간/일)",
   "path": "P",
   "emotionProtocol": "neutral",
-
   "profile": {
     "role": "student",
-    "timeBudget": { "weekday": 60, "weekend": 60 }
+    "timeBudget": {
+      "weekday": 60,
+      "weekend": 60
+    }
   },
-
-  "conversation": [
-    {
-      "turn": 1,
-      "user": "수학 기출문제집 풀려고요. 총 500문제. 수능까지 4개월 남았어요. 하루 1시간.",
-      "expectedAI": {
-        "action": "generate_plan",
-        "plans": [
-          {
-            "label": "수능 수학 기출문제집",
-            "type": "practice",
-            "dailyTarget": { "value": 5, "unit": "problem" },
-            "totalQuantity": 500,
-            "effortModel": { "expected": 15, "min": 5, "max": 60, "unit": "problem" },
-            "priority": "primary"
+  "paths": {
+    "A": {
+      "label": "Golden Path (정보 충분)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "수학 기출문제집 풀려고요. 총 500문제. 수능까지 4개월 남았어요. 하루 1시간.",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=N/A, level=N/A), timeFit=tight",
+                "relevant": "상황에 맞는 분배",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시 (해당 시)",
+                "practice": "선택적",
+                "insight": "선택적"
+              },
+              "coach": {
+                "diagnosis": "profile + 유저 답변 기반 상황 파악",
+                "strategy": "timeFit=tight 맞는 전략",
+                "honesty": "timeFit=tight 솔직 전달",
+                "emotion": "neutral 톤 적절, mustNotSay 위반 없음"
+              }
+            }
           }
-        ],
-        "timeFit": "tight",
-        "diagnosis": "수능 수학 난이도 편차 극심: 기본 2-5min vs 킬러문항 30-60min. 단순 500÷120일=4.2문제/일 계산은 무의미. 난이도 태깅 기반 Phase 전략 필요. 5문제/day 기준 (쉬운 날 7-8개, 어려운 날 2-3개 → 평균 5).",
-        "strategy": "난이도 태깅: ⭐(기본)/⭐⭐(중간)/⭐⭐⭐(킬러) — 풀면서 즉시 태깅. Phase 1 (1-2개월): 1회독 태깅하며 풀기 5문제/day. Phase 2 (3개월차): 오답 2회독 + 약점 영역 집중. Phase 3 (4개월차): 모의시험 시뮬레이션 + 최종 약점 보완. 매 5일마다 60min 오답 분석 전용 세션. 인터리빙: 같은 유형 연속 X, 영역 혼합.",
-        "honestAssessment": "킬러문항은 1문제에 60min 걸릴 수 있음 — 이건 정상. Phase 3에서 모의시험 시뮬레이션은 기본 60min/day 초과할 수 있음. 500문제 전체 1회독 + 오답 2회독은 tight.",
-        "alternatives": [
-          {
-            "label": "킬러 우선 전략",
-            "change": "⭐⭐⭐ 문제 먼저 분류 → 킬러 150문제 집중 + 나머지 빠르게 확인",
-            "newTimeFit": "fits"
-          },
-          {
-            "label": "2회독 포기 → 1회독 + 오답만",
-            "change": "500문제 1회독 완주 + 오답 문제만 2회독 (전체 2회독 생략)",
-            "newTimeFit": "fits"
-          }
-        ],
-        "emotion": {
-          "detected": "neutral",
-          "tone": "systematic, Korean exam context-aware",
-          "mustNotSay": ["하루 4문제면 돼요", "쉽게 끝낼 수 있어요"]
         }
-      }
+      ]
+    },
+    "B": {
+      "label": "Variant (다른 조건에서 plan)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "(Path A와 약간 다른 조건으로 같은 시나리오)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustDifferFrom": "path_A",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=N/A, level=N/A), timeFit=tight",
+                "relevant": "상황에 맞는 분배",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시 (해당 시)",
+                "practice": "선택적",
+                "insight": "선택적"
+              },
+              "coach": {
+                "diagnosis": "profile + 유저 답변 기반 상황 파악",
+                "strategy": "Path A와 다른 전략 (다른 선택지 반영)",
+                "honesty": "timeFit=tight 솔직 전달",
+                "emotion": "neutral 톤 적절, mustNotSay 위반 없음"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "C": {
+      "label": "🤷 체인 (모르겠어 → 추정 질문 → Smart Default)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "수학 기출문제집 풀려고요. 총 500문제. 수능까지 4개월 남았어요. 하루 1시간.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "기본 정보 확인"
+          }
+        },
+        {
+          "turn": 2,
+          "user": "🤷 잘 모르겠어요.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "더 쉬운 질문으로 재시도 (추정)",
+            "mustNotDo": [
+              "분량 모른 채 plan 생성",
+              "넘어가기"
+            ]
+          }
+        },
+        {
+          "turn": 3,
+          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustDifferFrom": "path_A",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=N/A, level=N/A), timeFit=tight",
+                "relevant": "약점 모르니 Smart Default + 리밸런스 안내",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시 (해당 시)",
+                "practice": "선택적",
+                "insight": "선택적"
+              },
+              "coach": {
+                "diagnosis": "정보 부족 → 추정 기반 or 기본값",
+                "strategy": "Smart Default + 나중에 조정 가능 안내",
+                "honesty": "timeFit=tight 솔직 전달",
+                "emotion": "neutral 톤 적절, mustNotSay 위반 없음"
+              }
+            }
+          }
+        }
+      ]
     }
-  ],
-
-  "validation": {
-    "diagnosis": {
-      "mustIdentify": ["수능 수학 난이도 편차 (기본 5min vs 킬러 60min)", "단순 나눗셈 목표(500÷120=4.2) 부적절", "난이도 태깅 기반 전략 필요"],
-      "mustReflectInPlan": "effortModel min/max 극심한 편차 반영, phase-based strategy with difficulty tagging"
-    },
-    "strategy": {
-      "expectedType": "tight-phased",
-      "mustProvideAlternatives": true,
-      "alternativesMinCount": 2
-    },
-    "questions": {
-      "turn1MustAsk": [],
-      "maxQuestionsPerTurn": 0
-    },
-    "honesty": {
-      "expectedTimeFit": "tight",
-      "mustNotFalsePlan": true
-    },
-    "emotion": {
-      "expected": "neutral",
-      "mustNotSay": ["하루 4문제면 돼요", "쉽게 끝낼 수 있어요"],
-      "toneExpected": "systematic, Korean exam context-aware; phase structure with clear milestones"
-    }
-  }
+  },
+  "hardFailGates": [
+    "HFG-1",
+    "HFG-4",
+    "HFG-5"
+  ]
 }

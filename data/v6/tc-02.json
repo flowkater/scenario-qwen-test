@@ -4,7 +4,6 @@
   "name": "Emma — Genetics Junior (멀티 자료)",
   "path": "E",
   "emotionProtocol": "neutral",
-
   "profile": {
     "role": "student",
     "studentLevel": "college",
@@ -12,88 +11,134 @@
     "year": "junior",
     "level": "capable",
     "focusSpan": 50,
-    "timeBudget": { "weekday": 120, "weekend": 120 }
+    "timeBudget": {
+      "weekday": 120,
+      "weekend": 120
+    }
   },
-
-  "conversation": [
-    {
-      "turn": 1,
-      "user": "Genetics midterm is April 14th. I have Concepts of Genetics textbook (chapters 8-14, about 210 pages), 90 practice problems from past exams, and 12 lectures I haven't watched. I'm a junior, I've done well in bio before.",
-      "expectedAI": {
-        "action": "generate_plan",
-        "plans": [
-          {
-            "label": "Concepts of Genetics Ch.8-14",
-            "type": "read",
-            "dailyTarget": { "value": 9, "unit": "page" },
-            "totalQuantity": 210,
-            "effortModel": { "expected": 5.5, "min": 5.0, "max": 6.0, "unit": "page" },
-            "priority": "secondary"
-          },
-          {
-            "label": "Practice Problems (기출)",
-            "type": "practice",
-            "dailyTarget": { "value": 4, "unit": "problem" },
-            "totalQuantity": 90,
-            "effortModel": { "expected": 11, "min": 10, "max": 12, "unit": "problem" },
-            "priority": "primary"
-          },
-          {
-            "label": "Lecture Recordings",
-            "type": "watch",
-            "dailyTarget": { "value": 1, "unit": "lecture" },
-            "totalQuantity": 12,
-            "effortModel": { "expected": 75, "min": 60, "max": 90, "unit": "lecture" },
-            "priority": "tertiary"
+  "paths": {
+    "A": {
+      "label": "Golden Path (정보 충분)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "Genetics midterm is April 14th. I have Concepts of Genetics textbook (chapters 8-14, about 210 pages), 90 practice problems from past exams, and 12 lectures I haven't watched. I'm a junior, I've done well in bio before.",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=50, level=capable), timeFit=tight",
+                "relevant": "상황에 맞는 분배",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시",
+                "practice": "인출 연습 제안 (문제풀기 or 셀프테스트)",
+                "insight": "이해도 확인 제안 (틀린 문제 복습 등)"
+              },
+              "coach": {
+                "diagnosis": "profile + 유저 답변 기반 상황 파악",
+                "strategy": "timeFit=tight 맞는 전략",
+                "honesty": "timeFit=tight 솔직 전달",
+                "emotion": "neutral 톤 적절, mustNotSay 위반 없음"
+              }
+            }
           }
-        ],
-        "timeFit": "tight",
-        "diagnosis": "capable junior, bio 기반 있음 → 문제풀이 중심 전략. 3자료 동시 → PlanGroup 번들",
-        "strategy": "PlanGroup 3 plans. Priority: problems > textbook > lectures. interleaving: chapter reading → immediate problem set. 총 ~3105min needed vs 3000min available → tight",
-        "honestAssessment": "3자료 전부 커버하면 tight. 강의 7-8개로 줄이면 여유 생김.",
-        "alternatives": [
-          {
-            "label": "강의 축소",
-            "change": "12 lectures → 8 lectures (핵심 토픽만)",
-            "newTimeFit": "fits"
-          },
-          {
-            "label": "문제 우선 집중",
-            "change": "reading 210p → 140p (문제 출제 챕터만) + 90문제 전부",
-            "newTimeFit": "fits"
-          }
-        ],
-        "emotion": {
-          "detected": "neutral",
-          "tone": "confident-student",
-          "mustNotSay": []
         }
-      }
+      ]
+    },
+    "B": {
+      "label": "Variant (다른 조건에서 plan)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "(Path A와 약간 다른 조건으로 같은 시나리오)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustDifferFrom": "path_A",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=50, level=capable), timeFit=tight",
+                "relevant": "상황에 맞는 분배",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시",
+                "practice": "인출 연습 제안 (문제풀기 or 셀프테스트)",
+                "insight": "이해도 확인 제안 (틀린 문제 복습 등)"
+              },
+              "coach": {
+                "diagnosis": "profile + 유저 답변 기반 상황 파악",
+                "strategy": "Path A와 다른 전략 (다른 선택지 반영)",
+                "honesty": "timeFit=tight 솔직 전달",
+                "emotion": "neutral 톤 적절, mustNotSay 위반 없음"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "C": {
+      "label": "🤷 체인 (모르겠어 → 추정 질문 → Smart Default)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "Genetics midterm is April 14th. I have Concepts of Genetics textbook (chapters 8-14, about 210 pages), 90 practice problems from past exams, and 12 lectures I haven't watched. I'm a junior, I've done well in bio before.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "기본 정보 확인"
+          }
+        },
+        {
+          "turn": 2,
+          "user": "🤷 잘 모르겠어요.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "더 쉬운 질문으로 재시도 (추정)",
+            "mustNotDo": [
+              "분량 모른 채 plan 생성",
+              "넘어가기"
+            ]
+          }
+        },
+        {
+          "turn": 3,
+          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustDifferFrom": "path_A",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=50, level=capable), timeFit=tight",
+                "relevant": "약점 모르니 Smart Default + 리밸런스 안내",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시",
+                "practice": "인출 연습 제안 (문제풀기 or 셀프테스트)",
+                "insight": "이해도 확인 제안 (틀린 문제 복습 등)"
+              },
+              "coach": {
+                "diagnosis": "정보 부족 → 추정 기반 or 기본값",
+                "strategy": "Smart Default + 나중에 조정 가능 안내",
+                "honesty": "timeFit=tight 솔직 전달",
+                "emotion": "neutral 톤 적절, mustNotSay 위반 없음"
+              }
+            }
+          }
+        }
+      ]
     }
-  ],
-
-  "validation": {
-    "diagnosis": {
-      "mustIdentify": ["multi-resource bundle (3 materials)", "genetics = problem-solving subject"],
-      "mustReflectInPlan": "PlanGroup with 3 plans, problems prioritized over textbook"
-    },
-    "strategy": {
-      "expectedType": "tight-with-alternatives",
-      "mustProvideAlternatives": true,
-      "alternativesMinCount": 2
-    },
-    "questions": {
-      "turn1MustAsk": [],
-      "maxQuestionsPerTurn": 1
-    },
-    "honesty": {
-      "expectedTimeFit": "tight",
-      "mustNotFalsePlan": true
-    },
-    "emotion": {
-      "expected": "neutral",
-      "mustNotSay": [],
-      "toneExpected": "confident-student — '유전학은 문제풀이 과목. 문제가 실력 키워줘.'"
-    }
-  }
+  },
+  "hardFailGates": [
+    "HFG-1",
+    "HFG-4",
+    "HFG-5"
+  ]
 }

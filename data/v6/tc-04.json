@@ -1,103 +1,163 @@
 {
   "id": "tc-04",
   "category": "exam-university",
-  "name": "Marcus — Orgo II Sophomore (산만, 15min focus)",
+  "name": "Marcus — Orgo II (산만, 15min focus, frustration)",
   "path": "E",
   "emotionProtocol": "frustration",
-
   "profile": {
     "role": "student",
-    "studentLevel": "college",
-    "collegeType": "undergrad",
     "year": "sophomore",
     "level": "capable",
     "focusSpan": 15,
     "timeBudget": { "weekday": 120, "weekend": 120 }
   },
-
-  "conversation": [
-    {
-      "turn": 1,
-      "user": "Organic chemistry 2 exam in 10 days. I have the McMurry textbook, about 200 pages for this unit. I also have practice problems but I get distracted really easily. I can only focus for like 15 minutes at a time. I have about 2 hours a day.",
-      "expectedAI": {
-        "action": "ask",
-        "mustAsk": ["practiceProblemsCount"],
-        "reason": "문제 수량 모르면 Plan 2 생성 불가. ≤50 → reading 비중 증가; ≥100 → problem drill 우선",
-        "mustDiagnose": ["focusSpan=15 → 분량 chunk 필요"],
-        "mustNotDo": ["plan 바로 생성 (문제 수량 모름)", "try to focus longer 권유"]
-      }
-    },
-    {
-      "turn": 2,
-      "user": "I have practice problems but I'm not sure how many. Maybe around 80?",
-      "expectedAI": {
-        "action": "generate_plan",
-        "plans": [
-          {
-            "label": "McMurry Orgo II 교재",
-            "type": "read",
-            "dailyTarget": { "value": 20, "unit": "page" },
-            "chunkSize": 3,
-            "totalQuantity": 200,
-            "effortModel": { "expected": 5.5, "min": 4.8, "max": 7.0, "unit": "page" },
-            "priority": "primary"
-          },
-          {
-            "label": "Practice Problems",
-            "type": "practice",
-            "dailyTarget": { "value": 8, "unit": "problem" },
-            "totalQuantity": 80,
-            "effortModel": { "expected": 12, "min": 8, "max": 18, "unit": "problem" },
-            "priority": "secondary"
+  "paths": {
+    "A": {
+      "label": "약점 특정 + 문제 추정 (Golden Path)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "Organic chemistry 2 exam in 10 days. McMurry textbook, about 200 pages. I also have practice problems but I'm not sure how many.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "문제집 분량 추정",
+            "choices": [
+              { "id": "1", "text": "50개 이하" },
+              { "id": "2", "text": "50-100개" },
+              { "id": "3", "text": "100개 이상" },
+              { "id": "free", "text": "직접 입력" },
+              { "id": "idk", "text": "🤷 잘 모르겠어" }
+            ],
+            "mustNotDo": ["분량 모른 채 plan 생성", "focusSpan 다시 물어보기"]
           }
-        ],
-        "timeFit": "deficit",
-        "diagnosis": "focusSpan=15 → effective budget ~100-108min (restart overhead 10%), 분량 chunk 3p 단위로 끊어 읽기",
-        "strategy": "reading 70% + practice 30%. 200p × 5.5 + 80 × 12 = 2060min needed, ~1050min available → deficit",
-        "honestAssessment": "200p + 80문제를 10일 × ~105min으로 커버 불가. deficit.",
-        "alternatives": [
-          {
-            "label": "핵심 챕터만",
-            "change": "200p → 120p (시험 빈출 챕터)",
-            "newTimeFit": "tight"
-          },
-          {
-            "label": "문제 우선",
-            "change": "reading 50p skim + 80문제 전부",
-            "newTimeFit": "tight"
+        },
+        {
+          "turn": 2,
+          "user": "Maybe around 80 problems. The mechanism part is really hard for me, probably 20-30% of the material.",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustInclude": {
+              "smart": {
+                "specific": "교재 200p + 문제 80개 분리된 plan",
+                "measurable": "dailyTarget 숫자 (p/day, 문제/day)",
+                "achievable": "focusSpan=15 → effective budget ~78min 반영, deficit 경고",
+                "relevant": "어려운 부분(20-30%) 우선순위 primary",
+                "timeBound": "10일 마감 역산"
+              },
+              "cpi": {
+                "coverage": "전체 200p 대비 커버리지 % 명시",
+                "practice": "문제를 읽은 범위에서 병행 풀기 제안",
+                "insight": "틀린 문제 복습 or 어려운 부분 먼저 전략 제안"
+              },
+              "coach": {
+                "diagnosis": "focusSpan=15 → budget 축소 + 약점 20-30% 파악",
+                "strategy": "weakness-first + 핵심 선별 (deficit이니까)",
+                "honesty": "deficit → 전부 커버 불가 솔직 + 대안 2개+",
+                "emotion": "frustration → 자책 없이 현실적 톤, '더 집중해' 금지"
+              }
+            }
           }
-        ],
-        "emotion": {
-          "detected": "frustration",
-          "tone": "constraint-accepting",
-          "mustNotSay": ["try to focus longer", "just study more"]
         }
-      }
+      ]
+    },
+    "B": {
+      "label": "전체 어려움 (Variant)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "Organic chemistry 2 exam in 10 days. McMurry textbook, about 200 pages. I also have practice problems but I'm not sure how many.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "문제집 분량 추정"
+          }
+        },
+        {
+          "turn": 2,
+          "user": "About 80 problems. Honestly the whole subject is hard for me, not just one part.",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustDifferFrom": "path_A",
+            "mustInclude": {
+              "smart": {
+                "specific": "교재 200p + 문제 80개",
+                "measurable": "dailyTarget 숫자",
+                "achievable": "focusSpan=15 반영, 전체 어려우면 pace 더 느림",
+                "relevant": "약점 특정 불가 → 균등 분배 또는 앞에서부터",
+                "timeBound": "10일 역산"
+              },
+              "cpi": {
+                "coverage": "커버리지 % 명시 (Path A보다 낮을 수 있음)",
+                "practice": "문제 병행 제안",
+                "insight": "전체 어려우니 자기 진단 방법 제안"
+              },
+              "coach": {
+                "diagnosis": "전체 어려움 → 기초부터 or 빈출 위주",
+                "strategy": "균등 분배 or 빈출 챕터 위주 (약점 특정 불가)",
+                "honesty": "Path A보다 더 심한 deficit 가능",
+                "emotion": "frustration → 현실적이되 격려"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "C": {
+      "label": "🤷 체인 (문제수 모름 + 약점 모름)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "Organic chemistry 2 exam in 10 days. McMurry textbook, about 200 pages. I also have practice problems but I'm not sure how many.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "문제집 분량 추정"
+          }
+        },
+        {
+          "turn": 2,
+          "user": "🤷 I really have no idea how many problems there are.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "챕터당 문제수 + 시험 범위로 추정",
+            "choices": [
+              { "id": "1", "text": "5개 이하" },
+              { "id": "2", "text": "5-10개" },
+              { "id": "3", "text": "10개 이상" },
+              { "id": "free", "text": "직접 입력" },
+              { "id": "idk", "text": "🤷 진짜 모르겠어" }
+            ],
+            "mustNotDo": ["분량 모른 채 plan 생성", "넘어가기"]
+          }
+        },
+        {
+          "turn": 3,
+          "user": "Maybe 5-10 per chapter, and the exam covers about 5-6 chapters. I don't really know what's hard yet either.",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustDifferFrom": "path_A",
+            "mustInclude": {
+              "smart": {
+                "specific": "교재 200p + 추정 ~40문제",
+                "measurable": "dailyTarget 숫자",
+                "achievable": "focusSpan=15 반영",
+                "relevant": "약점 모르니 균등 or 앞에서부터 + 리밸런스 안내",
+                "timeBound": "10일 역산"
+              },
+              "cpi": {
+                "coverage": "커버리지 % 명시",
+                "practice": "문제 병행 제안 (추정치 기반)",
+                "insight": "3일 후 어려운 부분 파악되면 조정 제안"
+              },
+              "coach": {
+                "diagnosis": "문제수 추정 ~40개, 약점 미파악",
+                "strategy": "Smart Default + 리밸런스 안내",
+                "honesty": "추정치 기반임을 명시, 나중에 조정 가능",
+                "emotion": "frustration → 모르는 거 괜찮다는 톤"
+              }
+            }
+          }
+        }
+      ]
     }
-  ],
-
-  "validation": {
-    "diagnosis": {
-      "mustIdentify": ["short focusSpan → chunk-based study", "distraction overhead ~10%", "orgo mechanism difficulty"],
-      "mustReflectInPlan": "chunkSize=3 for reading plan, effective budget adjusted"
-    },
-    "strategy": {
-      "expectedType": "deficit-options",
-      "mustProvideAlternatives": true,
-      "alternativesMinCount": 2
-    },
-    "questions": {
-      "turn1MustAsk": ["practiceProblemsCount"],
-      "maxQuestionsPerTurn": 1
-    },
-    "honesty": {
-      "expectedTimeFit": "deficit",
-      "mustNotFalsePlan": true
-    },
-    "emotion": {
-      "expected": "frustration",
-      "mustNotSay": ["try harder", "focus longer"],
-      "toneExpected": "constraint-accepting — '15분이 네 리듬이라면 거기에 맞춰 짜자.'"
-    }
-  }
+  },
+  "hardFailGates": ["HFG-1", "HFG-2", "HFG-3", "HFG-4", "HFG-5"]
 }

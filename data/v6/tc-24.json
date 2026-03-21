@@ -4,81 +4,179 @@
   "name": "영문 에세이 5p 비교 (화요일 시작, 금요일 마감)",
   "path": "A",
   "emotionProtocol": "neutral",
-
   "profile": {
     "role": "student",
-    "timeBudget": { "weekday": 60, "weekend": 60 }
+    "timeBudget": {
+      "weekday": 60,
+      "weekend": 60
+    }
   },
-
-  "conversation": [
-    {
-      "turn": 1,
-      "user": "I have a 5-page essay due Friday for my English class. Topic is comparing two novels we read. I haven't started. It's Tuesday now.",
-      "expectedAI": {
-        "action": "ask",
-        "mustAsk": "Have you already read both novels?",
-        "reason": "소설 미독 시 Day 0 리뷰 단계 추가 필요 → 일정 구조 변경",
-        "mustDiagnose": ["3-day window (Tue-Thu) for writing", "essay uses milestone-based plan, not page-based"],
-        "mustNotDo": ["plan 바로 생성 (소설 읽음 여부 모름)", "2 pages/day 같은 page-based plan"]
-      }
-    },
-    {
-      "turn": 2,
-      "user": "Yeah I've read both. Just haven't started writing.",
-      "expectedAI": {
-        "action": "generate_plan",
-        "plans": [
-          {
-            "label": "Comparative Essay — Two Novels",
-            "type": "assignment",
-            "dailyTarget": { "value": 1, "unit": "milestone" },
-            "totalQuantity": 3,
-            "effortModel": { "expected": null, "min": null, "max": null, "unit": "milestone" },
-            "priority": "primary"
+  "paths": {
+    "A": {
+      "label": "Golden Path (핵심 정보 제공)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "I have a 5-page essay due Friday for my English class. Topic is comparing two novels we read. I haven't started. It's Tuesday now.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "Have you already read both novels?",
+            "choices": [
+              {
+                "id": "1",
+                "text": "옵션 1"
+              },
+              {
+                "id": "2",
+                "text": "옵션 2"
+              },
+              {
+                "id": "3",
+                "text": "옵션 3"
+              },
+              {
+                "id": "free",
+                "text": "직접 입력"
+              },
+              {
+                "id": "idk",
+                "text": "🤷 잘 모르겠어"
+              }
+            ],
+            "mustNotDo": [
+              "분량 모른 채 plan 생성",
+              "focusSpan 다시 물어보기"
+            ]
           }
-        ],
-        "timeFit": "fits",
-        "diagnosis": "3 working days (Tue/Wed/Thu); novels already read → no extra reading day needed; milestone-based planning",
-        "strategy": "Day 1 (Tue): outline + thesis + intro + body paragraph 1 — 60min; Day 2 (Wed): remaining body paragraphs + conclusion — 60-75min; Day 3 (Thu): revision + read-aloud + rubric check + submit prep — 45-60min",
-        "honestAssessment": "3 days is enough for a 5-page essay if you start writing (not just outlining) on Day 1.",
-        "alternatives": [
-          {
-            "label": "소설 미독 시",
-            "change": "Day 0 추가: 핵심 장면 리뷰 후 outline 시작",
-            "newTimeFit": "tight"
+        },
+        {
+          "turn": 2,
+          "user": "(유저가 구체적 답변 제공 — 약점 특정, 분량 확인 등)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=N/A, level=N/A), timeFit=fits",
+                "relevant": "약점/우선순위 반영",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시 (해당 시)",
+                "practice": "선택적",
+                "insight": "선택적"
+              },
+              "coach": {
+                "diagnosis": "profile + 유저 답변 기반 상황 파악",
+                "strategy": "timeFit=fits 맞는 전략",
+                "honesty": "timeFit=fits 솔직 전달",
+                "emotion": "neutral 톤 적절, mustNotSay 위반 없음"
+              }
+            }
           }
-        ],
-        "emotion": {
-          "detected": "neutral",
-          "tone": "structured, reassuring, actionable",
-          "mustNotSay": ["you should have started earlier"]
         }
-      }
+      ]
+    },
+    "B": {
+      "label": "Variant (다른 핵심 선택 → 다른 plan)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "I have a 5-page essay due Friday for my English class. Topic is comparing two novels we read. I haven't started. It's Tuesday now.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "Have you already read both novels?"
+          }
+        },
+        {
+          "turn": 2,
+          "user": "(유저가 Path A와 다른 답변 — 전체 어려움, 다른 전략 선호 등)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustDifferFrom": "path_A",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=N/A, level=N/A), timeFit=fits",
+                "relevant": "약점/우선순위 반영",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시 (해당 시)",
+                "practice": "선택적",
+                "insight": "선택적"
+              },
+              "coach": {
+                "diagnosis": "profile + 유저 답변 기반 상황 파악",
+                "strategy": "Path A와 다른 전략 (다른 선택지 반영)",
+                "honesty": "timeFit=fits 솔직 전달",
+                "emotion": "neutral 톤 적절, mustNotSay 위반 없음"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "C": {
+      "label": "🤷 체인 (모르겠어 → 추정 질문 → Smart Default)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "I have a 5-page essay due Friday for my English class. Topic is comparing two novels we read. I haven't started. It's Tuesday now.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "Have you already read both novels?"
+          }
+        },
+        {
+          "turn": 2,
+          "user": "🤷 잘 모르겠어요.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "더 쉬운 질문으로 재시도 (추정)",
+            "mustNotDo": [
+              "분량 모른 채 plan 생성",
+              "넘어가기"
+            ]
+          }
+        },
+        {
+          "turn": 3,
+          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustDifferFrom": "path_A",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=N/A, level=N/A), timeFit=fits",
+                "relevant": "약점 모르니 Smart Default + 리밸런스 안내",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시 (해당 시)",
+                "practice": "선택적",
+                "insight": "선택적"
+              },
+              "coach": {
+                "diagnosis": "정보 부족 → 추정 기반 or 기본값",
+                "strategy": "Smart Default + 나중에 조정 가능 안내",
+                "honesty": "timeFit=fits 솔직 전달",
+                "emotion": "neutral 톤 적절, mustNotSay 위반 없음"
+              }
+            }
+          }
+        }
+      ]
     }
-  ],
-
-  "validation": {
-    "diagnosis": {
-      "mustIdentify": ["milestone-based plan needed (not page-based)", "Day 1 must include real writing, not just outline"],
-      "mustReflectInPlan": "milestone progression (outline+draft → body → revision)"
-    },
-    "strategy": {
-      "expectedType": "fits",
-      "mustProvideAlternatives": false,
-      "alternativesMinCount": 0
-    },
-    "questions": {
-      "turn1MustAsk": ["Have you already read both novels?"],
-      "maxQuestionsPerTurn": 2
-    },
-    "honesty": {
-      "expectedTimeFit": "fits",
-      "mustNotFalsePlan": true
-    },
-    "emotion": {
-      "expected": "neutral",
-      "mustNotSay": ["2 pages/day page-based plan", "just outline on Day 1"],
-      "toneExpected": "structured, reassuring, actionable milestone-by-milestone; thesis checkpoint at Day 1 end"
-    }
-  }
+  },
+  "hardFailGates": [
+    "HFG-1",
+    "HFG-3",
+    "HFG-4",
+    "HFG-5"
+  ]
 }

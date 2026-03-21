@@ -4,86 +4,179 @@
   "name": "정치학 토론 준비 (논증 중심, DEFICIT)",
   "path": "R",
   "emotionProtocol": "neutral",
-
   "profile": {
     "role": "student",
-    "timeBudget": { "weekday": 45, "weekend": 45 }
+    "timeBudget": {
+      "weekday": 45,
+      "weekend": 45
+    }
   },
-
-  "conversation": [
-    {
-      "turn": 1,
-      "user": "I need to read chapters 5-9 of my political theory textbook for next week's discussion. About 150 pages. I need to be able to discuss the arguments, not just summarize. 45 min a day.",
-      "expectedAI": {
-        "action": "ask",
-        "mustAsk": "discussionDay",
-        "reason": "토론 날짜를 알아야 총 가용일 계산 → dailyTarget 결정 가능",
-        "mustDiagnose": ["discussion-focused reading → argument-mapping needed, not cover-to-cover"],
-        "mustNotDo": ["plan 바로 생성 (토론 날짜 모름 → 일수 불확정)"]
-      }
-    },
-    {
-      "turn": 2,
-      "user": "The discussion is next Wednesday. So I have 7 days including today.",
-      "expectedAI": {
-        "action": "generate_plan",
-        "plans": [
-          {
-            "label": "Political Theory Textbook Ch.5-9",
-            "type": "read",
-            "dailyTarget": { "value": 22, "unit": "page" },
-            "totalQuantity": 150,
-            "effortModel": { "expected": 6.5, "min": 5.0, "max": 8.0, "unit": "page" },
-            "priority": "primary"
+  "paths": {
+    "A": {
+      "label": "Golden Path (핵심 정보 제공)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "I need to read chapters 5-9 of my political theory textbook for next week's discussion. About 150 pages. I need to be able to discuss the arguments, not just summarize. 45 min a day.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "discussionDay",
+            "choices": [
+              {
+                "id": "1",
+                "text": "옵션 1"
+              },
+              {
+                "id": "2",
+                "text": "옵션 2"
+              },
+              {
+                "id": "3",
+                "text": "옵션 3"
+              },
+              {
+                "id": "free",
+                "text": "직접 입력"
+              },
+              {
+                "id": "idk",
+                "text": "🤷 잘 모르겠어"
+              }
+            ],
+            "mustNotDo": [
+              "분량 모른 채 plan 생성",
+              "focusSpan 다시 물어보기"
+            ]
           }
-        ],
-        "timeFit": "deficit",
-        "diagnosis": "150p × 6.5min/p = 975min needed vs 7days × 45min = 315min available → 3.1× deficit",
-        "strategy": "reverse reading: read discussion questions first, then relevant sections; 2-pass skim: 1.5min/p full structure pass, then deep-read top 30-40p",
-        "honestAssessment": "3.1× budget deficit — full cover-to-cover reading is impossible. Selective deep reading is the only viable strategy.",
-        "alternatives": [
-          {
-            "label": "핵심 논증 30-40p 집중",
-            "change": "150p → 30-40p (토론 질문 직접 관련 페이지만 argument mapping)",
-            "newTimeFit": "fits"
-          },
-          {
-            "label": "교수 토론 질문 역추적",
-            "change": "150p → 교수 질문 기반 30% 구간만 deep read, 나머지 skim",
-            "newTimeFit": "tight"
+        },
+        {
+          "turn": 2,
+          "user": "(유저가 구체적 답변 제공 — 약점 특정, 분량 확인 등)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=N/A, level=N/A), timeFit=deficit",
+                "relevant": "약점/우선순위 반영",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시 (해당 시)",
+                "practice": "선택적",
+                "insight": "선택적"
+              },
+              "coach": {
+                "diagnosis": "profile + 유저 답변 기반 상황 파악",
+                "strategy": "timeFit=deficit 맞는 전략 + 대안 2개+",
+                "honesty": "timeFit=deficit 솔직 전달 + 대안 제시",
+                "emotion": "neutral 톤 적절, mustNotSay 위반 없음"
+              }
+            }
           }
-        ],
-        "emotion": {
-          "detected": "neutral",
-          "tone": "practical triage framing",
-          "mustNotSay": ["just read faster", "you should have started earlier"]
         }
-      }
+      ]
+    },
+    "B": {
+      "label": "Variant (다른 핵심 선택 → 다른 plan)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "I need to read chapters 5-9 of my political theory textbook for next week's discussion. About 150 pages. I need to be able to discuss the arguments, not just summarize. 45 min a day.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "discussionDay"
+          }
+        },
+        {
+          "turn": 2,
+          "user": "(유저가 Path A와 다른 답변 — 전체 어려움, 다른 전략 선호 등)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustDifferFrom": "path_A",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=N/A, level=N/A), timeFit=deficit",
+                "relevant": "약점/우선순위 반영",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시 (해당 시)",
+                "practice": "선택적",
+                "insight": "선택적"
+              },
+              "coach": {
+                "diagnosis": "profile + 유저 답변 기반 상황 파악",
+                "strategy": "Path A와 다른 전략 (다른 선택지 반영)",
+                "honesty": "timeFit=deficit 솔직 전달 + 대안 제시",
+                "emotion": "neutral 톤 적절, mustNotSay 위반 없음"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "C": {
+      "label": "🤷 체인 (모르겠어 → 추정 질문 → Smart Default)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "I need to read chapters 5-9 of my political theory textbook for next week's discussion. About 150 pages. I need to be able to discuss the arguments, not just summarize. 45 min a day.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "discussionDay"
+          }
+        },
+        {
+          "turn": 2,
+          "user": "🤷 잘 모르겠어요.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "더 쉬운 질문으로 재시도 (추정)",
+            "mustNotDo": [
+              "분량 모른 채 plan 생성",
+              "넘어가기"
+            ]
+          }
+        },
+        {
+          "turn": 3,
+          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustDifferFrom": "path_A",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=N/A, level=N/A), timeFit=deficit",
+                "relevant": "약점 모르니 Smart Default + 리밸런스 안내",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시 (해당 시)",
+                "practice": "선택적",
+                "insight": "선택적"
+              },
+              "coach": {
+                "diagnosis": "정보 부족 → 추정 기반 or 기본값",
+                "strategy": "Smart Default + 나중에 조정 가능 안내",
+                "honesty": "timeFit=deficit 솔직 전달 + 대안 제시",
+                "emotion": "neutral 톤 적절, mustNotSay 위반 없음"
+              }
+            }
+          }
+        }
+      ]
     }
-  ],
-
-  "validation": {
-    "diagnosis": {
-      "mustIdentify": ["discussion-focused reading needs argument analysis not summarization", "3.1× budget deficit"],
-      "mustReflectInPlan": "triage strategy — selective deep reading over full coverage"
-    },
-    "strategy": {
-      "expectedType": "deficit-options",
-      "mustProvideAlternatives": true,
-      "alternativesMinCount": 2
-    },
-    "questions": {
-      "turn1MustAsk": ["discussionDay"],
-      "maxQuestionsPerTurn": 1
-    },
-    "honesty": {
-      "expectedTimeFit": "deficit",
-      "mustNotFalsePlan": true
-    },
-    "emotion": {
-      "expected": "neutral",
-      "mustNotSay": ["just read faster"],
-      "toneExpected": "neutral to mildly supportive; practical triage framing"
-    }
-  }
+  },
+  "hardFailGates": [
+    "HFG-1",
+    "HFG-3",
+    "HFG-4",
+    "HFG-5"
+  ]
 }

@@ -4,87 +4,179 @@
   "name": "PhD 문헌 리뷰 — 논문 12편 (3주 목표)",
   "path": "R",
   "emotionProtocol": "neutral",
-
   "profile": {
     "role": "student",
-    "year": "phd",
-    "timeBudget": { "weekday": 120, "weekend": 120 }
+    "timeBudget": {
+      "weekday": 120,
+      "weekend": 120
+    }
   },
-
-  "conversation": [
-    {
-      "turn": 1,
-      "user": "I have 12 journal papers to read for my literature review. Each is about 15-25 pages. I need to deeply understand methodology and findings. No hard deadline but I want to finish in 3 weeks. PhD student in psychology.",
-      "expectedAI": {
-        "action": "ask",
-        "mustAsk": "papers pre-selected or still searching?",
-        "reason": "논문이 확정인지 탐색 중인지에 따라 일정에 탐색 기간 추가 여부 결정",
-        "mustDiagnose": ["PhD literature review needs multi-pass reading (Keshav 3-pass)", "12 papers need classification before uniform reading"],
-        "mustNotDo": ["plan 바로 생성 (논문 확정 여부 모름 → 일정 달라짐)"]
-      }
-    },
-    {
-      "turn": 2,
-      "user": "Yes, all 12 are selected. Mix of quantitative and qualitative, mostly empirical studies.",
-      "expectedAI": {
-        "action": "generate_plan",
-        "plans": [
-          {
-            "label": "Literature Review — 12 Psychology Papers",
-            "type": "read",
-            "dailyTarget": { "value": 1, "unit": "paper" },
-            "totalQuantity": 12,
-            "effortModel": { "expected": 120, "min": 65, "max": 240, "unit": "paper" },
-            "priority": "primary"
+  "paths": {
+    "A": {
+      "label": "Golden Path (핵심 정보 제공)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "I have 12 journal papers to read for my literature review. Each is about 15-25 pages. I need to deeply understand methodology and findings. No hard deadline but I want to finish in 3 weeks. PhD student in psychology.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "papers pre-selected or still searching?",
+            "choices": [
+              {
+                "id": "1",
+                "text": "옵션 1"
+              },
+              {
+                "id": "2",
+                "text": "옵션 2"
+              },
+              {
+                "id": "3",
+                "text": "옵션 3"
+              },
+              {
+                "id": "free",
+                "text": "직접 입력"
+              },
+              {
+                "id": "idk",
+                "text": "🤷 잘 모르겠어"
+              }
+            ],
+            "mustNotDo": [
+              "분량 모른 채 plan 생성",
+              "focusSpan 다시 물어보기"
+            ]
           }
-        ],
-        "timeFit": "fits",
-        "diagnosis": "12 papers × 120min avg = 1440min; 21days × 120min = 2520min available → fits with buffer for synthesis",
-        "strategy": "30-min Abstract scan first → 3-tier classification (Must-Read 5, Should-Read 5, Skim-Only 2); Must-Read: Pass 3 (200min/paper); Should-Read: Pass 2 (120min/paper); Skim-Only: Pass 1+2 (70min/paper); Synthesis matrix: rows=papers, cols=research question/method/findings/limitations/relevance",
-        "honestAssessment": "Fits within 3 weeks with room for synthesis work. Classification step is critical to avoid spending equal time on all 12.",
-        "alternatives": [
-          {
-            "label": "정량 논문 우선",
-            "change": "quantitative-heavy → read tables/graphs first to orient before full text",
-            "newTimeFit": "fits"
-          },
-          {
-            "label": "탐색 기간 추가",
-            "change": "if papers not fully finalized → add 2-3 days for screening Pass 1",
-            "newTimeFit": "fits"
+        },
+        {
+          "turn": 2,
+          "user": "(유저가 구체적 답변 제공 — 약점 특정, 분량 확인 등)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=N/A, level=N/A), timeFit=fits",
+                "relevant": "약점/우선순위 반영",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시 (해당 시)",
+                "practice": "선택적",
+                "insight": "선택적"
+              },
+              "coach": {
+                "diagnosis": "profile + 유저 답변 기반 상황 파악",
+                "strategy": "timeFit=fits 맞는 전략",
+                "honesty": "timeFit=fits 솔직 전달",
+                "emotion": "neutral 톤 적절, mustNotSay 위반 없음"
+              }
+            }
           }
-        ],
-        "emotion": {
-          "detected": "neutral",
-          "tone": "systematic and collaborative; PhD context awareness",
-          "mustNotSay": ["just read them all the same way"]
         }
-      }
+      ]
+    },
+    "B": {
+      "label": "Variant (다른 핵심 선택 → 다른 plan)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "I have 12 journal papers to read for my literature review. Each is about 15-25 pages. I need to deeply understand methodology and findings. No hard deadline but I want to finish in 3 weeks. PhD student in psychology.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "papers pre-selected or still searching?"
+          }
+        },
+        {
+          "turn": 2,
+          "user": "(유저가 Path A와 다른 답변 — 전체 어려움, 다른 전략 선호 등)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustDifferFrom": "path_A",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=N/A, level=N/A), timeFit=fits",
+                "relevant": "약점/우선순위 반영",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시 (해당 시)",
+                "practice": "선택적",
+                "insight": "선택적"
+              },
+              "coach": {
+                "diagnosis": "profile + 유저 답변 기반 상황 파악",
+                "strategy": "Path A와 다른 전략 (다른 선택지 반영)",
+                "honesty": "timeFit=fits 솔직 전달",
+                "emotion": "neutral 톤 적절, mustNotSay 위반 없음"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "C": {
+      "label": "🤷 체인 (모르겠어 → 추정 질문 → Smart Default)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "I have 12 journal papers to read for my literature review. Each is about 15-25 pages. I need to deeply understand methodology and findings. No hard deadline but I want to finish in 3 weeks. PhD student in psychology.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "papers pre-selected or still searching?"
+          }
+        },
+        {
+          "turn": 2,
+          "user": "🤷 잘 모르겠어요.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "더 쉬운 질문으로 재시도 (추정)",
+            "mustNotDo": [
+              "분량 모른 채 plan 생성",
+              "넘어가기"
+            ]
+          }
+        },
+        {
+          "turn": 3,
+          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustDifferFrom": "path_A",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=N/A, level=N/A), timeFit=fits",
+                "relevant": "약점 모르니 Smart Default + 리밸런스 안내",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시 (해당 시)",
+                "practice": "선택적",
+                "insight": "선택적"
+              },
+              "coach": {
+                "diagnosis": "정보 부족 → 추정 기반 or 기본값",
+                "strategy": "Smart Default + 나중에 조정 가능 안내",
+                "honesty": "timeFit=fits 솔직 전달",
+                "emotion": "neutral 톤 적절, mustNotSay 위반 없음"
+              }
+            }
+          }
+        }
+      ]
     }
-  ],
-
-  "validation": {
-    "diagnosis": {
-      "mustIdentify": ["multi-pass reading approach needed (Keshav 3-pass)", "3-tier classification before diving in"],
-      "mustReflectInPlan": "differentiated reading depth per paper tier, not uniform min/paper"
-    },
-    "strategy": {
-      "expectedType": "fits",
-      "mustProvideAlternatives": false,
-      "alternativesMinCount": 0
-    },
-    "questions": {
-      "turn1MustAsk": ["papers pre-selected or still searching?"],
-      "maxQuestionsPerTurn": 2
-    },
-    "honesty": {
-      "expectedTimeFit": "fits",
-      "mustNotFalsePlan": true
-    },
-    "emotion": {
-      "expected": "neutral",
-      "mustNotSay": ["treat all 12 papers identically"],
-      "toneExpected": "systematic and collaborative; PhD context awareness; synthesis matrix suggestion as value-add"
-    }
-  }
+  },
+  "hardFailGates": [
+    "HFG-1",
+    "HFG-3",
+    "HFG-4",
+    "HFG-5"
+  ]
 }

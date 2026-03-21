@@ -4,75 +4,136 @@
   "name": "JLPT N2 단어 2000개 SRS (15분/일, 지속가능성)",
   "path": "P",
   "emotionProtocol": "neutral",
-
   "profile": {
     "role": "self",
-    "timeBudget": { "weekday": 15, "weekend": 15 }
+    "timeBudget": {
+      "weekday": 15,
+      "weekend": 15
+    }
   },
-
-  "conversation": [
-    {
-      "turn": 1,
-      "user": "I want to memorize Japanese vocabulary. I have a list of 2000 words for JLPT N2. I want to do some every day. Maybe 15 minutes.",
-      "expectedAI": {
-        "action": "generate_plan",
-        "plans": [
-          {
-            "label": "JLPT N2 Vocabulary",
-            "type": "practice",
-            "dailyTarget": { "value": 10, "unit": "word" },
-            "totalQuantity": 2000,
-            "effortModel": { "expected": 1.0, "min": 0.5, "max": 2.0, "unit": "word" },
-            "priority": "primary"
+  "paths": {
+    "A": {
+      "label": "Golden Path (정보 충분)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "I want to memorize Japanese vocabulary. I have a list of 2000 words for JLPT N2. I want to do some every day. Maybe 15 minutes.",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=N/A, level=N/A), timeFit=fits",
+                "relevant": "상황에 맞는 분배",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시 (해당 시)",
+                "practice": "선택적",
+                "insight": "선택적"
+              },
+              "coach": {
+                "diagnosis": "profile + 유저 답변 기반 상황 파악",
+                "strategy": "timeFit=fits 맞는 전략",
+                "honesty": "timeFit=fits 솔직 전달",
+                "emotion": "neutral 톤 적절, mustNotSay 위반 없음"
+              }
+            }
           }
-        ],
-        "timeFit": "fits",
-        "diagnosis": "10 new words/day × 1.0min = 10min new + ~5min review of recent words → fits 15min budget. Anki 10× rule: 10 new/day → ~100 review cards at steady state. 2000 ÷ 10 = 200 days completion.",
-        "strategy": "5-5-5 session: 5min yesterday's review, 5min 10 new words, 5min random quiz from last 30. Anki SRS recommended. Frequency-sorted word list (고빈도 먼저). If JLPT deadline < 200 days: prioritize top 1200-1500 high-frequency words.",
-        "honestAssessment": "10 new/day fits 15min budget sustainably. 15+ new/day will cause Day 14-21 review pile-up exceeding budget. 200 days for full 2000 — if JLPT test is sooner, prioritize high-frequency subset.",
-        "alternatives": [
-          {
-            "label": "고빈도 1500개 집중",
-            "change": "2000 → 1500 words (상위 빈도순) → 150일 완료, JLPT 시험일 전 완료 가능",
-            "newTimeFit": "fits"
-          },
-          {
-            "label": "시간 증가 → 15개/일",
-            "change": "15min → 20min/day, 15 new words/day → 134일 완료",
-            "newTimeFit": "fits"
-          }
-        ],
-        "emotion": {
-          "detected": "neutral",
-          "tone": "steady and sustainable",
-          "mustNotSay": ["you should study more", "15 minutes is not enough"]
         }
-      }
+      ]
+    },
+    "B": {
+      "label": "Variant (다른 조건에서 plan)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "(Path A와 약간 다른 조건으로 같은 시나리오)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustDifferFrom": "path_A",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=N/A, level=N/A), timeFit=fits",
+                "relevant": "상황에 맞는 분배",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시 (해당 시)",
+                "practice": "선택적",
+                "insight": "선택적"
+              },
+              "coach": {
+                "diagnosis": "profile + 유저 답변 기반 상황 파악",
+                "strategy": "Path A와 다른 전략 (다른 선택지 반영)",
+                "honesty": "timeFit=fits 솔직 전달",
+                "emotion": "neutral 톤 적절, mustNotSay 위반 없음"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "C": {
+      "label": "🤷 체인 (모르겠어 → 추정 질문 → Smart Default)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "I want to memorize Japanese vocabulary. I have a list of 2000 words for JLPT N2. I want to do some every day. Maybe 15 minutes.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "기본 정보 확인"
+          }
+        },
+        {
+          "turn": 2,
+          "user": "🤷 잘 모르겠어요.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "더 쉬운 질문으로 재시도 (추정)",
+            "mustNotDo": [
+              "분량 모른 채 plan 생성",
+              "넘어가기"
+            ]
+          }
+        },
+        {
+          "turn": 3,
+          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustDifferFrom": "path_A",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=N/A, level=N/A), timeFit=fits",
+                "relevant": "약점 모르니 Smart Default + 리밸런스 안내",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시 (해당 시)",
+                "practice": "선택적",
+                "insight": "선택적"
+              },
+              "coach": {
+                "diagnosis": "정보 부족 → 추정 기반 or 기본값",
+                "strategy": "Smart Default + 나중에 조정 가능 안내",
+                "honesty": "timeFit=fits 솔직 전달",
+                "emotion": "neutral 톤 적절, mustNotSay 위반 없음"
+              }
+            }
+          }
+        }
+      ]
     }
-  ],
-
-  "validation": {
-    "diagnosis": {
-      "mustIdentify": ["SRS pile-up risk at Day 14-21 (not Day 30)", "Anki 10× rule (10 new → 100 reviews steady state)", "15+ new/day exceeds 15min budget"],
-      "mustReflectInPlan": "dailyTarget = 10 words/day (NOT 15+), sustainable within 15min"
-    },
-    "strategy": {
-      "expectedType": "fits-sustainable",
-      "mustProvideAlternatives": true,
-      "alternativesMinCount": 2
-    },
-    "questions": {
-      "turn1MustAsk": [],
-      "maxQuestionsPerTurn": 0
-    },
-    "honesty": {
-      "expectedTimeFit": "fits",
-      "mustNotFalsePlan": true
-    },
-    "emotion": {
-      "expected": "neutral",
-      "mustNotSay": ["you should study more", "15 minutes is not enough"],
-      "toneExpected": "steady, sustainable, SRS-mechanics-aware; streak resilience"
-    }
-  }
+  },
+  "hardFailGates": [
+    "HFG-1",
+    "HFG-4",
+    "HFG-5"
+  ]
 }

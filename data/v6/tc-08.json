@@ -4,7 +4,6 @@
   "name": "Med Student — Anatomy Atlas",
   "path": "E",
   "emotionProtocol": "neutral",
-
   "profile": {
     "role": "student",
     "studentLevel": "college",
@@ -12,80 +11,134 @@
     "year": "med-1",
     "level": "confident",
     "focusSpan": 60,
-    "timeBudget": { "weekday": 180, "weekend": 180 }
+    "timeBudget": {
+      "weekday": 180,
+      "weekend": 180
+    }
   },
-
-  "conversation": [
-    {
-      "turn": 1,
-      "user": "Anatomy exam in 4 weeks. Netter's Atlas + lecture notes. The atlas is about 500 pages but I need to know structures, not just read. I'm a first-year med student. I can do 3 hours a day.",
-      "expectedAI": {
-        "action": "generate_plan",
-        "plans": [
-          {
-            "label": "Netter's Atlas of Human Anatomy",
-            "type": "read",
-            "dailyTarget": { "value": 18, "unit": "page" },
-            "totalQuantity": 500,
-            "effortModel": { "expected": 11.0, "min": 9.0, "max": 15.0, "unit": "page" },
-            "priority": "primary"
-          },
-          {
-            "label": "Lecture Notes Review",
-            "type": "read",
-            "dailyTarget": { "value": 10, "unit": "page" },
-            "totalQuantity": 0,
-            "effortModel": { "expected": 3.0, "min": 2.0, "max": 4.0, "unit": "page" },
-            "priority": "secondary"
+  "paths": {
+    "A": {
+      "label": "Golden Path (정보 충분)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "Anatomy exam in 4 weeks. Netter's Atlas + lecture notes. The atlas is about 500 pages but I need to know structures, not just read. I'm a first-year med student. I can do 3 hours a day.",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=60, level=confident), timeFit=tight",
+                "relevant": "상황에 맞는 분배",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시",
+                "practice": "인출 연습 제안 (문제풀기 or 셀프테스트)",
+                "insight": "이해도 확인 제안 (틀린 문제 복습 등)"
+              },
+              "coach": {
+                "diagnosis": "profile + 유저 답변 기반 상황 파악",
+                "strategy": "timeFit=tight 맞는 전략",
+                "honesty": "timeFit=tight 솔직 전달",
+                "emotion": "neutral 톤 적절, mustNotSay 위반 없음"
+              }
+            }
           }
-        ],
-        "timeFit": "tight",
-        "diagnosis": "anatomy atlas ≠ 일반 교재. 구조 암기 (active recall) 필요 → 11min/page. 500p × 11 = 5500min needed vs 180 × 28 = 5040min → tight",
-        "strategy": "active recall cycle: look → close → draw → compare → label → blank test. region 단위로 학습 (upper limb, lower limb, thorax 등). 주말 review cycle 활용",
-        "honestAssessment": "500p atlas를 active recall로 하면 tight. 보기만 하면 시험에서 못 그림. viewing ≠ knowing.",
-        "alternatives": [
-          {
-            "label": "high-yield region 집중",
-            "change": "500p → 350p (시험 빈출 region 우선, 나머지 atlas 참조만)",
-            "newTimeFit": "fits"
-          },
-          {
-            "label": "주말 확장",
-            "change": "주말 180min → 240min (4시간)",
-            "newTimeFit": "fits"
-          }
-        ],
-        "emotion": {
-          "detected": "neutral",
-          "tone": "med-student-context",
-          "mustNotSay": []
         }
-      }
+      ]
+    },
+    "B": {
+      "label": "Variant (다른 조건에서 plan)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "(Path A와 약간 다른 조건으로 같은 시나리오)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustDifferFrom": "path_A",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=60, level=confident), timeFit=tight",
+                "relevant": "상황에 맞는 분배",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시",
+                "practice": "인출 연습 제안 (문제풀기 or 셀프테스트)",
+                "insight": "이해도 확인 제안 (틀린 문제 복습 등)"
+              },
+              "coach": {
+                "diagnosis": "profile + 유저 답변 기반 상황 파악",
+                "strategy": "Path A와 다른 전략 (다른 선택지 반영)",
+                "honesty": "timeFit=tight 솔직 전달",
+                "emotion": "neutral 톤 적절, mustNotSay 위반 없음"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "C": {
+      "label": "🤷 체인 (모르겠어 → 추정 질문 → Smart Default)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "Anatomy exam in 4 weeks. Netter's Atlas + lecture notes. The atlas is about 500 pages but I need to know structures, not just read. I'm a first-year med student. I can do 3 hours a day.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "기본 정보 확인"
+          }
+        },
+        {
+          "turn": 2,
+          "user": "🤷 잘 모르겠어요.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "더 쉬운 질문으로 재시도 (추정)",
+            "mustNotDo": [
+              "분량 모른 채 plan 생성",
+              "넘어가기"
+            ]
+          }
+        },
+        {
+          "turn": 3,
+          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustDifferFrom": "path_A",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=60, level=confident), timeFit=tight",
+                "relevant": "약점 모르니 Smart Default + 리밸런스 안내",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시",
+                "practice": "인출 연습 제안 (문제풀기 or 셀프테스트)",
+                "insight": "이해도 확인 제안 (틀린 문제 복습 등)"
+              },
+              "coach": {
+                "diagnosis": "정보 부족 → 추정 기반 or 기본값",
+                "strategy": "Smart Default + 나중에 조정 가능 안내",
+                "honesty": "timeFit=tight 솔직 전달",
+                "emotion": "neutral 톤 적절, mustNotSay 위반 없음"
+              }
+            }
+          }
+        }
+      ]
     }
-  ],
-
-  "validation": {
-    "diagnosis": {
-      "mustIdentify": ["anatomy atlas → active recall required (not passive reading)", "11min/page for structure memorization", "viewing ≠ knowing"],
-      "mustReflectInPlan": "high min/page (11.0) reflecting active recall, not passive reading"
-    },
-    "strategy": {
-      "expectedType": "tight-with-alternatives",
-      "mustProvideAlternatives": true,
-      "alternativesMinCount": 2
-    },
-    "questions": {
-      "turn1MustAsk": [],
-      "maxQuestionsPerTurn": 1
-    },
-    "honesty": {
-      "expectedTimeFit": "tight",
-      "mustNotFalsePlan": true
-    },
-    "emotion": {
-      "expected": "neutral",
-      "mustNotSay": [],
-      "toneExpected": "med-student-context — '해부학은 볼륨보다 recall 퀄리티가 성적 만들어.'"
-    }
-  }
+  },
+  "hardFailGates": [
+    "HFG-1",
+    "HFG-4",
+    "HFG-5"
+  ]
 }

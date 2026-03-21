@@ -11,45 +11,130 @@
       "weekend": 60
     }
   },
-  "conversation": [
-    {
-      "turn": 1,
-      "user": "I'm a Korean high school student preparing for TOEFL. Test is in 2 months. Current score is about 80, target is 100. 1 hour a day.",
-      "expectedAI": {
-        "action": "generate_plan",
-        "timeFit": "impossible",
-        "emotion": {
-          "detected": "panic"
+  "paths": {
+    "A": {
+      "label": "Golden Path (정보 충분)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "I'm a Korean high school student preparing for TOEFL. Test is in 2 months. Current score is about 80, target is 100. 1 hour a day.",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=N/A, level=N/A), timeFit=impossible",
+                "relevant": "상황에 맞는 분배",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시",
+                "practice": "인출 연습 제안 (문제풀기 or 셀프테스트)",
+                "insight": "이해도 확인 제안 (틀린 문제 복습 등)"
+              },
+              "coach": {
+                "diagnosis": "profile + 유저 답변 기반 상황 파악",
+                "strategy": "timeFit=impossible 맞는 전략 + 대안 2개+",
+                "honesty": "timeFit=impossible 솔직 전달 + 대안 제시",
+                "emotion": "panic 톤 적절, mustNotSay 위반 없음"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "B": {
+      "label": "Variant (다른 조건에서 plan)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "(Path A와 약간 다른 조건으로 같은 시나리오)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustDifferFrom": "path_A",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=N/A, level=N/A), timeFit=impossible",
+                "relevant": "상황에 맞는 분배",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시",
+                "practice": "인출 연습 제안 (문제풀기 or 셀프테스트)",
+                "insight": "이해도 확인 제안 (틀린 문제 복습 등)"
+              },
+              "coach": {
+                "diagnosis": "profile + 유저 답변 기반 상황 파악",
+                "strategy": "Path A와 다른 전략 (다른 선택지 반영)",
+                "honesty": "timeFit=impossible 솔직 전달 + 대안 제시",
+                "emotion": "panic 톤 적절, mustNotSay 위반 없음"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "C": {
+      "label": "🤷 체인 (모르겠어 → 추정 질문 → Smart Default)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "I'm a Korean high school student preparing for TOEFL. Test is in 2 months. Current score is about 80, target is 100. 1 hour a day.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "기본 정보 확인"
+          }
         },
-        "strategy": [
-          "non-linear score explanation: 80→90 = test-taking strategy; 90→100 = real English proficiency",
-          "Speaking templates first (fastest score gains)",
-          "all-section rotation + vocabulary daily",
-          "immediate target adjustment to 90+ as primary goal"
-        ],
-        "warnings": [
-          "60hr for 20 points = near-impossible: 10-point gain requires ~100hr, 20-point gain requires ~200hr",
-          "80→85/87 is realistic within 60hr; 90+ requires more time or higher daily budget"
-        ]
-      }
+        {
+          "turn": 2,
+          "user": "🤷 잘 모르겠어요.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "더 쉬운 질문으로 재시도 (추정)",
+            "mustNotDo": [
+              "분량 모른 채 plan 생성",
+              "넘어가기"
+            ]
+          }
+        },
+        {
+          "turn": 3,
+          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustDifferFrom": "path_A",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=N/A, level=N/A), timeFit=impossible",
+                "relevant": "약점 모르니 Smart Default + 리밸런스 안내",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시",
+                "practice": "인출 연습 제안 (문제풀기 or 셀프테스트)",
+                "insight": "이해도 확인 제안 (틀린 문제 복습 등)"
+              },
+              "coach": {
+                "diagnosis": "정보 부족 → 추정 기반 or 기본값",
+                "strategy": "Smart Default + 나중에 조정 가능 안내",
+                "honesty": "timeFit=impossible 솔직 전달 + 대안 제시",
+                "emotion": "panic 톤 적절, mustNotSay 위반 없음"
+              }
+            }
+          }
+        }
+      ]
     }
-  ],
-  "validation": {
-    "honesty": {
-      "expectedTimeFit": "impossible"
-    },
-    "emotion": {
-      "expected": "panic"
-    },
-    "hardFailChecks": [
-      "must NOT say '80→100 is achievable in 60hr' — false plan",
-      "must present at least 3 realistic options",
-      "must explain non-linear score gain curve for all profiles",
-      "panic must be validated before data is presented"
-    ]
   },
-  "_legacy": {
-    "inputFile": "data/legacy-v4/input/tc-36-toefl-3-profiles.json",
-    "expectedFile": "data/legacy-v4/expected/tc-36-toefl-3-profiles.json"
-  }
+  "hardFailGates": [
+    "HFG-1",
+    "HFG-2",
+    "HFG-4",
+    "HFG-5"
+  ]
 }

@@ -4,83 +4,139 @@
   "name": "Priya — Political Science Essay Exam",
   "path": "E",
   "emotionProtocol": "neutral",
-
   "profile": {
     "role": "student",
     "studentLevel": "college",
     "level": "capable",
     "focusSpan": 45,
-    "timeBudget": { "weekday": 90, "weekend": 90 }
+    "timeBudget": {
+      "weekday": 90,
+      "weekend": 90
+    }
   },
-
-  "conversation": [
-    {
-      "turn": 1,
-      "user": "I have a political science midterm that's all essay questions. It covers chapters 1-8 of our textbook, about 400 pages. The exam is in 3 weeks. I need to understand arguments well enough to write about them, not just recognize terms.",
-      "expectedAI": {
-        "action": "generate_plan",
-        "plans": [
-          {
-            "label": "Political Science Ch.1-8 (argument-level reading)",
-            "type": "read",
-            "dailyTarget": { "value": 19, "unit": "page" },
-            "totalQuantity": 400,
-            "effortModel": { "expected": 6.5, "min": 5.0, "max": 8.0, "unit": "page" },
-            "priority": "primary"
+  "paths": {
+    "A": {
+      "label": "Golden Path (정보 충분)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "I have a political science midterm that's all essay questions. It covers chapters 1-8 of our textbook, about 400 pages. The exam is in 3 weeks. I need to understand arguments well enough to write about them, not just recognize terms.",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=45, level=capable), timeFit=deficit",
+                "relevant": "상황에 맞는 분배",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시",
+                "practice": "인출 연습 제안 (문제풀기 or 셀프테스트)",
+                "insight": "이해도 확인 제안 (틀린 문제 복습 등)"
+              },
+              "coach": {
+                "diagnosis": "profile + 유저 답변 기반 상황 파악",
+                "strategy": "timeFit=deficit 맞는 전략 + 대안 2개+",
+                "honesty": "timeFit=deficit 솔직 전달 + 대안 제시",
+                "emotion": "neutral 톤 적절, mustNotSay 위반 없음"
+              }
+            }
           }
-        ],
-        "timeFit": "deficit",
-        "diagnosis": "essay exam → argument-level 이해 필요 (용어 인식 아님). 6.5min/page. 400p × 6.5 = 2600min + essay prep ~400min = 3000min needed, 90 × 21 = 1890min → 1110min deficit",
-        "strategy": "DEFICIT 심각 (1110min). 역방향 독서: essay 예상 주제 먼저 → 해당 챕터 deep read → 나머지 skim. 2-pass: Pass 1 structure only (2min/p) → Pass 2 essay-critical 200p (7min/p)",
-        "honestAssessment": "400p 전체를 argument-level로 읽기 불가. 역방향 전략으로 핵심 200p에 집중해야.",
-        "alternatives": [
-          {
-            "label": "역방향 독서 (essay 주제 기반)",
-            "change": "400p → 200p deep read + 200p skim (2min/p)",
-            "newTimeFit": "tight"
-          },
-          {
-            "label": "시간 증가",
-            "change": "90min/day → 150min/day",
-            "newTimeFit": "tight"
-          },
-          {
-            "label": "essay outline 연습 추가",
-            "change": "reading 300p + essay outline 2회/주 30min별도",
-            "newTimeFit": "deficit"
-          }
-        ],
-        "emotion": {
-          "detected": "neutral",
-          "tone": "strategic-reframe",
-          "mustNotSay": []
         }
-      }
+      ]
+    },
+    "B": {
+      "label": "Variant (다른 조건에서 plan)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "(Path A와 약간 다른 조건으로 같은 시나리오)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustDifferFrom": "path_A",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=45, level=capable), timeFit=deficit",
+                "relevant": "상황에 맞는 분배",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시",
+                "practice": "인출 연습 제안 (문제풀기 or 셀프테스트)",
+                "insight": "이해도 확인 제안 (틀린 문제 복습 등)"
+              },
+              "coach": {
+                "diagnosis": "profile + 유저 답변 기반 상황 파악",
+                "strategy": "Path A와 다른 전략 (다른 선택지 반영)",
+                "honesty": "timeFit=deficit 솔직 전달 + 대안 제시",
+                "emotion": "neutral 톤 적절, mustNotSay 위반 없음"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "C": {
+      "label": "🤷 체인 (모르겠어 → 추정 질문 → Smart Default)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "I have a political science midterm that's all essay questions. It covers chapters 1-8 of our textbook, about 400 pages. The exam is in 3 weeks. I need to understand arguments well enough to write about them, not just recognize terms.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "기본 정보 확인"
+          }
+        },
+        {
+          "turn": 2,
+          "user": "🤷 잘 모르겠어요.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "더 쉬운 질문으로 재시도 (추정)",
+            "mustNotDo": [
+              "분량 모른 채 plan 생성",
+              "넘어가기"
+            ]
+          }
+        },
+        {
+          "turn": 3,
+          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustDifferFrom": "path_A",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=45, level=capable), timeFit=deficit",
+                "relevant": "약점 모르니 Smart Default + 리밸런스 안내",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시",
+                "practice": "인출 연습 제안 (문제풀기 or 셀프테스트)",
+                "insight": "이해도 확인 제안 (틀린 문제 복습 등)"
+              },
+              "coach": {
+                "diagnosis": "정보 부족 → 추정 기반 or 기본값",
+                "strategy": "Smart Default + 나중에 조정 가능 안내",
+                "honesty": "timeFit=deficit 솔직 전달 + 대안 제시",
+                "emotion": "neutral 톤 적절, mustNotSay 위반 없음"
+              }
+            }
+          }
+        }
+      ]
     }
-  ],
-
-  "validation": {
-    "diagnosis": {
-      "mustIdentify": ["essay exam → argument-level reading (not term recognition)", "6.5min/page for monograph-style", "severe deficit 1110min"],
-      "mustReflectInPlan": "dailyTarget based on full 400p, deficit acknowledged"
-    },
-    "strategy": {
-      "expectedType": "deficit-options",
-      "mustProvideAlternatives": true,
-      "alternativesMinCount": 2
-    },
-    "questions": {
-      "turn1MustAsk": [],
-      "maxQuestionsPerTurn": 2
-    },
-    "honesty": {
-      "expectedTimeFit": "deficit",
-      "mustNotFalsePlan": true
-    },
-    "emotion": {
-      "expected": "neutral",
-      "mustNotSay": [],
-      "toneExpected": "strategic-reframe — '400p는 많아. 하지만 에세이 시험이라 전략이 달라. 역방향으로 가자.'"
-    }
-  }
+  },
+  "hardFailGates": [
+    "HFG-1",
+    "HFG-4",
+    "HFG-5"
+  ]
 }

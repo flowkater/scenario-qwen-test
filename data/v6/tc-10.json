@@ -4,78 +4,140 @@
   "name": "Over-budget Crisis — 내일 시험 300p 🔴",
   "path": "E",
   "emotionProtocol": "panic",
-
   "profile": {
     "role": "student",
     "studentLevel": "college",
     "level": "beginner",
     "focusSpan": 25,
-    "timeBudget": { "weekday": 45, "weekend": 45 }
+    "timeBudget": {
+      "weekday": 45,
+      "weekend": 45
+    }
   },
-
-  "conversation": [
-    {
-      "turn": 1,
-      "user": "시험이 내일인데 300페이지 남았어요. 하루에 45분밖에 없어요. 경영학 원론이에요.",
-      "expectedAI": {
-        "action": "generate_plan",
-        "plans": [
-          {
-            "label": "경영학 원론 — TRIAGE (핵심 요약만)",
-            "type": "read",
-            "dailyTarget": { "value": 35, "unit": "page" },
-            "totalQuantity": 35,
-            "effortModel": { "expected": 1.0, "min": 0.8, "max": 1.2, "unit": "page" },
-            "priority": "primary"
+  "paths": {
+    "A": {
+      "label": "Golden Path (정보 충분)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "시험이 내일인데 300페이지 남았어요. 하루에 45분밖에 없어요. 경영학 원론이에요.",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=25, level=beginner), timeFit=impossible",
+                "relevant": "상황에 맞는 분배",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시",
+                "practice": "인출 연습 제안 (문제풀기 or 셀프테스트)",
+                "insight": "이해도 확인 제안 (틀린 문제 복습 등)"
+              },
+              "coach": {
+                "diagnosis": "profile + 유저 답변 기반 상황 파악",
+                "strategy": "timeFit=impossible 맞는 전략 + 대안 2개+",
+                "honesty": "timeFit=impossible 솔직 전달 + 대안 제시",
+                "emotion": "panic 톤 적절, mustNotSay 위반 없음"
+              }
+            }
           }
-        ],
-        "timeFit": "impossible",
-        "diagnosis": "D-1, 300p × 3.0min = 900min needed, 45min available → IMPOSSIBLE. 정상 독서 불가. TRIAGE: index scan + chapter summaries + key terms만 가능",
-        "strategy": "TRIAGE 45min 배분: index/glossary scan 5min + chapter summaries/key terms 20min + 취약 챕터 1개 15min + quick review 5min = 45min total. 30-40p만 실제 커버",
-        "honestAssessment": "300p 전체 읽기는 절대 불가. 45분으로 할 수 있는 최선: 핵심 개념 30-40p 파악. 찍기보다 나은 결과.",
-        "alternatives": [
-          {
-            "label": "교수 슬라이드/시험 가이드 활용",
-            "change": "300p → 30-40p (교수 자료 있으면 핵심 압축 가능)",
-            "newTimeFit": "tight"
-          },
-          {
-            "label": "수업 출석 기반 전략",
-            "change": "수업 들었으면 reading load 대폭 감소, 복습 중심 30p",
-            "newTimeFit": "tight"
-          }
-        ],
-        "emotion": {
-          "detected": "panic",
-          "tone": "calm-practical",
-          "mustNotSay": ["all-nighter recommended", "20% content = 60-70% score", "sleep less"]
         }
-      }
+      ]
+    },
+    "B": {
+      "label": "Variant (다른 조건에서 plan)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "(Path A와 약간 다른 조건으로 같은 시나리오)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustDifferFrom": "path_A",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=25, level=beginner), timeFit=impossible",
+                "relevant": "상황에 맞는 분배",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시",
+                "practice": "인출 연습 제안 (문제풀기 or 셀프테스트)",
+                "insight": "이해도 확인 제안 (틀린 문제 복습 등)"
+              },
+              "coach": {
+                "diagnosis": "profile + 유저 답변 기반 상황 파악",
+                "strategy": "Path A와 다른 전략 (다른 선택지 반영)",
+                "honesty": "timeFit=impossible 솔직 전달 + 대안 제시",
+                "emotion": "panic 톤 적절, mustNotSay 위반 없음"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "C": {
+      "label": "🤷 체인 (모르겠어 → 추정 질문 → Smart Default)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "시험이 내일인데 300페이지 남았어요. 하루에 45분밖에 없어요. 경영학 원론이에요.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "기본 정보 확인"
+          }
+        },
+        {
+          "turn": 2,
+          "user": "🤷 잘 모르겠어요.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "더 쉬운 질문으로 재시도 (추정)",
+            "mustNotDo": [
+              "분량 모른 채 plan 생성",
+              "넘어가기"
+            ]
+          }
+        },
+        {
+          "turn": 3,
+          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustDifferFrom": "path_A",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=25, level=beginner), timeFit=impossible",
+                "relevant": "약점 모르니 Smart Default + 리밸런스 안내",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시",
+                "practice": "인출 연습 제안 (문제풀기 or 셀프테스트)",
+                "insight": "이해도 확인 제안 (틀린 문제 복습 등)"
+              },
+              "coach": {
+                "diagnosis": "정보 부족 → 추정 기반 or 기본값",
+                "strategy": "Smart Default + 나중에 조정 가능 안내",
+                "honesty": "timeFit=impossible 솔직 전달 + 대안 제시",
+                "emotion": "panic 톤 적절, mustNotSay 위반 없음"
+              }
+            }
+          }
+        }
+      ]
     }
-  ],
-
-  "validation": {
-    "diagnosis": {
-      "mustIdentify": ["D-1 impossible: 900min needed vs 45min available", "triage mode: ultra-fast skim only"],
-      "mustReflectInPlan": "totalQuantity ~30-40p (not 300p), triage-speed effortModel (1.0min/p)"
-    },
-    "strategy": {
-      "expectedType": "impossible-triage",
-      "mustProvideAlternatives": true,
-      "alternativesMinCount": 1
-    },
-    "questions": {
-      "turn1MustAsk": [],
-      "maxQuestionsPerTurn": 1
-    },
-    "honesty": {
-      "expectedTimeFit": "impossible",
-      "mustNotFalsePlan": true
-    },
-    "emotion": {
-      "expected": "panic",
-      "mustNotSay": ["all-nighter", "20% = 60-70% score", "sleep less"],
-      "toneExpected": "calm-practical — '할 수 있는 최선을 하자. 완벽 안 돼도 괜찮아.'"
-    }
-  }
+  },
+  "hardFailGates": [
+    "HFG-1",
+    "HFG-2",
+    "HFG-4",
+    "HFG-5"
+  ]
 }

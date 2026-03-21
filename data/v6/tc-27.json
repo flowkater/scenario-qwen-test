@@ -4,94 +4,180 @@
   "name": "밀린 물리 강의 8개 (시험 2주, frustration)",
   "path": "W",
   "emotionProtocol": "frustration",
-
   "profile": {
     "role": "student",
-    "timeBudget": { "weekday": 120, "weekend": 120 }
+    "timeBudget": {
+      "weekday": 120,
+      "weekend": 120
+    }
   },
-
-  "conversation": [
-    {
-      "turn": 1,
-      "user": "I'm behind on my physics lectures. 8 lectures behind, each about 50 minutes. Midterm is in 2 weeks and the lectures are the main study material. I can do 2 hours a day.",
-      "expectedAI": {
-        "action": "ask",
-        "mustAsk": "practiceProblemsAvailable",
-        "reason": "연습문제 유무에 따라 Plan 2 생성 여부 및 시간 배분 전략이 달라짐",
-        "mustDiagnose": ["behind on lectures → frustration acknowledged", "50min lecture × 2.0× multiplier = ~100min effective per lecture → 1 lecture/day max within 120min budget"],
-        "mustNotDo": ["plan 바로 생성 (연습문제 유무 미확인)", "2 lectures/day 계획 (100min × 2 = 200min > 120min budget)"]
-      }
-    },
-    {
-      "turn": 2,
-      "user": "Yeah, there are practice problems at the end of each lecture. About 5-10 per lecture.",
-      "expectedAI": {
-        "action": "generate_plan",
-        "plans": [
-          {
-            "label": "Physics Lectures",
-            "type": "watch",
-            "dailyTarget": { "value": 1, "unit": "lecture" },
-            "totalQuantity": 8,
-            "effortModel": { "expected": 100, "min": 75, "max": 150, "unit": "lecture" },
-            "priority": "primary"
-          },
-          {
-            "label": "Lecture Practice Problems",
-            "type": "practice",
-            "dailyTarget": { "value": 5, "unit": "problem" },
-            "totalQuantity": 60,
-            "effortModel": { "expected": 4, "min": 2, "max": 8, "unit": "problem" },
-            "priority": "secondary"
+  "paths": {
+    "A": {
+      "label": "Golden Path (핵심 정보 제공)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "I'm behind on my physics lectures. 8 lectures behind, each about 50 minutes. Midterm is in 2 weeks and the lectures are the main study material. I can do 2 hours a day.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "Are there practice problems? (you need 3-5 per lecture for real learning)",
+            "choices": [
+              {
+                "id": "1",
+                "text": "50개 이하"
+              },
+              {
+                "id": "2",
+                "text": "50-100개"
+              },
+              {
+                "id": "3",
+                "text": "100개 이상"
+              },
+              {
+                "id": "free",
+                "text": "직접 입력"
+              },
+              {
+                "id": "idk",
+                "text": "🤷 잘 모르겠어"
+              }
+            ],
+            "mustNotDo": [
+              "분량 모른 채 plan 생성",
+              "focusSpan 다시 물어보기"
+            ]
           }
-        ],
-        "timeFit": "tight",
-        "diagnosis": "8 lectures × 100min(2.0× multiplier) = 800min lecture + 60 problems × 4min = 240min practice → total ~1040min needed vs 14days × 120min = 1680min available → tight but workable with interleaving",
-        "strategy": "1 lecture/day + immediate 5 practice problems (Day 1-8). Day 9-14: full review + remaining problems + past exam practice. Interleaved: each day = current lecture + review of previous lecture problems.",
-        "honestAssessment": "1 lecture/day is the maximum pace. 2 lectures/day is physically impossible (200min > 120min budget). Day 9-14 review window is critical.",
-        "alternatives": [
-          {
-            "label": "리뷰 축소",
-            "change": "Day 9-14 리뷰 → Day 9-11만 (3일 집중 리뷰), Day 12-14 시험 시뮬레이션",
-            "newTimeFit": "tight"
-          },
-          {
-            "label": "문제 우선 전략",
-            "change": "강의 중 derivation 부분만 집중(강의당 70min) + 문제 풀이 시간 확대(50min/day)",
-            "newTimeFit": "tight"
+        },
+        {
+          "turn": 2,
+          "user": "(유저가 구체적 답변 제공 — 약점 특정, 분량 확인 등)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=N/A, level=N/A), timeFit=tight",
+                "relevant": "약점/우선순위 반영",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시 (해당 시)",
+                "practice": "선택적",
+                "insight": "선택적"
+              },
+              "coach": {
+                "diagnosis": "profile + 유저 답변 기반 상황 파악",
+                "strategy": "timeFit=tight 맞는 전략",
+                "honesty": "timeFit=tight 솔직 전달",
+                "emotion": "frustration 톤 적절, mustNotSay 위반 없음"
+              }
+            }
           }
-        ],
-        "emotion": {
-          "detected": "frustration",
-          "tone": "constraint-accepting",
-          "mustNotSay": ["try to focus longer", "just watch 2 lectures a day", "you should have kept up"]
         }
-      }
+      ]
+    },
+    "B": {
+      "label": "Variant (다른 핵심 선택 → 다른 plan)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "I'm behind on my physics lectures. 8 lectures behind, each about 50 minutes. Midterm is in 2 weeks and the lectures are the main study material. I can do 2 hours a day.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "Are there practice problems? (you need 3-5 per lecture for real learning)"
+          }
+        },
+        {
+          "turn": 2,
+          "user": "(유저가 Path A와 다른 답변 — 전체 어려움, 다른 전략 선호 등)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustDifferFrom": "path_A",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=N/A, level=N/A), timeFit=tight",
+                "relevant": "약점/우선순위 반영",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시 (해당 시)",
+                "practice": "선택적",
+                "insight": "선택적"
+              },
+              "coach": {
+                "diagnosis": "profile + 유저 답변 기반 상황 파악",
+                "strategy": "Path A와 다른 전략 (다른 선택지 반영)",
+                "honesty": "timeFit=tight 솔직 전달",
+                "emotion": "frustration 톤 적절, mustNotSay 위반 없음"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "C": {
+      "label": "🤷 체인 (모르겠어 → 추정 질문 → Smart Default)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "I'm behind on my physics lectures. 8 lectures behind, each about 50 minutes. Midterm is in 2 weeks and the lectures are the main study material. I can do 2 hours a day.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "Are there practice problems? (you need 3-5 per lecture for real learning)"
+          }
+        },
+        {
+          "turn": 2,
+          "user": "🤷 잘 모르겠어요.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "더 쉬운 질문으로 재시도 (추정)",
+            "mustNotDo": [
+              "분량 모른 채 plan 생성",
+              "넘어가기"
+            ]
+          }
+        },
+        {
+          "turn": 3,
+          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustDifferFrom": "path_A",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=N/A, level=N/A), timeFit=tight",
+                "relevant": "약점 모르니 Smart Default + 리밸런스 안내",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시 (해당 시)",
+                "practice": "선택적",
+                "insight": "선택적"
+              },
+              "coach": {
+                "diagnosis": "정보 부족 → 추정 기반 or 기본값",
+                "strategy": "Smart Default + 나중에 조정 가능 안내",
+                "honesty": "timeFit=tight 솔직 전달",
+                "emotion": "frustration 톤 적절, mustNotSay 위반 없음"
+              }
+            }
+          }
+        }
+      ]
     }
-  ],
-
-  "validation": {
-    "diagnosis": {
-      "mustIdentify": ["2.0× lecture multiplier for derivation-heavy physics", "1 lecture/day max (NOT 2)", "behind on lectures → structured catch-up needed"],
-      "mustReflectInPlan": "dailyTarget = 1 lecture/day, interleaved with practice problems"
-    },
-    "strategy": {
-      "expectedType": "tight-structured",
-      "mustProvideAlternatives": true,
-      "alternativesMinCount": 2
-    },
-    "questions": {
-      "turn1MustAsk": ["practiceProblemsAvailable"],
-      "maxQuestionsPerTurn": 1
-    },
-    "honesty": {
-      "expectedTimeFit": "tight",
-      "mustNotFalsePlan": true
-    },
-    "emotion": {
-      "expected": "frustration",
-      "mustNotSay": ["watch 2 lectures a day", "try to focus longer", "you should have kept up"],
-      "toneExpected": "constraint-accepting; validate 'behind' feeling briefly then pivot to achievable plan"
-    }
-  }
+  },
+  "hardFailGates": [
+    "HFG-1",
+    "HFG-2",
+    "HFG-3",
+    "HFG-4",
+    "HFG-5"
+  ]
 }

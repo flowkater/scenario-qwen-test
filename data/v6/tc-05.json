@@ -4,7 +4,6 @@
   "name": "Emma-B — Genetics D-3 PANIC 🔴",
   "path": "E",
   "emotionProtocol": "panic",
-
   "profile": {
     "role": "student",
     "studentLevel": "college",
@@ -12,88 +11,135 @@
     "year": "junior",
     "level": "capable",
     "focusSpan": 50,
-    "timeBudget": { "weekday": 120, "weekend": 300 }
+    "timeBudget": {
+      "weekday": 120,
+      "weekend": 300
+    }
   },
-
-  "conversation": [
-    {
-      "turn": 1,
-      "user": "Genetics midterm is in 3 days. Same situation — textbook Ch.8-14 (210p), 90 practice problems, 12 lectures I haven't watched. I'm panicking.",
-      "expectedAI": {
-        "action": "generate_plan",
-        "plans": [
-          {
-            "label": "기출 Practice Problems (TRIAGE)",
-            "type": "practice",
-            "dailyTarget": { "value": 30, "unit": "problem" },
-            "totalQuantity": 90,
-            "effortModel": { "expected": 6, "min": 5, "max": 8, "unit": "problem" },
-            "priority": "primary"
-          },
-          {
-            "label": "Genetics 교재 핵심 챕터 Skim",
-            "type": "read",
-            "dailyTarget": { "value": 27, "unit": "page" },
-            "totalQuantity": 80,
-            "effortModel": { "expected": 3.5, "min": 3.0, "max": 4.5, "unit": "page" },
-            "priority": "secondary"
-          },
-          {
-            "label": "핵심 Lectures (2-3개만)",
-            "type": "watch",
-            "dailyTarget": { "value": 1, "unit": "lecture" },
-            "totalQuantity": 3,
-            "effortModel": { "expected": 75, "min": 60, "max": 90, "unit": "lecture" },
-            "priority": "tertiary"
+  "paths": {
+    "A": {
+      "label": "Golden Path (정보 충분)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "Genetics midterm is in 3 days. Same situation — textbook Ch.8-14 (210p), 90 practice problems, 12 lectures I haven't watched. I'm panicking.",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=50, level=capable), timeFit=tight",
+                "relevant": "상황에 맞는 분배",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시",
+                "practice": "인출 연습 제안 (문제풀기 or 셀프테스트)",
+                "insight": "이해도 확인 제안 (틀린 문제 복습 등)"
+              },
+              "coach": {
+                "diagnosis": "profile + 유저 답변 기반 상황 파악",
+                "strategy": "timeFit=tight 맞는 전략",
+                "honesty": "timeFit=tight 솔직 전달",
+                "emotion": "panic 톤 적절, mustNotSay 위반 없음"
+              }
+            }
           }
-        ],
-        "timeFit": "tight",
-        "diagnosis": "D-3 panic → TRIAGE MODE. TC-02와 완전히 다른 전략. 문제 pattern-matching 모드 (11min→6min), 교재는 reverse-skim only",
-        "strategy": "TRIAGE: 기출 90문제 전부 → 틀린 개념 80p만 skim → 강의 2-3개 핵심만. 수면 7시간 최소 보장",
-        "honestAssessment": "3일로 전체 커버 불가. 기출 패턴 파악이 최선. TC-02 full plan을 3일로 압축하면 실패.",
-        "alternatives": [
-          {
-            "label": "문제 집중 올인",
-            "change": "90문제 + 틀린 개념만 교재 참조, lectures 전부 컷",
-            "newTimeFit": "fits"
-          },
-          {
-            "label": "확장 시간 (하루 4-5시간)",
-            "change": "120min → 270min/day, 210p + 90문제 커버 가능",
-            "newTimeFit": "tight"
-          }
-        ],
-        "emotion": {
-          "detected": "panic",
-          "tone": "panic-first-validation",
-          "mustNotSay": ["sleep less", "study all night", "you should have started earlier"]
         }
-      }
+      ]
+    },
+    "B": {
+      "label": "Variant (다른 조건에서 plan)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "(Path A와 약간 다른 조건으로 같은 시나리오)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustDifferFrom": "path_A",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=50, level=capable), timeFit=tight",
+                "relevant": "상황에 맞는 분배",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시",
+                "practice": "인출 연습 제안 (문제풀기 or 셀프테스트)",
+                "insight": "이해도 확인 제안 (틀린 문제 복습 등)"
+              },
+              "coach": {
+                "diagnosis": "profile + 유저 답변 기반 상황 파악",
+                "strategy": "Path A와 다른 전략 (다른 선택지 반영)",
+                "honesty": "timeFit=tight 솔직 전달",
+                "emotion": "panic 톤 적절, mustNotSay 위반 없음"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "C": {
+      "label": "🤷 체인 (모르겠어 → 추정 질문 → Smart Default)",
+      "conversation": [
+        {
+          "turn": 1,
+          "user": "Genetics midterm is in 3 days. Same situation — textbook Ch.8-14 (210p), 90 practice problems, 12 lectures I haven't watched. I'm panicking.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "기본 정보 확인"
+          }
+        },
+        {
+          "turn": 2,
+          "user": "🤷 잘 모르겠어요.",
+          "expectedAI": {
+            "action": "ask",
+            "question": "더 쉬운 질문으로 재시도 (추정)",
+            "mustNotDo": [
+              "분량 모른 채 plan 생성",
+              "넘어가기"
+            ]
+          }
+        },
+        {
+          "turn": 3,
+          "user": "(대략적 추정 답변 제공 or 재시도도 🤷)",
+          "expectedAI": {
+            "action": "generate_plan",
+            "mustDifferFrom": "path_A",
+            "mustInclude": {
+              "smart": {
+                "specific": "자료별 분량이 구체적으로 분리된 plan",
+                "measurable": "dailyTarget이 숫자로 명시",
+                "achievable": "profile 반영 (focusSpan=50, level=capable), timeFit=tight",
+                "relevant": "약점 모르니 Smart Default + 리밸런스 안내",
+                "timeBound": "마감 기반 일정 역산"
+              },
+              "cpi": {
+                "coverage": "전체 대비 커버리지 % 명시",
+                "practice": "인출 연습 제안 (문제풀기 or 셀프테스트)",
+                "insight": "이해도 확인 제안 (틀린 문제 복습 등)"
+              },
+              "coach": {
+                "diagnosis": "정보 부족 → 추정 기반 or 기본값",
+                "strategy": "Smart Default + 나중에 조정 가능 안내",
+                "honesty": "timeFit=tight 솔직 전달",
+                "emotion": "panic 톤 적절, mustNotSay 위반 없음"
+              }
+            }
+          }
+        }
+      ]
     }
-  ],
-
-  "validation": {
-    "diagnosis": {
-      "mustIdentify": ["D-3 panic → triage mode", "different strategy from TC-02 full plan"],
-      "mustReflectInPlan": "triage plan: problems first, skim reading, cut lectures to 2-3"
-    },
-    "strategy": {
-      "expectedType": "triage-panic",
-      "mustProvideAlternatives": true,
-      "alternativesMinCount": 2
-    },
-    "questions": {
-      "turn1MustAsk": [],
-      "maxQuestionsPerTurn": 1
-    },
-    "honesty": {
-      "expectedTimeFit": "tight",
-      "mustNotFalsePlan": true
-    },
-    "emotion": {
-      "expected": "panic",
-      "mustNotSay": ["you should have started earlier", "sleep less", "all-nighter"],
-      "toneExpected": "panic-first-validation — 'Take a breath. 넌 bio 잘했잖아. 90개 기출이 있으면 시험 패턴이 보여.'"
-    }
-  }
+  },
+  "hardFailGates": [
+    "HFG-1",
+    "HFG-2",
+    "HFG-4",
+    "HFG-5"
+  ]
 }

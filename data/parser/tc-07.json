@@ -1,0 +1,34 @@
+{
+  "id": "tc-07",
+  "description": "Quantity inference forbidden — no number",
+  "input": {
+    "category": "read",
+    "description": "유기화학 교재 다 읽기",
+    "profile": {
+      "role": "student",
+      "year": "sophomore",
+      "level": "capable"
+    }
+  },
+  "expected": {
+    "name": "유기화학",
+    "purpose": "coverToCover",
+    "planType": "range",
+    "totalQuantity": null,
+    "startValue": null,
+    "endValue": null,
+    "deadline": null,
+    "examPrep": false,
+    "expectedSkipped": [
+      "purpose"
+    ],
+    "expectedShown": [
+      "quantity",
+      "deadline",
+      "weekday"
+    ]
+  },
+  "hardFailChecks": [
+    "HF-1"
+  ]
+}

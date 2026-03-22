@@ -1,0 +1,30 @@
+{
+  "id": "tc-19",
+  "description": "Project milestones",
+  "input": {
+    "category": "practice",
+    "description": "capstone project, 4 milestones by end of semester",
+    "profile": {
+      "role": "student",
+      "year": "senior",
+      "level": "confident"
+    }
+  },
+  "expected": {
+    "name": "Capstone Project",
+    "purpose": "project",
+    "planType": "check",
+    "totalQuantity": null,
+    "deadline": null,
+    "examPrep": false,
+    "expectedSkipped": [
+      "purpose"
+    ],
+    "expectedShown": [
+      "quantity",
+      "deadline",
+      "weekday"
+    ]
+  },
+  "hardFailChecks": []
+}

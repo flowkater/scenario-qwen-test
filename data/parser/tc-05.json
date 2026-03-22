@@ -1,0 +1,32 @@
+{
+  "id": "tc-05",
+  "description": "Working + leisure reading → coverToCover",
+  "input": {
+    "category": "read",
+    "description": "Sapiens",
+    "profile": {
+      "role": "working",
+      "level": "confident",
+      "reading": "aLot"
+    }
+  },
+  "expected": {
+    "name": "Sapiens",
+    "purpose": "coverToCover",
+    "planType": "range",
+    "totalQuantity": null,
+    "deadline": null,
+    "examPrep": false,
+    "expectedSkipped": [
+      "purpose"
+    ],
+    "expectedShown": [
+      "quantity",
+      "deadline",
+      "weekday"
+    ]
+  },
+  "hardFailChecks": [
+    "HF-4"
+  ]
+}

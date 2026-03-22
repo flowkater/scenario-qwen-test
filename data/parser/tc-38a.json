@@ -1,0 +1,29 @@
+{
+  "id": "tc-38a",
+  "description": "economics + student → ambiguous",
+  "input": {
+    "category": "read",
+    "description": "economics",
+    "profile": {
+      "role": "student",
+      "year": "sophomore",
+      "level": "capable"
+    }
+  },
+  "expected": {
+    "name": "Economics",
+    "purpose": null,
+    "planType": null,
+    "totalQuantity": null,
+    "deadline": null,
+    "examPrep": false,
+    "expectedSkipped": [],
+    "expectedShown": [
+      "purpose",
+      "quantity",
+      "deadline",
+      "weekday"
+    ]
+  },
+  "hardFailChecks": []
+}

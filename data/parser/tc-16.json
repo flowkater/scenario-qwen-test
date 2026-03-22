@@ -1,0 +1,29 @@
+{
+  "id": "tc-16",
+  "description": "Episode check explicit",
+  "input": {
+    "category": "watchListen",
+    "description": "Coursera ML course, check each lecture",
+    "profile": {
+      "role": "selfLearner",
+      "level": "confident"
+    }
+  },
+  "expected": {
+    "name": "ML Course",
+    "purpose": "watchByEpisodes",
+    "planType": "check",
+    "totalQuantity": null,
+    "deadline": null,
+    "examPrep": false,
+    "expectedSkipped": [
+      "purpose"
+    ],
+    "expectedShown": [
+      "quantity",
+      "deadline",
+      "weekday"
+    ]
+  },
+  "hardFailChecks": []
+}

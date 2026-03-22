@@ -1,0 +1,29 @@
+{
+  "id": "tc-14",
+  "description": "Minimal watch input → fallback",
+  "input": {
+    "category": "watchListen",
+    "description": "lectures",
+    "profile": {
+      "role": "student",
+      "year": "sophomore",
+      "level": "capable"
+    }
+  },
+  "expected": {
+    "name": "Lectures",
+    "purpose": null,
+    "planType": null,
+    "totalQuantity": null,
+    "deadline": null,
+    "examPrep": false,
+    "expectedSkipped": [],
+    "expectedShown": [
+      "purpose",
+      "quantity",
+      "deadline",
+      "weekday"
+    ]
+  },
+  "hardFailChecks": []
+}

@@ -1,0 +1,29 @@
+{
+  "id": "tc-12",
+  "description": "Full course with count",
+  "input": {
+    "category": "watchListen",
+    "description": "Inflearn React course 30 lectures",
+    "profile": {
+      "role": "working",
+      "level": "confident"
+    }
+  },
+  "expected": {
+    "name": "React Course",
+    "purpose": "fullCourse",
+    "planType": "amount",
+    "totalQuantity": 30,
+    "deadline": null,
+    "examPrep": false,
+    "expectedSkipped": [
+      "purpose",
+      "quantity"
+    ],
+    "expectedShown": [
+      "deadline",
+      "weekday"
+    ]
+  },
+  "hardFailChecks": []
+}

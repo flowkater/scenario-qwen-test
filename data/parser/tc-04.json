@@ -1,0 +1,32 @@
+{
+  "id": "tc-04",
+  "description": "Chapter range → byChapters",
+  "input": {
+    "category": "read",
+    "description": "Biology Campbell ch.5-12",
+    "profile": {
+      "role": "student",
+      "year": "sophomore",
+      "level": "capable"
+    }
+  },
+  "expected": {
+    "name": "Biology",
+    "purpose": "byChapters",
+    "planType": "check",
+    "startValue": 5,
+    "endValue": 12,
+    "totalQuantity": null,
+    "deadline": null,
+    "examPrep": false,
+    "expectedSkipped": [
+      "purpose",
+      "quantity"
+    ],
+    "expectedShown": [
+      "deadline",
+      "weekday"
+    ]
+  },
+  "hardFailChecks": []
+}

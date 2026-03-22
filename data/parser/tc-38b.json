@@ -1,0 +1,32 @@
+{
+  "id": "tc-38b",
+  "description": "economics + working → coverToCover",
+  "input": {
+    "category": "read",
+    "description": "economics",
+    "profile": {
+      "role": "working",
+      "level": "confident",
+      "reading": "aLot"
+    }
+  },
+  "expected": {
+    "name": "Economics",
+    "purpose": "coverToCover",
+    "planType": "range",
+    "totalQuantity": null,
+    "deadline": null,
+    "examPrep": false,
+    "expectedSkipped": [
+      "purpose"
+    ],
+    "expectedShown": [
+      "quantity",
+      "deadline",
+      "weekday"
+    ]
+  },
+  "hardFailChecks": [
+    "HF-4"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "tc-40",
+  "description": "Self-learner + book → coverToCover",
+  "input": {
+    "category": "read",
+    "description": "Clean Code",
+    "profile": {
+      "role": "selfLearner",
+      "level": "confident",
+      "reading": "aLot"
+    }
+  },
+  "expected": {
+    "name": "Clean Code",
+    "purpose": "coverToCover",
+    "planType": "range",
+    "totalQuantity": null,
+    "deadline": null,
+    "examPrep": false,
+    "expectedSkipped": [
+      "purpose"
+    ],
+    "expectedShown": [
+      "quantity",
+      "deadline",
+      "weekday"
+    ]
+  },
+  "hardFailChecks": []
+}

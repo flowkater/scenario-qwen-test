@@ -1,0 +1,29 @@
+{
+  "id": "tc-10",
+  "description": "Vague deadline → null",
+  "input": {
+    "category": "read",
+    "description": "Physics soon",
+    "profile": {
+      "role": "student",
+      "year": "sophomore",
+      "level": "capable"
+    }
+  },
+  "expected": {
+    "name": "Physics",
+    "purpose": null,
+    "planType": null,
+    "totalQuantity": null,
+    "deadline": null,
+    "examPrep": false,
+    "expectedSkipped": [],
+    "expectedShown": [
+      "purpose",
+      "quantity",
+      "deadline",
+      "weekday"
+    ]
+  },
+  "hardFailChecks": []
+}

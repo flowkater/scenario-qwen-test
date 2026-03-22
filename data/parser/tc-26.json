@@ -1,0 +1,29 @@
+{
+  "id": "tc-26",
+  "description": "Create + deadline extraction",
+  "input": {
+    "category": "create",
+    "description": "term paper due December 15",
+    "profile": {
+      "role": "student",
+      "year": "junior",
+      "level": "capable"
+    }
+  },
+  "expected": {
+    "name": "Term Paper",
+    "purpose": null,
+    "planType": "check",
+    "totalQuantity": null,
+    "deadline": "2026-12-15",
+    "examPrep": false,
+    "expectedSkipped": [
+      "deadline"
+    ],
+    "expectedShown": [
+      "quantity",
+      "weekday"
+    ]
+  },
+  "hardFailChecks": []
+}

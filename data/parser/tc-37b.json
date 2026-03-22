@@ -1,0 +1,29 @@
+{
+  "id": "tc-37b",
+  "description": "Same desc, Senior → fallback",
+  "input": {
+    "category": "read",
+    "description": "biology",
+    "profile": {
+      "role": "student",
+      "year": "senior",
+      "level": "confident"
+    }
+  },
+  "expected": {
+    "name": "Biology",
+    "purpose": null,
+    "planType": null,
+    "totalQuantity": null,
+    "deadline": null,
+    "examPrep": false,
+    "expectedSkipped": [],
+    "expectedShown": [
+      "purpose",
+      "quantity",
+      "deadline",
+      "weekday"
+    ]
+  },
+  "hardFailChecks": []
+}

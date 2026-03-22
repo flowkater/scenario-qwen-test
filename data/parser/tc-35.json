@@ -1,0 +1,32 @@
+{
+  "id": "tc-35",
+  "description": "Page variant recognition",
+  "input": {
+    "category": "read",
+    "description": "read 350 pgs of Econ textbook",
+    "profile": {
+      "role": "student",
+      "year": "junior",
+      "level": "confident"
+    }
+  },
+  "expected": {
+    "name": "Econ Textbook",
+    "purpose": "coverToCover",
+    "planType": "range",
+    "startValue": 1,
+    "endValue": 350,
+    "totalQuantity": null,
+    "deadline": null,
+    "examPrep": false,
+    "expectedSkipped": [
+      "purpose",
+      "quantity"
+    ],
+    "expectedShown": [
+      "deadline",
+      "weekday"
+    ]
+  },
+  "hardFailChecks": []
+}

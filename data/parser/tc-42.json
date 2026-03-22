@@ -1,0 +1,33 @@
+{
+  "id": "tc-42",
+  "description": "focusSpan has no effect on parsing",
+  "input": {
+    "category": "read",
+    "description": "History textbook 300 pages",
+    "profile": {
+      "role": "student",
+      "year": "sophomore",
+      "level": "beginner",
+      "focusSpan": 15
+    }
+  },
+  "expected": {
+    "name": "History",
+    "purpose": "coverToCover",
+    "planType": "range",
+    "startValue": 1,
+    "endValue": 300,
+    "totalQuantity": null,
+    "deadline": null,
+    "examPrep": false,
+    "expectedSkipped": [
+      "purpose",
+      "quantity"
+    ],
+    "expectedShown": [
+      "deadline",
+      "weekday"
+    ]
+  },
+  "hardFailChecks": []
+}

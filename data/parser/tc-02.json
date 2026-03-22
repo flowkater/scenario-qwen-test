@@ -1,0 +1,33 @@
+{
+  "id": "tc-02",
+  "description": "Short input + Profile boost (FR+firstExam)",
+  "input": {
+    "category": "read",
+    "description": "calc",
+    "profile": {
+      "role": "student",
+      "year": "freshman",
+      "level": "beginner",
+      "firstExam": true
+    }
+  },
+  "expected": {
+    "name": "Calculus",
+    "purpose": "readExamPrep",
+    "planType": "range",
+    "totalQuantity": null,
+    "deadline": null,
+    "examPrep": true,
+    "expectedSkipped": [
+      "purpose"
+    ],
+    "expectedShown": [
+      "quantity",
+      "deadline",
+      "weekday"
+    ]
+  },
+  "hardFailChecks": [
+    "HF-1"
+  ]
+}

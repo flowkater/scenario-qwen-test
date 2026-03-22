@@ -1,0 +1,30 @@
+{
+  "id": "tc-41",
+  "description": "Gap year + prep → examPrep",
+  "input": {
+    "category": "read",
+    "description": "LSAT prep book",
+    "profile": {
+      "role": "student",
+      "year": "gap",
+      "level": "capable"
+    }
+  },
+  "expected": {
+    "name": "LSAT Prep",
+    "purpose": "readExamPrep",
+    "planType": "range",
+    "totalQuantity": null,
+    "deadline": null,
+    "examPrep": true,
+    "expectedSkipped": [
+      "purpose"
+    ],
+    "expectedShown": [
+      "quantity",
+      "deadline",
+      "weekday"
+    ]
+  },
+  "hardFailChecks": []
+}

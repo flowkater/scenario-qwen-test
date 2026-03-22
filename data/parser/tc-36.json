@@ -1,0 +1,30 @@
+{
+  "id": "tc-36",
+  "description": "Number without unit + category context",
+  "input": {
+    "category": "practice",
+    "description": "math 500",
+    "profile": {
+      "role": "student",
+      "year": "sophomore",
+      "level": "capable"
+    }
+  },
+  "expected": {
+    "name": "Math",
+    "purpose": "problemSets",
+    "planType": "amount",
+    "totalQuantity": 500,
+    "deadline": null,
+    "examPrep": false,
+    "expectedSkipped": [
+      "purpose",
+      "quantity"
+    ],
+    "expectedShown": [
+      "deadline",
+      "weekday"
+    ]
+  },
+  "hardFailChecks": []
+}

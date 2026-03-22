@@ -1,0 +1,31 @@
+{
+  "id": "tc-13",
+  "description": "Exam prep lectures",
+  "input": {
+    "category": "watchListen",
+    "description": "review lectures before midterm",
+    "profile": {
+      "role": "student",
+      "year": "freshman",
+      "level": "beginner",
+      "firstExam": true
+    }
+  },
+  "expected": {
+    "name": "Review Lectures",
+    "purpose": "watchExamPrep",
+    "planType": "amount",
+    "totalQuantity": null,
+    "deadline": null,
+    "examPrep": true,
+    "expectedSkipped": [
+      "purpose"
+    ],
+    "expectedShown": [
+      "quantity",
+      "deadline",
+      "weekday"
+    ]
+  },
+  "hardFailChecks": []
+}

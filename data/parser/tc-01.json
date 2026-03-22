@@ -1,0 +1,32 @@
+{
+  "id": "tc-01",
+  "description": "Full info — all fields filled",
+  "input": {
+    "category": "read",
+    "description": "McMurry Organic Chemistry pp.1-350, midterm April 15",
+    "profile": {
+      "role": "student",
+      "year": "sophomore",
+      "level": "capable"
+    }
+  },
+  "expected": {
+    "name": "Organic Chemistry",
+    "purpose": "readExamPrep",
+    "planType": "range",
+    "startValue": 1,
+    "endValue": 350,
+    "totalQuantity": null,
+    "deadline": "2026-04-15",
+    "examPrep": true,
+    "expectedSkipped": [
+      "purpose",
+      "quantity",
+      "deadline"
+    ],
+    "expectedShown": [
+      "weekday"
+    ]
+  },
+  "hardFailChecks": []
+}

@@ -1,0 +1,34 @@
+{
+  "id": "tc-39",
+  "description": "guitar ≠ exam despite firstExam profile",
+  "input": {
+    "category": "practice",
+    "description": "guitar chords",
+    "profile": {
+      "role": "student",
+      "year": "freshman",
+      "level": "beginner",
+      "firstExam": true
+    }
+  },
+  "expected": {
+    "name": "Guitar Chords",
+    "purpose": "dailyDrills",
+    "planType": "amount",
+    "totalQuantity": null,
+    "deadline": null,
+    "examPrep": false,
+    "expectedSkipped": [
+      "purpose"
+    ],
+    "expectedShown": [
+      "quantity",
+      "deadline",
+      "weekday"
+    ]
+  },
+  "hardFailChecks": [
+    "HF-3",
+    "HF-4"
+  ]
+}

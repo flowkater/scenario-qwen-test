@@ -1,0 +1,31 @@
+{
+  "id": "tc-33",
+  "description": "Korean-English mixed",
+  "input": {
+    "category": "read",
+    "description": "경제학원론 Mankiw ch.1-15 중간고사",
+    "profile": {
+      "role": "student",
+      "year": "freshman",
+      "level": "beginner"
+    }
+  },
+  "expected": {
+    "name": "경제학원론",
+    "purpose": "readExamPrep",
+    "planType": "range",
+    "startValue": 1,
+    "endValue": 15,
+    "deadline": null,
+    "examPrep": true,
+    "expectedSkipped": [
+      "purpose",
+      "quantity"
+    ],
+    "expectedShown": [
+      "deadline",
+      "weekday"
+    ]
+  },
+  "hardFailChecks": []
+}

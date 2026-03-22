@@ -1,0 +1,29 @@
+{
+  "id": "tc-21",
+  "description": "Vague practice → fallback",
+  "input": {
+    "category": "practice",
+    "description": "coding",
+    "profile": {
+      "role": "student",
+      "year": "junior",
+      "level": "capable"
+    }
+  },
+  "expected": {
+    "name": "Coding",
+    "purpose": null,
+    "planType": null,
+    "totalQuantity": null,
+    "deadline": null,
+    "examPrep": false,
+    "expectedSkipped": [],
+    "expectedShown": [
+      "purpose",
+      "quantity",
+      "deadline",
+      "weekday"
+    ]
+  },
+  "hardFailChecks": []
+}

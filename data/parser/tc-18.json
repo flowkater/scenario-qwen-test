@@ -1,0 +1,32 @@
+{
+  "id": "tc-18",
+  "description": "Workbook with page range",
+  "input": {
+    "category": "practice",
+    "description": "Grammar workbook pp.30-180",
+    "profile": {
+      "role": "student",
+      "year": "freshman",
+      "level": "beginner"
+    }
+  },
+  "expected": {
+    "name": "Grammar Workbook",
+    "purpose": "workbook",
+    "planType": "range",
+    "startValue": 30,
+    "endValue": 180,
+    "totalQuantity": null,
+    "deadline": null,
+    "examPrep": false,
+    "expectedSkipped": [
+      "purpose",
+      "quantity"
+    ],
+    "expectedShown": [
+      "deadline",
+      "weekday"
+    ]
+  },
+  "hardFailChecks": []
+}

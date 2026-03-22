@@ -1,0 +1,30 @@
+{
+  "id": "tc-20",
+  "description": "Daily drills",
+  "input": {
+    "category": "practice",
+    "description": "vocab flashcards every day 50 words",
+    "profile": {
+      "role": "student",
+      "year": "freshman",
+      "level": "beginner"
+    }
+  },
+  "expected": {
+    "name": "Vocab Flashcards",
+    "purpose": "dailyDrills",
+    "planType": "amount",
+    "totalQuantity": 50,
+    "deadline": null,
+    "examPrep": false,
+    "expectedSkipped": [
+      "purpose",
+      "quantity"
+    ],
+    "expectedShown": [
+      "deadline",
+      "weekday"
+    ]
+  },
+  "hardFailChecks": []
+}

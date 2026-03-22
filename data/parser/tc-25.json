@@ -1,0 +1,27 @@
+{
+  "id": "tc-25",
+  "description": "Other — quantity extraction OK",
+  "input": {
+    "category": "other",
+    "description": "journaling 100 entries",
+    "profile": {
+      "role": "selfLearner",
+      "level": "confident"
+    }
+  },
+  "expected": {
+    "name": "Journaling",
+    "purpose": null,
+    "planType": null,
+    "totalQuantity": 100,
+    "deadline": null,
+    "examPrep": false,
+    "expectedSkipped": [],
+    "expectedShown": [
+      "purpose",
+      "deadline",
+      "weekday"
+    ]
+  },
+  "hardFailChecks": []
+}

@@ -1,0 +1,29 @@
+{
+  "id": "tc-15",
+  "description": "Korean mixed input",
+  "input": {
+    "category": "watchListen",
+    "description": "인프런 스프링 강의 42강",
+    "profile": {
+      "role": "working",
+      "level": "confident"
+    }
+  },
+  "expected": {
+    "name": "스프링 강의",
+    "purpose": "fullCourse",
+    "planType": "amount",
+    "totalQuantity": 42,
+    "deadline": null,
+    "examPrep": false,
+    "expectedSkipped": [
+      "purpose",
+      "quantity"
+    ],
+    "expectedShown": [
+      "deadline",
+      "weekday"
+    ]
+  },
+  "hardFailChecks": []
+}

@@ -1,0 +1,31 @@
+{
+  "id": "tc-28",
+  "description": "Emoji only",
+  "input": {
+    "category": "read",
+    "description": "📚✨",
+    "profile": {
+      "role": "student",
+      "year": "freshman",
+      "level": "beginner"
+    }
+  },
+  "expected": {
+    "name": "📚✨",
+    "purpose": null,
+    "planType": null,
+    "totalQuantity": null,
+    "deadline": null,
+    "examPrep": false,
+    "expectedSkipped": [],
+    "expectedShown": [
+      "purpose",
+      "quantity",
+      "deadline",
+      "weekday"
+    ]
+  },
+  "hardFailChecks": [
+    "HF-1"
+  ]
+}

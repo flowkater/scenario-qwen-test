@@ -1,0 +1,30 @@
+{
+  "id": "tc-09",
+  "description": "Explicit deadline extraction",
+  "input": {
+    "category": "read",
+    "description": "Genetics final by May 20",
+    "profile": {
+      "role": "student",
+      "year": "junior",
+      "level": "confident"
+    }
+  },
+  "expected": {
+    "name": "Genetics",
+    "purpose": "readExamPrep",
+    "planType": "range",
+    "totalQuantity": null,
+    "deadline": "2026-05-20",
+    "examPrep": true,
+    "expectedSkipped": [
+      "purpose",
+      "deadline"
+    ],
+    "expectedShown": [
+      "quantity",
+      "weekday"
+    ]
+  },
+  "hardFailChecks": []
+}

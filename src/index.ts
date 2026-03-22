@@ -462,7 +462,6 @@ Commands:
     }
 
     // ── judge-v6: 단일 TC + path → 파이프라인 실행 후 결과 저장 ──
-    // (Claude Code가 직접 평가 — ANTHROPIC_API_KEY 불필요)
     case "judge-v6": {
       const tcId = args[1];
       if (!tcId) { console.error("Usage: judge-v6 <tc-id> [path]"); process.exit(1); }
@@ -479,27 +478,34 @@ Commands:
       const resultsDir = path.resolve(import.meta.dirname, "../data/v6/results");
       await fs.mkdir(resultsDir, { recursive: true });
       const outFile = path.join(resultsDir, `${tcId}-${pathKey}.json`);
-      const judgeInput = { tc, pipelineResult, hfg };
-      await fs.writeFile(outFile, JSON.stringify(judgeInput, null, 2));
+      await fs.writeFile(outFile, JSON.stringify({ tc, pipelineResult, hfg }, null, 2));
 
-      // 평가용 전체 컨텍스트 출력 (Claude Code가 읽고 평가)
-      console.log(`\n${"═".repeat(60)}`);
-      console.log(`[JUDGE INPUT] 저장: ${outFile}`);
-      console.log(`${"═".repeat(60)}`);
-      console.log(`\n## TC: ${tc.id} Path-${pathKey}`);
-      console.log(`Profile: ${JSON.stringify(tc.profile)}`);
-      console.log(`Emotion: ${tc.emotionProtocol ?? "neutral"} | Category: ${tc.category}`);
-      console.log(`\n## 대화 내역`);
-      for (const r of pipelineResult.results) {
-        console.log(`\nTurn ${r.turn} [학생]: ${r.userMessage}`);
-        console.log(`Turn ${r.turn} [코치]: ${JSON.stringify(r.aiResponse, null, 2)}`);
+      if (!pipelineResult.finalPlan) {
+        console.log(`\n❌ No plan generated — skipping Judge evaluation`);
+        console.log(`HFG: ${hfg.length === 0 ? "✅" : "❌ " + hfg.join(", ")}`);
+        break;
       }
-      console.log(`\n## 기대사항`);
-      for (const t of tc.paths[pathKey].conversation) {
-        console.log(`Turn ${t.turn}: action=${t.expectedAI.action} | ${JSON.stringify(t.expectedAI.mustInclude ?? {})}`);
+
+      // Claude Judge 호출
+      console.log("  Claude Judge 평가 중...");
+      try {
+        const judgeResult = await judgeResponse(tc, pathKey, pipelineResult);
+        const judgeFile = path.join(resultsDir, `${tcId}-${pathKey}-judge.json`);
+        await fs.writeFile(judgeFile, JSON.stringify(judgeResult, null, 2));
+
+        console.log(`\n${"═".repeat(60)}`);
+        console.log(`[JUDGE RESULT] ${tc.id} Path-${pathKey}`);
+        console.log(`${"═".repeat(60)}`);
+        console.log(`\nSMART: S=${judgeResult.smart.specific.score} M=${judgeResult.smart.measurable.score} A=${judgeResult.smart.achievable.score} R=${judgeResult.smart.relevant.score} T=${judgeResult.smart.timeBound.score}`);
+        console.log(`CPI:   C=${judgeResult.cpi.coverage.score} P=${judgeResult.cpi.practice.score} I=${judgeResult.cpi.insight.score}`);
+        console.log(`Coach: D=${judgeResult.coach.diagnosis.score} S=${judgeResult.coach.strategy.score} H=${judgeResult.coach.honesty.score} E=${judgeResult.coach.emotion.score}`);
+        console.log(`\nTotal: ${judgeResult.totalScore}/${judgeResult.maxScore} ${judgeResult.pass ? "✅ PASS" : "❌ FAIL"}`);
+        console.log(`HFG: ${hfg.length === 0 ? "✅" : "❌ " + hfg.join(", ")} | Judge HF: ${judgeResult.hardFails.length === 0 ? "✅" : "❌ " + judgeResult.hardFails.join(", ")}`);
+        console.log(`Summary: ${judgeResult.summary}`);
+        console.log(`${"═".repeat(60)}\n`);
+      } catch (e) {
+        console.error(`Judge error: ${(e as Error).message}`);
       }
-      console.log(`\n## HFG 자동 체크: ${hfg.length === 0 ? "✅ 없음" : "❌ " + hfg.join(", ")}`);
-      console.log(`${"═".repeat(60)}\n`);
       break;
     }
 

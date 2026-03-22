@@ -1,0 +1,30 @@
+{
+  "id": "tc-32",
+  "description": "Relative date extraction",
+  "input": {
+    "category": "read",
+    "description": "finish textbook by next Friday",
+    "profile": {
+      "role": "student",
+      "year": "sophomore",
+      "level": "capable"
+    }
+  },
+  "expected": {
+    "name": "Textbook",
+    "purpose": "coverToCover",
+    "planType": "range",
+    "totalQuantity": null,
+    "deadline": "2026-03-27",
+    "examPrep": false,
+    "expectedSkipped": [
+      "purpose",
+      "deadline"
+    ],
+    "expectedShown": [
+      "quantity",
+      "weekday"
+    ]
+  },
+  "hardFailChecks": []
+}

@@ -1,0 +1,28 @@
+{
+  "id": "tc-23",
+  "description": "Create — always check, no purpose",
+  "input": {
+    "category": "create",
+    "description": "research paper outline",
+    "profile": {
+      "role": "student",
+      "year": "senior",
+      "level": "confident"
+    }
+  },
+  "expected": {
+    "name": "Research Paper Outline",
+    "purpose": null,
+    "planType": "check",
+    "totalQuantity": null,
+    "deadline": null,
+    "examPrep": false,
+    "expectedSkipped": [],
+    "expectedShown": [
+      "quantity",
+      "deadline",
+      "weekday"
+    ]
+  },
+  "hardFailChecks": []
+}

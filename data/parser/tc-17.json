@@ -1,0 +1,30 @@
+{
+  "id": "tc-17",
+  "description": "Problem sets with count",
+  "input": {
+    "category": "practice",
+    "description": "수학 문제집 500문제",
+    "profile": {
+      "role": "student",
+      "year": "sophomore",
+      "level": "capable"
+    }
+  },
+  "expected": {
+    "name": "수학 문제집",
+    "purpose": "problemSets",
+    "planType": "amount",
+    "totalQuantity": 500,
+    "deadline": null,
+    "examPrep": false,
+    "expectedSkipped": [
+      "purpose",
+      "quantity"
+    ],
+    "expectedShown": [
+      "deadline",
+      "weekday"
+    ]
+  },
+  "hardFailChecks": []
+}

@@ -1,0 +1,32 @@
+{
+  "id": "tc-31",
+  "description": "Time-based input → quantity null",
+  "input": {
+    "category": "practice",
+    "description": "study 2 hours every day",
+    "profile": {
+      "role": "student",
+      "year": "junior",
+      "level": "capable"
+    }
+  },
+  "expected": {
+    "name": "Study",
+    "purpose": "dailyDrills",
+    "planType": "amount",
+    "totalQuantity": null,
+    "deadline": null,
+    "examPrep": false,
+    "expectedSkipped": [
+      "purpose"
+    ],
+    "expectedShown": [
+      "quantity",
+      "deadline",
+      "weekday"
+    ]
+  },
+  "hardFailChecks": [
+    "HF-2"
+  ]
+}

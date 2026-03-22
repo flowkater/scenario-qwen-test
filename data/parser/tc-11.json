@@ -1,0 +1,30 @@
+{
+  "id": "tc-11",
+  "description": "Catch up signal",
+  "input": {
+    "category": "watchListen",
+    "description": "OS lectures week 3-8, behind on class",
+    "profile": {
+      "role": "student",
+      "year": "junior",
+      "level": "capable"
+    }
+  },
+  "expected": {
+    "name": "OS Lectures",
+    "purpose": "catchUp",
+    "planType": "amount",
+    "totalQuantity": null,
+    "deadline": null,
+    "examPrep": false,
+    "expectedSkipped": [
+      "purpose"
+    ],
+    "expectedShown": [
+      "quantity",
+      "deadline",
+      "weekday"
+    ]
+  },
+  "hardFailChecks": []
+}

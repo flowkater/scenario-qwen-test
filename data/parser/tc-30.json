@@ -1,0 +1,30 @@
+{
+  "id": "tc-30",
+  "description": "Category mismatch (Read but Practice desc)",
+  "input": {
+    "category": "read",
+    "description": "solve 200 math problems",
+    "profile": {
+      "role": "student",
+      "year": "sophomore",
+      "level": "capable"
+    }
+  },
+  "expected": {
+    "name": "Math Problems",
+    "purpose": null,
+    "planType": null,
+    "totalQuantity": 200,
+    "deadline": null,
+    "examPrep": false,
+    "expectedSkipped": [],
+    "expectedShown": [
+      "purpose",
+      "deadline",
+      "weekday"
+    ]
+  },
+  "hardFailChecks": [
+    "HF-5"
+  ]
+}

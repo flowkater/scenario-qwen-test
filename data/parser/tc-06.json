@@ -1,0 +1,31 @@
+{
+  "id": "tc-06",
+  "description": "Explicit page count extraction",
+  "input": {
+    "category": "read",
+    "description": "토익 RC 교재 200페이지",
+    "profile": {
+      "role": "working",
+      "level": "capable"
+    }
+  },
+  "expected": {
+    "name": "토익 RC",
+    "purpose": "coverToCover",
+    "planType": "range",
+    "startValue": 1,
+    "endValue": 200,
+    "totalQuantity": null,
+    "deadline": null,
+    "examPrep": false,
+    "expectedSkipped": [
+      "purpose",
+      "quantity"
+    ],
+    "expectedShown": [
+      "deadline",
+      "weekday"
+    ]
+  },
+  "hardFailChecks": []
+}

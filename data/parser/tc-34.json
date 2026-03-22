@@ -1,0 +1,34 @@
+{
+  "id": "tc-34",
+  "description": "Profile decay — description overrides profile",
+  "input": {
+    "category": "read",
+    "description": "leisure reading, no deadline, just for fun",
+    "profile": {
+      "role": "student",
+      "year": "freshman",
+      "level": "beginner",
+      "firstExam": true
+    }
+  },
+  "expected": {
+    "name": "Leisure Reading",
+    "purpose": "coverToCover",
+    "planType": "range",
+    "totalQuantity": null,
+    "deadline": null,
+    "examPrep": false,
+    "expectedSkipped": [
+      "purpose"
+    ],
+    "expectedShown": [
+      "quantity",
+      "deadline",
+      "weekday"
+    ]
+  },
+  "hardFailChecks": [
+    "HF-3",
+    "HF-4"
+  ]
+}

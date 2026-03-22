@@ -1,0 +1,30 @@
+{
+  "id": "tc-24",
+  "description": "Other — no AI purpose",
+  "input": {
+    "category": "other",
+    "description": "meditation practice",
+    "profile": {
+      "role": "working",
+      "level": "capable"
+    }
+  },
+  "expected": {
+    "name": "Meditation Practice",
+    "purpose": null,
+    "planType": null,
+    "totalQuantity": null,
+    "deadline": null,
+    "examPrep": false,
+    "expectedSkipped": [],
+    "expectedShown": [
+      "purpose",
+      "quantity",
+      "deadline",
+      "weekday"
+    ]
+  },
+  "hardFailChecks": [
+    "HF-4"
+  ]
+}

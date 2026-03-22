@@ -1,0 +1,33 @@
+{
+  "id": "tc-08",
+  "description": "Ratio inference forbidden",
+  "input": {
+    "category": "read",
+    "description": "경제학 교재 반 정도",
+    "profile": {
+      "role": "student",
+      "year": "junior",
+      "level": "capable"
+    }
+  },
+  "expected": {
+    "name": "경제학",
+    "purpose": null,
+    "planType": null,
+    "totalQuantity": null,
+    "startValue": null,
+    "endValue": null,
+    "deadline": null,
+    "examPrep": false,
+    "expectedSkipped": [],
+    "expectedShown": [
+      "purpose",
+      "quantity",
+      "deadline",
+      "weekday"
+    ]
+  },
+  "hardFailChecks": [
+    "HF-1"
+  ]
+}

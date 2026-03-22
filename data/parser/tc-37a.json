@@ -1,0 +1,31 @@
+{
+  "id": "tc-37a",
+  "description": "Same desc, FR+firstExam → examPrep",
+  "input": {
+    "category": "read",
+    "description": "biology",
+    "profile": {
+      "role": "student",
+      "year": "freshman",
+      "level": "beginner",
+      "firstExam": true
+    }
+  },
+  "expected": {
+    "name": "Biology",
+    "purpose": "readExamPrep",
+    "planType": "range",
+    "totalQuantity": null,
+    "deadline": null,
+    "examPrep": true,
+    "expectedSkipped": [
+      "purpose"
+    ],
+    "expectedShown": [
+      "quantity",
+      "deadline",
+      "weekday"
+    ]
+  },
+  "hardFailChecks": []
+}

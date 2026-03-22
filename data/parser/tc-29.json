@@ -1,0 +1,30 @@
+{
+  "id": "tc-29",
+  "description": "Very long input",
+  "input": {
+    "category": "read",
+    "description": "I need to read the McMurry Organic Chemistry textbook from chapter 1 to chapter 15, about 450 pages total, because my midterm exam is on April 20th and I haven't started yet",
+    "profile": {
+      "role": "student",
+      "year": "sophomore",
+      "level": "beginner"
+    }
+  },
+  "expected": {
+    "name": "Organic Chemistry",
+    "purpose": "readExamPrep",
+    "planType": "range",
+    "endValue": 450,
+    "deadline": "2026-04-20",
+    "examPrep": true,
+    "expectedSkipped": [
+      "purpose",
+      "quantity",
+      "deadline"
+    ],
+    "expectedShown": [
+      "weekday"
+    ]
+  },
+  "hardFailChecks": []
+}
